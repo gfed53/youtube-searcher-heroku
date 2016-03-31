@@ -14,7 +14,9 @@ angular
 				templateUrl: "./partials/search.html"
 			},
 			'video': {
-				templateUrl: "./partials/video.html"
+				templateUrl: "./partials/video.html",
+				controller: 'MyCtrl',
+				controllerAs: 'video'
 			}
 		}
 	})
@@ -25,8 +27,20 @@ angular
 				templateUrl: "./partials/search.html"
 			},
 			'playlist': {
-				templateUrl: "./partials/playlist.html"
+				templateUrl: "./partials/playlist.html",
+				controller: 'MyCtrl',
+				controllerAs: 'playlist'
 			}
 		}
 	})
+})
+
+.controller('MyCtrl', function($sce){
+	var vm = this;
+	vm.submit = function(){
+		alert("Submitted");
+	};
+	vm.trustSrc = function(src) {
+	  return $sce.trustAsResourceUrl(src);
+	};
 })

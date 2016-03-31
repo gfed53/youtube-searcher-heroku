@@ -1,10 +1,12 @@
 <div>
-	<iframe id="ytplayer" type="text/html" width="640" height="390"
-  src="https://www.youtube.com/embed/MKYhX6mZL4&t=661s"
-  frameborder="0"/>
+	<iframe width="640" height="390"
+  ng-src="{{ video.trustSrc('http://www.youtube.com/embed/xZD-DAg7MgE') }}"
+  frameborder="0"></iframe>
+  <hr>
+  <p>This is a description of the video.</p>
   <form action="">
-  	<input type="text" placeholder="Enter Comment">
-  	<input type="button" value="Submit">
+  	<textarea cols="40" placeholder="Enter Comment.."></textarea>
+  	<input type="button" ng-click="video.submit()" value="Submit">
   </form>
   
 </div>
