@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>Video Practice</h1>
+	<div ui-view="search"></div>
+	<a ui-sref="state1">Watch Video</a>
+	<a ui-sref="state2">Go to Playlist</a>
+	<div ui-view="video"></div>
+	<div ui-view="playlist"></div>
+	<script src="./node_modules/angular/angular.js"></script>
+	<script src="./node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="app.js"></script>
+</body>
+</html>

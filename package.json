@@ -1,0 +1,15 @@
+{
+  "name": "ui-router-video-practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "angular": "^1.5.3",
+    "angular-ui-router": "^0.2.18"
+  }
+}
