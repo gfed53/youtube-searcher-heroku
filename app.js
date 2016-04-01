@@ -7,8 +7,29 @@ angular
 	$urlRouterProvider.otherwise("/")
 
 	$stateProvider
-	.state('state1', {
-		url: "/state1",
+	.state('root', {
+		url: "/",
+		views: {
+			'header': {
+				templateUrl: "./partials/header.html"
+			},
+			'content': {
+				templateUrl: "./partials/content.html"
+			},
+			'footer': {
+				templateUrl: "./partials/footer.html"
+			},
+			'menu@root': {
+				templateUrl: "./partials/menu.html"
+			},
+			'search@root': {
+				templateUrl: "./partials/search.html"
+			}
+		}
+	})
+	.state('video', {
+		url: "/video",
+		parent: "root",
 		views: {
 			'search': {
 				templateUrl: "./partials/search.html"
@@ -20,7 +41,7 @@ angular
 			}
 		}
 	})
-	.state('state2', {
+	.state('playlist', {
 		url: '/state2',
 		views: {
 			'search': {
@@ -41,6 +62,6 @@ angular
 		alert("Submitted");
 	};
 	vm.trustSrc = function(src) {
-	  return $sce.trustAsResourceUrl(src);
+		return $sce.trustAsResourceUrl(src);
 	};
 })
