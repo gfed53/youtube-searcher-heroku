@@ -14,7 +14,9 @@ angular
 				templateUrl: "./partials/header.html"
 			},
 			'content': {
-				templateUrl: "./partials/content.html"
+				templateUrl: "./partials/content.html",
+				controller: 'MyCtrl',
+				controllerAs: 'content'
 			},
 			'footer': {
 				templateUrl: "./partials/footer.html"
@@ -28,29 +30,34 @@ angular
 		}
 	})
 	.state('video', {
-		url: "/video",
+		url: "video",
 		parent: "root",
 		views: {
-			'search': {
-				templateUrl: "./partials/search.html"
+			'content@': {
+				templateUrl: "./partials/video.html"
 			},
-			'video': {
-				templateUrl: "./partials/video.html",
+			'item@video': {
+				templateUrl: "./partials/item.html",
 				controller: 'MyCtrl',
-				controllerAs: 'video'
+				controllerAs: 'content'
+			},
+			'description@video': {
+				templateUrl: "./partials/description.html"
+			},
+			'comment@video': {
+				templateUrl: "./partials/comment.html"
 			}
+			
 		}
 	})
 	.state('playlist', {
-		url: '/state2',
+		url: "playlist",
+		parent: "root",
 		views: {
-			'search': {
-				templateUrl: "./partials/search.html"
-			},
-			'playlist': {
+			'content@': {
 				templateUrl: "./partials/playlist.html",
 				controller: 'MyCtrl',
-				controllerAs: 'playlist'
+				controllerAs: 'content'
 			}
 		}
 	})

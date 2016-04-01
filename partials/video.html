@@ -1,12 +1,4 @@
-<div>
-	<iframe width="640" height="390"
-  ng-src="{{ video.trustSrc('http://www.youtube.com/embed/xZD-DAg7MgE') }}"
-  frameborder="0"></iframe>
-  <hr>
-  <p>This is a description of the video.</p>
-  <form action="">
-  	<textarea cols="40" placeholder="Enter Comment.."></textarea>
-  	<input type="button" ng-click="video.submit()" value="Submit">
-  </form>
-  
-</div>
+This is video
+<div ui-view="item"></div>
+<div ui-view="description"></div>
+<div ui-view="comment"></div>
