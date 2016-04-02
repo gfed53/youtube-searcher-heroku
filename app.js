@@ -28,7 +28,7 @@ angular
 		}
 	})
 	.state('video', {
-		url: "video",
+		url: "video/{videoId:.{11}}",
 		parent: "root",
 		views: {
 			'content@': {
@@ -36,8 +36,8 @@ angular
 			},
 			'item@video': {
 				templateUrl: "./partials/video/video-partials/item.html",
-				controller: 'MyCtrl',
-				controllerAs: 'content'
+				controller: 'VideoCtrl',
+				controllerAs: 'video'
 			},
 			'description@video': {
 				templateUrl: "./partials/video/video-partials/description.html"
@@ -54,14 +54,14 @@ angular
 		views: {
 			'content@': {
 				templateUrl: "./partials/playlist/playlist.html",
-				controller: 'MyCtrl',
-				controllerAs: 'content'
+				controller: 'PlaylistCtrl',
+				controllerAs: 'playlist'
 			}
 		}
 	})
 })
 
-.controller('MyCtrl', function($sce){
+.controller('VideoCtrl', function($stateParams, $sce){
 	var vm = this;
 	vm.submit = function(){
 		alert("Submitted");
@@ -69,4 +69,36 @@ angular
 	vm.trustSrc = function(src) {
 		return $sce.trustAsResourceUrl(src);
 	};
+	vm.videoId = $stateParams.videoId
+	vm.url = "http://www.youtube.com/embed/"+vm.videoId;
+	vm.trustedUrl = vm.trustSrc(vm.url);
 })
+
+.controller('PlaylistCtrl', function($stateParams, $sce){
+	var vm = this;
+	vm.trustSrc = function(src) {
+		return $sce.trustAsResourceUrl(src);
+	};
+	vm.items = [
+		{
+			name: "Video 1",
+			id: "xZD-DAg7MgE"
+		},
+		{
+			name: "Video 2",
+			id: "KqRs_2kGZuY"
+		},
+		{
+			name: "Video 3",
+			id: "dqJRoh8MnBo"
+		},
+		{
+			name: "Video 4",
+			id: "OnoHdmbVPX4"
+		}
+	];
+})
+
+
+
+
