@@ -11,21 +11,19 @@ angular
 		url: "/",
 		views: {
 			'header': {
-				templateUrl: "./partials/header.html"
+				templateUrl: "./partials/header/header.html"
 			},
 			'content': {
-				templateUrl: "./partials/content.html",
-				controller: 'MyCtrl',
-				controllerAs: 'content'
+				templateUrl: "./partials/content/content.html"
 			},
 			'footer': {
-				templateUrl: "./partials/footer.html"
+				templateUrl: "./partials/footer/footer.html"
 			},
 			'menu@root': {
-				templateUrl: "./partials/menu.html"
+				templateUrl: "./partials/header/header-partials/menu.html"
 			},
 			'search@root': {
-				templateUrl: "./partials/search.html"
+				templateUrl: "./partials/header/header-partials/search.html"
 			}
 		}
 	})
@@ -34,18 +32,18 @@ angular
 		parent: "root",
 		views: {
 			'content@': {
-				templateUrl: "./partials/video.html"
+				templateUrl: "./partials/video/video.html"
 			},
 			'item@video': {
-				templateUrl: "./partials/item.html",
+				templateUrl: "./partials/video/video-partials/item.html",
 				controller: 'MyCtrl',
 				controllerAs: 'content'
 			},
 			'description@video': {
-				templateUrl: "./partials/description.html"
+				templateUrl: "./partials/video/video-partials/description.html"
 			},
 			'comment@video': {
-				templateUrl: "./partials/comment.html"
+				templateUrl: "./partials/video/video-partials/comment.html"
 			}
 			
 		}
@@ -55,7 +53,7 @@ angular
 		parent: "root",
 		views: {
 			'content@': {
-				templateUrl: "./partials/playlist.html",
+				templateUrl: "./partials/playlist/playlist.html",
 				controller: 'MyCtrl',
 				controllerAs: 'content'
 			}
