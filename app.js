@@ -5,9 +5,8 @@ angular
 	$httpProvider.defaults.useXDomain = true;
 
 	$urlRouterProvider.otherwise("/")
-
-	$stateProvider
-	.state('root', {
+	var myRoot = {
+		name: "root",
 		url: "/",
 		views: {
 			'header': {
@@ -26,8 +25,9 @@ angular
 				templateUrl: "./partials/header/header-partials/search.html"
 			}
 		}
-	})
-	.state('video', {
+	},
+	video = {
+		name: "video",
 		url: "video/{videoId:.{11}}",
 		parent: "root",
 		views: {
@@ -44,11 +44,11 @@ angular
 			},
 			'comment@video': {
 				templateUrl: "./partials/video/video-partials/comment.html"
-			}
-			
+			}	
 		}
-	})
-	.state('playlist', {
+	},
+	playlist = {
+		name: "playlist",
 		url: "playlist",
 		parent: "root",
 		views: {
@@ -58,7 +58,12 @@ angular
 				controllerAs: 'playlist'
 			}
 		}
-	})
+	};
+
+	$stateProvider
+	.state(myRoot)
+	.state(video)
+	.state(playlist)
 })
 
 .controller('VideoCtrl', function($stateParams, $sce){
