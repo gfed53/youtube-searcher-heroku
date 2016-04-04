@@ -3,6 +3,7 @@ angular
 
 .config(function($httpProvider, $stateProvider, $urlRouterProvider){
 	$httpProvider.defaults.useXDomain = true;
+	delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
 	$urlRouterProvider.otherwise("/")
 	var myRoot = {
@@ -19,10 +20,13 @@ angular
 				templateUrl: "./partials/footer/footer.html"
 			},
 			'menu@root': {
-				templateUrl: "./partials/header/header-partials/menu.html"
+				templateUrl: "./partials/header/header-partials/menu.html",
+				
 			},
 			'search@root': {
-				templateUrl: "./partials/header/header-partials/search.html"
+				templateUrl: "./partials/header/header-partials/search.html",
+				controller: 'SearchCtrl',
+				controllerAs: 'search'
 			}
 		}
 	},
@@ -66,24 +70,33 @@ angular
 	.state(playlist)
 })
 
-.controller('VideoCtrl', function($stateParams, $sce){
+.controller('SearchCtrl', function(ytSearchYouTube){
+	var vm = this;
+	vm.submit = submit;
+
+	function submit(keyword){
+		ytSearchYouTube(keyword).getResults()
+		.then(function(response){
+			console.log(response);
+			vm.results = response.data.items;
+		})
+	}
+})
+
+.controller('VideoCtrl', function($stateParams, ytTrustSrc){
 	var vm = this;
 	vm.submit = function(){
 		alert("Submitted");
 	};
-	vm.trustSrc = function(src) {
-		return $sce.trustAsResourceUrl(src);
-	};
-	vm.videoId = $stateParams.videoId
+	vm.trustSrc = ytTrustSrc;
+	vm.videoId = $stateParams.videoId;
 	vm.url = "http://www.youtube.com/embed/"+vm.videoId;
 	vm.trustedUrl = vm.trustSrc(vm.url);
 })
 
-.controller('PlaylistCtrl', function($stateParams, $sce){
+.controller('PlaylistCtrl', function($stateParams, ytTrustSrc){
 	var vm = this;
-	vm.trustSrc = function(src) {
-		return $sce.trustAsResourceUrl(src);
-	};
+	vm.trustSrc = ytTrustSrc;
 	vm.items = [
 		{
 			name: "Video 1",

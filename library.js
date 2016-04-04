@@ -1,11 +1,58 @@
-// Not in use for now
 angular
 .module('myApp')
-.factory('videoItems', videoItems);
+.factory('ytTrustSrc', ['$sce', ytTrustSrc])
+.factory('videoItems', videoItems)
+.factory('ytSearchYouTube', ['$q', '$http', ytSearchYouTube])
 
-function videoItems(){
-	return function(){
-		var items = [
+function ytTrustSrc($sce){
+	return function(src){
+		return $sce.trustAsResourceUrl(src);
+	}
+}
+
+function ytSearchYouTube($q, $http) {
+	return function(keyword){
+		    // $scope.keyword = keyword;  
+		    var url = "https://www.googleapis.com/youtube/v3/search";
+		    var request = {
+		    	key: "AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA",
+		    	part: "snippet",
+		    	maxResults: 20,
+		    	order: "relevance",
+		    	q: keyword,
+		    	type: "video",
+		    	videoEmbeddable: true,
+		    };
+		    var services = {
+		    	getResults: getResults
+		    };
+		    console.log("searching: "+keyword);
+		    return services;
+
+		    function getResults(){
+		    	console.log("is working");
+		    	return $http({
+		    		method: 'GET',
+		    		url: url,
+		    		params: request
+		    	})
+		    	.then(function(response){
+		    		console.log("working");
+		    		console.log(response);
+		    		var results = response;
+		    		// return results;
+		    		return $q.when(response);
+		    	},
+		    	function(response){
+		    		alert('error');
+		    	});
+		    }
+		}
+	};
+
+	function videoItems(){
+		return function(){
+			var items = [
 			{
 				name: "Video 1",
 				id: "xZD-DAg7MgE"
@@ -22,24 +69,24 @@ function videoItems(){
 				name: "Video 4",
 				id: "OnoHdmbVPX4"
 			}
-		],
-		services = {
-			getItems: getItems,
-			addItem: addItem
-		}
-		return services;
+			],
+			services = {
+				getItems: getItems,
+				addItem: addItem
+			}
+			return services;
 
-		function getItems(){
-			return items;
-		}
-
-		function addItem(name, id){
-			var item = {
-				name: name,
-				id: id
+			function getItems(){
+				return items;
 			}
 
-			items.push[item];
+			function addItem(name, id){
+				var item = {
+					name: name,
+					id: id
+				}
+
+				items.push[item];
+			}
 		}
 	}
-}
