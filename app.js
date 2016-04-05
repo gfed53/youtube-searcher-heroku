@@ -40,7 +40,7 @@ angular
 			},
 			'item@video': {
 				templateUrl: "./partials/video/video-partials/item.html",
-				controller: 'VideoCtrl',
+				controller: 'ItemCtrl',
 				controllerAs: 'video'
 			},
 			'description@video': {
@@ -70,52 +70,46 @@ angular
 	.state(playlist)
 })
 
-.controller('SearchCtrl', function(ytSearchYouTube){
-	var vm = this;
-	vm.submit = submit;
+// .controller('SearchCtrl', SearchCtrl)
 
-	function submit(keyword){
-		ytSearchYouTube(keyword).getResults()
-		.then(function(response){
-			console.log(response);
-			vm.results = response.data.items;
-		})
-	}
-})
+// .controller('ItemCtrl', ItemCtrl)
 
-.controller('VideoCtrl', function($stateParams, ytTrustSrc){
-	var vm = this;
-	vm.submit = function(){
-		alert("Submitted");
-	};
-	vm.trustSrc = ytTrustSrc;
-	vm.videoId = $stateParams.videoId;
-	vm.url = "http://www.youtube.com/embed/"+vm.videoId;
-	vm.trustedUrl = vm.trustSrc(vm.url);
-})
+// .controller('PlaylistCtrl', PlaylistCtrl)
 
-.controller('PlaylistCtrl', function($stateParams, ytTrustSrc){
-	var vm = this;
-	vm.trustSrc = ytTrustSrc;
-	vm.items = [
-		{
-			name: "Video 1",
-			id: "xZD-DAg7MgE"
-		},
-		{
-			name: "Video 2",
-			id: "KqRs_2kGZuY"
-		},
-		{
-			name: "Video 3",
-			id: "dqJRoh8MnBo"
-		},
-		{
-			name: "Video 4",
-			id: "OnoHdmbVPX4"
-		}
-	];
-})
+// function SearchCtrl(ytSearchYouTube){
+// 	var vm = this;
+// 	vm.submit = submit;
+
+// 	function submit(keyword){
+// 		ytSearchYouTube(keyword).getResults()
+// 		.then(function(response){
+// 			console.log(response);
+// 			vm.results = response.data.items;
+// 		})
+// 	}
+// };
+
+// function ItemCtrl($stateParams, ytTrustSrc){
+// 	var vm = this;
+// 	vm.submit = function(){
+// 		alert("Submitted");
+// 	};
+// 	vm.trustSrc = ytTrustSrc;
+// 	vm.videoId = $stateParams.videoId;
+// 	vm.url = "http://www.youtube.com/embed/"+vm.videoId;
+// 	vm.trustedUrl = vm.trustSrc(vm.url);
+// };
+
+// function PlaylistCtrl(ytVideoItems){
+// 	var vm = this;
+// 	// vm.trustSrc = ytTrustSrc;
+// 	console.log(ytVideoItems);
+// 	vm.items = ytVideoItems().getItems();
+// };
+
+
+
+
 
 
 
