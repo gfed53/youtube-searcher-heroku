@@ -1,5 +1,12 @@
 <form ng-submit="search.submit(search.keyword)">
 	<input type="text" ng-model="search.keyword" placeholder="Enter Search">
 	<input type="submit" value="Go!">
+	<input ng-if="search.viewVideo" ng-click="search.toggleVideo()" type="button" value="Back to Results">
 </form>
-<h2 ng-if="search.results">We found {{ search.results.length }} results for {{ search.keyword }}</h2>
+<div ng-if="search.results && !search.viewVideo" id="results">
+	<h2>We found {{ search.results.length }} results for {{ search.searchedKeyword }}</h2>
+	<div ng-repeat="result in search.results">
+		<h3>{{result.snippet.title}}</h3>
+		<a ng-click="search.toggleVideo()" ui-sref="video({videoId: result.id.videoId} )"><img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image"></a>
+	</div>
+</div>

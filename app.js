@@ -70,43 +70,6 @@ angular
 	.state(playlist)
 })
 
-// .controller('SearchCtrl', SearchCtrl)
-
-// .controller('ItemCtrl', ItemCtrl)
-
-// .controller('PlaylistCtrl', PlaylistCtrl)
-
-// function SearchCtrl(ytSearchYouTube){
-// 	var vm = this;
-// 	vm.submit = submit;
-
-// 	function submit(keyword){
-// 		ytSearchYouTube(keyword).getResults()
-// 		.then(function(response){
-// 			console.log(response);
-// 			vm.results = response.data.items;
-// 		})
-// 	}
-// };
-
-// function ItemCtrl($stateParams, ytTrustSrc){
-// 	var vm = this;
-// 	vm.submit = function(){
-// 		alert("Submitted");
-// 	};
-// 	vm.trustSrc = ytTrustSrc;
-// 	vm.videoId = $stateParams.videoId;
-// 	vm.url = "http://www.youtube.com/embed/"+vm.videoId;
-// 	vm.trustedUrl = vm.trustSrc(vm.url);
-// };
-
-// function PlaylistCtrl(ytVideoItems){
-// 	var vm = this;
-// 	// vm.trustSrc = ytTrustSrc;
-// 	console.log(ytVideoItems);
-// 	vm.items = ytVideoItems().getItems();
-// };
-
 
 
 
