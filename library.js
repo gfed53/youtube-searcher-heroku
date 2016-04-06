@@ -17,7 +17,7 @@ function ytSearchYouTube($q, $http) {
 		    var request = {
 		    	key: "AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA",
 		    	part: "snippet",
-		    	maxResults: 20,
+		    	maxResults: 50,
 		    	order: "relevance",
 		    	q: keyword,
 		    	type: "video",

@@ -62,12 +62,23 @@ angular
 				controllerAs: 'playlist'
 			}
 		}
-	};
+	},
+	about = {
+		name: "about",
+		url: "about",
+		parent: "root",
+		views: {
+			'content@': {
+				templateUrl: "./partials/about/about.html"
+			}
+		}
+	}
 
 	$stateProvider
 	.state(myRoot)
 	.state(video)
 	.state(playlist)
+	.state(about)
 })
 
 
