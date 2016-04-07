@@ -4,13 +4,17 @@
 	<meta charset="UTF-8">
 	<title>Ultimate YouTube Searcher</title>
 	<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-	<div ui-view="header"></div>
-	<div ui-view="content"></div>
-	<div ui-view="footer"></div>
-	<!-- <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script> -->
+	<div class="container">
+		<div ui-view="header"></div>
+		<div ui-view="content"></div>
+		<div ui-view="footer"></div>
+	</div>
+	<script src="../node_modules/jquery/dist/jquery.js"></script>
+	<script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
 	<script src="../node_modules/angular/angular.js"></script>
 	<script src="../node_modules/angular-ui-router/release/angular-ui-router.js"></script>
 	<script src="app.js"></script>

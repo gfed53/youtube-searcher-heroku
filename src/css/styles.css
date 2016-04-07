@@ -1,5 +1,22 @@
+h1 {
+  text-align: center; }
+
+#results h2, #results h3, #results a {
+  text-align: center; }
+
+#results .result {
+  height: 9em;
+  border: 2px solid black;
+  border-radius: 0.5em; }
+  #results .result h3 {
+    font-size: 1.2em; }
+  #results .result img {
+    margin: 1em 2em; }
+
+* {
+  font-family: "serif"; }
+
 .active {
-	color: beige;
-	background-color: grey;
-	font-weight: bold;
-}
+  color: beige;
+  background-color: grey;
+  font-weight: bold; }

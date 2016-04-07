@@ -1,0 +1,16 @@
+#results {
+	h2, h3, a {
+		text-align: center;
+	}
+	.result {
+		height: 9em;
+		border: 2px solid black;
+		border-radius: 0.5em;
+		h3 {
+			font-size: 1.2em;
+		}
+		img {
+			margin: 1em 2em;
+		}
+	}
+}

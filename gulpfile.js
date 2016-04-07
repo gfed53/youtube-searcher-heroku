@@ -4,16 +4,16 @@ var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
 
 var paths = {
-  scripts: [ 'src/**/*.js' ],
+  scripts: 'src/**/*.js',
   html: [
     './src/**/*.html',
-    '!./app/index.html'
+    '!./src/index.html'
   ],
-  scss: ['./src/scss/*.scss'],
-  css: ['./src/css'],
-  index: './app/index.html',
+  scss: './src/scss/*.scss',
+  css: './src/css',
+  index: './src/index.html',
   build: './build/'
-}
+};
 
 // JavaScript linting task
 gulp.task('jshint', function(){
@@ -28,4 +28,12 @@ gulp.task('sass', function(){
 		.pipe(sass())
 		.pipe(gulp.dest(paths.css));
 });
+
+// Watch task
+gulp.task('watch', function(){
+	gulp.watch(paths.scripts, ['jshint']);
+	gulp.watch(paths.scss, ['sass']);
+});
+
+gulp.task('default', ['jshint', 'sass', 'watch']);
 
