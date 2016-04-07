@@ -1,10 +1,7 @@
 angular
-.module('myApp', ['ui.router'])
+.module('myApp')
 
-.config(function($httpProvider, $stateProvider, $urlRouterProvider){
-	$httpProvider.defaults.useXDomain = true;
-	delete $httpProvider.defaults.headers.common['X-Requested-With'];
-
+.config(function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider.otherwise("/")
 	var myRoot = {
 		name: "root",
@@ -80,11 +77,4 @@ angular
 	.state(playlist)
 	.state(about)
 })
-
-
-
-
-
-
-
 

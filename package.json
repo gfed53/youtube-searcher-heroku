@@ -1,7 +1,6 @@
 {
   "name": "ui-router-video-practice",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,9 +11,20 @@
     "angular": "^1.5.3",
     "angular-ui-router": "^0.2.18",
     "bootstrap": "^3.3.6",
+    "browserify": "^13.0.0",
     "gulp": "^3.9.1",
     "gulp-jshint": "^2.0.0",
     "gulp-sass": "^2.2.0",
-    "jshint": "^2.9.1"
-  }
+    "jshint": "^2.9.1",
+    "normalize.css": "^4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gfed53/ultimate-youtube-searcher.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gfed53/ultimate-youtube-searcher/issues"
+  },
+  "homepage": "https://github.com/gfed53/ultimate-youtube-searcher#readme",
+  "description": ""
 }
