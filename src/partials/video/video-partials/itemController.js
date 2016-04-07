@@ -1,7 +1,7 @@
 angular
 .module('myApp')
 
-.controller('ItemCtrl', ItemCtrl)
+.controller('ItemCtrl', ['$stateParams', 'ytTrustSrc', ItemCtrl])
 
 function ItemCtrl($stateParams, ytTrustSrc){
 	var vm = this;

@@ -1,7 +1,7 @@
 angular
 .module('myApp')
 
-.controller('SearchCtrl', SearchCtrl)
+.controller('SearchCtrl', ['ytSearchYouTube', SearchCtrl])
 
 function SearchCtrl(ytSearchYouTube){
 	var vm = this;

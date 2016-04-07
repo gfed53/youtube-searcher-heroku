@@ -1,7 +1,7 @@
 angular
 .module('myApp')
 
-.run(function($rootScope){
+.run(['$rootScope', function($rootScope){
 		$rootScope.$on('$stateChangeStart',
 		function(event, toState, toParams, fromState, fromParams){
 				$rootScope.isLoading = true;
@@ -11,9 +11,9 @@ angular
 			$rootScope.isLoading = false;
 		});
 
-})
+}])
 
-.config(function($stateProvider, $urlRouterProvider){
+.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider.otherwise("/")
 	var myRoot = {
 		name: "root",
@@ -90,5 +90,5 @@ angular
 	.state(about);
 
 
-})
+}])
 

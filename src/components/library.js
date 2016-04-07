@@ -1,7 +1,7 @@
 angular
 .module('myApp')
 .factory('ytTrustSrc', ['$sce', ytTrustSrc])
-.factory('ytVideoItems', ytVideoItems)
+.factory('ytVideoItems', [ytVideoItems])
 .factory('ytSearchYouTube', ['$q', '$http', ytSearchYouTube])
 
 function ytTrustSrc($sce){
