@@ -1,20 +1,64 @@
-h1 {
+#about {
+  margin: 2.5em 0;
+  font-weight: bold;
+  font-style: italic; }
+
+#results.ng-enter,
+#results.ng-leave.ng-leave-active {
+  opacity: 0; }
+
+#results.ng-leave,
+#results.ng-enter.ng-enter-active {
+  opacity: 1; }
+
+.animate-view-container {
+  position: relative;
+  min-height: 100%; }
+
+.animate-view {
+  transition: 1s linear all; }
+
+.animate-view.ng-enter {
+  opacity: 0;
+  z-index: 100; }
+
+.animate-view.ng-enter.ng-enter-active {
+  opacity: 1; }
+
+.animate-view.ng-leave {
+  opacity: 1;
+  z-index: 99; }
+
+.animate-view.ng-leave.ng-leave-active {
+  opacity: 0; }
+
+footer {
+  margin-top: 5em;
+  padding: 2em;
+  border-top: 1px solid;
   text-align: center; }
+
+h1 {
+  text-align: center;
+  font-size: 4em;
+  font-weight: bold; }
 
 #form-search {
   margin: 1.5em 0.5em; }
 
-#results h2, #results h3, #results a {
-  text-align: center; }
-
-#results .result {
-  height: 9em;
-  border: 2px solid black;
-  border-radius: 0.5em; }
-  #results .result h3 {
-    font-size: 1.2em; }
-  #results .result img {
-    margin: 1em 2em; }
+#results {
+  margin: 2em 0;
+  transition: 1s linear all; }
+  #results h2, #results h3, #results a {
+    text-align: center; }
+  #results .result {
+    height: 9em;
+    border: 2px solid black;
+    border-radius: 0.5em; }
+    #results .result h3 {
+      font-size: 1.2em; }
+    #results .result img {
+      margin: 1em 2em; }
 
 * {
   font-family: "Open Sans" sans-serif; }

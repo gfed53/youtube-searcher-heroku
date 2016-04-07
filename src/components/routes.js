@@ -1,6 +1,18 @@
 angular
 .module('myApp')
 
+.run(function($rootScope){
+		$rootScope.$on('$stateChangeStart',
+		function(event, toState, toParams, fromState, fromParams){
+				$rootScope.isLoading = true;
+		});
+		$rootScope.$on('$stateChangeSuccess',
+		function(){
+			$rootScope.isLoading = false;
+		});
+
+})
+
 .config(function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider.otherwise("/")
 	var myRoot = {
@@ -75,6 +87,8 @@ angular
 	.state(myRoot)
 	.state(video)
 	.state(playlist)
-	.state(about)
+	.state(about);
+
+
 })
 

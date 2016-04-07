@@ -1,5 +1,5 @@
 angular
-.module('myApp', ['ui.router'])
+.module('myApp', ['ui.router', 'ngAnimate'])
 
 .config(function($httpProvider){
 	$httpProvider.defaults.useXDomain = true;

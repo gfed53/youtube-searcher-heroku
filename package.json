@@ -9,6 +9,7 @@
   "license": "ISC",
   "devDependencies": {
     "angular": "^1.5.3",
+    "angular-animate": "^1.5.3",
     "angular-ui-router": "^0.2.18",
     "bootstrap": "^3.3.6",
     "browserify": "^13.0.0",
