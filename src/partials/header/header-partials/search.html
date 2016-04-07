@@ -1,7 +1,10 @@
-<form ng-submit="search.submit(search.keyword)">
-	<input type="text" ng-model="search.keyword" placeholder="Enter Search">
-	<input type="submit" value="Go!">
-	<input ng-if="search.viewVideo" ng-click="search.toggleVideo()" type="button" value="View Results">
+<form id="form-search" class="form-inline" ng-submit="search.submit(search.keyword)">
+<!-- <div class="form-group"> -->
+	
+<!-- </div> -->
+	<input type="text" class="form-control" ng-model="search.keyword" placeholder="Enter Search">
+	<input type="submit" class="btn btn-default" value="Go!">
+	<input ng-if="search.viewVideo" ng-click="search.toggleVideo()" type="button" class="btn btn-default" value="View Results">
 </form>
 <div ng-if="search.results && !search.viewVideo" id="results">
 	<h2>We found {{ search.results.length }} results for {{ search.searchedKeyword }}</h2>

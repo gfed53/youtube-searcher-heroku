@@ -1,6 +1,9 @@
 h1 {
   text-align: center; }
 
+#form-search {
+  margin: 1.5em 0.5em; }
+
 #results h2, #results h3, #results a {
   text-align: center; }
 
@@ -14,9 +17,13 @@ h1 {
     margin: 1em 2em; }
 
 * {
-  font-family: "serif"; }
+  font-family: "Open Sans" sans-serif; }
 
 .active {
   color: beige;
   background-color: grey;
   font-weight: bold; }
+
+iframe {
+  display: block;
+  margin: 0 auto; }
