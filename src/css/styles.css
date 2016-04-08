@@ -1,7 +1,61 @@
+* {
+  font-family: "Open Sans" sans-serif; }
+
+#content, #page-footer, input {
+  font-size: 2em; }
+
+.active {
+  color: beige;
+  background-color: grey;
+  font-weight: bold; }
+
 #about {
   margin: 2.5em 0;
   font-weight: bold;
   font-style: italic; }
+
+#page-footer {
+  margin-top: 5em;
+  padding: 2em;
+  border-top: 1px solid;
+  text-align: center; }
+
+h1 {
+  text-align: center;
+  font-size: 6em;
+  font-weight: bold; }
+
+#menu {
+  font-size: 3em; }
+
+#form-search {
+  margin: 1.5em 0.5em; }
+  #form-search input {
+    height: 2.5em;
+    font-size: 2.5em; }
+  #form-search #btn-go {
+    width: 2.8em; }
+
+#results {
+  margin: 2em 0;
+  transition: 1s linear all; }
+  #results h2, #results h3 {
+    text-align: center; }
+  #results h2 {
+    font-size: 3em; }
+  #results .result {
+    height: 15em;
+    border: 2px solid black;
+    border-radius: 0.5em; }
+    #results .result h3 {
+      font-size: 2em; }
+    #results .result img {
+      display: block;
+      margin: auto; }
+
+iframe {
+  display: block;
+  margin: 0 auto; }
 
 #results.ng-enter,
 #results.ng-leave.ng-leave-active {
@@ -13,7 +67,7 @@
 
 .animate-view-container {
   position: relative;
-  height: 400px; }
+  height: 65em; }
 
 .animate-view {
   transition: 1s linear all;
@@ -36,43 +90,3 @@
 
 .animate-view.ng-leave.ng-leave-active {
   opacity: 0; }
-
-#page-footer {
-  margin-top: 5em;
-  padding: 2em;
-  border-top: 1px solid;
-  text-align: center; }
-
-h1 {
-  text-align: center;
-  font-size: 4em;
-  font-weight: bold; }
-
-#form-search {
-  margin: 1.5em 0.5em; }
-
-#results {
-  margin: 2em 0;
-  transition: 1s linear all; }
-  #results h2, #results h3, #results a {
-    text-align: center; }
-  #results .result {
-    height: 9em;
-    border: 2px solid black;
-    border-radius: 0.5em; }
-    #results .result h3 {
-      font-size: 1.2em; }
-    #results .result img {
-      margin: 1em 2em; }
-
-* {
-  font-family: "Open Sans" sans-serif; }
-
-.active {
-  color: beige;
-  background-color: grey;
-  font-weight: bold; }
-
-iframe {
-  display: block;
-  margin: 0 auto; }

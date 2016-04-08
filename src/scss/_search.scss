@@ -1,21 +1,32 @@
 #form-search {
 	margin: 1.5em 0.5em;
+	input {
+		height: 2.5em;
+		font-size: 2.5em;
+	}
+	#btn-go {
+		width: 2.8em;
+	}
 }
 
 #results {
 	margin: 2em 0;
-	h2, h3, a {
+	h2, h3 {
 		text-align: center;
 	}
+	h2 {
+		font-size: 3em;
+	}
 	.result {
-		height: 9em;
+		height: 15em;
 		border: 2px solid black;
 		border-radius: 0.5em;
 		h3 {
-			font-size: 1.2em;
+			font-size: 2em;
 		}
 		img {
-			margin: 1em 2em;
+			display: block;
+			margin: auto;
 		}
 	}
 	transition: 1s linear all;
