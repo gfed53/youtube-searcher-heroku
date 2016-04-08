@@ -31,3 +31,40 @@
 	}
 	transition: 1s linear all;
 }
+
+@media screen and ($tablet){
+	#results {
+		.result {
+			h3 {
+				font-size: 1.3em;
+			}
+		}
+	}
+}
+
+@media screen and ($desktop){
+	#form-search {
+		input {
+			height: 2em;
+			font-size: 1.5em;
+		}
+		// #btn-go {
+		// 	width: 2.5em;
+		// }
+	}
+
+	#results {
+		h2 {
+			font-size: 2em;
+		}
+		.result {
+			height: 8em;
+			h3 {
+				font-size: 1em;
+			}
+		}
+	}
+}
+
+
+

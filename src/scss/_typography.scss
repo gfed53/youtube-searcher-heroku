@@ -11,3 +11,13 @@
 	background-color: grey;
 	font-weight: bold;
 }
+
+@media screen and ($tablet){
+	
+}
+
+@media screen and ($desktop){
+	#content, #page-footer, input {
+		font-size: 1em;
+	}
+}
