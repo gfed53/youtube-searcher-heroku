@@ -3,6 +3,7 @@ angular
 .factory('ytTrustSrc', ['$sce', ytTrustSrc])
 .factory('ytVideoItems', [ytVideoItems])
 .factory('ytSearchYouTube', ['$q', '$http', ytSearchYouTube])
+.factory('ytContentResize', ytContentResize)
 
 function ytTrustSrc($sce){
 	return function(src){
@@ -50,43 +51,69 @@ function ytSearchYouTube($q, $http) {
 		}
 	};
 
-function ytVideoItems(){
-	return function(){
-		var items = [
-		{
-			name: "Video 1",
-			id: "xZD-DAg7MgE"
-		},
-		{
-			name: "Video 2",
-			id: "KqRs_2kGZuY"
-		},
-		{
-			name: "Video 3",
-			id: "dqJRoh8MnBo"
-		},
-		{
-			name: "Video 4",
-			id: "OnoHdmbVPX4"
-		}
-		];
-		var services = {
-			getItems: getItems,
-			addItem: addItem
-		};
-		return services;
+	function ytVideoItems(){
+		return function(){
+			var items = [
+			{
+				name: "Video 1",
+				id: "xZD-DAg7MgE"
+			},
+			{
+				name: "Video 2",
+				id: "KqRs_2kGZuY"
+			},
+			{
+				name: "Video 3",
+				id: "dqJRoh8MnBo"
+			},
+			{
+				name: "Video 4",
+				id: "OnoHdmbVPX4"
+			}
+			];
+			var services = {
+				getItems: getItems,
+				addItem: addItem
+			};
+			return services;
 
-		function getItems(){
-			return items;
-		}
-
-		function addItem(name, id){
-			var item = {
-				name: name,
-				id: id
+			function getItems(){
+				return items;
 			}
 
-			items.push[item];
+			function addItem(name, id){
+				var item = {
+					name: name,
+					id: id
+				}
+
+				items.push[item];
+			}
+		}
+	};
+
+	function ytContentResize(){
+	return function(){
+		var services = {
+			set: set
+		},
+		size = "",
+		container = document.getElementById("animate-view-container");
+
+		return services;
+
+		function set(newSize){
+			size = newSize;
+			if(size==="large"){
+				container.style.height = "500px";
+			} else {
+				container.style.height = "400px";
+			}
+			console.log(size);
 		}
 	}
-};
+}
+
+
+
+

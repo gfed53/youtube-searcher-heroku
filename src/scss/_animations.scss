@@ -10,7 +10,7 @@
 }
 
 // For State Changes
-.animate-view-container { 
+#animate-view-container { 
 	position:relative;
 	height: 65em; }
 .animate-view {
@@ -32,7 +32,7 @@
 }
 
 @media screen and ($desktop){
-	.animate-view-container {
+	#animate-view-container {
 		height: 400px;
 	}
 }

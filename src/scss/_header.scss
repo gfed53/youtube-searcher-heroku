@@ -1,5 +1,33 @@
-h1 {
-	text-align: center;
-	font-size: 6em;
-	font-weight: bold;
+body {
+	#page-header {
+		h1 {
+			text-align: center;
+			font-size: 6em;
+			font-weight: bold;
+		}
+	}
+}
+
+// @media screen and ($mobilefix){
+// 	body {
+// 		#page-header h1 {
+// 			font-size: 6em;
+// 		}
+// 	}
+// }
+
+@media screen and ($tablet){
+	body {
+		#page-header h1 {
+			font-size: 4em;		
+		}
+	}
+}
+
+@media screen and ($desktop){
+	body {
+		#page-header h1 {
+			font-size: 3em;
+		}
+	}
 }

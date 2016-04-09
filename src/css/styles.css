@@ -24,13 +24,29 @@
   border-top: 1px solid;
   text-align: center; }
 
-h1 {
+body #page-header h1 {
   text-align: center;
   font-size: 6em;
   font-weight: bold; }
 
+@media screen and (min-width: 768px) {
+  body #page-header h1 {
+    font-size: 4em; } }
+
+@media screen and (min-width: 1024px) {
+  body #page-header h1 {
+    font-size: 3em; } }
+
 #menu {
   font-size: 3em; }
+
+@media screen and (min-width: 768px) {
+  #menu {
+    font-size: 2em; } }
+
+@media screen and (min-width: 1024px) {
+  #menu {
+    font-size: 1em; } }
 
 #form-search {
   margin: 1.5em 0.5em; }
@@ -58,13 +74,19 @@ h1 {
       margin: auto; }
 
 @media screen and (min-width: 768px) {
+  #form-search input {
+    height: 2.2em;
+    font-size: 1.8em; }
   #results .result h3 {
     font-size: 1.3em; } }
 
 @media screen and (min-width: 1024px) {
   #form-search input {
     height: 2em;
-    font-size: 1.5em; }
+    font-size: 1em; }
+  #form-search #btn-go {
+    width: 3.5em;
+    text-align: center; }
   #results h2 {
     font-size: 2em; }
   #results .result {
@@ -76,6 +98,17 @@ iframe {
   display: block;
   margin: 0 auto; }
 
+#btn-choices {
+  display: none; }
+
+#choices-wrapper {
+  display: block;
+  text-align: center; }
+
+@media screen and (min-width: 1024px) {
+  #btn-choices {
+    display: inline-block; } }
+
 #results.ng-enter,
 #results.ng-leave.ng-leave-active {
   opacity: 0; }
@@ -84,7 +117,7 @@ iframe {
 #results.ng-enter.ng-enter-active {
   opacity: 1; }
 
-.animate-view-container {
+#animate-view-container {
   position: relative;
   height: 65em; }
 
@@ -111,5 +144,5 @@ iframe {
   opacity: 0; }
 
 @media screen and (min-width: 1024px) {
-  .animate-view-container {
+  #animate-view-container {
     height: 400px; } }

@@ -2,3 +2,19 @@ iframe {
 	display: block;
 	margin: 0 auto;
 }
+
+#btn-choices {
+	display: none;
+}
+
+#choices-wrapper {
+	display: block;
+	text-align: center;
+}
+
+@media screen and ($desktop) {
+	#btn-choices {
+		display: inline-block;
+		// text-align: center;
+	}
+}
