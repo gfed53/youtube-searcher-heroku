@@ -4,10 +4,26 @@ angular
 .factory('ytVideoItems', [ytVideoItems])
 .factory('ytSearchYouTube', ['$q', '$http', ytSearchYouTube])
 .factory('ytContentResize', ytContentResize)
+.factory('ytToggleAutoScroll', ytToggleAutoScroll)
 
 function ytTrustSrc($sce){
 	return function(src){
 		return $sce.trustAsResourceUrl(src);
+	}
+}
+
+function ytToggleAutoScroll(){
+	return function(){
+		var element = document.getElementById('results');
+		console.log(typeof element);
+		if(element === null){
+			console.log("its null");
+			document.getElementById('content').setAttribute("autoscroll", "false");
+		} else {
+			console.log("its there");
+			document.getElementById('content').setAttribute("autoscroll", "true");
+		}
+		document.getElementById('content').setAttribute("autoscroll", "true");
 	}
 }
 
@@ -93,26 +109,26 @@ function ytSearchYouTube($q, $http) {
 	};
 
 	function ytContentResize(){
-	return function(){
-		var services = {
-			set: set
-		},
-		size = "",
-		container = document.getElementById("animate-view-container");
+		return function(){
+			var services = {
+				set: set
+			},
+			size = "",
+			container = document.getElementById("animate-view-container");
 
-		return services;
+			return services;
 
-		function set(newSize){
-			size = newSize;
-			if(size==="large"){
-				container.style.height = "500px";
-			} else {
-				container.style.height = "400px";
+			function set(newSize){
+				size = newSize;
+				if(size==="large"){
+					container.style.height = "500px";
+				} else {
+					container.style.height = "400px";
+				}
+				console.log(size);
 			}
-			console.log(size);
 		}
 	}
-}
 
 
 

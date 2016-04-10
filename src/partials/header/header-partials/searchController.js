@@ -1,9 +1,13 @@
 angular
 .module('myApp')
 
-.controller('SearchCtrl', ['ytSearchYouTube', SearchCtrl])
+// .run(function(){
 
-function SearchCtrl(ytSearchYouTube){
+// })
+
+.controller('SearchCtrl', ['ytSearchYouTube', 'ytToggleAutoScroll', SearchCtrl])
+
+function SearchCtrl(ytSearchYouTube, ytToggleAutoScroll){
 	var vm = this;
 	vm.submit = submit;
 	vm.viewVideo = false;
@@ -16,6 +20,7 @@ function SearchCtrl(ytSearchYouTube){
 		.then(function(response){
 			console.log(response);
 			vm.results = response.data.items;
+			ytToggleAutoScroll();
 		})
 	}
 

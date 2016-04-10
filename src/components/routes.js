@@ -1,14 +1,17 @@
 angular
 .module('myApp')
 
-.run(['$rootScope', function($rootScope){
+.run(['$rootScope', 'ytToggleAutoScroll', function($rootScope, ytToggleAutoScroll){
 		$rootScope.$on('$stateChangeStart',
 		function(event, toState, toParams, fromState, fromParams){
-				$rootScope.isLoading = true;
+				// $rootScope.isLoading = true;
+				// ytToggleAutoScroll();
+				
 		});
 		$rootScope.$on('$stateChangeSuccess',
 		function(){
-			$rootScope.isLoading = false;
+			// $rootScope.isLoading = false;
+			ytToggleAutoScroll();
 		});
 
 }])

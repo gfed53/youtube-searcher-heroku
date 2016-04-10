@@ -12,4 +12,5 @@ function ItemCtrl($stateParams, ytTrustSrc){
 	vm.videoId = $stateParams.videoId;
 	vm.url = "http://www.youtube.com/embed/"+vm.videoId;
 	vm.trustedUrl = vm.trustSrc(vm.url);
+	console.log(vm.trustedUrl);
 };

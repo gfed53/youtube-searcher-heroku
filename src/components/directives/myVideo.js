@@ -1,30 +1,37 @@
 angular
 .module('myApp')
 
-.directive('myVideo', ['ytContentResize', myVideo]);
+.directive('myVideo', ['ytContentResize', 'ytTrustSrc', myVideo]);
 
-function myVideo(ytContentResize){
+function myVideo(ytContentResize, ytTrustSrc){
 	return {
 		restrict: "E",
 		templateUrl: "./components/directives/my-video.html",
 		scope: true,
 		transclude: true,
-		link: linkFunc,
 		controller: MyVideoCtrl,
-		controllerAs: "myVideo"
+		controllerAs: "myVideo",
+		bindToController: true,
+		link: linkFunc
 	}
 }
 
-function linkFunc(scope, element, attrs){
-	console.log("nothing");
+function linkFunc(scope, element, attrs, controller, transcludeFn){
+	// scope.ytTrustSrc = ytTrustSrc;
+	scope.url = attrs.src;
+	scope.source = ytTrustSrc(scope.url);
+	scope.url = attrs.src;
+	console.log(attrs);
+	console.log(attrs.src);
+	console.log(scope.source);
+	console.log(ytTrustSrc);
 }
 
-function MyVideoCtrl($scope, $element, $attrs, ytContentResize) {
+function MyVideoCtrl($scope, $element, $attrs, ytContentResize, ytTrustSrc) {
 	var vm = this;
-	// vm.source = $attrs.src;
-	console.log($attrs);
+	// console.log($attrs);
 	// console.log(ytContentResize);
-	// console.log($scope.$eval($attrs.src));
+	console.log($attrs.src);
 	vm.videoPlayer = $element.find('iframe')[0];
 	vm.goSmall = function(){
 		vm.videoPlayer.width = "480";
