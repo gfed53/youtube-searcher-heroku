@@ -18,9 +18,8 @@ function myVideo(ytContentResize, ytTrustSrc){
 
 function linkFunc(scope, element, attrs, controller, transcludeFn){
 	// scope.ytTrustSrc = ytTrustSrc;
-	scope.url = attrs.src;
-	scope.source = ytTrustSrc(scope.url);
-	scope.url = attrs.src;
+	// scope.url = attrs.src;
+	// scope.source = ytTrustSrc(scope.url);
 	console.log(attrs);
 	console.log(attrs.src);
 	console.log(scope.source);
@@ -48,7 +47,6 @@ function MyVideoCtrl($scope, $element, $attrs, ytContentResize, ytTrustSrc) {
 		vm.videoPlayer.height = "480";
 		ytContentResize().set("large");
 	}
-
 }
 
 function goSmall(videoPlayer){

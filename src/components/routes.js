@@ -1,17 +1,19 @@
 angular
 .module('myApp')
 
-.run(['$rootScope', 'ytToggleAutoScroll', function($rootScope, ytToggleAutoScroll){
-		$rootScope.$on('$stateChangeStart',
+.run(['$rootScope', 'ytToggleAutoScroll', 'ytContentResize', function($rootScope, ytToggleAutoScroll, ytContentResize){
+	$rootScope.$on('$stateChangeStart',
 		function(event, toState, toParams, fromState, fromParams){
 				// $rootScope.isLoading = true;
 				// ytToggleAutoScroll();
 				
-		});
-		$rootScope.$on('$stateChangeSuccess',
+				
+			});
+	$rootScope.$on('$stateChangeSuccess',
 		function(){
 			// $rootScope.isLoading = false;
-			ytToggleAutoScroll();
+			// ytToggleAutoScroll();
+			ytContentResize().reset();
 		});
 
 }])
@@ -32,14 +34,8 @@ angular
 				templateUrl: "./partials/footer/footer.html"
 			},
 			'menu@root': {
-				templateUrl: "./partials/header/header-partials/menu.html",
-				
-			},
-			'search@root': {
-				templateUrl: "./partials/header/header-partials/search.html",
-				controller: 'SearchCtrl',
-				controllerAs: 'search'
-			}
+				templateUrl: "./partials/header/header-partials/menu.html",	
+			 }
 		}
 	},
 	video = {
@@ -54,13 +50,7 @@ angular
 				templateUrl: "./partials/video/video-partials/item.html",
 				controller: 'ItemCtrl',
 				controllerAs: 'video'
-			},
-			'description@video': {
-				templateUrl: "./partials/video/video-partials/description.html"
-			},
-			'comment@video': {
-				templateUrl: "./partials/video/video-partials/comment.html"
-			}	
+			}
 		}
 	},
 	playlist = {
@@ -84,14 +74,35 @@ angular
 				templateUrl: "./partials/about/about.html"
 			}
 		}
+	},
+	search = {
+		name: "search",
+		url: "search",
+		parent: "root",
+		views: {
+			'content@': {
+				templateUrl: "./partials/search/search.html",
+				controller: 'SearchCtrl',
+				controllerAs: 'search'
+			},
+			'bar@search': {
+				templateUrl: "./partials/search/search-partials/bar.html"
+			},
+			'results@search': {
+				templateUrl: "./partials/search/search-partials/results.html"
+			}
+		},
+		
 	}
 
-	$stateProvider
-	.state(myRoot)
-	.state(video)
-	.state(playlist)
-	.state(about);
+
+		$stateProvider
+		.state(myRoot)
+		.state(video)
+		.state(playlist)
+		.state(about)
+		.state(search);
 
 
-}])
+	}])
 

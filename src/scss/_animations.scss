@@ -12,9 +12,10 @@
 // For State Changes
 #animate-view-container { 
 	position:relative;
-	height: 65em; }
+	height: 38em; }
 .animate-view {
     transition:1s linear all;
+    // transition-delay: 2s;
     position:absolute;
     top:0;
     left:0;

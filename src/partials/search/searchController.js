@@ -5,9 +5,9 @@ angular
 
 // })
 
-.controller('SearchCtrl', ['ytSearchYouTube', 'ytToggleAutoScroll', SearchCtrl])
+.controller('SearchCtrl', ['ytSearchYouTube', 'ytContentResize', SearchCtrl])
 
-function SearchCtrl(ytSearchYouTube, ytToggleAutoScroll){
+function SearchCtrl(ytSearchYouTube, ytContentResize){
 	var vm = this;
 	vm.submit = submit;
 	vm.viewVideo = false;
@@ -20,7 +20,7 @@ function SearchCtrl(ytSearchYouTube, ytToggleAutoScroll){
 		.then(function(response){
 			console.log(response);
 			vm.results = response.data.items;
-			ytToggleAutoScroll();
+			ytContentResize().adjust();
 		})
 	}
 

@@ -111,10 +111,13 @@ function ytSearchYouTube($q, $http) {
 	function ytContentResize(){
 		return function(){
 			var services = {
-				set: set
+				set: set,
+				adjust: adjust,
+				reset: reset
 			},
 			size = "",
-			container = document.getElementById("animate-view-container");
+			container = document.getElementById("animate-view-container"),
+			results = document.getElementById('results');
 
 			return services;
 
@@ -126,6 +129,16 @@ function ytSearchYouTube($q, $http) {
 					container.style.height = "400px";
 				}
 				console.log(size);
+			}
+
+			//Adjust to results
+			function adjust(){
+				container.style.height = "220em";
+			}
+
+			//Readjust
+			function reset(){
+				container.style.height = "400px";
 			}
 		}
 	}
