@@ -138,7 +138,7 @@ function ytSearchYouTube($q, $http) {
 
 			//Readjust
 			function reset(){
-				container.style.height = "400px";
+				container.style.height = "42em";
 			}
 		}
 	}
