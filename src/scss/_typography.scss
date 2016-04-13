@@ -1,23 +1,29 @@
-* {
-	font-family: "Open Sans" sans-serif;
+body {
+	font-family: "Open Sans", sans-serif;
+	#content, input {
+		font-size: 2em;
+	}
+	.nav-tabs > li > .active {
+		// border: 2px solid grey;
+		background-color: #f39c12;
+		color: white;
+		font-weight: bold;
+	}
 }
 
-#content, #page-footer, input {
-	font-size: 2em;
-}
 
-.active {
-	color: beige;
-	background-color: grey;
-	font-weight: bold;
-}
+
+
 
 // @media screen and ($tablet){
 	
 // }
 
 @media screen and ($desktop){
-	#content, #page-footer, input {
-		font-size: 1em;
+	body{
+		#content, #page-footer, input {
+			font-size: 1em;
+		}
 	}
+	
 }

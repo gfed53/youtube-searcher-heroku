@@ -20,7 +20,7 @@ function SearchCtrl(ytSearchYouTube, ytContentResize){
 		.then(function(response){
 			console.log(response);
 			vm.results = response.data.items;
-			ytContentResize().adjust();
+			// ytContentResize().adjust();
 		})
 	}
 

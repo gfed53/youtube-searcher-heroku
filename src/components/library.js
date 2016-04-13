@@ -3,8 +3,8 @@ angular
 .factory('ytTrustSrc', ['$sce', ytTrustSrc])
 .factory('ytVideoItems', [ytVideoItems])
 .factory('ytSearchYouTube', ['$q', '$http', ytSearchYouTube])
-.factory('ytContentResize', ytContentResize)
-.factory('ytToggleAutoScroll', ytToggleAutoScroll)
+.factory('ytContentResize', [ytContentResize])
+.factory('ytToggleAutoScroll', [ytToggleAutoScroll])
 
 function ytTrustSrc($sce){
 	return function(src){

@@ -13,7 +13,7 @@ angular
 		function(){
 			// $rootScope.isLoading = false;
 			// ytToggleAutoScroll();
-			ytContentResize().reset();
+			// ytContentResize().reset();
 		});
 
 }])
@@ -29,9 +29,6 @@ angular
 			},
 			'content': {
 				templateUrl: "./partials/content/content.html"
-			},
-			'footer': {
-				templateUrl: "./partials/footer/footer.html"
 			},
 			'menu@root': {
 				templateUrl: "./partials/header/header-partials/menu.html",	

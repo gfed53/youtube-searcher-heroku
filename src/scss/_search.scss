@@ -27,6 +27,8 @@
 		img {
 			display: block;
 			margin: auto;
+			height: 8em;
+			width: 10em;
 		}
 	}
 	transition: 1s linear all;
@@ -68,6 +70,10 @@
 			height: 8em;
 			h3 {
 				font-size: 1em;
+			}
+			img {
+				height: 90px;
+				width: 120px;
 			}
 		}
 	}
