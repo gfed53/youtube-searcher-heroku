@@ -4,7 +4,7 @@ angular
 .factory('ytVideoItems', [ytVideoItems])
 .factory('ytSearchYouTube', ['$q', '$http', ytSearchYouTube])
 .factory('ytContentResize', [ytContentResize])
-.factory('ytToggleAutoScroll', [ytToggleAutoScroll])
+// .factory('ytToggleAutoScroll', [ytToggleAutoScroll])
 
 function ytTrustSrc($sce){
 	return function(src){
@@ -12,20 +12,20 @@ function ytTrustSrc($sce){
 	}
 }
 
-function ytToggleAutoScroll(){
-	return function(){
-		var element = document.getElementById('results');
-		console.log(typeof element);
-		if(element === null){
-			console.log("its null");
-			document.getElementById('content').setAttribute("autoscroll", "false");
-		} else {
-			console.log("its there");
-			document.getElementById('content').setAttribute("autoscroll", "true");
-		}
-		document.getElementById('content').setAttribute("autoscroll", "true");
-	}
-}
+// function ytToggleAutoScroll(){
+// 	return function(){
+// 		var element = document.getElementById('results');
+// 		console.log(typeof element);
+// 		if(element === null){
+// 			console.log("its null");
+// 			document.getElementById('content').setAttribute("autoscroll", "false");
+// 		} else {
+// 			console.log("its there");
+// 			document.getElementById('content').setAttribute("autoscroll", "true");
+// 		}
+// 		document.getElementById('content').setAttribute("autoscroll", "true");
+// 	}
+// }
 
 function ytSearchYouTube($q, $http) {
 	return function(keyword){
