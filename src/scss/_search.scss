@@ -19,10 +19,13 @@
 	}
 	.result {
 		height: 15em;
-		border: 2px solid black;
+		background-color: #7f8c8d;
+		border: 2px solid rgba(0, 0, 0, 0.58);
 		border-radius: 0.5em;
 		h3 {
 			font-size: 2em;
+			font-weight: bold;
+			color: white;
 		}
 		img {
 			display: block;
@@ -69,7 +72,7 @@
 		.result {
 			height: 8em;
 			h3 {
-				font-size: 1em;
+				font-size: 1.2em;
 			}
 			img {
 				height: 90px;

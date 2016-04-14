@@ -60,10 +60,13 @@ body #page-header #credit {
     font-size: 3em; }
   #results .result {
     height: 15em;
-    border: 2px solid black;
+    background-color: #7f8c8d;
+    border: 2px solid rgba(0, 0, 0, 0.58);
     border-radius: 0.5em; }
     #results .result h3 {
-      font-size: 2em; }
+      font-size: 2em;
+      font-weight: bold;
+      color: white; }
     #results .result img {
       display: block;
       margin: auto;
@@ -89,7 +92,7 @@ body #page-header #credit {
   #results .result {
     height: 8em; }
     #results .result h3 {
-      font-size: 1em; }
+      font-size: 1.2em; }
     #results .result img {
       height: 90px;
       width: 120px; } }

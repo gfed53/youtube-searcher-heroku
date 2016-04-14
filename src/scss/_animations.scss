@@ -27,28 +27,6 @@
 .animate-view.ng-leave { opacity:1; z-index:99; }
 .animate-view.ng-leave.ng-leave-active { opacity:0; }
 
-// #page-header {
-// 	transition: 1s linear all;
-// 	// h1 {
-// 	// 	transition: 1s linear all;
-// 	// }
-// 	// #credit {
-// 	// 	transition: 1s linear all;
-// 	// 	transition-delay: 1s;
-// 	// }
-// 	// h1.ng-enter { margin-right: 100em; }
-// 	// h1.ng-enter.ng-enter.active {margin-right: 0; }
-// }
-
-// #page-header.ng-enter { margin-right: 200em; }
-// #page-header.ng-enter.ng-enter.active {margin-right: 0; }
-
-
-
-@media screen and ($tablet){
-
-}
-
 @media screen and ($desktop){
 	#animate-view-container {
 		min-height: 100%;
