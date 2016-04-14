@@ -12,10 +12,9 @@
 // For State Changes
 #animate-view-container { 
 	position:relative;
-	height: 42em; }
+	height: 100%; }
 .animate-view {
     transition:1s linear all;
-    // transition-delay: 2s;
     position:absolute;
     top:0;
     left:0;
@@ -28,12 +27,8 @@
 .animate-view.ng-leave { opacity:1; z-index:99; }
 .animate-view.ng-leave.ng-leave-active { opacity:0; }
 
-@media screen and ($tablet){
-
-}
-
 @media screen and ($desktop){
 	#animate-view-container {
-		height: 400px;
+		min-height: 100%;
 	}
 }

@@ -1,4 +1,4 @@
-<div ng-if="search.results && !search.viewVideo" id="results">
+<div ng-if="search.results" id="results">
 	<h2>We found {{ search.results.length }} results for {{ search.searchedKeyword }}</h2>
 	<div class="row">
 		<div class="col-md-6 result" ng-repeat="result in search.results">
@@ -7,7 +7,7 @@
 					<h3>{{result.snippet.title}}</h3>
 				</div>
 				<div class="col-md-6">
-					<a ng-click="search.toggleVideo()" ui-sref="video({videoId: result.id.videoId} )"><img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image"></a>
+					<a ui-sref="video({videoId: result.id.videoId} )"><img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image"></a>
 				</div>
 			</div>
 		</div>

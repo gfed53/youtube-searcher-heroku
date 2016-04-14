@@ -1,22 +1,14 @@
-html {
-  height: 100%;
-  min-height: 100%; }
-  html body {
-    min-height: 100%; }
-
-* {
-  font-family: "Open Sans" sans-serif; }
-
-#content, #page-footer, input {
-  font-size: 2em; }
-
-.active {
-  color: beige;
-  background-color: grey;
-  font-weight: bold; }
+body {
+  font-family: "Open Sans", sans-serif; }
+  body #content, body input {
+    font-size: 2em; }
+  body .nav-tabs > li > .active {
+    background-color: #f39c12;
+    color: white;
+    font-weight: bold; }
 
 @media screen and (min-width: 1024px) {
-  #content, #page-footer, input {
+  body #content, body #page-footer, body input {
     font-size: 1em; } }
 
 #about {
@@ -24,15 +16,20 @@ html {
   font-weight: bold;
   font-style: italic; }
 
-#page-footer {
-  margin-top: 5em;
-  padding: 2em;
-  border-top: 1px solid;
-  text-align: center; }
-
 body #page-header h1 {
   text-align: center;
   font-size: 6em;
+  font-weight: bold;
+  font-family: "Helvetica Neue", sans-serif;
+  padding: 1em;
+  color: #ecf0f1;
+  background-color: #27ae60;
+  border-radius: 0.4em; }
+
+body #page-header #credit {
+  text-align: right;
+  margin: 2em;
+  margin-right: 3em;
   font-weight: bold; }
 
 @media screen and (min-width: 1024px) {
@@ -63,13 +60,18 @@ body #page-header h1 {
     font-size: 3em; }
   #results .result {
     height: 15em;
-    border: 2px solid black;
+    background-color: #7f8c8d;
+    border: 2px solid rgba(0, 0, 0, 0.58);
     border-radius: 0.5em; }
     #results .result h3 {
-      font-size: 2em; }
+      font-size: 2em;
+      font-weight: bold;
+      color: white; }
     #results .result img {
       display: block;
-      margin: auto; }
+      margin: auto;
+      height: 8em;
+      width: 10em; }
 
 @media screen and (min-width: 768px) {
   #form-search input {
@@ -90,7 +92,10 @@ body #page-header h1 {
   #results .result {
     height: 8em; }
     #results .result h3 {
-      font-size: 1em; } }
+      font-size: 1.2em; }
+    #results .result img {
+      height: 90px;
+      width: 120px; } }
 
 iframe {
   display: block;
@@ -117,7 +122,7 @@ iframe {
 
 #animate-view-container {
   position: relative;
-  height: 42em; }
+  height: 100%; }
 
 .animate-view {
   transition: 1s linear all;
@@ -143,4 +148,4 @@ iframe {
 
 @media screen and (min-width: 1024px) {
   #animate-view-container {
-    height: 400px; } }
+    min-height: 100%; } }

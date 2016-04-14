@@ -1,23 +1,6 @@
 angular
 .module('myApp')
 
-.run(['$rootScope', 'ytToggleAutoScroll', 'ytContentResize', function($rootScope, ytToggleAutoScroll, ytContentResize){
-	$rootScope.$on('$stateChangeStart',
-		function(event, toState, toParams, fromState, fromParams){
-				// $rootScope.isLoading = true;
-				// ytToggleAutoScroll();
-				
-				
-			});
-	$rootScope.$on('$stateChangeSuccess',
-		function(){
-			// $rootScope.isLoading = false;
-			// ytToggleAutoScroll();
-			ytContentResize().reset();
-		});
-
-}])
-
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider.otherwise("/")
 	var myRoot = {
@@ -30,12 +13,9 @@ angular
 			'content': {
 				templateUrl: "./partials/content/content.html"
 			},
-			'footer': {
-				templateUrl: "./partials/footer/footer.html"
-			},
 			'menu@root': {
 				templateUrl: "./partials/header/header-partials/menu.html",	
-			 }
+			}
 		}
 	},
 	video = {
@@ -95,14 +75,12 @@ angular
 		
 	}
 
+	$stateProvider
+	.state(myRoot)
+	.state(video)
+	.state(playlist)
+	.state(about)
+	.state(search);
 
-		$stateProvider
-		.state(myRoot)
-		.state(video)
-		.state(playlist)
-		.state(about)
-		.state(search);
-
-
-	}])
+}])
 

@@ -28,7 +28,8 @@
     "jshint": "^2.9.1",
     "normalize-scss": "^4.0.3",
     "normalize.css": "^4.0.0",
-    "support-for": "^1.0.5"
+    "support-for": "^1.0.5",
+    "velocity-animate": "^1.2.3"
   },
   "repository": {
     "type": "git",
