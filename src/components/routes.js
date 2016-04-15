@@ -8,7 +8,9 @@ angular
 		url: "/",
 		views: {
 			'header': {
-				templateUrl: "./partials/header/header.html"
+				templateUrl: "./partials/header/header.html",
+				controller: 'HeaderCtrl',
+				controllerAs: 'header'
 			},
 			'content': {
 				templateUrl: "./partials/content/content.html"
