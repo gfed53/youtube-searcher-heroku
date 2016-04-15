@@ -1,9 +1,9 @@
 angular
 .module('myApp')
 
-.directive('myVideo', ['ytTrustSrc', myVideo]);
+.directive('myVideo', [myVideo]);
 
-function myVideo(ytTrustSrc){
+function myVideo(){
 	return {
 		restrict: "E",
 		templateUrl: "./components/directives/my-video.html",
@@ -15,12 +15,15 @@ function myVideo(ytTrustSrc){
 	}
 };
 
+MyVideoCtrl.$inject = ['$scope', '$element'];
+
+
 //Not currently in use
 // function linkFunc(scope, element, attrs, controller, transcludeFn){
 
 // };
 
-function MyVideoCtrl($scope, $element, $attrs) {
+function MyVideoCtrl($scope, $element) {
 	var vm = this;
 	vm.videoPlayer = $element.find('iframe')[0];
 	vm.goSmall = function(){
