@@ -10,6 +10,7 @@ var minifyCss = require('gulp-minify-css');
 var usemin = require('gulp-usemin');
 var rev = require('gulp-rev');
 var clean = require('gulp-clean');
+var del = require('del');
 
 var paths = {
   scripts: 'src/**/*.js',
@@ -45,8 +46,7 @@ gulp.task('watch', function(){
 
 // Build
 gulp.task('clean', function(){
-  gulp.src( paths.build, { read: false } )
-    .pipe(clean());
+  del(paths.build);
 });
 
 gulp.task('copy', [ 'clean' ], function() {

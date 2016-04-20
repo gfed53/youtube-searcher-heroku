@@ -17,12 +17,6 @@ function myVideo(){
 
 MyVideoCtrl.$inject = ['$scope', '$element'];
 
-
-//Not currently in use
-// function linkFunc(scope, element, attrs, controller, transcludeFn){
-
-// };
-
 function MyVideoCtrl($scope, $element) {
 	var vm = this;
 	vm.videoPlayer = $element.find('iframe')[0];
