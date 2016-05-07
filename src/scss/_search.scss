@@ -1,11 +1,12 @@
+#bar {
+	text-align: center;
+}
+
 #form-search {
-	margin: 1.5em 0.5em;
-	input {
-		height: 2.5em;
-		font-size: 2.5em;
-	}
+	margin: 2em;
 	#btn-go {
-		width: 2.8em;
+		height: 1.7em;
+		font-size: 0.8em;
 	}
 }
 
@@ -38,12 +39,6 @@
 }
 
 @media screen and ($tablet){
-	#form-search {
-		input {
-			height: 2.2em;
-			font-size: 1.8em;
-		}
-	}
 	#results {
 		.result {
 			h3 {
@@ -60,7 +55,8 @@
 			font-size: 1em;
 		}
 		#btn-go {
-			width: 3.5em;
+			width: 4em;
+			height: 2.5em;
 			text-align: center;
 		}
 	}

@@ -14,11 +14,16 @@ body {
 #about {
   margin: 2.5em 0;
   font-weight: bold;
-  font-style: italic; }
+  font-style: italic;
+  font-size: 0.8em; }
+
+@media screen and (min-width: 768px) {
+  #about {
+    font-size: 1em; } }
 
 body #page-header h1 {
   text-align: center;
-  font-size: 4em;
+  font-size: 3.5em;
   font-weight: bold;
   font-family: "Helvetica Neue", sans-serif;
   padding: 1em;
@@ -32,24 +37,29 @@ body #page-header #credit {
   margin-right: 3em;
   font-weight: bold; }
 
+@media screen and (min-width: 768px) {
+  body #page-header h1 {
+    font-size: 3.8em; } }
+
 @media screen and (min-width: 1024px) {
   body #page-header h1 {
     font-size: 3em; } }
 
 #menu {
-  font-size: 3em; }
+  font-size: 1.2em; }
 
 @media screen and (min-width: 1024px) {
   #menu {
     font-size: 1em; } }
 
+#bar {
+  text-align: center; }
+
 #form-search {
-  margin: 1.5em 0.5em; }
-  #form-search input {
-    height: 2.5em;
-    font-size: 2.5em; }
+  margin: 2em; }
   #form-search #btn-go {
-    width: 2.8em; }
+    height: 1.7em;
+    font-size: 0.8em; }
 
 #results {
   margin: 2em 0;
@@ -74,9 +84,6 @@ body #page-header #credit {
       width: 10em; }
 
 @media screen and (min-width: 768px) {
-  #form-search input {
-    height: 2.2em;
-    font-size: 1.8em; }
   #results .result h3 {
     font-size: 1.3em; } }
 
@@ -85,7 +92,8 @@ body #page-header #credit {
     height: 2em;
     font-size: 1em; }
   #form-search #btn-go {
-    width: 3.5em;
+    width: 4em;
+    height: 2.5em;
     text-align: center; }
   #results h2 {
     font-size: 2em; }
