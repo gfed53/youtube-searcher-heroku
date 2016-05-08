@@ -19,6 +19,9 @@
 		font-size: 3em;
 	}
 	.result {
+
+	}
+	.inner-result {
 		height: 15em;
 		background-color: #7f8c8d;
 		border: 2px solid rgba(0, 0, 0, 0.58);
@@ -66,7 +69,11 @@
 			font-size: 2em;
 		}
 		.result {
-			height: 8em;
+			height: 7em;
+			margin: 5em 0;
+			.inner-result {
+				margin: 0 1em;
+			}
 			h3 {
 				font-size: 1.2em;
 			}
