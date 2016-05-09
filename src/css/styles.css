@@ -67,25 +67,29 @@ body #page-header #credit {
   #results h2, #results h3 {
     text-align: center; }
   #results h2 {
-    font-size: 3em; }
+    font-size: 2.5em; }
+  #results .result {
+    margin: 3em 0; }
   #results .inner-result {
-    height: 15em;
     background-color: #7f8c8d;
     border: 2px solid rgba(0, 0, 0, 0.58);
     border-radius: 0.5em; }
     #results .inner-result h3 {
-      font-size: 2em;
+      font-size: 1em;
       font-weight: bold;
       color: white; }
     #results .inner-result img {
       display: block;
-      margin: auto;
-      height: 8em;
-      width: 10em; }
+      margin: 0.5em auto;
+      height: 6em;
+      width: 8em; }
 
 @media screen and (min-width: 768px) {
-  #results .result h3 {
-    font-size: 1.3em; } }
+  #results .result h2 {
+    font-size: 2em; }
+  #results .result img {
+    height: 5em;
+    width: 7em; } }
 
 @media screen and (min-width: 1024px) {
   #form-search input {
@@ -95,12 +99,11 @@ body #page-header #credit {
     width: 4em;
     height: 2.5em;
     text-align: center; }
-  #results h2 {
-    font-size: 2em; }
   #results .result {
     height: 7em;
     margin: 5em 0; }
     #results .result .inner-result {
+      height: 12em;
       margin: 0 1em; }
     #results .result h3 {
       font-size: 1.2em; }

@@ -16,26 +16,27 @@
 		text-align: center;
 	}
 	h2 {
-		font-size: 3em;
+		font-size: 2.5em;
 	}
 	.result {
+		margin: 3em 0;
 
 	}
 	.inner-result {
-		height: 15em;
+
 		background-color: #7f8c8d;
 		border: 2px solid rgba(0, 0, 0, 0.58);
 		border-radius: 0.5em;
 		h3 {
-			font-size: 2em;
+			font-size: 1em;
 			font-weight: bold;
 			color: white;
 		}
 		img {
 			display: block;
-			margin: auto;
-			height: 8em;
-			width: 10em;
+			margin:  0.5em auto;
+			height: 6em;
+			width: 8em;
 		}
 	}
 	transition: 1s linear all;
@@ -44,8 +45,15 @@
 @media screen and ($tablet){
 	#results {
 		.result {
+			h2 {
+				font-size: 2em;
+			}
 			h3 {
-				font-size: 1.3em;
+				// font-size: 1.3em;
+			}
+			img {
+				height: 5em;
+				width: 7em;
 			}
 		}
 	}
@@ -65,13 +73,12 @@
 	}
 
 	#results {
-		h2 {
-			font-size: 2em;
-		}
+
 		.result {
 			height: 7em;
 			margin: 5em 0;
 			.inner-result {
+				height: 12em;
 				margin: 0 1em;
 			}
 			h3 {
