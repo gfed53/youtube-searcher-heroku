@@ -20,16 +20,4 @@ MyVideoCtrl.$inject = ['$scope', '$element'];
 function MyVideoCtrl($scope, $element) {
 	var vm = this;
 	vm.videoPlayer = $element.find('iframe')[0];
-	vm.goSmall = function(){
-		vm.videoPlayer.width = "480";
-		vm.videoPlayer.height = "240";
-	}
-	vm.goMed = function(){
-		vm.videoPlayer.width = "640";
-		vm.videoPlayer.height = "390";
-	}
-	vm.goLarge = function(){
-		vm.videoPlayer.width = "720";
-		vm.videoPlayer.height = "480";
-	}
 };
