@@ -122,16 +122,9 @@ iframe {
   margin: 0 auto;
   width: 100%; }
 
-#btn-choices {
-  display: none; }
-
 #choices-wrapper {
   display: block;
   text-align: center; }
-
-@media screen and (min-width: 1024px) {
-  #btn-choices {
-    display: inline-block; } }
 
 #results.ng-enter,
 #results.ng-leave.ng-leave-active {
@@ -144,14 +137,13 @@ iframe {
 #animate-view-container {
   position: relative;
   height: 100%; }
-
-.animate-view {
-  transition: 1s linear all;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0; }
+  #animate-view-container .animate-view {
+    transition: 1s linear all;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; }
 
 .animate-view.ng-enter {
   opacity: 0;

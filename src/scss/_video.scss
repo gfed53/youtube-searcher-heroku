@@ -4,24 +4,7 @@ iframe {
 	width: 100%;
 }
 
-#btn-choices {
-	display: none;
-}
-
 #choices-wrapper {
 	display: block;
 	text-align: center;
-}
-
-@media screen and ($tablet) {
-	// iframe {
-	// 	width: 640px;
-	// 	height: 390px;
-	// }
-}
-
-@media screen and ($desktop) {
-	#btn-choices {
-		display: inline-block;
-	}
 }
