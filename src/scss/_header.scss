@@ -2,7 +2,7 @@ body {
 	#page-header {
 		h1 {
 			text-align: center;
-			font-size: 6em;
+			font-size: 2.5em;
 			font-weight: bold;
 			font-family: "Helvetica Neue", sans-serif;
 			padding: 1em;
@@ -21,21 +21,13 @@ body {
 	}
 }
 
-// @media screen and ($mobilefix){
-// 	body {
-// 		#page-header h1 {
-// 			font-size: 6em;
-// 		}
-// 	}
-// }
-
-// @media screen and ($tablet){
-// 	body {
-// 		#page-header h1 {
-// 			font-size: 4em;		
-// 		}
-// 	}
-// }
+@media screen and ($tablet){
+	body {
+		#page-header h1 {
+			font-size: 3.8em;		
+		}
+	}
+}
 
 @media screen and ($desktop){
 	body {

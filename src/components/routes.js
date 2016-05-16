@@ -2,7 +2,7 @@ angular
 .module('myApp')
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
-	$urlRouterProvider.otherwise("/")
+	$urlRouterProvider.otherwise("about")
 	var myRoot = {
 		name: "root",
 		url: "/",

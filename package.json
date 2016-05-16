@@ -13,6 +13,7 @@
     "angular-ui-router": "^0.2.18",
     "bootstrap": "^3.3.6",
     "browserify": "^13.0.0",
+    "del": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-connect": "^3.2.2",

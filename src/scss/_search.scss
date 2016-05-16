@@ -1,11 +1,12 @@
+#bar {
+	text-align: center;
+}
+
 #form-search {
-	margin: 1.5em 0.5em;
-	input {
-		height: 2.5em;
-		font-size: 2.5em;
-	}
+	margin: 2em;
 	#btn-go {
-		width: 2.8em;
+		height: 1.9em;
+		font-size: 0.8em;
 	}
 }
 
@@ -15,39 +16,41 @@
 		text-align: center;
 	}
 	h2 {
-		font-size: 3em;
+		font-size: 1.5em;
 	}
 	.result {
-		height: 15em;
+		margin: 3em 0;
+
+	}
+	.inner-result {
+
 		background-color: #7f8c8d;
 		border: 2px solid rgba(0, 0, 0, 0.58);
 		border-radius: 0.5em;
 		h3 {
-			font-size: 2em;
+			font-size: 1em;
 			font-weight: bold;
 			color: white;
 		}
 		img {
 			display: block;
-			margin: auto;
-			height: 8em;
-			width: 10em;
+			margin:  0.5em auto;
+			height: 6em;
+			width: 8em;
 		}
 	}
 	transition: 1s linear all;
 }
 
 @media screen and ($tablet){
-	#form-search {
-		input {
-			height: 2.2em;
-			font-size: 1.8em;
-		}
-	}
 	#results {
 		.result {
-			h3 {
-				font-size: 1.3em;
+			h2 {
+				font-size: 2em;
+			}
+			img {
+				height: 5em;
+				width: 7em;
 			}
 		}
 	}
@@ -60,17 +63,21 @@
 			font-size: 1em;
 		}
 		#btn-go {
-			width: 3.5em;
+			width: 4em;
+			height: 2.5em;
 			text-align: center;
 		}
 	}
 
 	#results {
-		h2 {
-			font-size: 2em;
-		}
+
 		.result {
-			height: 8em;
+			height: 7em;
+			margin: 5em 0;
+			.inner-result {
+				height: 12em;
+				margin: 0 1em;
+			}
 			h3 {
 				font-size: 1.2em;
 			}
