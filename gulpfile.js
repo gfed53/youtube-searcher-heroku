@@ -13,29 +13,29 @@ var clean = require('gulp-clean');
 var del = require('del');
 
 var paths = {
-  scripts: 'src/**/*.js',
-  html: [
-    './src/**/*.html',
-    '!./src/index.html'
-  ],
-  scss: './src/scss/*.scss',
-  css: './src/css',
-  index: './src/index.html',
-  build: './build/'
+	scripts: 'src/**/*.js',
+	html: [
+	'./src/**/*.html',
+	'!./src/index.html'
+	],
+	scss: './src/scss/*.scss',
+	css: './src/css',
+	index: './src/index.html',
+	build: './build/'
 };
 
 // JavaScript linting
 gulp.task('jshint', function(){
 	return gulp.src(paths.scripts)
-		.pipe(jshint())
-		.pipe(jshint.reporter('default'));
+	.pipe(jshint())
+	.pipe(jshint.reporter('default'));
 });
 
 // Compile SASS
 gulp.task('sass', function(){
 	return gulp.src(paths.scss)
-		.pipe(sass())
-		.pipe(gulp.dest(paths.css));
+	.pipe(sass())
+	.pipe(gulp.dest(paths.css));
 });
 
 // Watch
@@ -46,21 +46,21 @@ gulp.task('watch', function(){
 
 // Build
 gulp.task('clean', function(){
-  del(paths.build);
+	del(paths.build);
 });
 
 gulp.task('copy', [ 'clean' ], function() {
-  gulp.src( paths.html )
-    .pipe(gulp.dest('build/'));
+	gulp.src( paths.html )
+	.pipe(gulp.dest('build/'));
 });
 
 gulp.task('usemin', [ 'copy' ], function(){
-  gulp.src( paths.index )
-    .pipe(usemin({
-      css: [ minifyCss(), 'concat' ],
-      js: [ ngmin(), uglify() ]
-    }))
-    .pipe(gulp.dest( paths.build ))
+	gulp.src( paths.index )
+	.pipe(usemin({
+		css: [ minifyCss(), 'concat' ],
+		js: [ ngmin(), uglify() ]
+	}))
+	.pipe(gulp.dest( paths.build ))
 });
 
 gulp.task('build', ['usemin']);
