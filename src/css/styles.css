@@ -67,24 +67,25 @@ body #page-header #credit {
     height: 1.9em;
     font-size: 0.8em; }
 
-#results {
+.results {
   margin: 2em 0;
   transition: 1s linear all; }
-  #results h2, #results h3 {
+  .results h2, .results h3 {
     text-align: center; }
-  #results h2 {
+  .results h2 {
     font-size: 1.5em; }
-  #results .result {
+  .results .result {
     margin: 3em 0; }
-  #results .inner-result {
+  .results .inner-result {
     background-color: #7f8c8d;
     border: 2px solid rgba(0, 0, 0, 0.58);
     border-radius: 0.5em; }
-    #results .inner-result h3 {
-      font-size: 1em;
-      font-weight: bold;
+    .results .inner-result h3, .results .inner-result p {
       color: white; }
-    #results .inner-result img {
+    .results .inner-result h3 {
+      font-size: 1.4em;
+      font-weight: bold; }
+    .results .inner-result img {
       display: block;
       margin: 0.5em auto;
       height: 6em;

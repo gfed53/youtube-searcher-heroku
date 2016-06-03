@@ -3,6 +3,7 @@ angular
 .factory('ytTrustSrc', ['$sce', ytTrustSrc])
 .factory('ytVideoItems', [ytVideoItems])
 .factory('ytSearchYouTube', ['$q', '$http', ytSearchYouTube])
+.factory('ytChanSearch', ['$q', '$http', ytChanSearch])
 
 function ytTrustSrc($sce){
 	return function(src){
@@ -43,6 +44,39 @@ function ytSearchYouTube($q, $http) {
 		    }
 		}
 	};
+
+function ytChanSearch($q, $http){
+	return function(channel){
+		var url = "https://www.googleapis.com/youtube/v3/search";
+		    var request = {
+		    	key: "AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA",
+		    	part: "snippet",
+		    	maxResults: 50,
+		    	order: "relevance",
+		    	q: channel,
+		    	type: "channel"
+		    };
+		    var services = {
+		    	getResults: getResults
+		    };
+		    return services;
+
+		    function getResults(){
+		    	return $http({
+		    		method: 'GET',
+		    		url: url,
+		    		params: request
+		    	})
+		    	.then(function(response){
+		    		var results = response;
+		    		return $q.when(response);
+		    	},
+		    	function(response){
+		    		alert('error');
+		    	});
+		    }
+		}
+	}
 
 	function ytVideoItems(){
 		return function(){

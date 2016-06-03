@@ -10,7 +10,7 @@
 	}
 }
 
-#results {
+.results {
 	margin: 2em 0;
 	h2, h3 {
 		text-align: center;
@@ -27,10 +27,13 @@
 		background-color: #7f8c8d;
 		border: 2px solid rgba(0, 0, 0, 0.58);
 		border-radius: 0.5em;
-		h3 {
-			font-size: 1em;
-			font-weight: bold;
+		h3, p {
 			color: white;
+		}
+		h3 {
+			font-size: 1.4em;
+			font-weight: bold;
+			// color: white;
 		}
 		img {
 			display: block;

@@ -1,4 +1,4 @@
-<div ng-if="search.results" id="results">
+<!-- <div ng-if="search.results" class="results">
 	<h2>We found {{ search.results.length }} results for {{ search.searchedKeyword }}</h2>
 	<div class="row">
 		<div class="col-md-6 result" ng-repeat="result in search.results">
@@ -8,6 +8,22 @@
 				</div>
 				<div class="col-md-6">
 					<a ui-sref="video({videoId: result.id.videoId} )"><img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+<div ng-if="search.chanResults" class="results">
+	<h2>We found {{ search.chanResults.length }} results for {{ search.searchedChannel }}</h2>
+	<div class="row">
+		<div class="col-md-6 result" ng-repeat="result in search.chanResults">
+			<div class="row inner-result">
+				<div class="col-md-6 col-sm-6">
+					<h3>{{result.snippet.channelTitle}}</h3>
+					<p>{{result.snippet.description}}</p>
+				</div>
+				<div class="col-md-6">
+					<img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image">
 				</div>
 			</div>
 		</div>
