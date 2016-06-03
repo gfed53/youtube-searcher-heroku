@@ -13,13 +13,13 @@ function ytTrustSrc($sce){
 }
 
 function ytSearchYouTube($q, $http) {
-	return function(keyword, channelId){
+	return function(keyword, channelId, order){
 		    var url = "https://www.googleapis.com/youtube/v3/search";
 		    var request = {
 		    	key: "AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA",
 		    	part: "snippet",
 		    	maxResults: 50,
-		    	order: "relevance",
+		    	order: order,
 		    	q: keyword,
 		    	type: "video",
 		    	channelId: channelId,

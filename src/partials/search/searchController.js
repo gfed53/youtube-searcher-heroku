@@ -13,10 +13,10 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 	vm.viewVideo = false;
 	vm.filterActive = false;
 
-	function vidSubmit(keyword, channelId){
+	function vidSubmit(keyword, channelId, order){
 		vm.viewVideo = false;
 		vm.searchedKeyword = keyword;
-		ytSearchYouTube(keyword, channelId).getResults()
+		ytSearchYouTube(keyword, channelId, order).getResults()
 		.then(function(response){
 			vm.results = response.data.items;
 		})
