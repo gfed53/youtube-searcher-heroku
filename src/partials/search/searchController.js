@@ -12,11 +12,13 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 	// vm.ytChanFilter = ytChanFilter;
 	vm.viewVideo = false;
 	vm.filterActive = false;
+	vm.publishedAfter = vm.after+"T00:00:00Z";
+	vm.publishedBefore = vm.before+"T00:00:00Z";
 
-	function vidSubmit(keyword, channelId, order){
+	function vidSubmit(keyword, channelId, order, publishedAfter, publishedBefore){
 		vm.viewVideo = false;
 		vm.searchedKeyword = keyword;
-		ytSearchYouTube(keyword, channelId, order).getResults()
+		ytSearchYouTube(keyword, channelId, order, publishedAfter, publishedBefore).getResults()
 		.then(function(response){
 			vm.results = response.data.items;
 		})
