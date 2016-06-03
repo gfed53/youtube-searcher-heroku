@@ -1,4 +1,4 @@
-<form id="form-video-search" class="form-inline" ng-submit="search.vidSubmit(search.keyword)">
+<form id="form-video-search" class="form-inline" ng-submit="search.vidSubmit(search.keyword, search.channelId)">
 	<input type="text" class="form-control" ng-model="search.keyword" placeholder="Search Video..">
 	<input class="btn-go" type="submit" class="btn btn-default" value="Go!">
 </form>
@@ -6,3 +6,7 @@
 	<input type="text" class="form-control" ng-model="search.channel" placeholder="Search Channel..">
 	<input class="btn-go" type="submit" class="btn btn-default" value="Go!">
 </form>
+<div class="channel-filter" ng-if="search.filterActive">
+	<img src="{{search.image}}"></img>
+	<input type="button" ng-click="search.chanClear()" value="Clear Filter">
+</div>

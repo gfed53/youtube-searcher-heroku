@@ -67,6 +67,9 @@ body #page-header #credit {
     height: 1.9em;
     font-size: 0.8em; }
 
+.channel-filter img {
+  width: 5em; }
+
 .results {
   margin: 2em 0;
   transition: 1s linear all; }

@@ -4,6 +4,7 @@ angular
 .factory('ytVideoItems', [ytVideoItems])
 .factory('ytSearchYouTube', ['$q', '$http', ytSearchYouTube])
 .factory('ytChanSearch', ['$q', '$http', ytChanSearch])
+.service('ytChanFilter', [ytChanFilter])
 
 function ytTrustSrc($sce){
 	return function(src){
@@ -12,7 +13,7 @@ function ytTrustSrc($sce){
 }
 
 function ytSearchYouTube($q, $http) {
-	return function(keyword){
+	return function(keyword, channelId){
 		    var url = "https://www.googleapis.com/youtube/v3/search";
 		    var request = {
 		    	key: "AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA",
@@ -21,6 +22,7 @@ function ytSearchYouTube($q, $http) {
 		    	order: "relevance",
 		    	q: keyword,
 		    	type: "video",
+		    	channelId: channelId,
 		    	videoEmbeddable: true,
 		    };
 		    var services = {
@@ -77,6 +79,30 @@ function ytChanSearch($q, $http){
 		    }
 		}
 	}
+
+function ytChanFilter(){
+	this.id = "";
+	this.image = "";
+	// this.active = false;
+	this.set = set;
+	// this.get = get;
+	this.clear = clear;
+
+	function set(id, image){
+		this.id = id;
+		this.image = image;
+		console.log(this.id);
+		console.log(this.image);
+		// this.active = true;
+	}
+
+	function clear(){
+		this.id = "";
+		this.image = "";
+		// this.active
+	}
+
+}
 
 	function ytVideoItems(){
 		return function(){
