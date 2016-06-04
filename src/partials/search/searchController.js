@@ -12,13 +12,14 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 	// vm.ytChanFilter = ytChanFilter;
 	vm.viewVideo = false;
 	vm.filterActive = false;
-	vm.publishedAfter = vm.after+"T00:00:00Z";
-	vm.publishedBefore = vm.before+"T00:00:00Z";
+	vm.toggleAdv = toggleAdv;
+	// vm.publishedAfter = vm.after+"T00:00:00Z";
+	// vm.publishedBefore = vm.before+"T00:00:00Z";
 
-	function vidSubmit(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch){
+	function vidSubmit(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius){
 		vm.viewVideo = false;
 		vm.searchedKeyword = keyword;
-		ytSearchYouTube(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch).getResults()
+		ytSearchYouTube(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius).getResults()
 		.then(function(response){
 			vm.results = response.data.items;
 		})
@@ -46,5 +47,10 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 		vm.image = "";
 		vm.channelId = undefined;
 		vm.filterActive = false;
+	}
+
+	function toggleAdv(){
+		$("#advanced-search, #form-basic-video-search").slideToggle();
+		// $("#form-basic-video-search")
 	}
 };

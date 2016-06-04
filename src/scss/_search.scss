@@ -10,6 +10,21 @@
 	}
 }
 
+.button-wrapper {
+	margin: 1em;
+	margin-right: 3em;
+}
+
+#advanced-search {
+	display: none;
+	#form-advanced-video-search {
+		display: inline;
+	}
+	#form-channel-search {
+		display: inline-block;
+	}
+}
+
 .channel-filter {
 	img {
 		width: 5em;

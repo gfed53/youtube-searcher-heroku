@@ -67,6 +67,17 @@ body #page-header #credit {
     height: 1.9em;
     font-size: 0.8em; }
 
+.button-wrapper {
+  margin: 1em;
+  margin-right: 3em; }
+
+#advanced-search {
+  display: none; }
+  #advanced-search #form-advanced-video-search {
+    display: inline; }
+  #advanced-search #form-channel-search {
+    display: inline-block; }
+
 .channel-filter img {
   width: 5em; }
 
