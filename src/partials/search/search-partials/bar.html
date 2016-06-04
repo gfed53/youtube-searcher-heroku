@@ -4,7 +4,7 @@
 	<input type="button" value="Advanced Search">
 </form>
 <div id="advanced search">
-<form id="form-advanced-video-search" class="form-inline" ng-submit="search.vidSubmit(search.advKeyword, search.channelId, search.order, search.after, search.before)">
+<form id="form-advanced-video-search" class="form-inline" ng-submit="search.vidSubmit(search.advKeyword, search.channelId, search.order, search.after, search.before, search.safeSearch, search.location, search.locationRadius)">
 	<label for="order"> Order: </label>
 	<select name="order" ng-model="search.order">
 		<option value="relevance">Relevance</option>
@@ -13,12 +13,22 @@
 		<option value="title">Title</option>
 		<option value="viewCount">View Count</option>
 	</select>
+	<label for="safeSearch"> Safe Search: </label>
+	<select name="safeSearch" ng-model="search.safeSearch">
+		<option value="moderate">Moderate</option>
+		<option value="none">None</option>
+		<option value="strict">Strict</option>
+	</select>
 	<label for="date-after"> From: </label>
 	<input ng-model="search.after" name="date-after" type="date">
 	<label for="date-before"> To: </label>
 	<input ng-model="search.before" name="date-before" type="date">
-	<pre>{{search.after}}</pre>
-	<pre>{{search.before}}</pre>
+	<label for="location"> Location: </label>
+	<input type="text" ng-model="search.location" name="location" placeholder="e.g. (37.42307,-122.08427)">
+	<label for="locationRadius"> Location Radius: </label>
+	<input type="text" name="locationRadius" ng-model="search.locationRadius" placeholder="e.g. 1500m, 5km, 10000ft, 0.75mi">
+	<pre>{{search.location}}</pre>
+	<pre>{{search.locationRadius}}</pre>
 	<input type="text" class="form-control" ng-model="search.advKeyword" placeholder="Search Video..">
 	<input class="btn-go" type="submit" class="btn btn-default" value="Go!">
 </form>
