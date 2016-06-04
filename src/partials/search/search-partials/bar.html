@@ -3,7 +3,15 @@
 	<input class="btn-go" type="submit" class="btn btn-default" value="Go!">
 </form>
 <div class="button-wrapper">
-	<input type="button" ng-click="search.toggleAdv()" value="Advanced Search">
+	<input type="button" ng-click="search.toggleAdv()" value="Toggle Advanced">
+<!-- 	<form id="clear-toggle-results" ng-submit="">
+		<input type="radio" name="tog" value="clear"> Clear
+		<input type="radio" name="tog" value="vis"> Visibility 
+		<input type="checkbox" name="type" value="videos"> Videos 
+		<input type="checkbox" name="type" value="channels"> Channels
+		<input type="submit" value="Submit">
+	</form> -->
+	<input type="button" ng-click="search.toggleResults()" value="Toggle Results">
 </div>
 <div id="advanced-search">
 	<form id="form-advanced-video-search" class="form-inline" ng-submit="search.vidSubmit(search.advKeyword, search.channelId, search.order, search.after, search.before, search.safeSearch, search.location, search.locationRadius)">

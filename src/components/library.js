@@ -4,6 +4,7 @@ angular
 .factory('ytVideoItems', [ytVideoItems])
 .factory('ytSearchYouTube', ['$q', '$http', ytSearchYouTube])
 .factory('ytChanSearch', ['$q', '$http', ytChanSearch])
+.factory('ytToggleResults', ytToggleResults)
 .service('ytChanFilter', [ytChanFilter])
 
 function ytTrustSrc($sce){
@@ -109,46 +110,52 @@ function ytChanFilter(){
 
 }
 
-	function ytVideoItems(){
-		return function(){
-			var items = [
-			{
-				name: "Video 1",
-				id: "dqJRoh8MnBo"
-			},
-			{
-				name: "Video 2",
-				id: "dqJRoh8MnBo"
-			},
-			{
-				name: "Video 3",
-				id: "dqJRoh8MnBo"
-			},
-			{
-				name: "Video 4",
-				id: "dqJRoh8MnBo"
-			}
-			];
-			var services = {
-				getItems: getItems,
-				addItem: addItem
-			};
-			return services;
-
-			function getItems(){
-				return items;
-			}
-
-			function addItem(name, id){
-				var item = {
-					name: name,
-					id: id
-				}
-
-				items.push[item];
-			}
+function ytVideoItems(){
+	return function(){
+		var items = [
+		{
+			name: "Video 1",
+			id: "dqJRoh8MnBo"
+		},
+		{
+			name: "Video 2",
+			id: "dqJRoh8MnBo"
+		},
+		{
+			name: "Video 3",
+			id: "dqJRoh8MnBo"
+		},
+		{
+			name: "Video 4",
+			id: "dqJRoh8MnBo"
 		}
-	};
+		];
+		var services = {
+			getItems: getItems,
+			addItem: addItem
+		};
+		return services;
+
+		function getItems(){
+			return items;
+		}
+
+		function addItem(name, id){
+			var item = {
+				name: name,
+				id: id
+			}
+
+			items.push[item];
+		}
+	}
+};
+
+function ytToggleResults(){
+	return function(){
+
+	}
+}
 
 
 

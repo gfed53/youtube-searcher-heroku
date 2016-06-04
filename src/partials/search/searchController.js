@@ -13,6 +13,7 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 	vm.viewVideo = false;
 	vm.filterActive = false;
 	vm.toggleAdv = toggleAdv;
+	vm.toggleResults = toggleResults;
 	// vm.publishedAfter = vm.after+"T00:00:00Z";
 	// vm.publishedBefore = vm.before+"T00:00:00Z";
 
@@ -22,6 +23,10 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 		ytSearchYouTube(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius).getResults()
 		.then(function(response){
 			vm.results = response.data.items;
+			if($("#channel-results").css("display")==="block"){
+					$("#channel-results").slideUp();
+					$("#video-results").slideDown();
+			}
 		})
 	}
 
@@ -31,6 +36,11 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 		.then(function(response){
 			vm.chanResults = response.data.items;
 			console.log(vm.chanResults);
+			if($("#video-results").css("display")==="block"){
+				console.log("yes!");
+	    			$("#video-results").slideUp();
+	    			$("#channel-results").slideDown();
+	    		}
 		})
 	}
 
@@ -53,4 +63,11 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 		$("#advanced-search, #form-basic-video-search").slideToggle();
 		// $("#form-basic-video-search")
 	}
+
+	function toggleResults(){
+		$("#video-results").slideToggle();
+		$("#channel-results").slideToggle();
+		// console.log(results);
+	}
+
 };
