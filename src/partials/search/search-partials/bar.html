@@ -14,6 +14,7 @@
 	<input type="button" ng-click="search.toggleResults()" value="Toggle Results">
 </div>
 <div id="advanced-search">
+	<div id="map"></div>
 	<form id="form-advanced-video-search" class="form-inline" ng-submit="search.vidSubmit(search.advKeyword, search.channelId, search.order, search.after, search.before, search.safeSearch, search.location, search.locationRadius)">
 		<label for="order"> Order: </label>
 		<select name="order" ng-model="search.order">
@@ -37,8 +38,8 @@
 		<input type="text" ng-model="search.location" name="location" placeholder="e.g. (37.42307,-122.08427)">
 		<label for="locationRadius"> Location Radius: </label>
 		<input type="text" name="locationRadius" ng-model="search.locationRadius" placeholder="e.g. 1500m, 5km, 10000ft, 0.75mi">
-	<!-- 	<pre>{{search.location}}</pre>
-		<pre>{{search.locationRa}}</pre> -->
+		<pre>{{search.location}}</pre>
+		<pre>{{search.locationRadius}}</pre>
 		<input type="text" class="form-control" ng-model="search.advKeyword" placeholder="Search Video..">
 		<input class="btn-go" type="submit" class="btn btn-default" value="Go!">
 	</form>

@@ -5,6 +5,7 @@ angular
 
 function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 	var vm = this;
+	vm.initMap = initMap;
 	vm.vidSubmit = vidSubmit;
 	vm.chanSubmit = chanSubmit;
 	vm.chanFilter = chanFilter;
@@ -14,8 +15,56 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 	vm.filterActive = false;
 	vm.toggleAdv = toggleAdv;
 	vm.toggleResults = toggleResults;
+	// vm.location = "("+vm.lat+","+vm.lng+")";
+	// vm.locationRadius = vm.radius + "m";
+
+	// google.maps.event.addDomListener(window, "load", vm.initMap);
+
+	// vm.initMap();
 	// vm.publishedAfter = vm.after+"T00:00:00Z";
 	// vm.publishedBefore = vm.before+"T00:00:00Z";
+
+	function initMap() {
+		// if(document.getElementById('map') != null)
+	        vm.map = new google.maps.Map(document.getElementById('map'), {
+	          center: {lat: 39, lng: -99},
+	          zoom: 4
+	          	// center: {lat: 40, lng: -73},
+	          	// zoom: 8
+	        });
+
+
+			vm.circle = new google.maps.Circle({
+				center: {lat: 39, lng: -99},
+				radius: 10000,
+				editable: true,
+				draggable: true
+			});
+
+			vm.circle.setMap(vm.map);
+	        console.log(vm.map);
+	        console.log(vm.circle);
+	        vm.circle.addListener("center_changed", function(){
+	        	vm.center = vm.circle.getCenter();
+	        	vm.lat = vm.center.lat();
+
+	        	console.log(typeof vm.lat);
+	        	vm.lng = vm.center.lng();
+	        	vm.radius = vm.circle.getRadius();
+	        	vm.lat = JSON.stringify(vm.lat);
+	        	vm.lng = JSON.stringify(vm.lng);
+	        	vm.radius = JSON.stringify(vm.radius/1000);
+	   //      	vm.location = "("+vm.lat+","+vm.lng+")";
+				// vm.locationRadius = vm.radius+"km";
+	   //      	console.log(vm.lng);
+	   //      	console.log(vm.lat);
+	   //      	console.log(vm.radius);
+	   //      	console.log(vm.location);
+	   //      	console.log(vm.locationRadius);
+	   //      	console.log(typeof vm.location);
+	   //      	console.log(typeof vm.locationRadius);
+        	});
+		}
 
 	function vidSubmit(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius){
 		vm.viewVideo = false;
@@ -61,6 +110,7 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 
 	function toggleAdv(){
 		$("#advanced-search, #form-basic-video-search").slideToggle();
+		vm.initMap();
 		// $("#form-basic-video-search")
 	}
 

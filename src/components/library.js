@@ -48,6 +48,7 @@ function ytSearchYouTube($q, $http) {
 		    	},
 		    	function(response){
 		    		alert('error');
+		    		console.log(response);
 		    	});
 		    }
 		}

@@ -71,6 +71,11 @@ body #page-header #credit {
   margin: 1em;
   margin-right: 3em; }
 
+#map {
+  width: 50%;
+  height: 15em;
+  margin: 0 auto; }
+
 #advanced-search {
   display: none; }
   #advanced-search #form-advanced-video-search {
