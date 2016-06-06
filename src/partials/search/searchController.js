@@ -54,15 +54,15 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 	        	vm.lat = JSON.stringify(vm.lat);
 	        	vm.lng = JSON.stringify(vm.lng);
 	        	vm.radius = JSON.stringify(vm.radius/1000);
-	   //      	vm.location = "("+vm.lat+","+vm.lng+")";
-				// vm.locationRadius = vm.radius+"km";
-	   //      	console.log(vm.lng);
-	   //      	console.log(vm.lat);
-	   //      	console.log(vm.radius);
-	   //      	console.log(vm.location);
-	   //      	console.log(vm.locationRadius);
-	   //      	console.log(typeof vm.location);
-	   //      	console.log(typeof vm.locationRadius);
+	        	vm.location = vm.lat+","+vm.lng;
+				vm.locationRadius = vm.radius+"km";
+	        	console.log(vm.lng);
+	        	console.log(vm.lat);
+	        	console.log(vm.radius);
+	        	console.log(vm.location);
+	        	console.log(vm.locationRadius);
+	        	console.log(typeof vm.location);
+	        	console.log(typeof vm.locationRadius);
         	});
 		}
 
