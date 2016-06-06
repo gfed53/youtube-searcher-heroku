@@ -3,17 +3,17 @@
 	<input class="btn-go" type="submit" class="btn btn-default" value="Go!">
 </form>
 <div class="button-wrapper">
-	<input type="button" ng-click="search.toggleAdv()" value="Toggle Advanced">
-	<input type="button" ng-click="search.toggleResults()" value="Toggle Results">
+	<input class="btn btn-default" type="button" ng-click="search.toggleAdv()" value="Toggle Advanced">
+	<input class="btn btn-default" type="button" ng-click="search.toggleResults()" value="Toggle Results">
 </div>
 <div id="advanced-search">
 	<div id="map-wrapper">
 		<div id="map"></div>
-		<input type="button" ng-click="search.clearSelection()" value="Clear Selection">
+		<input class="btn btn-default" type="button" ng-click="search.clearSelection()" value="Clear Selection">
 	</div>
 	<form id="form-advanced-video-search" class="form-inline" ng-submit="search.vidSubmit(search.advKeyword, search.channelId, search.order, search.after, search.before, search.safeSearch, search.location, search.locationRadius)">
 		<label for="order"> Order: </label>
-		<select name="order" ng-model="search.order">
+		<select class="form-control" name="order" ng-model="search.order">
 			<option value="relevance">Relevance</option>
 			<option value="date">Date</option>
 			<option value="rating">Rating</option>
@@ -21,15 +21,15 @@
 			<option value="viewCount">View Count</option>
 		</select>
 		<label for="safeSearch"> Safe Search: </label>
-		<select name="safeSearch" ng-model="search.safeSearch">
+		<select class="form-control" id="safe-search" name="safeSearch" ng-model="search.safeSearch">
 			<option value="moderate">Moderate</option>
 			<option value="none">None</option>
 			<option value="strict">Strict</option>
 		</select>
 		<label for="date-after"> From: </label>
-		<input ng-model="search.after" name="date-after" type="date">
+		<input class="form-control" ng-model="search.after" name="date-after" type="date">
 		<label for="date-before"> To: </label>
-		<input ng-model="search.before" name="date-before" type="date"><br>
+		<input class="form-control" ng-model="search.before" name="date-before" type="date"><br>
 		<!-- <input type="button" value="Clear "> -->
 		<!-- <label for="location"> Location: </label>
 		<input type="text" ng-model="search.location" name="location" placeholder="e.g. (37.42307,-122.08427)">
@@ -38,11 +38,11 @@
 		<!-- <pre>{{ search.location }}</pre>
 		<pre>{{ search.locationRadius }}</pre> -->
 		<input type="text" class="form-control" ng-model="search.advKeyword" placeholder="Search Video..">
-		<input class="btn-go" type="submit" class="btn btn-default" value="Go!">
+		<input class="btn btn-default btn-go" type="submit" class="btn btn-default" value="Go!">
 	</form>
 	<form id="form-channel-search" class="form-inline" ng-submit="search.chanSubmit(search.channel)">
 		<input type="text" class="form-control" ng-model="search.channel" placeholder="Search Channel..">
-		<input class="btn-go" type="submit" class="btn btn-default" value="Go!">
+		<input class="btn btn-default btn-go" type="submit" value="Go!">
 	</form>
 	<div class="channel-filter" ng-if="search.filterActive">
 		<img src="{{search.image}}"></img>
