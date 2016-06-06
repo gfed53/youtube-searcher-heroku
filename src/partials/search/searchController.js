@@ -67,16 +67,20 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
         	});
 		}
 
-	function vidSubmit(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius){
+	function vidSubmit(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken){
 		vm.viewVideo = false;
 		vm.searchedKeyword = keyword;
-		ytSearchYouTube(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius).getResults()
+		ytSearchYouTube(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken).getResults()
 		.then(function(response){
 			vm.results = response.data.items;
+			vm.nextPageToken = response.data.nextPageToken;
+			console.log(response);
+			console.log(vm.results.nextPage)
 			if($("#channel-results").css("display")==="block"){
 					$("#channel-results").slideUp();
 					$("#video-results").slideDown();
 			}
+			// window.scrollTo();
 		})
 	}
 

@@ -7,17 +7,11 @@ angular
 }])
 
 .run(function(){
-	// var map;
-	// initMap();
-	// function initMap() {
-	// 	console.log("working?");
-	//         map = new google.maps.Map(document.getElementById('map'), {
-	//           center: {lat: 39, lng: -99},
-	//           zoom: 2
-	//           	// center: {lat: 40, lng: -73},
-	//           	// zoom: 8
-	//         });
-	//     };
+	// function($) { 
+	// 	$.fn.goTo = function() {
+	// 	 $(this)[0].scrollIntoView(true); return this;
+	// 	   } 
+	// 	})(jQuery);
 })
 
 

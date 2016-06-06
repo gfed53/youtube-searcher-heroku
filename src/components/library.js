@@ -14,7 +14,7 @@ function ytTrustSrc($sce){
 }
 
 function ytSearchYouTube($q, $http) {
-	return function(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius){
+	return function(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken){
 		    var url = "https://www.googleapis.com/youtube/v3/search";
 		    var request = {
 		    	key: "AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA",
@@ -26,6 +26,7 @@ function ytSearchYouTube($q, $http) {
 		    	safeSearch: safeSearch,
 		    	location: location,
 		    	locationRadius: locationRadius,
+		    	pageToken: pageToken,
 		    	q: keyword,
 		    	type: "video",
 		    	channelId: channelId,

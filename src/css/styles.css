@@ -89,10 +89,15 @@ body #page-header #credit {
 .results {
   margin: 2em 0;
   transition: 1s linear all; }
+  .results #page-selector #next-page {
+    float: right; }
   .results h2, .results h3, .results .result-dir {
     text-align: center; }
   .results h2 {
     font-size: 1.5em; }
+  .results .row {
+    height: 30em;
+    overflow-y: scroll; }
   .results .result {
     margin: 3em 0; }
   .results .inner-result {

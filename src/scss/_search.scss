@@ -40,12 +40,21 @@
 }
 
 .results {
+	#page-selector {
+		#next-page {
+			float: right;
+		}
+	}
 	margin: 2em 0;
 	h2, h3, .result-dir {
 		text-align: center;
 	}
 	h2 {
 		font-size: 1.5em;
+	}
+	.row {
+		height: 30em;
+		overflow-y: scroll;
 	}
 	.result {
 		margin: 3em 0;
