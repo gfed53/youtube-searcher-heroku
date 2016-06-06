@@ -73,6 +73,7 @@ body #page-header #credit {
 #map {
   width: 50%;
   height: 15em;
+  margin-left: 6.5em;
   display: inline-block; }
 
 #advanced-search {
@@ -95,13 +96,10 @@ body #page-header #credit {
     text-align: center; }
   .results h2 {
     font-size: 1.5em; }
-  .results .row {
-    height: 30em;
-    overflow-y: scroll; }
   .results .result {
     margin: 3em 0; }
   .results .inner-result {
-    background-color: #7f8c8d;
+    background-color: #27ae60;
     border: 2px solid rgba(0, 0, 0, 0.58);
     border-radius: 0.5em; }
     .results .inner-result h3, .results .inner-result p {
@@ -110,11 +108,11 @@ body #page-header #credit {
       font-size: 1.4em;
       font-weight: bold; }
     .results .inner-result img {
-      display: block;
+      float: right;
       cursor: pointer;
-      margin: 0.5em auto;
-      height: 6em;
-      width: 8em; }
+      margin: 2em 10em 0 0;
+      height: 100%;
+      width: 50%; }
 
 @media screen and (min-width: 768px) {
   #results .result h2 {

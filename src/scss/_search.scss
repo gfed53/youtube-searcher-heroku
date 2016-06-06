@@ -18,7 +18,7 @@
 #map {
 		width: 50%;
 		height: 15em;
-		// margin: 0 auto;
+		margin-left: 6.5em;
 		display: inline-block;
 }
 
@@ -52,17 +52,17 @@
 	h2 {
 		font-size: 1.5em;
 	}
-	.row {
-		height: 30em;
-		overflow-y: scroll;
-	}
+	// .row {
+	// 	height: 30em;
+	// 	overflow-y: scroll;
+	// }
 	.result {
 		margin: 3em 0;
 
 	}
 	.inner-result {
 
-		background-color: #7f8c8d;
+		background-color: rgb(39, 174, 96);
 		border: 2px solid rgba(0, 0, 0, 0.58);
 		border-radius: 0.5em;
 		h3, p {
@@ -74,11 +74,12 @@
 			// color: white;
 		}
 		img {
-			display: block;
+			// display: block;
+			float: right;
 			cursor: pointer;
-			margin:  0.5em auto;
-			height: 6em;
-			width: 8em;
+			margin:  2em 10em 0 0;
+			height: 100%;
+			width: 50%;
 		}
 	}
 	transition: 1s linear all;
