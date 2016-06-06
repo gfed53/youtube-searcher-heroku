@@ -15,6 +15,7 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 	vm.filterActive = false;
 	vm.toggleAdv = toggleAdv;
 	vm.toggleResults = toggleResults;
+	vm.clearSelection = clearSelection;
 	// vm.location = "("+vm.lat+","+vm.lng+")";
 	// vm.locationRadius = vm.radius + "m";
 
@@ -36,7 +37,7 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 
 			vm.circle = new google.maps.Circle({
 				center: {lat: 39, lng: -99},
-				radius: 10000,
+				radius: 100000,
 				editable: true,
 				draggable: true
 			});
@@ -118,6 +119,12 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 		$("#video-results").slideToggle();
 		$("#channel-results").slideToggle();
 		// console.log(results);
+	}
+
+	function clearSelection(){
+		//Clears location/locationRadius params
+		vm.location = undefined;
+		vm.locationRadius = undefined;
 	}
 
 };

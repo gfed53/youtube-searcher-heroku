@@ -20,7 +20,6 @@ body {
 #about {
   margin: 2.5em 0;
   font-weight: bold;
-  font-style: italic;
   font-size: 0.8em; }
 
 @media screen and (min-width: 768px) {
@@ -74,10 +73,11 @@ body #page-header #credit {
 #map {
   width: 50%;
   height: 15em;
-  margin: 0 auto; }
+  display: inline-block; }
 
 #advanced-search {
-  display: none; }
+  display: none;
+  margin-bottom: 3em; }
   #advanced-search #form-advanced-video-search {
     display: inline; }
   #advanced-search #form-channel-search {
@@ -89,7 +89,7 @@ body #page-header #credit {
 .results {
   margin: 2em 0;
   transition: 1s linear all; }
-  .results h2, .results h3 {
+  .results h2, .results h3, .results .result-dir {
     text-align: center; }
   .results h2 {
     font-size: 1.5em; }
@@ -106,6 +106,7 @@ body #page-header #credit {
       font-weight: bold; }
     .results .inner-result img {
       display: block;
+      cursor: pointer;
       margin: 0.5em auto;
       height: 6em;
       width: 8em; }

@@ -18,11 +18,13 @@
 #map {
 		width: 50%;
 		height: 15em;
-		margin: 0 auto;
+		// margin: 0 auto;
+		display: inline-block;
 }
 
 #advanced-search {
 	display: none;
+	margin-bottom: 3em;
 	#form-advanced-video-search {
 		display: inline;
 	}
@@ -39,7 +41,7 @@
 
 .results {
 	margin: 2em 0;
-	h2, h3 {
+	h2, h3, .result-dir {
 		text-align: center;
 	}
 	h2 {
@@ -64,6 +66,7 @@
 		}
 		img {
 			display: block;
+			cursor: pointer;
 			margin:  0.5em auto;
 			height: 6em;
 			width: 8em;

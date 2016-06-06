@@ -18,6 +18,7 @@
 <div ng-if="search.chanResults" id="channel-results" class="results">
 	<h2>Channel Results</h2>
 	<h2>We found {{ search.chanResults.length }} results for {{ search.searchedChannel }}</h2>
+	<p class="result-dir">Select a channel by clicking on its image. The channel will then be added as a search filter.</p>
 	<div class="row">
 		<div class="col-md-6 result" ng-repeat="result in search.chanResults">
 			<div class="row inner-result">
