@@ -127,6 +127,9 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 
 	function clearSelection(){
 		//Clears location/locationRadius params
+		vm.lat = undefined;
+		vm.lng = undefined;
+		vm.radius = undefined;
 		vm.location = undefined;
 		vm.locationRadius = undefined;
 	}
