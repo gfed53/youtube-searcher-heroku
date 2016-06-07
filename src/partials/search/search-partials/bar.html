@@ -8,7 +8,8 @@
 </form>
 <div class="button-wrapper">
 	<input class="btn btn-default" type="button" ng-click="search.toggleAdv()" value="Toggle Advanced">
-	<input class="btn btn-default" type="button" ng-click="search.toggleResults()" value="Toggle Results">
+<!-- 	<input class="btn btn-default" type="button" ng-click="search.toggleResults()" value="Show/Hide Videos">
+	<input class="btn btn-default" type="button" ng-click="search.toggleChanResults()" value="Show/Hide Channels"> -->
 </div>
 <div id="advanced-search">
 	<div id="map-wrapper">
@@ -62,5 +63,9 @@
 		<img src="{{search.image}}"></img>
 		<input class="btn btn-default" type="button" ng-click="search.chanClear()" value="Clear Filter">
 	</div>
+</div>
+<div class="btn-group" role="group" aria-label="...">
+	<input class="btn btn-default" type="button" ng-click="search.toggleResults()" value="Show/Hide Videos">
+	<input class="btn btn-default" type="button" ng-click="search.toggleChanResults()" value="Show/Hide Channels">
 </div>
 

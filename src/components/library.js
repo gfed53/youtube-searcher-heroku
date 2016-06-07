@@ -1,11 +1,13 @@
 angular
 .module('myApp')
 .factory('ytTrustSrc', ['$sce', ytTrustSrc])
-.factory('ytVideoItems', [ytVideoItems])
 .factory('ytSearchYouTube', ['$q', '$http', ytSearchYouTube])
 .factory('ytChanSearch', ['$q', '$http', ytChanSearch])
-.factory('ytToggleResults', ytToggleResults)
+// .factory('ytToggleResults', [ytToggleResults])
 .service('ytChanFilter', [ytChanFilter])
+.service('ytSearchParams', [ytSearchParams])
+.service('ytResults', [ytResults])
+.service('ytVideoItems', [ytVideoItems])
 
 function ytTrustSrc($sce){
 	return function(src){
@@ -153,11 +155,62 @@ function ytVideoItems(){
 	}
 };
 
-function ytToggleResults(){
-	return function(){
+function ytSearchParams(){
+	this.params = {
+		keyword,
+		advKeyword,
+		channelId,
+		order,
+		after,
+		before,
+		safeSearch,
+		location,
+		locationRadius
+	};
+
+	this.get = get;
+	this.set = set;
+
+	function get(){
+		return this.params;
+	}
+
+	function set(){
 
 	}
+
 }
+
+function ytResults(){
+	this.results = [];
+	this.chanResults = [];
+	this.getResults = getResults;
+	this.getChanResults = getChanResults;
+	this.setResults = setResults;
+	this.setChanResults = setChanResults;
+
+	function getResults(){
+		return this.results;
+	}
+
+	function getChanResults(){
+		return this.chanResults;
+	}
+
+	function setResults(results){
+		this.results = results;
+	}
+
+	function setChanResults(chanResults){
+		this.chanResults = chanResults;
+	}
+}
+
+// function ytToggleResults(){
+// 	return function(){
+
+// 	}
+// }
 
 
 

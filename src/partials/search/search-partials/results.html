@@ -1,6 +1,6 @@
-<div ng-if="search.results" id="video-results" class="results">
+<div ng-if="search.results.length > 0" id="video-results" class="results">
 	<h2>Video Results</h2>
-	<h2>We found {{ search.results.length }} results for {{ search.searchedKeyword }}</h2>
+	<h2>We found {{ search.results.length }} results.</h2>
 	<form id="page-selector">
 			<input class="btn btn-default" id="prev-page" type="button" ng-click="search.vidSubmit(search.advKeyword, search.channelId, search.order, search.after, search.before, search.safeSearch, search.location, search.locationRadius, search.previousPageToken)" value="Previous Page">
 			<input class="btn btn-default" id="next-page" type="button" ng-click="search.vidSubmit(search.advKeyword, search.channelId, search.order, search.after, search.before, search.safeSearch, search.location, search.locationRadius, search.nextPageToken)" value="Next Page">
@@ -24,9 +24,9 @@
 	</div>
 </div>
 
-<div ng-if="search.chanResults" id="channel-results" class="results">
+<div ng-if="search.chanResults.length > 0" id="channel-results" class="results">
 	<h2>Channel Results</h2>
-	<h2>We found {{ search.chanResults.length }} results for {{ search.searchedChannel }}</h2>
+	<h2>We found {{ search.chanResults.length }} results.</h2>
 	<p class="result-dir">Select a channel by clicking on its image. The channel will then be added as a search filter.</p>
 	<div class="row">
 		<div class="result" ng-repeat="result in search.chanResults">

@@ -1,9 +1,9 @@
 angular
 .module('myApp')
 
-.controller('SearchCtrl', ['ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', SearchCtrl])
+.controller('SearchCtrl', ['ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytResults', SearchCtrl])
 
-function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
+function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytResults){
 	var vm = this;
 	vm.initMap = initMap;
 	vm.vidSubmit = vidSubmit;
@@ -15,7 +15,10 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 	vm.filterActive = false;
 	vm.toggleAdv = toggleAdv;
 	vm.toggleResults = toggleResults;
+	vm.toggleChanResults = toggleChanResults;
 	vm.clearSelection = clearSelection;
+	vm.results = ytResults.getResults();
+	vm.chanResults = ytResults.getChanResults();
 	// vm.location = "("+vm.lat+","+vm.lng+")";
 	// vm.locationRadius = vm.radius + "m";
 
@@ -80,6 +83,7 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 					$("#channel-results").slideUp();
 					$("#video-results").slideDown();
 			}
+			ytResults.setResults(vm.results);
 			// window.scrollTo();
 		})
 	}
@@ -95,6 +99,7 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 	    			$("#video-results").slideUp();
 	    			$("#channel-results").slideDown();
 	    		}
+	    	ytResults.setChanResults(vm.chanResults);
 		})
 	}
 
@@ -121,8 +126,11 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter){
 
 	function toggleResults(){
 		$("#video-results").slideToggle();
-		$("#channel-results").slideToggle();
 		// console.log(results);
+	}
+
+	function toggleChanResults(){
+		$("#channel-results").slideToggle();
 	}
 
 	function clearSelection(){
