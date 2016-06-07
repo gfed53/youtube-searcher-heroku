@@ -56,7 +56,8 @@ body #page-header #credit {
     font-size: 1em; } }
 
 #bar {
-  text-align: center; }
+  text-align: center;
+  margin-top: 3em; }
 
 #form-search {
   margin: 2em; }
@@ -65,8 +66,7 @@ body #page-header #credit {
     font-size: 0.8em; }
 
 .button-wrapper {
-  margin: 1em;
-  margin-right: 3em; }
+  margin: 1em; }
 
 #map {
   width: 100%;
@@ -79,7 +79,9 @@ body #page-header #credit {
   #advanced-search #form-advanced-video-search {
     display: inline; }
   #advanced-search #form-channel-search {
-    display: inline-block; }
+    margin-top: 1.5em; }
+  #advanced-search .btn-clear-select {
+    margin: 0 0 1em 0; }
 
 .channel-filter img {
   width: 5em; }
@@ -107,7 +109,7 @@ body #page-header #credit {
     .results .inner-result img {
       float: right;
       cursor: pointer;
-      margin: 2em 10em 0 0;
+      margin: 2em 10em 2em 0;
       height: 100%;
       width: 50%; }
 
@@ -127,13 +129,7 @@ body #page-header #credit {
       height: 1.9em;
       font-size: 0.8em; }
   .button-wrapper {
-    margin: 1em;
-    margin-right: 3em; }
-  #map {
-    width: 50%;
-    height: 15em;
-    margin-left: 6.5em;
-    display: inline-block; }
+    margin: 1em; }
   #advanced-search {
     display: none;
     margin-bottom: 3em; }

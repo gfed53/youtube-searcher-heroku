@@ -82,7 +82,7 @@ function ytChanSearch($q, $http){
 		    		return $q.when(response);
 		    	},
 		    	function(response){
-		    		alert('error');
+		    		alert("Sorry, an error occured.");
 		    	});
 		    }
 		}

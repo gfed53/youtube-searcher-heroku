@@ -2,14 +2,15 @@
 	<h2>Video Results</h2>
 	<h2>We found {{ search.results.length }} results for {{ search.searchedKeyword }}</h2>
 	<form id="page-selector">
-			<input id="prev-page" type="button" ng-click="search.vidSubmit(search.advKeyword, search.channelId, search.order, search.after, search.before, search.safeSearch, search.location, search.locationRadius, search.previousPageToken)" value="Previous Page">
-			<input id="next-page" type="button" ng-click="search.vidSubmit(search.advKeyword, search.channelId, search.order, search.after, search.before, search.safeSearch, search.location, search.locationRadius, search.nextPageToken)" value="Next Page">
+			<input class="btn btn-default" id="prev-page" type="button" ng-click="search.vidSubmit(search.advKeyword, search.channelId, search.order, search.after, search.before, search.safeSearch, search.location, search.locationRadius, search.previousPageToken)" value="Previous Page">
+			<input class="btn btn-default" id="next-page" type="button" ng-click="search.vidSubmit(search.advKeyword, search.channelId, search.order, search.after, search.before, search.safeSearch, search.location, search.locationRadius, search.nextPageToken)" value="Next Page">
 		</form>
 	<div class="row">
 		<div class="result" ng-repeat="result in search.results">
 			<div class="row inner-result">
 				<div class="col-md-6 col-sm-6">
 					<h3>{{result.snippet.title}}</h3>
+					<p>{{ result.snippet.description }}
 				</div>
 				<div class="col-md-6">
 					<a ui-sref="video({videoId: result.id.videoId} )"><img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image"></a>

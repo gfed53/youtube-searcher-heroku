@@ -1,6 +1,10 @@
 <form id="form-basic-video-search" class="form-inline" ng-submit="search.vidSubmit(search.keyword)">
-	<input type="text" class="form-control" ng-model="search.keyword" placeholder="Search Video..">
-	<input class="btn-go" type="submit" class="btn btn-default" value="Go!">
+	<div class="input-group">
+		<input type="text" class="form-control" ng-model="search.keyword" placeholder="Search Video..">
+		<span class="input-group-btn">
+			<input class="btn btn-default btn-go" type="submit" value="Go!">
+		</span>
+	</div>
 </form>
 <div class="button-wrapper">
 	<input class="btn btn-default" type="button" ng-click="search.toggleAdv()" value="Toggle Advanced">
@@ -9,7 +13,7 @@
 <div id="advanced-search">
 	<div id="map-wrapper">
 		<div id="map"></div>
-		<input class="btn btn-default" type="button" ng-click="search.clearSelection()" value="Clear Selection">
+		<input class="btn btn-default btn-clear-select" type="button" ng-click="search.clearSelection()" value="Clear Selection">
 	</div>
 	<form id="form-advanced-video-search" class="form-inline" ng-submit="search.vidSubmit(search.advKeyword, search.channelId, search.order, search.after, search.before, search.safeSearch, search.location, search.locationRadius)">
 		<label for="order"> Order: </label>
@@ -37,16 +41,24 @@
 		<input type="text" name="locationRadius" ng-model="search.locationRadius" placeholder="e.g. 1500m, 5km, 10000ft, 0.75mi"> -->
 		<!-- <pre>{{ search.location }}</pre>
 		<pre>{{ search.locationRadius }}</pre> -->
-		<input type="text" class="form-control" ng-model="search.advKeyword" placeholder="Search Video..">
-		<input class="btn btn-default btn-go" type="submit" class="btn btn-default" value="Go!">
+		<div class="input-group">
+			<input type="text" class="form-control" ng-model="search.advKeyword" placeholder="Search Video..">
+			<span class="input-group-btn">
+				<input class="btn btn-default btn-go" type="submit" class="btn btn-default" value="Go!">
+			</span>
+		</div>
 	</form>
 	<form id="form-channel-search" class="form-inline" ng-submit="search.chanSubmit(search.channel)">
-		<input type="text" class="form-control" ng-model="search.channel" placeholder="Search Channel..">
-		<input class="btn btn-default btn-go" type="submit" value="Go!">
+		<div class="input-group">
+			<input type="text" class="form-control" ng-model="search.channel" placeholder="Search Channel..">
+			<span class="input-group-btn">
+				<input class="btn btn-default btn-go" type="submit" value="Go!">
+			</span>
+		</div>
 	</form>
 	<div class="channel-filter" ng-if="search.filterActive">
 		<img src="{{search.image}}"></img>
-		<input type="button" ng-click="search.chanClear()" value="Clear Filter">
+		<input class="btn btn-default" type="button" ng-click="search.chanClear()" value="Clear Filter">
 	</div>
 </div>
 
