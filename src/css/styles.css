@@ -93,7 +93,7 @@ body #page-header #credit {
   transition: 1s linear all; }
   .results #page-selector #next-page {
     float: right; }
-  .results h2, .results h3, .results .result-dir {
+  .results h2, .results h3, .results .result-dir, .results .results-img-container {
     text-align: center; }
   .results h2 {
     font-size: 1.5em; }
@@ -109,9 +109,9 @@ body #page-header #credit {
       font-size: 1.4em;
       font-weight: bold; }
     .results .inner-result img {
-      float: right;
+      float: none;
       cursor: pointer;
-      margin: 2em 10em 2em 0;
+      margin: 2em 0;
       height: 100%;
       width: 50%; }
 
@@ -160,13 +160,7 @@ body #page-header #credit {
         color: white; }
       .results .inner-result h3 {
         font-size: 1.4em;
-        font-weight: bold; }
-      .results .inner-result img {
-        float: right;
-        cursor: pointer;
-        margin: 2em 10em 0 0;
-        height: 100%;
-        width: 50%; } }
+        font-weight: bold; } }
 
 #item {
   margin-bottom: 15em; }

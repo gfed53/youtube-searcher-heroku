@@ -12,7 +12,7 @@
 					<h3>{{result.snippet.title}}</h3>
 					<p>{{ result.snippet.description }}
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 results-img-container">
 					<a ui-sref="video({videoId: result.id.videoId} )"><img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image"></a>
 				</div>
 			</div>
@@ -35,7 +35,7 @@
 					<h3>{{result.snippet.channelTitle}}</h3>
 					<p>{{result.snippet.description}}</p>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 results-img-container">
 					<img ng-click="search.chanFilter(result.id.channelId, result.snippet.thumbnails.default.url)" ng-src="{{result.snippet.thumbnails.default.url}}" alt="image">
 				</div>
 			</div>

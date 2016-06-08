@@ -51,7 +51,7 @@
 		}
 	}
 	margin: 2em 0;
-	h2, h3, .result-dir {
+	h2, h3, .result-dir, .results-img-container {
 		text-align: center;
 	}
 	h2 {
@@ -80,9 +80,9 @@
 		}
 		img {
 			// display: block;
-			float: right;
+			float: none;
 			cursor: pointer;
-			margin:  2em 10em 2em 0;
+			margin:  2em 0;
 			height: 100%;
 			width: 50%;
 		}
@@ -179,11 +179,11 @@
 			}
 			img {
 				// display: block;
-				float: right;
-				cursor: pointer;
-				margin:  2em 10em 0 0;
-				height: 100%;
-				width: 50%;
+				// float: right;
+				// cursor: pointer;
+				// // margin:  2em 10em 0 0;
+				// height: 100%;
+				// width: 50%;
 			}
 		}
 		transition: 1s linear all;
