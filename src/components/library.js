@@ -157,15 +157,20 @@ function ytVideoItems(){
 
 function ytSearchParams(){
 	this.params = {
-		keyword,
-		advKeyword,
-		channelId,
-		order,
-		after,
-		before,
-		safeSearch,
-		location,
-		locationRadius
+		keyword: undefined,
+		advKeyword: undefined,
+		searchedKeyword: undefined,
+		channel: undefined,
+		channelId: undefined,
+		image: undefined,
+		order: undefined,
+		after: undefined,
+		before: undefined,
+		safeSearch: undefined,
+		location: undefined,
+		locationRadius: undefined,
+		prevPageToken: undefined,
+		nextPageToken: undefined
 	};
 
 	this.get = get;
@@ -175,8 +180,21 @@ function ytSearchParams(){
 		return this.params;
 	}
 
-	function set(){
-
+	function set(keyword, advKeyword, searchedKeyword, channel, channelId, image, order, after, before, safeSearch, location, locationRadius, prevPageToken, nextPageToken){
+		this.params.keyword = keyword;
+		this.params.advKeyword = advKeyword;
+		this.params.searchedKeyword = searchedKeyword;
+		this.params.channel = channel;
+		this.params.channelId = channelId;
+		this.params.image = image;
+		this.params.order = order;
+		this.params.after = after;
+		this.params.before = before;
+		this.params.safeSearch = safeSearch;
+		this.params.location = location;
+		this.params.locationRadius = locationRadius;
+		this.params.prevPageToken = prevPageToken;
+		this.params.nextPageToken = nextPageToken;
 	}
 
 }

@@ -1,6 +1,6 @@
-<form id="form-basic-video-search" class="form-inline" ng-submit="search.vidSubmit(search.keyword)">
+<form id="form-basic-video-search" class="form-inline" ng-submit="search.vidSubmit(search.params.keyword)">
 	<div class="input-group">
-		<input type="text" class="form-control" ng-model="search.keyword" placeholder="Search Video..">
+		<input type="text" class="form-control" ng-model="search.params.keyword" placeholder="Search Video..">
 		<span class="input-group-btn">
 			<input class="btn btn-default btn-go" type="submit" value="Go!">
 		</span>
@@ -18,9 +18,9 @@
 		<input class="btn btn-default btn-clear-select" type="button" ng-click="search.clearSelection()" value="Clear Selection">
 		<span>{{ search.radius | number: 0 }}km</span>
 	</div>
-	<form id="form-advanced-video-search" class="form-inline" ng-submit="search.vidSubmit(search.advKeyword, search.channelId, search.order, search.after, search.before, search.safeSearch, search.location, search.locationRadius)">
+	<form id="form-advanced-video-search" class="form-inline" ng-submit="search.vidSubmit(search.params.advKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius)">
 		<label for="order"> Order: </label>
-		<select class="form-control" name="order" ng-model="search.order">
+		<select class="form-control" name="order" ng-model="search.params.order">
 			<option value="relevance">Relevance</option>
 			<option value="date">Date</option>
 			<option value="rating">Rating</option>
@@ -28,15 +28,15 @@
 			<option value="viewCount">View Count</option>
 		</select>
 		<label for="safeSearch"> Safe Search: </label>
-		<select class="form-control" id="safe-search" name="safeSearch" ng-model="search.safeSearch">
+		<select class="form-control" id="safe-search" name="safeSearch" ng-model="search.params.safeSearch">
 			<option value="moderate">Moderate</option>
 			<option value="none">None</option>
 			<option value="strict">Strict</option>
 		</select>
 		<label for="date-after"> From: </label>
-		<input class="form-control" ng-model="search.after" name="date-after" type="date">
+		<input class="form-control" ng-model="search.params.after" name="date-after" type="date">
 		<label for="date-before"> To: </label>
-		<input class="form-control" ng-model="search.before" name="date-before" type="date"><br>
+		<input class="form-control" ng-model="search.params.before" name="date-before" type="date"><br>
 		<!-- <input type="button" value="Clear "> -->
 		<!-- <label for="location"> Location: </label>
 		<input type="text" ng-model="search.location" name="location" placeholder="e.g. (37.42307,-122.08427)">
@@ -45,22 +45,22 @@
 		<!-- <pre>{{ search.location }}</pre>
 		<pre>{{ search.locationRadius }}</pre> -->
 		<div class="input-group">
-			<input type="text" class="form-control" ng-model="search.advKeyword" placeholder="Search Video..">
+			<input type="text" class="form-control" ng-model="search.params.advKeyword" placeholder="Search Video..">
 			<span class="input-group-btn">
 				<input class="btn btn-default btn-go" type="submit" class="btn btn-default" value="Go!">
 			</span>
 		</div>
 	</form>
-	<form id="form-channel-search" class="form-inline" ng-submit="search.chanSubmit(search.channel)">
+	<form id="form-channel-search" class="form-inline" ng-submit="search.chanSubmit(search.params.channel)">
 		<div class="input-group">
-			<input type="text" class="form-control" ng-model="search.channel" placeholder="Search Channel..">
+			<input type="text" class="form-control" ng-model="search.params.channel" placeholder="Search Channel..">
 			<span class="input-group-btn">
 				<input class="btn btn-default btn-go" type="submit" value="Go!">
 			</span>
 		</div>
 	</form>
-	<div class="channel-filter" ng-if="search.filterActive">
-		<img src="{{search.image}}"></img>
+	<div class="channel-filter" ng-if="search.params.image">
+		<img src="{{search.params.image}}"></img>
 		<input class="btn btn-default" type="button" ng-click="search.chanClear()" value="Clear Filter">
 	</div>
 </div>
