@@ -8,8 +8,6 @@
 </form>
 <div class="button-wrapper">
 	<input class="btn btn-default" type="button" ng-click="search.toggleAdv()" value="Toggle Advanced">
-<!-- 	<input class="btn btn-default" type="button" ng-click="search.toggleResults()" value="Show/Hide Videos">
-	<input class="btn btn-default" type="button" ng-click="search.toggleChanResults()" value="Show/Hide Channels"> -->
 </div>
 <div id="advanced-search">
 	<div id="map-wrapper">
@@ -37,13 +35,6 @@
 		<input class="form-control" ng-model="search.params.after" name="date-after" type="date">
 		<label for="date-before"> To: </label>
 		<input class="form-control" ng-model="search.params.before" name="date-before" type="date"><br>
-		<!-- <input type="button" value="Clear "> -->
-		<!-- <label for="location"> Location: </label>
-		<input type="text" ng-model="search.location" name="location" placeholder="e.g. (37.42307,-122.08427)">
-		<label for="locationRadius"> Location Radius: </label>
-		<input type="text" name="locationRadius" ng-model="search.locationRadius" placeholder="e.g. 1500m, 5km, 10000ft, 0.75mi"> -->
-		<!-- <pre>{{ search.location }}</pre>
-		<pre>{{ search.locationRadius }}</pre> -->
 		<div class="input-group">
 			<input type="text" class="form-control" ng-model="search.params.advKeyword" placeholder="Search Video..">
 			<span class="input-group-btn">
@@ -64,7 +55,7 @@
 		<input class="btn btn-default" type="button" ng-click="search.chanClear()" value="Clear Filter">
 	</div>
 </div>
-<div class="btn-group" role="group" aria-label="...">
+<div class="btn-group-vertical" role="group" aria-label="...">
 	<input class="btn btn-default" type="button" ng-click="search.toggleResults()" value="Show/Hide Videos">
 	<input class="btn btn-default" type="button" ng-click="search.toggleChanResults()" value="Show/Hide Channels">
 </div>

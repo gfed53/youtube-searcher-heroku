@@ -22,53 +22,34 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 
 	//Retrieving our saved params, if any
 	vm.params = ytSearchParams.get();
-	// vm.keyword = vm.params.keyword;
-	// vm.advKeyword = ytSearchParams.params.advKeyword;
-
-
-	console.log(vm.params);
-
-
 
 	function initMap() {
-		// if(document.getElementById('map') != null)
-	        vm.map = new google.maps.Map(document.getElementById('map'), {
-	          center: {lat: 39, lng: -99},
-	          zoom: 4
-	        });
+        vm.map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 39, lng: -99},
+          zoom: 4
+        });
 
 
-			vm.circle = new google.maps.Circle({
-				center: {lat: 39, lng: -99},
-				radius: 100000,
-				editable: true,
-				draggable: true
-			});
+		vm.circle = new google.maps.Circle({
+			center: {lat: 39, lng: -99},
+			radius: 100000,
+			editable: true,
+			draggable: true
+		});
 
-			vm.circle.setMap(vm.map);
-	        // console.log(vm.map);
-	        // console.log(vm.circle);
-	        vm.circle.addListener("center_changed", function(){
-	        	vm.center = vm.circle.getCenter();
-	        	vm.lat = vm.center.lat();
-
-	        	// console.log(typeof vm.lat);
-	        	vm.lng = vm.center.lng();
-	        	vm.radius = vm.circle.getRadius();
-	        	vm.lat = JSON.stringify(vm.lat);
-	        	vm.lng = JSON.stringify(vm.lng);
-	        	vm.radius = JSON.stringify(vm.radius/1000);
-	        	vm.params.location = vm.lat+","+vm.lng;
-				vm.params.locationRadius = vm.radius+"km";
-	        	// console.log(vm.lng);
-	        	// console.log(vm.lat);
-	        	// console.log(vm.radius);
-	        	// console.log(vm.location);
-	        	// console.log(vm.locationRadius);
-	        	// console.log(typeof vm.location);
-	        	// console.log(typeof vm.locationRadius);
-        	});
-		}
+		vm.circle.setMap(vm.map);
+        vm.circle.addListener("center_changed", function(){
+        	vm.center = vm.circle.getCenter();
+        	vm.lat = vm.center.lat();
+        	vm.lng = vm.center.lng();
+        	vm.radius = vm.circle.getRadius();
+        	vm.lat = JSON.stringify(vm.lat);
+        	vm.lng = JSON.stringify(vm.lng);
+        	vm.radius = JSON.stringify(vm.radius/1000);
+        	vm.params.location = vm.lat+","+vm.lng;
+			vm.params.locationRadius = vm.radius+"km";
+    	});
+	}
 
 	function vidSubmit(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken){
 		vm.viewVideo = false;
@@ -129,12 +110,10 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 	function toggleAdv(){
 		$("#advanced-search, #form-basic-video-search").slideToggle();
 		vm.initMap();
-		// $("#form-basic-video-search")
 	}
 
 	function toggleResults(){
 		$("#video-results").slideToggle();
-		// console.log(results);
 	}
 
 	function toggleChanResults(){
@@ -160,9 +139,5 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 			
 		})
 	}
-
-	// function setSavedParams(){
-
-	// }
 
 };
