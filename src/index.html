@@ -10,12 +10,19 @@
 	<!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css"> -->
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css">
 	<link rel="stylesheet" href="./css/styles.css">
 	<!-- endbuild -->
-	<link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 </head>
 <body>
+	<div class="scroll-top-wrapper ">
+		<span class="scroll-top-inner">
+			<i class="fa fa-2x fa-arrow-circle-up"></i>
+		</span>
+	</div>
 	<div id="container-main" class="container-fluid">
+		<!-- <div id="map"></div> -->
 		<div id="page-header" ui-view="header"></div>
 		<div id="animate-view-container">
 			<div class="animate-view" id="content" ui-view="content"></div>
@@ -36,6 +43,7 @@
 	<script src="../node_modules/velocity-animate/velocity.ui.min.js"></script> -->
 	<script src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
 	<script src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMqmShHuzFUZLwyuZk8WVW5GtriTlLxjg" defer></script>
 	<script src="app.js"></script>
 	<script src="./components/routes.js"></script>
 	<script src="./components/library.js"></script>

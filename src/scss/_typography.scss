@@ -1,12 +1,15 @@
 body {
 	font-family: "Open Sans", sans-serif;
 	#content, input {
-		font-size: 2em;
+		// font-size: 2em;
 	}
 	.nav-tabs > li > .active {
 		background-color: #f39c12;
 		color: white;
 		font-weight: bold;
+	}
+	.emph {
+		font-size: 1.2em;
 	}
 }
 

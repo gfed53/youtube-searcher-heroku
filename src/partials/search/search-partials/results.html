@@ -1,13 +1,41 @@
-<div ng-if="search.results" id="results">
-	<h2>We found {{ search.results.length }} results for {{ search.searchedKeyword }}</h2>
+<div ng-if="search.results.length > 0" id="video-results" class="results">
+	<h2>Video Results</h2>
+	<h2>We found {{ search.results.length }} results.</h2>
+	<form id="page-selector">
+			<input class="btn btn-default" id="prev-page" type="button" ng-click="search.vidSubmit(search.params.searchedKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius, search.params.prevPageToken)" value="Previous Page">
+			<input class="btn btn-default" id="next-page" type="button" ng-click="search.vidSubmit(search.params.searchedKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius, search.params.nextPageToken)" value="Next Page">
+	</form>
 	<div class="row">
-		<div class="col-md-6 result" ng-repeat="result in search.results">
+		<div class="result" ng-repeat="result in search.results">
+			<div class="row inner-result">
+				<div class="col-md-6 col-sm-6 tit-descrip-container">
+					<h3>{{result.snippet.title}}</h3>
+					<p>{{ result.snippet.description }}</p>
+					<p>Date: {{ result.snippet.publishedAt | date : 'short' }}</p>
+					<p class="result-chan-descrip">Channel: {{ result.snippet.channelTitle }}</p>
+					<input class="btn btn-default" type="button" value="Filter" ng-click="search.searchAndChanFilter(result.snippet.channelTitle)">
+				</div>
+				<div class="col-md-6 results-img-container">
+					<a ui-sref="video({videoId: result.id.videoId} )"><img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div ng-if="search.chanResults.length > 0" id="channel-results" class="results">
+	<h2>Channel Results</h2>
+	<h2>We found {{ search.chanResults.length }} results.</h2>
+	<p class="result-dir">Select a channel by clicking on its image. The channel will then be added as a search filter.</p>
+	<div class="row">
+		<div class="result" ng-repeat="result in search.chanResults">
 			<div class="row inner-result">
 				<div class="col-md-6 col-sm-6">
-					<h3>{{result.snippet.title}}</h3>
+					<h3>{{result.snippet.channelTitle}}</h3>
+					<p>{{result.snippet.description}}</p>
 				</div>
-				<div class="col-md-6">
-					<a ui-sref="video({videoId: result.id.videoId} )"><img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image"></a>
+				<div class="col-md-6 results-img-container">
+					<img ng-click="search.chanFilter(result.id.channelId, result.snippet.thumbnails.default.url)" ng-src="{{result.snippet.thumbnails.default.url}}" alt="image">
 				</div>
 			</div>
 		</div>
