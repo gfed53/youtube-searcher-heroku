@@ -21,15 +21,11 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 
 	//Retrieving our saved params, if any
 	vm.params = ytSearchParams.get();
-	vm.keyword = vm.params.keyword;
-	vm.advKeyword = ytSearchParams.params.advKeyword;
-	// vm.keyword = ytSearchParams.params.keyword;
-	// vm.keyword = ytSearchParams.params.keyword;
-	// vm.keyword = ytSearchParams.params.keyword;
-	// vm.keyword = ytSearchParams.params.keyword;
+	// vm.keyword = vm.params.keyword;
+	// vm.advKeyword = ytSearchParams.params.advKeyword;
+
 
 	console.log(vm.params);
-	console.log(vm.keyword);
 
 
 
@@ -94,7 +90,7 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 			console.log(vm.searchedKeyword);
 
 			//Saving our params to our service
-			ytSearchParams.set(vm.params.keyword, vm.params.advKeyword, vm.params.searchedKeyword, vm.params.channel, vm.params.channelId, vm.params.image, vm.params.order, vm.params.after, vm.params.before, vm.params.safeSearch, vm.params.location, vm.params.locationRadius, vm.params.prevPageToken, vm.params.nextPageToken);
+			ytSearchParams.set(vm.params);
 			//Saving the results to our service
 			ytResults.setResults(vm.results);
 		})

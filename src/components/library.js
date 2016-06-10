@@ -156,7 +156,7 @@ function ytVideoItems(){
 };
 
 function ytSearchParams(){
-	this.params = {
+	var params = {
 		keyword: undefined,
 		advKeyword: undefined,
 		searchedKeyword: undefined,
@@ -169,6 +169,9 @@ function ytSearchParams(){
 		safeSearch: undefined,
 		location: undefined,
 		locationRadius: undefined,
+		lat: undefined,
+		lng: undefined,
+		radius: undefined,
 		prevPageToken: undefined,
 		nextPageToken: undefined
 	};
@@ -177,26 +180,31 @@ function ytSearchParams(){
 	this.set = set;
 
 	function get(){
-		return this.params;
+		return params;
 	}
 
-	function set(keyword, advKeyword, searchedKeyword, channel, channelId, image, order, after, before, safeSearch, location, locationRadius, prevPageToken, nextPageToken){
-		this.params.keyword = keyword;
-		this.params.advKeyword = advKeyword;
-		this.params.searchedKeyword = searchedKeyword;
-		this.params.channel = channel;
-		this.params.channelId = channelId;
-		this.params.image = image;
-		this.params.order = order;
-		this.params.after = after;
-		this.params.before = before;
-		this.params.safeSearch = safeSearch;
-		this.params.location = location;
-		this.params.locationRadius = locationRadius;
-		this.params.prevPageToken = prevPageToken;
-		this.params.nextPageToken = nextPageToken;
+	function set(newParams){
+		// params.keyword = newParams.keyword;
+		// params.advKeyword = newParams.advKeyword;
+		// params.searchedKeyword = newParams.searchedKeyword;
+		// params.channel = newParams.channel;
+		// params.channelId = newParams.channelId;
+		// params.image = newParams.image;
+		// params.order = newParams.order;
+		// params.after = newParams.after;
+		// params.before = newParams.before;
+		// params.safeSearch = newParams.safeSearch;
+		// params.location = newParams.location;
+		// params.locationRadius = newParams.locationRadius;
+		// params.lat = newParams.lat;
+		// params.lng = newParams.lng;
+		// params.radius = newParams.radius;
+		// params.prevPageToken = newParams.prevPageToken;
+		// params.nextPageToken = newParams.nextPageToken;
+		for(var item in params){
+			params[item] = newParams[item];
+		}	
 	}
-
 }
 
 function ytResults(){
