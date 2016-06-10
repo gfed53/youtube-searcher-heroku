@@ -54,6 +54,7 @@
 	h2, h3, .result-dir, .results-img-container {
 		text-align: center;
 	}
+
 	h2 {
 		font-size: 1.5em;
 	}
@@ -70,6 +71,12 @@
 		background-color: rgb(39, 174, 96);
 		border: 2px solid rgba(0, 0, 0, 0.58);
 		border-radius: 0.5em;
+		.tit-descrip-container {
+			z-index: 1;
+			.result-chan-descrip {
+				// display: inline-block;
+			}
+		}
 		h3, p {
 			color: white;
 		}
@@ -91,14 +98,17 @@
 }
 
 @media screen and ($tablet){
-	#results {
+	.results {
 		.result {
 			h2 {
 				font-size: 2em;
 			}
-			img {
-				height: 5em;
-				width: 7em;
+		}
+		.inner-result {
+			.tit-descrip-container {
+				.result-chan-descrip {
+					display: inline-block;
+				}
 			}
 		}
 	}

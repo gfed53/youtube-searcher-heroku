@@ -18,6 +18,7 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 	vm.clearSelection = clearSelection;
 	vm.results = ytResults.getResults();
 	vm.chanResults = ytResults.getChanResults();
+	vm.searchAndChanFilter = searchAndChanFilter;
 
 	//Retrieving our saved params, if any
 	vm.params = ytSearchParams.get();
@@ -149,8 +150,19 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 		vm.params.locationRadius = undefined;
 	}
 
-	function setSavedParams(){
-
+	function searchAndChanFilter(channel){
+		vm.searchedChannel = channel;
+		ytChanSearch(channel).getResults()
+		.then(function(response){
+			vm.firstChanResult = response.data.items[0];
+			console.log(vm.firstChanResult);
+			vm.chanFilter(vm.firstChanResult.id.channelId, vm.firstChanResult.snippet.thumbnails.default.url);
+			
+		})
 	}
+
+	// function setSavedParams(){
+
+	// }
 
 };

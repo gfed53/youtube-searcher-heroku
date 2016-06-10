@@ -21,9 +21,8 @@ body {
     font-size: 1em; } }
 
 #about {
-  margin: 2.5em 4em 10em 4em;
-  font-weight: bold;
-  font-size: 0.8em; }
+  margin: 2.5em 2em 10em 2em;
+  font-weight: bold; }
 
 @media screen and (min-width: 768px) {
   #about {
@@ -106,6 +105,8 @@ body #page-header #credit {
     background-color: #27ae60;
     border: 2px solid rgba(0, 0, 0, 0.58);
     border-radius: 0.5em; }
+    .results .inner-result .tit-descrip-container {
+      z-index: 1; }
     .results .inner-result h3, .results .inner-result p {
       color: white; }
     .results .inner-result h3 {
@@ -119,11 +120,10 @@ body #page-header #credit {
       width: 50%; }
 
 @media screen and (min-width: 768px) {
-  #results .result h2 {
+  .results .result h2 {
     font-size: 2em; }
-  #results .result img {
-    height: 5em;
-    width: 7em; } }
+  .results .inner-result .tit-descrip-container .result-chan-descrip {
+    display: inline-block; } }
 
 @media screen and (min-width: 1024px) {
   #bar {
