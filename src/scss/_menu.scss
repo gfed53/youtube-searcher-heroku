@@ -1,5 +1,12 @@
 #menu {
-	font-size: 1.2em;
+	font-size: 0.8em;
+}
+
+@media screen and ($mobile2){
+	#menu {
+		font-size: 1.2em;
+	}
+	
 }
 
 @media screen and ($desktop){

@@ -56,7 +56,7 @@
 	</div>
 </div>
 <div class="btn-group-vertical" role="group" aria-label="...">
-	<input class="btn btn-default" type="button" ng-click="search.toggleResults()" value="Show/Hide Videos">
-	<input class="btn btn-default" type="button" ng-click="search.toggleChanResults()" value="Show/Hide Channels">
+	<input ng-if="search.results.length > 0" class="btn btn-default" type="button" ng-click="search.toggleResults()" value="Show/Hide Videos">
+	<input ng-if="search.chanResults.length > 0" class="btn btn-default" type="button" ng-click="search.toggleChanResults()" value="Show/Hide Channels">
 </div>
 

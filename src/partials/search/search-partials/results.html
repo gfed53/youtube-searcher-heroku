@@ -12,8 +12,10 @@
 					<h3>{{result.snippet.title}}</h3>
 					<p>{{ result.snippet.description }}</p>
 					<p>Date: {{ result.snippet.publishedAt | date : 'short' }}</p>
-					<p class="result-chan-descrip">Channel: {{ result.snippet.channelTitle }}</p>
-					<input class="btn btn-default" type="button" value="Filter" ng-click="search.searchAndChanFilter(result.snippet.channelTitle)">
+					<div class="result-chan-wrapper">
+						<p class="result-chan-descrip">Channel: {{ result.snippet.channelTitle }}</p>
+						<input class="btn btn-default" type="button" value="Filter" ng-click="search.searchAndChanFilter(result.snippet.channelTitle)">
+					</div>
 				</div>
 				<div class="col-md-6 results-img-container">
 					<a ui-sref="video({videoId: result.id.videoId} )"><img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image"></a>

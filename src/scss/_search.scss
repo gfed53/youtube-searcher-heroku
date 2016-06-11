@@ -73,6 +73,12 @@
 		border-radius: 0.5em;
 		.tit-descrip-container {
 			z-index: 1;
+			.result-chan-wrapper {
+					display: inline-block;
+					padding: 1em;
+					border: 1px solid white;
+					border-radius: 0.5em;
+				}
 			.result-chan-descrip {
 				// display: inline-block;
 			}
@@ -106,6 +112,7 @@
 		}
 		.inner-result {
 			.tit-descrip-container {
+				
 				.result-chan-descrip {
 					display: inline-block;
 				}
