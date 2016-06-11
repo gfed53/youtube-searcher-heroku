@@ -12,9 +12,9 @@
 <div id="advanced-search">
 	<div id="map-wrapper">
 		<div id="map"></div>
-		<span>({{ search.lat | number: 0 }}, {{ search.lng | number: 0}})</span>
+		<span>({{ search.params.lat | number: 0 }}, {{ search.params.lng | number: 0}})</span>
 		<input class="btn btn-default btn-clear-select" type="button" ng-click="search.clearSelection()" value="Clear Selection">
-		<span>{{ search.radius | number: 0 }}km</span>
+		<span>{{ search.params.radius | number: 0 }}km</span>
 	</div>
 	<form id="form-advanced-video-search" class="form-inline" ng-submit="search.vidSubmit(search.params.advKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius)">
 		<label for="order"> Order: </label>

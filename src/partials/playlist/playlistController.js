@@ -12,5 +12,6 @@ function PlaylistCtrl(ytVideoItems, ytSearchHistory, ytSearchParams){
 
 	function grab(search){
 		ytSearchParams.set(search);
+		alert("Search params for "+search.name+" now active.");
 	}
 };

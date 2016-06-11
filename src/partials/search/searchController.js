@@ -45,11 +45,11 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
         	vm.lat = vm.center.lat();
         	vm.lng = vm.center.lng();
         	vm.radius = vm.circle.getRadius();
-        	vm.lat = JSON.stringify(vm.lat);
-        	vm.lng = JSON.stringify(vm.lng);
-        	vm.radius = JSON.stringify(vm.radius/1000);
-        	vm.params.location = vm.lat+","+vm.lng;
-			vm.params.locationRadius = vm.radius+"km";
+        	vm.params.lat = JSON.stringify(vm.lat);
+        	vm.params.lng = JSON.stringify(vm.lng);
+        	vm.params.radius = JSON.stringify(vm.radius/1000);
+        	vm.params.location = vm.params.lat+","+vm.params.lng;
+			vm.params.locationRadius = vm.params.radius+"km";
     	});
 	}
 
@@ -124,9 +124,9 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 
 	function clearSelection(){
 		//Clears location/locationRadius params
-		vm.lat = undefined;
-		vm.lng = undefined;
-		vm.radius = undefined;
+		vm.params.lat = undefined;
+		vm.params.lng = undefined;
+		vm.params.radius = undefined;
 		vm.params.location = undefined;
 		vm.params.locationRadius = undefined;
 	}
