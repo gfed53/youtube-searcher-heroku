@@ -1,9 +1,9 @@
 angular
 .module('myApp')
 
-.controller('SearchCtrl', ['ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', SearchCtrl])
+.controller('SearchCtrl', ['ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', SearchCtrl])
 
-function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults){
+function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory){
 	var vm = this;
 	vm.initMap = initMap;
 	vm.vidSubmit = vidSubmit;
@@ -19,6 +19,8 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 	vm.results = ytResults.getResults();
 	vm.chanResults = ytResults.getChanResults();
 	vm.searchAndChanFilter = searchAndChanFilter;
+	vm.saveSearch = saveSearch;
+	// ytSearchHistory.clear();
 
 	//Retrieving our saved params, if any
 	vm.params = ytSearchParams.get();
@@ -138,6 +140,10 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 			vm.chanFilter(vm.firstChanResult.id.channelId, vm.firstChanResult.snippet.thumbnails.default.url);
 			
 		})
+	}
+
+	function saveSearch(params){
+		ytSearchHistory.set(params);
 	}
 
 };

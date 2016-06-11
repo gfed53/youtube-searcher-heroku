@@ -8,6 +8,7 @@ angular
 .service('ytSearchParams', [ytSearchParams])
 .service('ytResults', [ytResults])
 .service('ytVideoItems', [ytVideoItems])
+.service('ytSearchHistory', ['ytSearchParams', ytSearchHistory])
 
 function ytTrustSrc($sce){
 	return function(src){
@@ -17,99 +18,93 @@ function ytTrustSrc($sce){
 
 function ytSearchYouTube($q, $http) {
 	return function(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken){
-		    var url = "https://www.googleapis.com/youtube/v3/search";
-		    var request = {
-		    	key: "AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA",
-		    	part: "snippet",
-		    	maxResults: 50,
-		    	order: order,
-		    	publishedAfter: publishedAfter,
-		    	publishedBefore: publishedBefore,
-		    	safeSearch: safeSearch,
-		    	location: location,
-		    	locationRadius: locationRadius,
-		    	pageToken: pageToken,
-		    	q: keyword,
-		    	type: "video",
-		    	channelId: channelId,
-		    	videoEmbeddable: true,
-		    };
-		    var services = {
-		    	getResults: getResults
-		    };
-		    return services;
+		var url = "https://www.googleapis.com/youtube/v3/search";
+		var request = {
+			key: "AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA",
+			part: "snippet",
+			maxResults: 50,
+			order: order,
+			publishedAfter: publishedAfter,
+			publishedBefore: publishedBefore,
+			safeSearch: safeSearch,
+			location: location,
+			locationRadius: locationRadius,
+			pageToken: pageToken,
+			q: keyword,
+			type: "video",
+			channelId: channelId,
+			videoEmbeddable: true,
+		};
+		var services = {
+			getResults: getResults
+		};
+		return services;
 
-		    function getResults(){
-		    	return $http({
-		    		method: 'GET',
-		    		url: url,
-		    		params: request
-		    	})
-		    	.then(function(response){
-		    		var results = response;
-		    		return $q.when(response);
-		    	},
-		    	function(response){
-		    		alert('error');
-		    		console.log(response);
-		    	});
-		    }
+		function getResults(){
+			return $http({
+				method: 'GET',
+				url: url,
+				params: request
+			})
+			.then(function(response){
+				var results = response;
+				return $q.when(response);
+			},
+			function(response){
+				alert('error');
+				console.log(response);
+			});
 		}
-	};
+	}
+};
 
 function ytChanSearch($q, $http){
 	return function(channel){
 		var url = "https://www.googleapis.com/youtube/v3/search";
-		    var request = {
-		    	key: "AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA",
-		    	part: "snippet",
-		    	maxResults: 50,
-		    	order: "relevance",
-		    	q: channel,
-		    	type: "channel"
-		    };
-		    var services = {
-		    	getResults: getResults
-		    };
-		    return services;
+		var request = {
+			key: "AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA",
+			part: "snippet",
+			maxResults: 50,
+			order: "relevance",
+			q: channel,
+			type: "channel"
+		};
+		var services = {
+			getResults: getResults
+		};
+		return services;
 
-		    function getResults(){
-		    	return $http({
-		    		method: 'GET',
-		    		url: url,
-		    		params: request
-		    	})
-		    	.then(function(response){
-		    		var results = response;
-		    		return $q.when(response);
-		    	},
-		    	function(response){
-		    		alert("Sorry, an error occured.");
-		    	});
-		    }
+		function getResults(){
+			return $http({
+				method: 'GET',
+				url: url,
+				params: request
+			})
+			.then(function(response){
+				var results = response;
+				return $q.when(response);
+			},
+			function(response){
+				alert("Sorry, an error occured.");
+			});
 		}
 	}
+}
 
 function ytChanFilter(){
 	this.id = "";
 	this.image = "";
-	// this.active = false;
 	this.set = set;
-	// this.get = get;
 	this.clear = clear;
 
 	function set(id, image){
 		this.id = id;
 		this.image = image;
-		console.log(this.id);
-		console.log(this.image);
-		// this.active = true;
 	}
 
 	function clear(){
 		this.id = "";
 		this.image = "";
-		// this.active
 	}
 
 }
@@ -173,7 +168,9 @@ function ytSearchParams(){
 		lng: undefined,
 		radius: undefined,
 		prevPageToken: undefined,
-		nextPageToken: undefined
+		nextPageToken: undefined,
+		name: undefined,
+		date: undefined
 	};
 
 	this.get = get;
@@ -184,26 +181,10 @@ function ytSearchParams(){
 	}
 
 	function set(newParams){
-		// params.keyword = newParams.keyword;
-		// params.advKeyword = newParams.advKeyword;
-		// params.searchedKeyword = newParams.searchedKeyword;
-		// params.channel = newParams.channel;
-		// params.channelId = newParams.channelId;
-		// params.image = newParams.image;
-		// params.order = newParams.order;
-		// params.after = newParams.after;
-		// params.before = newParams.before;
-		// params.safeSearch = newParams.safeSearch;
-		// params.location = newParams.location;
-		// params.locationRadius = newParams.locationRadius;
-		// params.lat = newParams.lat;
-		// params.lng = newParams.lng;
-		// params.radius = newParams.radius;
-		// params.prevPageToken = newParams.prevPageToken;
-		// params.nextPageToken = newParams.nextPageToken;
 		for(var item in params){
 			params[item] = newParams[item];
-		}	
+		}
+		console.log(params.after);
 	}
 }
 
@@ -232,11 +213,63 @@ function ytResults(){
 	}
 }
 
-// function ytToggleResults(){
-// 	return function(){
+function ytSearchHistory(ytSearchParams){
+	this.pastSearches = [];
+	this.get = get;
+	this.set = set;
+	// this.grab = grab;
+	this.clear = clear;
 
-// 	}
-// }
+	function get(){
+		console.log(localStorage);
+		if(localStorage.length > 0){
+			for(key in localStorage){
+				console.log(key);
+				console.log(localStorage[key]);
+				var obj = localStorage.getItem(key);
+				obj = JSON.parse(obj);
+				if(obj.after != null){
+					obj.after = new Date(obj.after);
+				}
+				if(obj.before != null){
+					obj.before = new Date(obj.before);
+				}
+				console.log(obj.after);
+				console.log(obj);
+				//This is here to avoid existent objects getting reappended to the array within the session when they shouldn't be
+				if(getIndexIfObjWithAttr(this.pastSearches, "name", obj.name) === -1){
+					this.pastSearches.push(obj);
+				}
+				
+			}
+			return this.pastSearches;
+		}
+	}
+
+	function set(params){
+		console.log(params);
+		params.name = prompt("Enter a name for this saved search");
+		params.date = Date.now();
+		this.pastSearches.push(params);
+		localStorage.setItem(params.name, JSON.stringify(params));
+	}
+
+	function clear(){
+		//Clears all past searches
+		localStorage.clear();
+		console.log("should be clear now");
+	}
+
+	function getIndexIfObjWithAttr(array, attr, value) {
+		for(var i = 0; i < array.length; i++) {
+			if(array[i][attr] === value) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+}
 
 
 

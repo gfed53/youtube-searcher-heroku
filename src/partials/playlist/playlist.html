@@ -6,4 +6,12 @@
 			<a ui-sref="video({videoId: item.id})">{{item.name}}</a>
 		</li>
 	</ul>
+	<h2>Saved Searches</h2>
+	<ul ng-if="playlist.pastSearches" ng-repeat="search in playlist.pastSearches">
+		<li>
+			<p>{{ search.name }}</p>
+			<p>{{ search.date | date : short }}</p>
+			<button ng-click="playlist.grab(search)" class="btn btn-default">Grab!</button>
+		</li>
+	</ul>
 </div>
