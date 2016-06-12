@@ -3,7 +3,7 @@
 	<p>(Dummy playlist for now)</p>
 	<ul ng-repeat="item in playlist.items">
 		<li>
-			<a ui-sref="video({videoId: item.id})">{{item.name}}</a>
+			<a ng-click="playlist.setVideoId(item.id)" ui-sref="video({videoId: item.id})">{{item.name}}</a>
 		</li>
 	</ul>
 	<h2>Saved Searches</h2>

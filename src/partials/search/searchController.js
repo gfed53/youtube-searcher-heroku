@@ -1,12 +1,13 @@
 angular
 .module('myApp')
 
-.controller('SearchCtrl', ['ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', SearchCtrl])
+.controller('SearchCtrl', ['ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', SearchCtrl])
 
-function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory){
+function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems){
 	var vm = this;
 	vm.initMap = initMap;
 	vm.vidSubmit = vidSubmit;
+	vm.setVideoId = setVideoId;
 	vm.chanSubmit = chanSubmit;
 	vm.chanFilter = chanFilter;
 	vm.chanClear = chanClear;
@@ -78,6 +79,10 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 			//Saving the results to our service
 			ytResults.setResults(vm.results);
 		})
+	}
+
+	function setVideoId(videoId){
+		ytVideoItems.services.setVideoId(videoId);
 	}
 
 	function chanSubmit(channel){

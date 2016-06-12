@@ -54,6 +54,8 @@ body #page-header #credit {
 
 #menu {
   font-size: 0.8em; }
+  #menu #video-tab {
+    display: none; }
 
 @media screen and (min-width: 320px) {
   #menu {

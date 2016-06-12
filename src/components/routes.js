@@ -16,7 +16,9 @@ angular
 				templateUrl: "./partials/content/content.html"
 			},
 			'menu@root': {
-				templateUrl: "./partials/header/header-partials/menu.html",	
+				templateUrl: "./partials/header/header-partials/menu.html",
+				controller: 'MenuCtrl',
+				controllerAs: 'menu'
 			}
 		}
 	},
@@ -84,5 +86,19 @@ angular
 	.state(about)
 	.state(search);
 
+	
+
+
+}])
+
+.run(['$rootScope', function($rootScope){
+	// $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+	// 	console.log("changing states");
+	// 	console.log(toState);
+	// 	if(toState.name === 'video'){
+	// 		console.log("to video");
+	// 		$('#video-tab').show();
+	// 	}
+	// });
 }])
 

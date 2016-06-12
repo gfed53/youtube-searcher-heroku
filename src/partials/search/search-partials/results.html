@@ -18,7 +18,7 @@
 					</div>
 				</div>
 				<div class="col-md-6 results-img-container">
-					<a ui-sref="video({videoId: result.id.videoId} )"><img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image"></a>
+					<a ng-click="search.setVideoId(result.id.videoId)" ui-sref="video({videoId: result.id.videoId} )"><img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image"></a>
 				</div>
 			</div>
 		</div>

@@ -110,43 +110,53 @@ function ytChanFilter(){
 }
 
 function ytVideoItems(){
-	return function(){
-		var items = [
-		{
-			name: "Video 1",
-			id: "dqJRoh8MnBo"
-		},
-		{
-			name: "Video 2",
-			id: "dqJRoh8MnBo"
-		},
-		{
-			name: "Video 3",
-			id: "dqJRoh8MnBo"
-		},
-		{
-			name: "Video 4",
-			id: "dqJRoh8MnBo"
-		}
-		];
-		var services = {
-			getItems: getItems,
-			addItem: addItem
-		};
-		return services;
+	var currentVideoId;
+	var items = [
+	{
+		name: "Video 1",
+		id: "dqJRoh8MnBo"
+	},
+	{
+		name: "Video 2",
+		id: "dqJRoh8MnBo"
+	},
+	{
+		name: "Video 3",
+		id: "dqJRoh8MnBo"
+	},
+	{
+		name: "Video 4",
+		id: "dqJRoh8MnBo"
+	}
+	];
 
-		function getItems(){
-			return items;
+	this.services = {
+		// isVideo: isVideo,
+		getItems: getItems,
+		addItem: addItem,
+		getVideoId: getVideoId,
+		setVideoId: setVideoId
+	};
+
+	function getItems(){
+		return items;
+	}
+
+	function addItem(name, id){
+		var item = {
+			name: name,
+			id: id
 		}
 
-		function addItem(name, id){
-			var item = {
-				name: name,
-				id: id
-			}
+		items.push(item);
+	}
 
-			items.push[item];
-		}
+	function getVideoId(){
+		return currentVideoId;
+	}
+
+	function setVideoId(videoId){
+		currentVideoId = videoId;
 	}
 };
 
