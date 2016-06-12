@@ -12,6 +12,8 @@
 			<p>{{ search.name }}</p>
 			<p>{{ search.date | date : short }}</p>
 			<button ng-click="playlist.grab(search)" class="btn btn-default">Grab!</button>
+			<button ng-click="playlist.clear(search)" class="btn btn-default">Remove</button>
 		</li>
 	</ul>
+	<button ng-click="playlist.clearAll()" class="btn btn-default btn-playlist-clear">Clear History</button>
 </div>

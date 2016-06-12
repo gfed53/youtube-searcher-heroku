@@ -3,7 +3,6 @@ angular
 .factory('ytTrustSrc', ['$sce', ytTrustSrc])
 .factory('ytSearchYouTube', ['$q', '$http', ytSearchYouTube])
 .factory('ytChanSearch', ['$q', '$http', ytChanSearch])
-// .factory('ytToggleResults', [ytToggleResults])
 .service('ytChanFilter', [ytChanFilter])
 .service('ytSearchParams', [ytSearchParams])
 .service('ytResults', [ytResults])
@@ -131,7 +130,6 @@ function ytVideoItems(){
 	];
 
 	this.services = {
-		// isVideo: isVideo,
 		getItems: getItems,
 		addItem: addItem,
 		getVideoId: getVideoId,
@@ -227,8 +225,8 @@ function ytSearchHistory(ytSearchParams){
 	this.pastSearches = [];
 	this.get = get;
 	this.set = set;
-	// this.grab = grab;
-	this.clear = clear;
+	this.clearItem = clearItem;
+	this.clearAll = clearAll;
 
 	function get(){
 		console.log(localStorage);
@@ -264,8 +262,16 @@ function ytSearchHistory(ytSearchParams){
 		localStorage.setItem(params.name, JSON.stringify(params));
 	}
 
-	function clear(){
+	function clearItem(search){
+		var searchIndex = this.pastSearches.indexOf(search);
+		this.pastSearches.splice(searchIndex, 1);
+		console.log(this.pastSearches);
+		localStorage.removeItem(search.name);
+	}
+
+	function clearAll(){
 		//Clears all past searches
+		this.pastSearches = [];
 		localStorage.clear();
 		console.log("should be clear now");
 	}

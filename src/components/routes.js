@@ -85,20 +85,5 @@ angular
 	.state(playlist)
 	.state(about)
 	.state(search);
-
-	
-
-
-}])
-
-.run(['$rootScope', function($rootScope){
-	// $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-	// 	console.log("changing states");
-	// 	console.log(toState);
-	// 	if(toState.name === 'video'){
-	// 		console.log("to video");
-	// 		$('#video-tab').show();
-	// 	}
-	// });
 }])
 

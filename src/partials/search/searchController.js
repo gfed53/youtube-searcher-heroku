@@ -21,7 +21,6 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 	vm.chanResults = ytResults.getChanResults();
 	vm.searchAndChanFilter = searchAndChanFilter;
 	vm.saveSearch = saveSearch;
-	// ytSearchHistory.clear();
 
 	//Retrieving our saved params, if any
 	vm.params = ytSearchParams.get();

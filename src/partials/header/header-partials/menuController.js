@@ -17,12 +17,4 @@ function MenuCtrl($rootScope, ytVideoItems){
 			vm.videoId = ytVideoItems.services.getVideoId();
 		}
 	});
-
-	// $scope.$watch('ytVideoItems.isVideo', function (newVal, oldVal, scope) {
-	// 	if(newVal) { 
-	// 		scope.status = newVal;
-	// 	}
-
-
-	// });
 }

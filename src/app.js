@@ -7,10 +7,8 @@ angular
 }])
 
 .run(['$rootScope', function($rootScope){
-	$(function(){
-	 
-		$(document).on( 'scroll', function(){
-	 
+	$(function(){	 
+		$(document).on( 'scroll', function(){	 
 			if ($(window).scrollTop() > 100) {
 				$('.scroll-top-wrapper').addClass('show');
 			} else {
@@ -28,14 +26,6 @@ angular
 			$('html, body').animate({scrollTop: offsetTop}, 500, 'linear');
 		}
 	})
-
-	// $rootScope.on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-	// 	console.log("changing states");
-	// 	if(toState === 'video'){
-	// 		console.log("to video");
-	// 		$('#video-tab').show();
-	// 	}
-	// });
 }])
 
 

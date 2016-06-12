@@ -8,13 +8,23 @@ function PlaylistCtrl(ytVideoItems, ytSearchHistory, ytSearchParams){
 	vm.items = ytVideoItems.services.getItems();
 	vm.setVideoId = setVideoId;
 	vm.pastSearches = ytSearchHistory.get();
-
 	vm.grab = grab;
+	vm.clear = clear;
+	vm.clearAll = clearAll;
 	console.log(vm.pastSearches);
 
 	function grab(search){
 		ytSearchParams.set(search);
 		alert("Search params for "+search.name+" now active.");
+	}
+
+	function clear(search){
+		ytSearchHistory.clearItem(search);
+	}
+
+	function clearAll(){
+		vm.pastSearches = [];
+		ytSearchHistory.clearAll();
 	}
 
 	function setVideoId(videoId){

@@ -65,6 +65,9 @@ body #page-header #credit {
   #menu {
     font-size: 1em; } }
 
+#playlist .btn-playlist-clear {
+  margin: 2em 0; }
+
 #bar {
   text-align: center;
   margin: 3em 0; }

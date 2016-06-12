@@ -9,5 +9,4 @@ function ItemCtrl($stateParams, ytVideoItems, ytTrustSrc){
 	vm.videoId = $stateParams.videoId;
 	vm.url = "http://www.youtube.com/embed/"+vm.videoId;
 	vm.trustedUrl = vm.trustSrc(vm.url);
-	// ytVideoItems.services.toggleVideoTab();
 };
