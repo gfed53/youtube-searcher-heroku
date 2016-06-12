@@ -236,19 +236,20 @@ function ytSearchHistory(ytSearchParams){
 				console.log(localStorage[key]);
 				var obj = localStorage.getItem(key);
 				obj = JSON.parse(obj);
-				if(obj.after != null){
+				if(obj.name){
+					if(obj.after != null){
 					obj.after = new Date(obj.after);
-				}
-				if(obj.before != null){
-					obj.before = new Date(obj.before);
-				}
-				console.log(obj.after);
-				console.log(obj);
-				//This is here to avoid existent objects getting reappended to the array within the session when they shouldn't be
-				if(getIndexIfObjWithAttr(this.pastSearches, "name", obj.name) === -1){
-					this.pastSearches.push(obj);
-				}
-				
+					}
+					if(obj.before != null){
+						obj.before = new Date(obj.before);
+					}
+					console.log(obj.after);
+					console.log(obj);
+					//This is here to avoid existent objects getting reappended to the array within the session when they shouldn't be
+					if(getIndexIfObjWithAttr(this.pastSearches, "name", obj.name) === -1){
+						this.pastSearches.push(obj);
+					}
+				}				
 			}
 			return this.pastSearches;
 		}
