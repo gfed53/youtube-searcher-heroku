@@ -2,7 +2,7 @@ The following is taken from the "about" section of the app:
 
 Welcome to the Ultimate YouTube Searcher. The goal of this app is to allow the user to gain more freedom in searching for YouTube videos. It was originally created with all of the hardcore YouTube junkies out there in mind (myself included), but of course can be enjoyed and used by anybody.
 
-The next big goal for the future is to create a fully functional playlist, and also to incorporate a way to save actual past searches with all of their respective params. I also plan on adding more search options. Enjoy!
+Some goals for the future are to create a fully functional playlist and to add more search options. Enjoy!
 
 Guide
 
@@ -11,6 +11,7 @@ You can simply do a basic video search via the default search bar. Clicking "Tog
 Currently, you can search by location, result order, safe search settings, date range (from, to), and also by a particular channel filter.
 
 The location parameter uses Google Maps to allow the user to select a portion of the map using an adjustable circular selector. Due to the limits of the API, radii of selections cannot exceed 100 kilometers. You can clear the selection by clicking the "Clear Selection" button. The coordinates of the center of the circle and its radius are displayed to the left and right of the "Clear Selection" button, respectively.
+
 
 If you want to search the contents of a specific channel, here's what you do:
 
@@ -22,6 +23,9 @@ You should then see the filter applied represented by an icon below the search b
 You will now only get results from that particular channel back. Clicking on another channel will reset the filter. 
 
 You can remove the filter by clicking the "Clear Filter" button.
+
+
+You can also click the "Save Search" button to save and store the current search parameters as an item in your local storage. You can find all of your saved past searches in the "Personal" view. In the "Saved Searches" area of this view, clicking the "Grab!" button will activate the respective saved search and fill the current parameters. Note that this doesn't immediately initialize the search, so you can tweak any of the parameters as you wish before making your search.
 
 
 (This ends the "about" section content)
