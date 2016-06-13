@@ -16,7 +16,7 @@
 		<input class="btn btn-default btn-clear-select" type="button" ng-click="search.clearSelection()" value="Clear Selection">
 		<span>{{ search.params.radius | number: 0 }}km</span>
 	</div>
-	<form id="form-advanced-video-search" class="form-inline" ng-submit="search.vidSubmit(search.params.advKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius)">
+	<form autocomplete="on" id="form-advanced-video-search" class="form-inline" ng-submit="search.vidSubmit(search.params.advKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius)">
 		<label for="order"> Order: </label>
 		<select class="form-control" name="order" ng-model="search.params.order">
 			<option value="relevance">Relevance</option>

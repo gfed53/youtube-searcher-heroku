@@ -258,6 +258,7 @@ function ytSearchHistory(ytSearchParams){
 	function set(params){
 		console.log(params);
 		params.name = prompt("Enter a name for this saved search");
+		params.name = "uyts-"+params.name;
 		params.date = Date.now();
 		this.pastSearches.push(params);
 		localStorage.setItem(params.name, JSON.stringify(params));
@@ -273,7 +274,11 @@ function ytSearchHistory(ytSearchParams){
 	function clearAll(){
 		//Clears all past searches
 		this.pastSearches = [];
-		localStorage.clear();
+		for(key in localStorage){
+			if(key.includes("uyts")){
+				localStorage.removeItem(key);
+			}
+		}
 		console.log("should be clear now");
 	}
 
