@@ -1,6 +1,7 @@
 angular
 .module('myApp')
 .factory('ytTrustSrc', ['$sce', ytTrustSrc])
+.factory('ytToggleResults', [ytToggleResults])
 .factory('ytSearchYouTube', ['$q', '$http', ytSearchYouTube])
 .factory('ytChanSearch', ['$q', '$http', ytChanSearch])
 .service('ytChanFilter', [ytChanFilter])
@@ -12,6 +13,15 @@ angular
 function ytTrustSrc($sce){
 	return function(src){
 		return $sce.trustAsResourceUrl(src);
+	}
+}
+
+function ytToggleResults(){
+	return function(target, sibling){
+		if($(target).css("display")==="block"){
+				$(target).slideUp();
+				$(sibling).slideDown();
+		}
 	}
 }
 
