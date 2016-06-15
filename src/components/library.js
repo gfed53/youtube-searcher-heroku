@@ -17,11 +17,59 @@ function ytTrustSrc($sce){
 }
 
 function ytToggleResults(){
-	return function(target, sibling){
-		if($(target).css("display")==="block"){
-				$(target).slideUp();
-				$(sibling).slideDown();
+	return function(){
+
+		var services = {
+			toggle: toggle,
+			toggleBetween: toggleBetween,
+			checkStatus: checkStatus
 		}
+
+		return services;
+
+		function toggle(target, targetBtn, targetName){
+			$(target).slideToggle(400, function(){
+				checkStatus(target, targetBtn, targetName);
+			});
+			
+		}
+
+		function toggleBetween(target, targetBtn, targetName, sibling, siblingBtn, siblingName){
+			console.log($(target));
+			console.log($(sibling));
+			if($(target).css("display")==="block"){
+				$(target).slideUp(400, function(){
+					console.log($(targetBtn).attr("value"));
+					checkStatus(target, targetBtn, targetName);
+					checkStatus(sibling, siblingBtn, siblingName);
+				});
+				$(sibling).slideDown(400, function(){
+					checkStatus(target, targetBtn, targetName);
+					checkStatus(sibling, siblingBtn, siblingName);
+				});
+				
+			} else {
+				checkStatus(target, targetBtn, targetName);
+				checkStatus(sibling, siblingBtn, siblingName);
+			}
+			
+		}
+
+		function checkStatus(target, targetBtn, targetName){
+			console.log($(target));
+			console.log($(target).css("display"));
+			var action = "";
+			if($(target).css("display")==="none"){
+				console.log("none?");
+				action = "Show";
+			} else {
+				action = "Hide";
+			}
+			$(targetBtn).attr("value", action+" "+targetName);
+			console.log($(targetBtn).attr("value"));
+			console.log($("#btn-tog-channels"));
+		}
+		
 	}
 }
 
@@ -248,7 +296,7 @@ function ytSearchHistory(ytSearchParams){
 				obj = JSON.parse(obj);
 				if(obj.name){
 					if(obj.after != null){
-					obj.after = new Date(obj.after);
+						obj.after = new Date(obj.after);
 					}
 					if(obj.before != null){
 						obj.before = new Date(obj.before);

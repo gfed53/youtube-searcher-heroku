@@ -16,7 +16,7 @@
 		<input class="btn btn-default btn-clear-select" type="button" ng-click="search.clearSelection()" value="Clear Selection">
 		<span>{{ search.params.radius | number: 0 }}km</span>
 	</div>
-	<form autocomplete="on" id="form-advanced-video-search" class="form-inline" ng-submit="search.vidSubmit(search.params.advKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius)">
+	<form id="form-advanced-video-search" class="form-inline" ng-submit="search.vidSubmit(search.params.advKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius)">
 		<label for="order"> Order: </label>
 		<select class="form-control" name="order" ng-model="search.params.order">
 			<option value="relevance">Relevance</option>
@@ -36,7 +36,7 @@
 		<label for="date-before"> To: </label>
 		<input class="form-control" ng-model="search.params.before" name="date-before" type="date"><br>
 		<div class="input-group">
-			<input type="text" class="form-control" ng-model="search.params.advKeyword" placeholder="Search Video..">
+			<input autocomplete="on" type="text" class="form-control" ng-model="search.params.advKeyword" placeholder="Search Video..">
 			<span class="input-group-btn">
 				<input class="btn btn-default btn-go" type="submit" class="btn btn-default" value="Go!">
 			</span>
@@ -45,7 +45,7 @@
 	</form>
 	<form id="form-channel-search" class="form-inline" ng-submit="search.chanSubmit(search.params.channel)">
 		<div class="input-group">
-			<input type="text" class="form-control" ng-model="search.params.channel" placeholder="Search Channel..">
+			<input autocomplete="on" type="text" class="form-control" ng-model="search.params.channel" placeholder="Search Channel..">
 			<span class="input-group-btn">
 				<input class="btn btn-default btn-go" type="submit" value="Go!">
 			</span>
@@ -57,7 +57,7 @@
 	</div>
 </div>
 <div class="btn-group-vertical" role="group" aria-label="...">
-	<input ng-if="search.results.length > 0" class="btn btn-default" type="button" ng-click="search.toggleResults()" value="Show/Hide Videos">
-	<input ng-if="search.chanResults.length > 0" class="btn btn-default" type="button" ng-click="search.toggleChanResults()" value="Show/Hide Channels">
+	<input id="btn-tog-videos" ng-if="search.results.length > 0" class="btn btn-default" type="button" ng-click="search.toggleResults('#video-results', '#btn-tog-videos', 'Videos')" value="Hide Videos">
+	<input id="btn-tog-channels" ng-if="search.chanResults.length > 0" class="btn btn-default" type="button" ng-click="search.toggleResults('#channel-results', '#btn-tog-channels', 'Channels')" value="Hide Channels">
 </div>
 

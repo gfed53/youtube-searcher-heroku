@@ -14,8 +14,9 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 	vm.viewVideo = false;
 	vm.filterActive = false;
 	vm.toggleAdv = toggleAdv;
-	vm.toggleResults = toggleResults;
-	vm.toggleChanResults = toggleChanResults;
+	vm.toggleResults = ytToggleResults().toggle;
+	// vm.toggleResultsMock = toggleResults;
+	// vm.toggleChanResultsMock = toggleChanResults;
 	vm.clearSelection = clearSelection;
 	vm.results = ytResults.getResults();
 	vm.chanResults = ytResults.getChanResults();
@@ -26,11 +27,10 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 	vm.params = ytSearchParams.get();
 
 	function initMap() {
-        vm.map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 39, lng: -99},
-          zoom: 4
-        });
-
+		vm.map = new google.maps.Map(document.getElementById('map'), {
+			center: {lat: 39, lng: -99},
+			zoom: 4
+		});
 
 		vm.circle = new google.maps.Circle({
 			center: {lat: 39, lng: -99},
@@ -40,17 +40,17 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 		});
 
 		vm.circle.setMap(vm.map);
-        vm.circle.addListener("center_changed", function(){
-        	vm.center = vm.circle.getCenter();
-        	vm.lat = vm.center.lat();
-        	vm.lng = vm.center.lng();
-        	vm.radius = vm.circle.getRadius();
-        	vm.params.lat = JSON.stringify(vm.lat);
-        	vm.params.lng = JSON.stringify(vm.lng);
-        	vm.params.radius = JSON.stringify(vm.radius/1000);
-        	vm.params.location = vm.params.lat+","+vm.params.lng;
+		vm.circle.addListener("center_changed", function(){
+			vm.center = vm.circle.getCenter();
+			vm.lat = vm.center.lat();
+			vm.lng = vm.center.lng();
+			vm.radius = vm.circle.getRadius();
+			vm.params.lat = JSON.stringify(vm.lat);
+			vm.params.lng = JSON.stringify(vm.lng);
+			vm.params.radius = JSON.stringify(vm.radius/1000);
+			vm.params.location = vm.params.lat+","+vm.params.lng;
 			vm.params.locationRadius = vm.params.radius+"km";
-    	});
+		});
 	}
 
 	function vidSubmit(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken){
@@ -65,12 +65,7 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 			console.log(vm.results.nextPageToken);
 			console.log(vm.params.nextPageToken);
 			console.log(vm.params.prevPageToken);
-			ytToggleResults("#channel-results", "#video-results");
-			// if($("#channel-results").css("display")==="block"){
-			// 		$("#channel-results").slideUp();
-			// 		$("#video-results").slideDown();
-			// }
-
+			ytToggleResults().toggleBetween("#channel-results", "#btn-tog-channels", "Channels", "#video-results", "#btn-tog-videos", "Videos");
 			console.log(vm.searchedKeyword);
 
 			//Saving our params to our service
@@ -90,12 +85,8 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 		.then(function(response){
 			vm.chanResults = response.data.items;
 			console.log(vm.chanResults);
-			ytToggleResults("#video-results", "#channel-results");
-			// if($("#video-results").css("display")==="block"){
-	  //   			$("#video-results").slideUp();
-	  //   			$("#channel-results").slideDown();
-	  //   		}
-	    	ytResults.setChanResults(vm.chanResults);
+			ytToggleResults().toggleBetween("#video-results", "#btn-tog-videos", "Videos", "#channel-results", "#btn-tog-channels", "Channels");
+			ytResults.setChanResults(vm.chanResults);
 		})
 	}
 
@@ -120,11 +111,31 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 	}
 
 	function toggleResults(){
-		$("#video-results").slideToggle();
+		console.log($("#btn-tog-videos"));
+		$("#video-results").slideToggle(400, function(){
+			console.log($("#video-results").css("display"));
+			if($("#video-results").css("display")==="none"){
+				$("#btn-tog-videos").attr("value", "Show Videos");
+				console.log($("#btn-tog-videos"));
+			} else {
+				console.log("is this running?");
+				$("#btn-tog-videos").attr("value", "Hide Videos");
+			}
+		});
+		
+
 	}
 
 	function toggleChanResults(){
-		$("#channel-results").slideToggle();
+		$("#channel-results").slideToggle(400, function(){
+			if($("#channel-results").css("display")==="none"){
+				$("#btn-tog-channels").attr("value", "Show channels");
+			} else {
+				console.log("is this running?");
+				$("#btn-tog-channels").attr("value", "Hide channels");
+			}
+		});
+		
 	}
 
 	function clearSelection(){
