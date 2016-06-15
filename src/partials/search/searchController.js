@@ -1,13 +1,15 @@
 angular
 .module('myApp')
 
-.controller('SearchCtrl', ['ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytToggleResults', SearchCtrl])
+.controller('SearchCtrl', ['$scope', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytToggleResults', SearchCtrl])
 
-function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytToggleResults){
+function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytToggleResults){
 	var vm = this;
 	vm.initMap = initMap;
 	vm.vidSubmit = vidSubmit;
 	vm.setVideoId = setVideoId;
+	vm.videosCollapsed = true;
+	vm.channelsCollapsed = true;
 	vm.chanSubmit = chanSubmit;
 	vm.chanFilter = chanFilter;
 	vm.chanClear = chanClear;
@@ -25,6 +27,7 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 
 	//Retrieving our saved params, if any
 	vm.params = ytSearchParams.get();
+
 
 	function initMap() {
 		vm.map = new google.maps.Map(document.getElementById('map'), {
@@ -65,9 +68,16 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 			console.log(vm.results.nextPageToken);
 			console.log(vm.params.nextPageToken);
 			console.log(vm.params.prevPageToken);
-			ytToggleResults().toggleBetween("#channel-results", "#btn-tog-channels", "Channels", "#video-results", "#btn-tog-videos", "Videos");
+			// ytToggleResults().toggleBetween("#channel-results", "#btn-tog-channels", "Channels", "#video-results", "#btn-tog-videos", "Videos");
 			console.log(vm.searchedKeyword);
-
+			vm.channelsCollapsed = true;
+			vm.videosCollapsed = false;
+			var channelsBtn = document.getElementById("btn-channels"),
+			videosBtn = document.getElementById("btn-videos");
+			console.log(channelsBtn);
+			console.log(videosBtn);
+			channelsBtn.setAttribute("value", "Show Channels");
+			videosBtn.setAttribute("value", "Hide Videos");
 			//Saving our params to our service
 			ytSearchParams.set(vm.params);
 			//Saving the results to our service
@@ -85,7 +95,13 @@ function SearchCtrl(ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams,
 		.then(function(response){
 			vm.chanResults = response.data.items;
 			console.log(vm.chanResults);
-			ytToggleResults().toggleBetween("#video-results", "#btn-tog-videos", "Videos", "#channel-results", "#btn-tog-channels", "Channels");
+			// ytToggleResults().toggleBetween("#video-results", "#btn-tog-videos", "Videos", "#channel-results", "#btn-tog-channels", "Channels");
+			vm.channelsCollapsed = false;
+			vm.videosCollapsed = true;
+			var channelsBtn = document.getElementById("btn-channels"),
+			videosBtn = document.getElementById("btn-videos");
+			videosBtn.setAttribute("value", "Show Videos");
+			channelsBtn.setAttribute("value", "Hide Channels");
 			ytResults.setChanResults(vm.chanResults);
 		})
 	}
