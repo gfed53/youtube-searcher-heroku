@@ -65,6 +65,9 @@ body #page-header #credit {
   #menu {
     font-size: 1em; } }
 
+#playlist #playlist-items {
+  list-style-type: decimal; }
+
 #playlist .btn-playlist-clear {
   margin: 2em 0; }
 
@@ -226,6 +229,9 @@ iframe {
 
 .scroll-top-wrapper i.fa {
   line-height: inherit; }
+
+.my-thumbnail {
+  width: 5em; }
 
 #results.ng-enter,
 #results.ng-leave.ng-leave-active {

@@ -196,6 +196,8 @@ function ytVideoItems(){
 	this.services = {
 		getItems: getItems,
 		setItem: setItem,
+		clearItem: clearItem,
+		clearAllItems: clearAllItems,
 		getVideoId: getVideoId,
 		setVideoId: setVideoId
 	};
@@ -207,26 +209,43 @@ function ytVideoItems(){
 				if(key.includes("uytp")){
 					var item = {
 						name: key,
-						id: localStorage[key]
+						content: JSON.parse(localStorage[key])
 					}
 					console.log(item);
 					if(items.indexOf(item) === -1){
 						newItems.push(item);
-					}
-					
+					}					
 				}
 			}
 			items = newItems;
+			console.log(items);
 		}
 		return items;
 	}
 
-	function setItem(name, id){
-		itemName = "uytp-"+name;
+	function setItem(name, id, thumb){
+		var itemName = "uytp-"+name,
+		content = {
+			id: id,
+			thumb: thumb
+		}
+		content = JSON.stringify(content);
 		console.log("setItem running?");
 
 		// items.push(item);
-		localStorage.setItem(itemName, id);
+		localStorage.setItem(itemName, content);
+	}
+
+	function clearItem(name){
+		localStorage.removeItem(name);
+	}
+
+	function clearAllItems(){
+		for(key in localStorage){
+			if(key.includes("uytp-")){
+				localStorage.removeItem(key);
+			}
+		}
 	}
 
 	function getVideoId(){

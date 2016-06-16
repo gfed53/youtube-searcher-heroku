@@ -11,8 +11,10 @@ function PlaylistCtrl(ytVideoItems, ytSearchHistory, ytSearchParams){
 	vm.pastSearches = ytSearchHistory.get();
 	vm.grab = grab;
 	vm.clear = clear;
+	vm.clearItem = clearItem;
 	vm.clearAll = clearAll;
 	console.log(vm.pastSearches);
+	// ytVideoItems.services.clearAllItems();
 
 	function grab(search){
 		ytSearchParams.set(search);
@@ -26,6 +28,12 @@ function PlaylistCtrl(ytVideoItems, ytSearchHistory, ytSearchParams){
 	function clearAll(){
 		vm.pastSearches = [];
 		ytSearchHistory.clearAll();
+	}
+
+	function clearItem(item){
+		var itemIndex = vm.items.indexOf(item);
+		vm.items.splice(itemIndex, 1);
+		ytVideoItems.services.clearItem(item.name);
 	}
 
 	function setVideoId(videoId){

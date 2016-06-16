@@ -84,7 +84,7 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 			vm.params.prevPageToken = response.data.prevPageToken;
 			vm.status.channelsCollapsed = true;
 			vm.status.videosCollapsed = false;
-
+			console.log(vm.results);
 			ytResults.setStatus(vm.status);
 
 			//Saving our params to our service

@@ -1,8 +1,14 @@
 <div id="playlist">
 	<h2>My Playlist</h2>
-	<ul ng-repeat="item in playlist.items">
-		<li>
-			<a ng-click="playlist.setVideoId(item.id)" ui-sref="video({videoId: item.id})">{{item.name}}</a>
+	<ul id="playlist-items">
+		<li class="row" ng-repeat="item in playlist.items">
+			<div class="col-md-6">
+				<a ng-click="playlist.setVideoId(item.id)" ui-sref="video({videoId: item.content.id})"><img class="my-thumbnail" ng-src="{{item.content.thumb}}" alt="image"></a>
+				{{item.name}}
+			</div>
+			<div class="col-md-6">
+				<button class="btn btn-default" ng-click="playlist.clearItem(item)">Remove</button>
+			</div>
 		</li>
 	</ul>
 	<h2>Saved Searches</h2>
