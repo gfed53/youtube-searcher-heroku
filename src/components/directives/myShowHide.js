@@ -1,3 +1,4 @@
+//A directive that toggles the text of a button on click. Not currently used, but good to have.
 angular
 .module('myApp')
 
@@ -6,7 +7,7 @@ angular
 function myShowHide(){
     return {
         restrict: 'A',
-        templateUrl: './components/directives/show-hide.html',
+        templateUrl: './components/directives/my-show-hide.html',
         scope: true,
         transclude: true,
         link: function (scope, elem, attrs) {

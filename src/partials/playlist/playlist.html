@@ -1,6 +1,5 @@
 <div id="playlist">
 	<h2>My Playlist</h2>
-	<p>(Dummy playlist for now)</p>
 	<ul ng-repeat="item in playlist.items">
 		<li>
 			<a ng-click="playlist.setVideoId(item.id)" ui-sref="video({videoId: item.id})">{{item.name}}</a>

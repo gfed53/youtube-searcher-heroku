@@ -175,42 +175,58 @@ function ytChanFilter(){
 function ytVideoItems(){
 	var currentVideoId;
 	var items = [
-	{
-		name: "Video 1",
-		id: "dqJRoh8MnBo"
-	},
-	{
-		name: "Video 2",
-		id: "dqJRoh8MnBo"
-	},
-	{
-		name: "Video 3",
-		id: "dqJRoh8MnBo"
-	},
-	{
-		name: "Video 4",
-		id: "dqJRoh8MnBo"
-	}
+	// {
+	// 	name: "Video 1",
+	// 	id: "dqJRoh8MnBo"
+	// },
+	// {
+	// 	name: "Video 2",
+	// 	id: "dqJRoh8MnBo"
+	// },
+	// {
+	// 	name: "Video 3",
+	// 	id: "dqJRoh8MnBo"
+	// },
+	// {
+	// 	name: "Video 4",
+	// 	id: "dqJRoh8MnBo"
+	// }
 	];
 
 	this.services = {
 		getItems: getItems,
-		addItem: addItem,
+		setItem: setItem,
 		getVideoId: getVideoId,
 		setVideoId: setVideoId
 	};
 
 	function getItems(){
+		var newItems = [];
+		if(localStorage.length > 0){
+			for(key in localStorage){
+				if(key.includes("uytp")){
+					var item = {
+						name: key,
+						id: localStorage[key]
+					}
+					console.log(item);
+					if(items.indexOf(item) === -1){
+						newItems.push(item);
+					}
+					
+				}
+			}
+			items = newItems;
+		}
 		return items;
 	}
 
-	function addItem(name, id){
-		var item = {
-			name: name,
-			id: id
-		}
+	function setItem(name, id){
+		itemName = "uytp-"+name;
+		console.log("setItem running?");
 
-		items.push(item);
+		// items.push(item);
+		localStorage.setItem(itemName, id);
 	}
 
 	function getVideoId(){
@@ -326,46 +342,48 @@ function ytSearchHistory(ytSearchParams){
 		console.log(localStorage);
 		if(localStorage.length > 0){
 			for(key in localStorage){
-				console.log(key);
-				console.log(localStorage[key]);
-				var obj = localStorage.getItem(key);
-				obj = JSON.parse(obj);
-				if(obj.name){
-					if(obj.after != null){
-						obj.after = new Date(obj.after);
-					}
-					if(obj.before != null){
-						obj.before = new Date(obj.before);
-					}
-					console.log(obj.after);
-					console.log(obj);
+				if(key.includes("uyts")){
+					console.log(key);
+					console.log(localStorage[key]);
+					var obj = localStorage.getItem(key);
+					obj = JSON.parse(obj);
+					if(obj.name){
+						if(obj.after != null){
+							obj.after = new Date(obj.after);
+						}
+						if(obj.before != null){
+							obj.before = new Date(obj.before);
+						}
+						console.log(obj.after);
+						console.log(obj);
 					//This is here to avoid existent objects getting reappended to the array within the session when they shouldn't be
 					if(getIndexIfObjWithAttr(this.pastSearches, "name", obj.name) === -1){
 						this.pastSearches.push(obj);
 					}
-				}				
+				}
 			}
-			return this.pastSearches;
 		}
+		return this.pastSearches;
 	}
+}
 
-	function set(params){
-		console.log(params);
-		params.name = prompt("Enter a name for this saved search");
-		params.name = "uyts-"+params.name;
-		params.date = Date.now();
-		this.pastSearches.push(params);
-		localStorage.setItem(params.name, JSON.stringify(params));
-	}
+function set(params){
+	console.log(params);
+	params.name = prompt("Enter a name for this saved search");
+	params.name = "uyts-"+params.name;
+	params.date = Date.now();
+	this.pastSearches.push(params);
+	localStorage.setItem(params.name, JSON.stringify(params));
+}
 
-	function clearItem(search){
-		var searchIndex = this.pastSearches.indexOf(search);
-		this.pastSearches.splice(searchIndex, 1);
-		console.log(this.pastSearches);
-		localStorage.removeItem(search.name);
-	}
+function clearItem(search){
+	var searchIndex = this.pastSearches.indexOf(search);
+	this.pastSearches.splice(searchIndex, 1);
+	console.log(this.pastSearches);
+	localStorage.removeItem(search.name);
+}
 
-	function clearAll(){
+function clearAll(){
 		//Clears all past searches
 		this.pastSearches = [];
 		for(key in localStorage){
