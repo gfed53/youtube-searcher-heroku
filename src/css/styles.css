@@ -65,7 +65,7 @@ body #page-header #credit {
   #menu {
     font-size: 1em; } }
 
-#playlist #playlist-items {
+#playlist #playlist-items, #playlist #past-search-items {
   list-style-type: decimal; }
 
 #playlist .btn-playlist-clear {

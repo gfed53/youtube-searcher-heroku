@@ -12,12 +12,16 @@
 		</li>
 	</ul>
 	<h2>Saved Searches</h2>
-	<ul ng-if="playlist.pastSearches" ng-repeat="search in playlist.pastSearches">
-		<li>
-			<p>{{ search.name }}</p>
-			<p>{{ search.date | date : short }}</p>
-			<button ng-click="playlist.grab(search)" class="btn btn-default">Grab!</button>
-			<button ng-click="playlist.clear(search)" class="btn btn-default">Remove</button>
+	<ul id="past-search-items" ng-if="playlist.pastSearches">
+		<li class="row" ng-repeat="search in playlist.pastSearches">
+			<div class="col-md-6">
+				<p>{{ search.name }}</p>
+				<p>{{ search.date | date : short }}</p>
+			</div>
+			<div class="col-md-6">
+				<button ng-click="playlist.grab(search)" class="btn btn-default">Grab!</button>
+				<button ng-click="playlist.clear(search)" class="btn btn-default">Remove</button>
+			</div>
 		</li>
 	</ul>
 	<button ng-click="playlist.clearAll()" class="btn btn-default btn-playlist-clear">Clear History</button>
