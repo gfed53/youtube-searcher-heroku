@@ -69,6 +69,12 @@ function ytToggleResults(){
 			console.log($(targetBtn).attr("value"));
 			console.log($("#btn-tog-channels"));
 		}
+
+		// function checkStatus2(status, btn, name){
+		// 	if(status){
+		// 		btn.setAttribute("value", "")
+		// 	}
+		// }
 		
 	}
 }
@@ -257,10 +263,40 @@ function ytSearchParams(){
 function ytResults(){
 	this.results = [];
 	this.chanResults = [];
+	this.status = {
+		videosCollapsed: true,
+		channelsCollapsed: true,
+		videoButtonValue: "",
+		channelButtonValue: ""
+	}
 	this.getResults = getResults;
 	this.getChanResults = getChanResults;
 	this.setResults = setResults;
 	this.setChanResults = setChanResults;
+	this.getStatus = getStatus;
+	this.setStatus = setStatus;
+	this.checkStatus = checkStatus;
+
+	function checkStatus(newVal, oldVal, buttonValue, showText, hideText){
+
+		console.log(buttonValue);
+		if(newVal === true){
+			buttonValue = showText;
+		} else {
+			buttonValue = hideText;
+		}
+		console.log(buttonValue);
+		return buttonValue;
+		
+	}
+
+	function getStatus(){
+		return this.status;
+	}
+
+	function setStatus(status){
+		this.status = status;
+	}
 
 	function getResults(){
 		return this.results;

@@ -8,8 +8,7 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 	vm.initMap = initMap;
 	vm.vidSubmit = vidSubmit;
 	vm.setVideoId = setVideoId;
-	vm.videosCollapsed = true;
-	vm.channelsCollapsed = true;
+	vm.status = ytResults.getStatus();
 	vm.chanSubmit = chanSubmit;
 	vm.chanFilter = chanFilter;
 	vm.chanClear = chanClear;
@@ -24,10 +23,34 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 	vm.chanResults = ytResults.getChanResults();
 	vm.searchAndChanFilter = searchAndChanFilter;
 	vm.saveSearch = saveSearch;
+	// vm.status.videoButtonValue = "Videos";
+	// vm.status.channelButtonValue = "Channels";
 
 	//Retrieving our saved params, if any
 	vm.params = ytSearchParams.get();
 
+	$scope.$watch('search.status.videosCollapsed', function(current, original){
+			var showText = "Show Videos",
+			hideText = "Hide Videos";
+			
+			vm.status.videoButtonValue = ytResults.checkStatus(current, original, vm.status.videoButtonValue, showText, hideText);
+			console.log(current);
+			console.log(original);
+		});
+
+	$scope.$watch('search.status.channelsCollapsed', function(current, original){
+			var showText = "Show Channels",
+			hideText = "Hide Channels";
+
+			vm.status.channelButtonValue = ytResults.checkStatus(current, original, vm.status.channelButtonValue, showText, hideText);
+			// if(current === true){
+			// 	vm.status.channelButtonValue = "Show Channels";
+			// } else {
+			// 	vm.status.channelButtonValue = "Hide Channels";
+			// }
+			console.log(current);
+			console.log(original);
+		});
 
 	function initMap() {
 		vm.map = new google.maps.Map(document.getElementById('map'), {
@@ -70,14 +93,17 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 			console.log(vm.params.prevPageToken);
 			// ytToggleResults().toggleBetween("#channel-results", "#btn-tog-channels", "Channels", "#video-results", "#btn-tog-videos", "Videos");
 			console.log(vm.searchedKeyword);
-			vm.channelsCollapsed = true;
-			vm.videosCollapsed = false;
-			var channelsBtn = document.getElementById("btn-channels"),
-			videosBtn = document.getElementById("btn-videos");
-			console.log(channelsBtn);
-			console.log(videosBtn);
-			channelsBtn.setAttribute("value", "Show Channels");
-			videosBtn.setAttribute("value", "Hide Videos");
+			vm.status.channelsCollapsed = true;
+			vm.status.videosCollapsed = false;
+
+			ytResults.setStatus(vm.status);
+			// var channelsBtn = document.getElementById("btn-channels"),
+			// videosBtn = document.getElementById("btn-videos");
+			// console.log(channelsBtn);
+			// console.log(videosBtn);
+			// channelsBtn.setAttribute("value", "Show Channels");
+			// videosBtn.setAttribute("value", "Hide Videos");
+
 			//Saving our params to our service
 			ytSearchParams.set(vm.params);
 			//Saving the results to our service
@@ -96,12 +122,15 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 			vm.chanResults = response.data.items;
 			console.log(vm.chanResults);
 			// ytToggleResults().toggleBetween("#video-results", "#btn-tog-videos", "Videos", "#channel-results", "#btn-tog-channels", "Channels");
-			vm.channelsCollapsed = false;
-			vm.videosCollapsed = true;
-			var channelsBtn = document.getElementById("btn-channels"),
-			videosBtn = document.getElementById("btn-videos");
-			videosBtn.setAttribute("value", "Show Videos");
-			channelsBtn.setAttribute("value", "Hide Channels");
+			vm.status.channelsCollapsed = false;
+			vm.status.videosCollapsed = true;
+
+			ytResults.setStatus(vm.status);
+			// var channelsBtn = document.getElementById("btn-channels"),
+			// videosBtn = document.getElementById("btn-videos");
+			// videosBtn.setAttribute("value", "Show Videos");
+			// channelsBtn.setAttribute("value", "Hide Channels");
+
 			ytResults.setChanResults(vm.chanResults);
 		})
 	}
