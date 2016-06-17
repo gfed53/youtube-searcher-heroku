@@ -34,14 +34,16 @@
 		<label for="date-after"> From: </label>
 		<input class="form-control" ng-model="search.params.after" name="date-after" type="date">
 		<label for="date-before"> To: </label>
-		<input class="form-control" ng-model="search.params.before" name="date-before" type="date"><br>
+		<input class="form-control" ng-model="search.params.before" name="date-before" type="date">
+		<div id="safe-search-wrapper">
+			<input class="btn btn-default" ng-click="search.saveSearch(search.params)" type="button" value="Save Search">
+		</div>
 		<div class="input-group">
 			<input autocomplete="on" type="text" class="form-control" ng-model="search.params.advKeyword" placeholder="Search Video..">
 			<span class="input-group-btn">
 				<input class="btn btn-default btn-go" type="submit" class="btn btn-default" value="Go!">
 			</span>
 		</div>
-		<input class="btn btn-default" ng-click="search.saveSearch(search.params)" type="button" value="Save Search">
 	</form>
 	<form id="form-channel-search" class="form-inline" ng-submit="search.chanSubmit(search.params.channel)">
 		<div class="input-group">

@@ -67,6 +67,8 @@ body #page-header #credit {
 
 #playlist #playlist-items, #playlist #past-search-items {
   list-style-type: decimal; }
+  #playlist #playlist-items .playlist-div, #playlist #past-search-items .playlist-div {
+    margin-bottom: 1em; }
 
 #playlist .btn-playlist-clear {
   margin: 2em 0; }
@@ -94,6 +96,8 @@ body #page-header #credit {
   margin-bottom: 3em; }
   #advanced-search #form-advanced-video-search {
     display: inline; }
+    #advanced-search #form-advanced-video-search #safe-search-wrapper {
+      margin: 1em; }
   #advanced-search #form-channel-search {
     margin-top: 1.5em; }
   #advanced-search .btn-clear-select {
@@ -158,7 +162,8 @@ body #page-header #credit {
     #advanced-search #form-advanced-video-search {
       display: inline; }
     #advanced-search #form-channel-search {
-      display: inline-block; }
+      display: inline-block;
+      margin-top: 0; }
   .channel-filter img {
     width: 5em; }
   .results {

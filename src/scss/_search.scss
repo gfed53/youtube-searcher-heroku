@@ -28,6 +28,9 @@
 	margin-bottom: 3em;
 	#form-advanced-video-search {
 		display: inline;
+		#safe-search-wrapper {
+			margin: 1em;
+		}
 	}
 	#form-channel-search {
 		margin-top: 1.5em;
@@ -151,6 +154,7 @@
 		}
 		#form-channel-search {
 			display: inline-block;
+			margin-top: 0;
 		}
 	}
 

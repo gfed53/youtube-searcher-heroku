@@ -1,6 +1,9 @@
 #playlist {
 	#playlist-items, #past-search-items {
 		list-style-type: decimal;
+		.playlist-div {
+			margin-bottom: 1em;
+		}
 	}
 	.btn-playlist-clear {
 		margin: 2em 0;

@@ -2,11 +2,13 @@
 	<h2>My Playlist</h2>
 	<ul id="playlist-items">
 		<li class="row" ng-repeat="item in playlist.items">
-			<div class="col-md-6">
+			<div class="col-md-2 playlist-div">
 				<a ng-click="playlist.setVideoId(item.id)" ui-sref="video({videoId: item.content.id})"><img class="my-thumbnail" ng-src="{{item.content.thumb}}" alt="image"></a>
-				{{item.name}}
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-8 playlist-div">
+				{{item.name}}		
+			</div>
+			<div class="col-md-2 playlist-div">
 				<button class="btn btn-default" ng-click="playlist.clearItem(item)">Remove</button>
 			</div>
 		</li>
@@ -15,7 +17,7 @@
 	<ul id="past-search-items" ng-if="playlist.pastSearches">
 		<li class="row" ng-repeat="search in playlist.pastSearches">
 			<div class="col-md-6">
-				<p>{{ search.name }}</p>
+				<p class="emph">{{ search.name }}</p>
 				<p>{{ search.date | date : short }}</p>
 			</div>
 			<div class="col-md-6">
