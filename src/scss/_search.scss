@@ -76,12 +76,18 @@
 		border-radius: 0.5em;
 		.tit-descrip-container {
 			z-index: 1;
+			.playlist-button-wrapper, .outer-wrapper {
+				text-align: center;
+			}
 			.result-chan-wrapper {
 					display: inline-block;
 					padding: 1em;
 					border: 1px solid white;
 					border-radius: 0.5em;
 				}
+			.playlist-button-wrapper {
+				margin: 1em;
+			}
 			.result-chan-descrip {
 				// display: inline-block;
 			}
@@ -115,7 +121,9 @@
 		}
 		.inner-result {
 			.tit-descrip-container {
-				
+				.playlist-button-wrapper, .outer-wrapper {
+				text-align: left;
+			}
 				.result-chan-descrip {
 					display: inline-block;
 				}

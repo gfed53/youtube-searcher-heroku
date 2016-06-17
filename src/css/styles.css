@@ -123,11 +123,15 @@ body #page-header #credit {
     border-radius: 0.5em; }
     .results .inner-result .tit-descrip-container {
       z-index: 1; }
+      .results .inner-result .tit-descrip-container .playlist-button-wrapper, .results .inner-result .tit-descrip-container .outer-wrapper {
+        text-align: center; }
       .results .inner-result .tit-descrip-container .result-chan-wrapper {
         display: inline-block;
         padding: 1em;
         border: 1px solid white;
         border-radius: 0.5em; }
+      .results .inner-result .tit-descrip-container .playlist-button-wrapper {
+        margin: 1em; }
     .results .inner-result h3, .results .inner-result p {
       color: white; }
     .results .inner-result h3 {
@@ -143,6 +147,8 @@ body #page-header #credit {
 @media screen and (min-width: 768px) {
   .results .result h2 {
     font-size: 2em; }
+  .results .inner-result .tit-descrip-container .playlist-button-wrapper, .results .inner-result .tit-descrip-container .outer-wrapper {
+    text-align: left; }
   .results .inner-result .tit-descrip-container .result-chan-descrip {
     display: inline-block; } }
 

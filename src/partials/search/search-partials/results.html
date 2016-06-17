@@ -12,11 +12,15 @@
 					<h3>{{result.snippet.title}}</h3>
 					<p>{{ result.snippet.description }}</p>
 					<p>Date: {{ result.snippet.publishedAt | date : 'short' }}</p>
-					<div class="result-chan-wrapper">
-						<p class="result-chan-descrip">Channel: {{ result.snippet.channelTitle }}</p>
-						<input class="btn btn-default" type="button" value="Filter" ng-click="search.searchAndChanFilter(result.snippet.channelTitle)">
+					<div class="outer-wrapper">
+						<div class="result-chan-wrapper">
+							<p class="result-chan-descrip">Channel: {{ result.snippet.channelTitle }}</p>
+							<input class="btn btn-default" type="button" value="Filter" ng-click="search.searchAndChanFilter(result.snippet.channelTitle)">
+						</div>
 					</div>
-					<input class="btn btn-default" type="button" value="Add to Playlist" ng-click="search.addToPlaylist(result.snippet.title, result.id.videoId, result.snippet.thumbnails.default.url)">
+					<div class="playlist-button-wrapper">
+						<input class="btn btn-default" type="button" value="Add to Playlist" ng-click="search.addToPlaylist(result.snippet.title, result.id.videoId, result.snippet.thumbnails.default.url)">
+					</div>
 				</div>
 				<div class="col-md-6 results-img-container">
 					<a ng-click="search.setVideoId(result.id.videoId)" ui-sref="video({videoId: result.id.videoId} )"><img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image"></a>
