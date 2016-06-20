@@ -1,10 +1,14 @@
+# Ultimate YouTube Searcher
+
 The following is taken from the "about" section of the app:
+
+## Intro
 
 Welcome to the Ultimate YouTube Searcher. The goal of this app is to allow the user to gain more freedom in searching for YouTube videos. It was originally created with all of the hardcore YouTube junkies out there in mind (myself included), but of course can be enjoyed and used by anybody.
 
 Some goals for the future are to create a fully functional playlist and to add more search options. Enjoy!
 
-Guide
+## Guide
 
 You can simply do a basic video search via the default search bar. Clicking "Toggle Advanced" brings out the advanced search parameters
 
@@ -30,12 +34,15 @@ You can also click the "Save Search" button to save and store the current search
 
 (This ends the "about" section content)
 
+## The Process
+
 This app uses CORS requests to get data from the Youtube API, and uses the iframe element to allow embedded YouTube videos within the app. Aside from working further with API hacks using AngularJS, in developing this app I was also introduced to AngularUI router, which utilizes nested states and views. This dependency is more than just a better alternative to ngView; it changes the way a website or app's structure is viewed, and promotes a more modular approach.
 
 I also began following John Papa's Style Guide for best practices in developing AngularJS projects, as I have with other projects.
 
 https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md
 
+## Resources
 
 The src directory contains the source code, while the build version is not currently distributed.
 

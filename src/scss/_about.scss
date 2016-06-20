@@ -1,6 +1,15 @@
 #about {
 	margin: 2.5em 2em 10em 2em;
 	font-weight: bold;
+	#about-intro {
+		margin: 2em 0;
+	}
+	#about-guide {
+		h2 {
+			margin-bottom: 0.5em;
+			font-size: 2em;
+		}
+	}
 }
 
 @media screen and ($tablet){
