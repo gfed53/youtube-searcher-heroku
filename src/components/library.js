@@ -16,6 +16,7 @@ function ytTrustSrc($sce){
 	}
 }
 
+//Not currently used, but useful as a snippet
 function ytToggleResults(){
 	return function(){
 
@@ -35,11 +36,8 @@ function ytToggleResults(){
 		}
 
 		function toggleBetween(target, targetBtn, targetName, sibling, siblingBtn, siblingName){
-			console.log($(target));
-			console.log($(sibling));
-			if($(target).css("display")==="block"){
+			if($(target).css('display')==='block'){
 				$(target).slideUp(400, function(){
-					console.log($(targetBtn).attr("value"));
 					checkStatus(target, targetBtn, targetName);
 					checkStatus(sibling, siblingBtn, siblingName);
 				});
@@ -56,35 +54,23 @@ function ytToggleResults(){
 		}
 
 		function checkStatus(target, targetBtn, targetName){
-			console.log($(target));
-			console.log($(target).css("display"));
-			var action = "";
-			if($(target).css("display")==="none"){
-				console.log("none?");
-				action = "Show";
+			var action = '';
+			if($(target).css('display')==='none'){
+				action = 'Show';
 			} else {
-				action = "Hide";
+				action = 'Hide';
 			}
-			$(targetBtn).attr("value", action+" "+targetName);
-			console.log($(targetBtn).attr("value"));
-			console.log($("#btn-tog-channels"));
+			$(targetBtn).attr('value', action+' '+targetName);
 		}
-
-		// function checkStatus2(status, btn, name){
-		// 	if(status){
-		// 		btn.setAttribute("value", "")
-		// 	}
-		// }
-		
 	}
 }
 
 function ytSearchYouTube($q, $http) {
 	return function(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken){
-		var url = "https://www.googleapis.com/youtube/v3/search";
+		var url = 'https://www.googleapis.com/youtube/v3/search';
 		var request = {
-			key: "AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA",
-			part: "snippet",
+			key: 'AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA',
+			part: 'snippet',
 			maxResults: 50,
 			order: order,
 			publishedAfter: publishedAfter,
@@ -94,7 +80,7 @@ function ytSearchYouTube($q, $http) {
 			locationRadius: locationRadius,
 			pageToken: pageToken,
 			q: keyword,
-			type: "video",
+			type: 'video',
 			channelId: channelId,
 			videoEmbeddable: true,
 		};
@@ -115,7 +101,6 @@ function ytSearchYouTube($q, $http) {
 			},
 			function(response){
 				alert('error');
-				console.log(response);
 			});
 		}
 	}
@@ -123,14 +108,14 @@ function ytSearchYouTube($q, $http) {
 
 function ytChanSearch($q, $http){
 	return function(channel){
-		var url = "https://www.googleapis.com/youtube/v3/search";
+		var url = 'https://www.googleapis.com/youtube/v3/search';
 		var request = {
-			key: "AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA",
-			part: "snippet",
+			key: 'AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA',
+			part: 'snippet',
 			maxResults: 50,
-			order: "relevance",
+			order: 'relevance',
 			q: channel,
-			type: "channel"
+			type: 'channel'
 		};
 		var services = {
 			getResults: getResults
@@ -148,15 +133,15 @@ function ytChanSearch($q, $http){
 				return $q.when(response);
 			},
 			function(response){
-				alert("Sorry, an error occured.");
+				alert('Sorry, an error occured.');
 			});
 		}
 	}
 }
 
 function ytChanFilter(){
-	this.id = "";
-	this.image = "";
+	this.id = '';
+	this.image = '';
 	this.set = set;
 	this.clear = clear;
 
@@ -166,8 +151,8 @@ function ytChanFilter(){
 	}
 
 	function clear(){
-		this.id = "";
-		this.image = "";
+		this.id = '';
+		this.image = '';
 	}
 
 }
@@ -175,22 +160,6 @@ function ytChanFilter(){
 function ytVideoItems(){
 	var currentVideoId;
 	var items = [
-	// {
-	// 	name: "Video 1",
-	// 	id: "dqJRoh8MnBo"
-	// },
-	// {
-	// 	name: "Video 2",
-	// 	id: "dqJRoh8MnBo"
-	// },
-	// {
-	// 	name: "Video 3",
-	// 	id: "dqJRoh8MnBo"
-	// },
-	// {
-	// 	name: "Video 4",
-	// 	id: "dqJRoh8MnBo"
-	// }
 	];
 
 	this.services = {
@@ -206,34 +175,32 @@ function ytVideoItems(){
 		var newItems = [];
 		if(localStorage.length > 0){
 			for(key in localStorage){
-				if(key.includes("uytp")){
+				if(key.includes('uytp')){
 					var item = {
 						name: key,
 						content: JSON.parse(localStorage[key])
 					}
-					console.log(item);
 					if(items.indexOf(item) === -1){
 						newItems.push(item);
 					}					
 				}
 			}
 			items = newItems;
-			console.log(items);
 		}
 		return items;
 	}
 
 	function setItem(name, id, thumb){
-		var itemName = "uytp-"+name,
+		var itemName = 'uytp-'+name,
 		content = {
 			id: id,
 			thumb: thumb
 		}
 		content = JSON.stringify(content);
-		console.log("setItem running?");
 
 		// items.push(item);
 		localStorage.setItem(itemName, content);
+		alert("Video Added!");
 	}
 
 	function clearItem(name){
@@ -242,7 +209,7 @@ function ytVideoItems(){
 
 	function clearAllItems(){
 		for(key in localStorage){
-			if(key.includes("uytp-")){
+			if(key.includes('uytp-')){
 				localStorage.removeItem(key);
 			}
 		}
@@ -291,7 +258,6 @@ function ytSearchParams(){
 		for(var item in params){
 			params[item] = newParams[item];
 		}
-		console.log(params.after);
 	}
 }
 
@@ -301,8 +267,8 @@ function ytResults(){
 	this.status = {
 		videosCollapsed: true,
 		channelsCollapsed: true,
-		videoButtonValue: "",
-		channelButtonValue: ""
+		videoButtonValue: '',
+		channelButtonValue: ''
 	}
 	this.getResults = getResults;
 	this.getChanResults = getChanResults;
@@ -313,16 +279,12 @@ function ytResults(){
 	this.checkStatus = checkStatus;
 
 	function checkStatus(newVal, oldVal, buttonValue, showText, hideText){
-
-		console.log(buttonValue);
 		if(newVal === true){
 			buttonValue = showText;
 		} else {
 			buttonValue = hideText;
 		}
-		console.log(buttonValue);
-		return buttonValue;
-		
+		return buttonValue;	
 	}
 
 	function getStatus(){
@@ -358,12 +320,9 @@ function ytSearchHistory(ytSearchParams){
 	this.clearAll = clearAll;
 
 	function get(){
-		console.log(localStorage);
 		if(localStorage.length > 0){
 			for(key in localStorage){
-				if(key.includes("uyts")){
-					console.log(key);
-					console.log(localStorage[key]);
+				if(key.includes('uyts')){
 					var obj = localStorage.getItem(key);
 					obj = JSON.parse(obj);
 					if(obj.name){
@@ -373,44 +332,39 @@ function ytSearchHistory(ytSearchParams){
 						if(obj.before != null){
 							obj.before = new Date(obj.before);
 						}
-						console.log(obj.after);
-						console.log(obj);
-					//This is here to avoid existent objects getting reappended to the array within the session when they shouldn't be
-					if(getIndexIfObjWithAttr(this.pastSearches, "name", obj.name) === -1){
-						this.pastSearches.push(obj);
+						//This is here to avoid existent objects getting reappended to the array within the session when they shouldn't be
+						if(getIndexIfObjWithAttr(this.pastSearches, 'name', obj.name) === -1){
+							this.pastSearches.push(obj);
+						}
 					}
 				}
 			}
+			return this.pastSearches;
 		}
-		return this.pastSearches;
 	}
-}
 
-function set(params){
-	console.log(params);
-	params.name = prompt("Enter a name for this saved search");
-	params.name = "uyts-"+params.name;
-	params.date = Date.now();
-	this.pastSearches.push(params);
-	localStorage.setItem(params.name, JSON.stringify(params));
-}
+	function set(params){
+		params.name = prompt('Enter a name for this saved search');
+		params.name = 'uyts-'+params.name;
+		params.date = Date.now();
+		this.pastSearches.push(params);
+		localStorage.setItem(params.name, JSON.stringify(params));
+	}
 
-function clearItem(search){
-	var searchIndex = this.pastSearches.indexOf(search);
-	this.pastSearches.splice(searchIndex, 1);
-	console.log(this.pastSearches);
-	localStorage.removeItem(search.name);
-}
+	function clearItem(search){
+		var searchIndex = this.pastSearches.indexOf(search);
+		this.pastSearches.splice(searchIndex, 1);
+		localStorage.removeItem(search.name);
+	}
 
-function clearAll(){
+	function clearAll(){
 		//Clears all past searches
 		this.pastSearches = [];
 		for(key in localStorage){
-			if(key.includes("uyts")){
+			if(key.includes('uyts')){
 				localStorage.removeItem(key);
 			}
 		}
-		console.log("should be clear now");
 	}
 
 	function getIndexIfObjWithAttr(array, attr, value) {

@@ -6,15 +6,12 @@ angular
 function PlaylistCtrl(ytVideoItems, ytSearchHistory, ytSearchParams){
 	var vm = this;
 	vm.items = ytVideoItems.services.getItems();
-	// vm.items = [];
 	vm.setVideoId = setVideoId;
 	vm.pastSearches = ytSearchHistory.get();
 	vm.grab = grab;
 	vm.clear = clear;
 	vm.clearItem = clearItem;
 	vm.clearAll = clearAll;
-	console.log(vm.pastSearches);
-	// ytVideoItems.services.clearAllItems();
 
 	function grab(search){
 		ytSearchParams.set(search);

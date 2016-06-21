@@ -5,12 +5,12 @@ angular
 
 function myVideo(){
 	return {
-		restrict: "E",
-		templateUrl: "./components/directives/my-video.html",
+		restrict: 'E',
+		templateUrl: './components/directives/my-video.html',
 		scope: true,
 		transclude: true,
 		controller: MyVideoCtrl,
-		controllerAs: "myVideo",
+		controllerAs: 'myVideo',
 		bindToController: true
 	}
 };

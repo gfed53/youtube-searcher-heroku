@@ -14,7 +14,6 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 	vm.viewVideo = false;
 	vm.filterActive = false;
 	vm.toggleAdv = toggleAdv;
-	vm.toggleResults = ytToggleResults().toggle;
 	vm.clearSelection = clearSelection;
 	vm.searchAndChanFilter = searchAndChanFilter;
 	vm.saveSearch = saveSearch;
@@ -24,27 +23,19 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 	vm.chanResults = ytResults.getChanResults();
 	vm.params = ytSearchParams.get();
 	vm.status = ytResults.getStatus();
-	
-
-	
-	
 
 	$scope.$watch('search.status.videosCollapsed', function(current, original){
-			var showText = "Show Videos",
-			hideText = "Hide Videos";
+			var showText = 'Show Videos',
+			hideText = 'Hide Videos';
 			
 			vm.status.videoButtonValue = ytResults.checkStatus(current, original, vm.status.videoButtonValue, showText, hideText);
-			console.log(current);
-			console.log(original);
 		});
 
 	$scope.$watch('search.status.channelsCollapsed', function(current, original){
-			var showText = "Show Channels",
-			hideText = "Hide Channels";
+			var showText = 'Show Channels',
+			hideText = 'Hide Channels';
 
 			vm.status.channelButtonValue = ytResults.checkStatus(current, original, vm.status.channelButtonValue, showText, hideText);
-			console.log(current);
-			console.log(original);
 		});
 
 	function initMap() {
@@ -61,7 +52,7 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 		});
 
 		vm.circle.setMap(vm.map);
-		vm.circle.addListener("center_changed", function(){
+		vm.circle.addListener('center_changed', function(){
 			vm.center = vm.circle.getCenter();
 			vm.lat = vm.center.lat();
 			vm.lng = vm.center.lng();
@@ -69,8 +60,8 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 			vm.params.lat = JSON.stringify(vm.lat);
 			vm.params.lng = JSON.stringify(vm.lng);
 			vm.params.radius = JSON.stringify(vm.radius/1000);
-			vm.params.location = vm.params.lat+","+vm.params.lng;
-			vm.params.locationRadius = vm.params.radius+"km";
+			vm.params.location = vm.params.lat+','+vm.params.lng;
+			vm.params.locationRadius = vm.params.radius+'km';
 		});
 	}
 
@@ -84,7 +75,6 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 			vm.params.prevPageToken = response.data.prevPageToken;
 			vm.status.channelsCollapsed = true;
 			vm.status.videosCollapsed = false;
-			console.log(vm.results);
 			ytResults.setStatus(vm.status);
 
 			//Saving our params to our service
@@ -105,7 +95,6 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 			vm.chanResults = response.data.items;
 			vm.status.channelsCollapsed = false;
 			vm.status.videosCollapsed = true;
-
 			ytResults.setStatus(vm.status);
 			ytResults.setChanResults(vm.chanResults);
 		})
@@ -116,47 +105,18 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 		vm.params.image = image;
 		vm.params.channelId = id;
 		vm.filterActive = true;
-		console.log(ytChanFilter.image);
 	}
 
 	function chanClear(){
 		ytChanFilter.clear();
-		vm.params.image = "";
+		vm.params.image = '';
 		vm.params.channelId = undefined;
 		vm.filterActive = false;
 	}
 
 	function toggleAdv(){
-		$("#advanced-search, #form-basic-video-search").slideToggle();
+		$('#advanced-search, #form-basic-video-search').slideToggle();
 		vm.initMap();
-	}
-
-	function toggleResults(){
-		console.log($("#btn-tog-videos"));
-		$("#video-results").slideToggle(400, function(){
-			console.log($("#video-results").css("display"));
-			if($("#video-results").css("display")==="none"){
-				$("#btn-tog-videos").attr("value", "Show Videos");
-				console.log($("#btn-tog-videos"));
-			} else {
-				console.log("is this running?");
-				$("#btn-tog-videos").attr("value", "Hide Videos");
-			}
-		});
-		
-
-	}
-
-	function toggleChanResults(){
-		$("#channel-results").slideToggle(400, function(){
-			if($("#channel-results").css("display")==="none"){
-				$("#btn-tog-channels").attr("value", "Show channels");
-			} else {
-				console.log("is this running?");
-				$("#btn-tog-channels").attr("value", "Hide channels");
-			}
-		});
-		
 	}
 
 	function clearSelection(){

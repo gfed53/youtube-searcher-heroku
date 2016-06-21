@@ -1,4 +1,4 @@
-//A directive that toggles the text of a button on click. Not currently used, but good to have.
+//A directive that toggles the text of a button on click. Not currently used, but held onto.
 angular
 .module('myApp')
 
@@ -13,7 +13,6 @@ function myShowHide(){
         link: function (scope, elem, attrs) {
             elem.bind("click", function () {
                 console.log(attrs);
-                // console.log(elem);
                 console.log('startstop clicked', elem)
                 if (elem.val().includes("Show")) {
                     console.log("hide");
