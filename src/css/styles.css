@@ -114,18 +114,21 @@ body #page-header #credit {
 .results {
   margin: 2em 0;
   transition: 1s linear all; }
+  .results #page-selector #prev-page, .results #page-selector #next-page {
+    font-size: 0.7em; }
   .results #page-selector #next-page {
     float: right; }
   .results h2, .results h3, .results .result-dir, .results .results-img-container {
     text-align: center; }
   .results h2 {
     font-size: 1.5em; }
-  .results .result {
-    margin: 3em 0; }
+  .results .results-row {
+    margin: 1em 0; }
   .results .inner-result {
-    background-color: #27ae60;
-    border: 2px solid rgba(0, 0, 0, 0.58);
-    border-radius: 0.5em; }
+    background-color: #ececec;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.58);
+    border-width: 1px 2px 0 2px; }
     .results .inner-result .tit-descrip-container {
       z-index: 1; }
       .results .inner-result .tit-descrip-container .playlist-button-wrapper, .results .inner-result .tit-descrip-container .outer-wrapper {
@@ -138,7 +141,7 @@ body #page-header #credit {
       .results .inner-result .tit-descrip-container .playlist-button-wrapper {
         margin: 1em; }
     .results .inner-result h3, .results .inner-result p {
-      color: white; }
+      color: black; }
     .results .inner-result h3 {
       font-size: 1.4em;
       font-weight: bold; }
@@ -148,6 +151,14 @@ body #page-header #credit {
       margin: 2em 0;
       height: 100%;
       width: 50%; }
+  .results .last > .inner-result {
+    border-bottom-width: 2px; }
+  .results .first > .inner-result {
+    border-top-width: 2px; }
+
+@media screen and (min-width: 350px) {
+  .results #page-selector #prev-page, .results #page-selector #next-page {
+    font-size: 1em; } }
 
 @media screen and (min-width: 768px) {
   .results .result h2 {
@@ -185,18 +196,7 @@ body #page-header #credit {
     .results h2, .results h3, .results .result-dir {
       text-align: center; }
     .results h2 {
-      font-size: 1.5em; }
-    .results .result {
-      margin: 3em 0; }
-    .results .inner-result {
-      background-color: #27ae60;
-      border: 2px solid rgba(0, 0, 0, 0.58);
-      border-radius: 0.5em; }
-      .results .inner-result h3, .results .inner-result p {
-        color: white; }
-      .results .inner-result h3 {
-        font-size: 1.4em;
-        font-weight: bold; } }
+      font-size: 1.5em; } }
 
 #item {
   margin-bottom: 15em; }

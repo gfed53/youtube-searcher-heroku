@@ -1,9 +1,9 @@
 angular
 .module('myApp')
 
-.controller('SearchCtrl', ['$scope', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytToggleResults', SearchCtrl])
+.controller('SearchCtrl', ['$scope', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', SearchCtrl])
 
-function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytToggleResults){
+function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass){
 	var vm = this;
 	vm.initMap = initMap;
 	vm.vidSubmit = vidSubmit;
@@ -18,6 +18,7 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 	vm.searchAndChanFilter = searchAndChanFilter;
 	vm.saveSearch = saveSearch;
 	vm.addToPlaylist = ytVideoItems.services.setItem;
+	vm.computeCssClass = computeCssClass;
 	//Retrieving our saved variables, if any
 	vm.results = ytResults.getResults();
 	vm.chanResults = ytResults.getChanResults();
@@ -143,4 +144,9 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 		ytSearchHistory.set(params);
 	}
 
+	function computeCssClass(first, last){
+		return ytComputeCssClass(first, last);
+	}
 };
+
+

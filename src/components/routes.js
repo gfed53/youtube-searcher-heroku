@@ -84,6 +84,6 @@ angular
 	.state(video)
 	.state(playlist)
 	.state(about)
-	.state(search);
+	.state(search)
 }])
 

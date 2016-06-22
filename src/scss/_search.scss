@@ -47,6 +47,9 @@
 
 .results {
 	#page-selector {
+		#prev-page, #next-page {
+			font-size: 0.7em;
+		}
 		#next-page {
 			float: right;
 		}
@@ -59,14 +62,15 @@
 	h2 {
 		font-size: 1.5em;
 	}
-	.result {
-		margin: 3em 0;
-
+	.results-row {
+		margin: 1em 0;
 	}
 	.inner-result {
-		background-color: rgb(39, 174, 96);
-		border: 2px solid rgba(0, 0, 0, 0.58);
-		border-radius: 0.5em;
+		background-color: rgb(236, 236, 236);
+		border-style: solid;
+		border-color: rgba(0, 0, 0, 0.58);
+		border-width: 1px 2px 0 2px;
+		// border-radius: 0.5em;
 		.tit-descrip-container {
 			z-index: 1;
 			.playlist-button-wrapper, .outer-wrapper {
@@ -85,7 +89,7 @@
 			}
 		}
 		h3, p {
-			color: white;
+			color: rgba(0, 0, 0, 1);
 		}
 		h3 {
 			font-size: 1.4em;
@@ -99,7 +103,23 @@
 			width: 50%;
 		}
 	}
+	.last > .inner-result {
+		border-bottom-width: 2px;
+	}
+	.first > .inner-result {
+		border-top-width: 2px;
+	}
 	transition: 1s linear all;
+}
+
+@media screen and ($mobile3){
+	.results {
+		#page-selector {
+			#prev-page, #next-page {
+				font-size: 1em;
+			}
+		}
+	}
 }
 
 @media screen and ($tablet){
@@ -166,22 +186,6 @@
 		}
 		h2 {
 			font-size: 1.5em;
-		}
-		.result {
-			margin: 3em 0;
-
-		}
-		.inner-result {
-			background-color: rgb(39, 174, 96);
-			border: 2px solid rgba(0, 0, 0, 0.58);
-			border-radius: 0.5em;
-			h3, p {
-				color: white;
-			}
-			h3 {
-				font-size: 1.4em;
-				font-weight: bold;
-			}
 		}
 		transition: 1s linear all;
 	}

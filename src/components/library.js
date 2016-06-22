@@ -1,9 +1,9 @@
 angular
 .module('myApp')
 .factory('ytTrustSrc', ['$sce', ytTrustSrc])
-.factory('ytToggleResults', [ytToggleResults])
 .factory('ytSearchYouTube', ['$q', '$http', ytSearchYouTube])
 .factory('ytChanSearch', ['$q', '$http', ytChanSearch])
+.factory('ytComputeCssClass', [ytComputeCssClass])
 .service('ytChanFilter', [ytChanFilter])
 .service('ytSearchParams', [ytSearchParams])
 .service('ytResults', [ytResults])
@@ -13,55 +13,6 @@ angular
 function ytTrustSrc($sce){
 	return function(src){
 		return $sce.trustAsResourceUrl(src);
-	}
-}
-
-//Not currently used, but useful as a snippet
-function ytToggleResults(){
-	return function(){
-
-		var services = {
-			toggle: toggle,
-			toggleBetween: toggleBetween,
-			checkStatus: checkStatus
-		}
-
-		return services;
-
-		function toggle(target, targetBtn, targetName){
-			$(target).slideToggle(400, function(){
-				checkStatus(target, targetBtn, targetName);
-			});
-			
-		}
-
-		function toggleBetween(target, targetBtn, targetName, sibling, siblingBtn, siblingName){
-			if($(target).css('display')==='block'){
-				$(target).slideUp(400, function(){
-					checkStatus(target, targetBtn, targetName);
-					checkStatus(sibling, siblingBtn, siblingName);
-				});
-				$(sibling).slideDown(400, function(){
-					checkStatus(target, targetBtn, targetName);
-					checkStatus(sibling, siblingBtn, siblingName);
-				});
-				
-			} else {
-				checkStatus(target, targetBtn, targetName);
-				checkStatus(sibling, siblingBtn, siblingName);
-			}
-			
-		}
-
-		function checkStatus(target, targetBtn, targetName){
-			var action = '';
-			if($(target).css('display')==='none'){
-				action = 'Show';
-			} else {
-				action = 'Hide';
-			}
-			$(targetBtn).attr('value', action+' '+targetName);
-		}
 	}
 }
 
@@ -376,6 +327,24 @@ function ytSearchHistory(ytSearchParams){
 		return -1;
 	}
 
+}
+
+function ytComputeCssClass(){
+	return function(first, last){
+		var val;
+		console.log(first);
+		console.log(last);
+		if(first){
+			console.log("should return first");
+			val = 'first';
+		} else if(last){
+			console.log("should return last");
+			val = 'last';
+		} else {
+			val = null;
+		}
+		return val;
+	}
 }
 
 
