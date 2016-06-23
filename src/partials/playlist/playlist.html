@@ -6,7 +6,7 @@
 				<a ng-click="playlist.setVideoId(item.id)" ui-sref="video({videoId: item.content.id})"><img class="my-thumbnail" ng-src="{{item.content.thumb}}" alt="image"></a>
 			</div>
 			<div class="col-md-8 playlist-div">
-				{{item.name}}		
+				<p>{{item.name}}</p>		
 			</div>
 			<div class="col-md-2 playlist-div">
 				<button class="btn btn-default" ng-click="playlist.clearItem(item)">Remove</button>

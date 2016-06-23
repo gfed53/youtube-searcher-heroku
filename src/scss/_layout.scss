@@ -8,6 +8,17 @@ html,body
 }
 
 body {
+	// #animate-view-container {
+	//     	.animate-view {
+	//     		#playlist, #results-container {
+	//     			margin: 0 3em;
+	//     		}
+	//     	}
+	//     }	
+}
+
+@media screen and ($tablet){
+	body {
 	#animate-view-container {
 	    	.animate-view {
 	    		#playlist, #results-container {
@@ -15,4 +26,5 @@ body {
 	    		}
 	    	}
 	    }	
+	}
 }

@@ -3,6 +3,9 @@
 		list-style-type: decimal;
 		.playlist-div {
 			margin-bottom: 1em;
+			p {
+				max-width: 20em;
+			}
 		}
 	}
 	.btn-playlist-clear {
