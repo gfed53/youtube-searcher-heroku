@@ -141,6 +141,9 @@
 					display: inline-block;
 				}
 			}
+			p {
+				overflow-x: auto;
+			}
 			img {
 				margin: 2em 0;
 			}

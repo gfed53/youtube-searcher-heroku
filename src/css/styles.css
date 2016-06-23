@@ -172,6 +172,8 @@ body #page-header #credit {
     text-align: left; }
   .results .inner-result .tit-descrip-container .result-chan-descrip {
     display: inline-block; }
+  .results .inner-result p {
+    overflow-x: auto; }
   .results .inner-result img {
     margin: 2em 0; } }
 

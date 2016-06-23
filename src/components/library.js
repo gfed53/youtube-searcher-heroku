@@ -142,7 +142,7 @@ function ytVideoItems(){
 	}
 
 	function setItem(name, id, thumb){
-		var itemName = 'uytp-'+name,
+		var itemName = name+'-uytp',
 		content = {
 			id: id,
 			thumb: thumb
@@ -160,7 +160,7 @@ function ytVideoItems(){
 
 	function clearAllItems(){
 		for(key in localStorage){
-			if(key.includes('uytp-')){
+			if(key.includes('uytp')){
 				localStorage.removeItem(key);
 			}
 		}
@@ -296,7 +296,7 @@ function ytSearchHistory(ytSearchParams){
 
 	function set(params){
 		params.name = prompt('Enter a name for this saved search');
-		params.name = 'uyts-'+params.name;
+		params.name = params.name+'-uyts';
 		params.date = Date.now();
 		this.pastSearches.push(params);
 		localStorage.setItem(params.name, JSON.stringify(params));
