@@ -332,13 +332,9 @@ function ytSearchHistory(ytSearchParams){
 function ytComputeCssClass(){
 	return function(first, last){
 		var val;
-		console.log(first);
-		console.log(last);
 		if(first){
-			console.log("should return first");
 			val = 'first';
 		} else if(last){
-			console.log("should return last");
 			val = 'last';
 		} else {
 			val = null;

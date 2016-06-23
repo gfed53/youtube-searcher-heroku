@@ -134,7 +134,6 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 		ytChanSearch(channel).getResults()
 		.then(function(response){
 			vm.firstChanResult = response.data.items[0];
-			console.log(vm.firstChanResult);
 			vm.chanFilter(vm.firstChanResult.id.channelId, vm.firstChanResult.snippet.thumbnails.default.url);
 			
 		})
