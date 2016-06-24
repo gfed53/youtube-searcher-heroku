@@ -3,7 +3,7 @@
 	<ul id="playlist-items">
 		<li class="row" ng-repeat="item in playlist.items">
 			<div class="col-md-2 playlist-div">
-				<a ng-click="playlist.setVideoId(item.id)" ui-sref="video({videoId: item.content.id})"><img class="my-thumbnail" ng-src="{{item.content.thumb}}" alt="image"></a>
+				<a ng-click="playlist.setVideoId(item.content.id)" ui-sref="video({videoId: item.content.id})"><img class="my-thumbnail" ng-src="{{item.content.thumb}}" alt="image"></a>
 			</div>
 			<div class="col-md-8 playlist-div">
 				<p>{{item.name}}</p>		

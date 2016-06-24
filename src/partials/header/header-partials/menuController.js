@@ -11,6 +11,7 @@ function MenuCtrl($rootScope, ytVideoItems){
 		if(toState.name === 'video'){
 			$('#video-tab').show();
 			vm.videoId = ytVideoItems.services.getVideoId();
+			console.log(vm.videoId);
 		}
 	});
 }

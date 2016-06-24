@@ -34,7 +34,7 @@
 		margin-top: 1.5em;
 	}
 
-	.btn-clear-select {
+	.btn-clear-select, .btn-toggle-map {
 		margin: 0 0 1em 0;
 	}
 }
@@ -165,7 +165,11 @@
 	#bar {
 	text-align: center;
 	}
-
+	
+	#map {
+		width: 60%;
+		margin: 0 auto;
+	}
 	#form-search {
 		margin: 2em;
 		#btn-go {

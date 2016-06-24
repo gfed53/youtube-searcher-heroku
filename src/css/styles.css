@@ -108,7 +108,7 @@ body #page-header #credit {
       margin: 1em; }
   #advanced-search #form-channel-search {
     margin-top: 1.5em; }
-  #advanced-search .btn-clear-select {
+  #advanced-search .btn-clear-select, #advanced-search .btn-toggle-map {
     margin: 0 0 1em 0; }
 
 .channel-filter img {
@@ -190,6 +190,9 @@ body #page-header #credit {
 @media screen and (min-width: 1024px) {
   #bar {
     text-align: center; }
+  #map {
+    width: 60%;
+    margin: 0 auto; }
   #form-search {
     margin: 2em; }
     #form-search #btn-go {
@@ -220,14 +223,27 @@ body #page-header #credit {
 #item {
   margin-bottom: 15em; }
 
+.view-area-header, p {
+  text-align: center; }
+
+.view-area-header {
+  font-family: "Courgette", serif; }
+
 iframe {
   display: block;
   margin: 0 auto;
-  width: 100%; }
+  width: 100%;
+  resize: both; }
 
 #choices-wrapper {
   display: block;
   text-align: center; }
+
+@media screen and (min-width: 1024px) {
+  .view-area-header {
+    font-size: 3em; }
+  iframe {
+    width: 50%; } }
 
 .scroll-top-wrapper {
   position: fixed;

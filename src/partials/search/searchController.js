@@ -107,6 +107,7 @@ function SearchCtrl($scope, $location, $anchorScroll, ytSearchYouTube, ytChanSea
 
 	function setVideoId(videoId){
 		ytVideoItems.services.setVideoId(videoId);
+		console.log(videoId);
 	}
 
 	function chanSubmit(channel){
