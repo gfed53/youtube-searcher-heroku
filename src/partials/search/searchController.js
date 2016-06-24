@@ -21,12 +21,12 @@ function SearchCtrl($scope, $location, $anchorScroll, ytSearchYouTube, ytChanSea
 	vm.computeCssClass = computeCssClass;
 	vm.scrollTo = scrollTo;
 	vm.checkScrollBtnStatus = checkScrollBtnStatus;
-	vm.offSet = false;
 	//Retrieving our saved variables, if any
 	vm.results = ytResults.getResults();
 	vm.chanResults = ytResults.getChanResults();
 	vm.params = ytSearchParams.get();
 	vm.status = ytResults.getStatus();
+	vm.offSet = checkScrollBtnStatus();
 
 	$scope.$watch('search.status.videosCollapsed', function(current, original){
 			var showText = 'Show Videos',
@@ -42,10 +42,9 @@ function SearchCtrl($scope, $location, $anchorScroll, ytSearchYouTube, ytChanSea
 			vm.status.channelButtonValue = ytResults.checkStatus(current, original, vm.status.channelButtonValue, showText, hideText);
 		});
 
-	document.onscroll = function(){
-		vm.checkScrollBtnStatus();
-	}
-	// document.documentElement.onscroll = vm.checkScrollBtnStatus();
+	// document.onscroll = function(){
+	// 	vm.checkScrollBtnStatus();
+	// }
 
 	function initMap() {
 		vm.map = new google.maps.Map(document.getElementById('map'), {
@@ -101,13 +100,13 @@ function SearchCtrl($scope, $location, $anchorScroll, ytSearchYouTube, ytChanSea
 			ytResults.setResults(vm.results);
 
 			//Autoscroll up
-			vm.scrollTo('video-results');
+			vm.scrollTo('results-container');
+			vm.offSet = true;
 		})
 	}
 
 	function setVideoId(videoId){
 		ytVideoItems.services.setVideoId(videoId);
-		console.log(videoId);
 	}
 
 	function chanSubmit(channel){
@@ -119,7 +118,8 @@ function SearchCtrl($scope, $location, $anchorScroll, ytSearchYouTube, ytChanSea
 			vm.status.videosCollapsed = true;
 			ytResults.setStatus(vm.status);
 			ytResults.setChanResults(vm.chanResults);
-			vm.scrollTo('channel-results');
+			vm.scrollTo('results-container');
+			vm.offSet = true;
 		})
 	}
 
@@ -174,9 +174,13 @@ function SearchCtrl($scope, $location, $anchorScroll, ytSearchYouTube, ytChanSea
 	}
 
 	function checkScrollBtnStatus(){
-		vm.offSet = ytScrollTo().checkScrollBtnStatus();
-		console.log(vm.offSet);
-		$scope.$apply();
+		var bool;
+		if(vm.results || vm.chanResults){
+			bool = true;
+		} else {
+			bool = false;
+		}
+		return bool;
 	}
 };
 

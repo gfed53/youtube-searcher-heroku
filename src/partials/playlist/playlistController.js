@@ -35,6 +35,5 @@ function PlaylistCtrl(ytVideoItems, ytSearchHistory, ytSearchParams){
 
 	function setVideoId(videoId){
 		ytVideoItems.services.setVideoId(videoId);
-		console.log(videoId);
 	}
 };

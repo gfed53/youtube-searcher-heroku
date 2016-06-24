@@ -222,9 +222,8 @@ body #page-header #credit {
 
 #item {
   margin-bottom: 15em; }
-
-.view-area-header, p {
-  text-align: center; }
+  #item .view-area-header, #item p {
+    text-align: center; }
 
 .view-area-header {
   font-family: "Courgette", serif; }

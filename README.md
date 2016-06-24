@@ -6,7 +6,7 @@ The following is taken from the "about" section of the app:
 
 Welcome to the Ultimate YouTube Searcher. The goal of this app is to allow the user to gain more freedom in searching for YouTube videos. It was originally created with all of the hardcore YouTube junkies out there in mind (myself included), but of course can be enjoyed and used by anybody.
 
-In the future there may be more search options available, as well as a more options while watching videos. Enjoy!
+In the future there may be more search options available, so stay tuned, and in the meantime, enjoy!
 
 ## Guide
 
