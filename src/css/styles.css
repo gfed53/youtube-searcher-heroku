@@ -220,28 +220,29 @@ body #page-header #credit {
     .results h2 {
       font-size: 1.5em; } }
 
-#item {
-  margin-bottom: 15em; }
-  #item .view-area-header, #item p {
-    text-align: center; }
+#video .view-area-header, #video p {
+  text-align: center; }
 
-.view-area-header {
+#video #item {
+  margin-bottom: 15em; }
+
+#video .view-area-header {
   font-family: "Courgette", serif; }
 
-iframe {
+#video iframe {
   display: block;
   margin: 0 auto;
   width: 100%;
   resize: both; }
 
-#choices-wrapper {
+#video #choices-wrapper {
   display: block;
   text-align: center; }
 
 @media screen and (min-width: 1024px) {
-  .view-area-header {
+  #video .view-area-header {
     font-size: 3em; }
-  iframe {
+  #video iframe {
     width: 50%; } }
 
 .scroll-top-wrapper {

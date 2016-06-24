@@ -1,34 +1,38 @@
-#item {
-	margin-bottom: 15em;
-	
+
+#video {
 	.view-area-header, p {
-	text-align: center;
-}
+		text-align: center;
+	}
+	#item {
+		margin-bottom: 15em;
+
+		
+	}
+	.view-area-header {
+		font-family: "Courgette", serif;
+	}
+
+	iframe {
+		display: block;
+		margin: 0 auto;
+		width: 100%;
+		resize: both;
+	}
+
+	#choices-wrapper {
+		display: block;
+		text-align: center;
+	}	
 }
 
-
-
-.view-area-header {
-	font-family: "Courgette", serif;
-}
-
-iframe {
-	display: block;
-	margin: 0 auto;
-	width: 100%;
-	resize: both;
-}
-
-#choices-wrapper {
-	display: block;
-	text-align: center;
-}
 
 @media screen and ($desktop){
-	.view-area-header {
-		font-size: 3em;
-	}
-	iframe {
-		width: 50%;
+	#video {
+		.view-area-header {
+			font-size: 3em;
+		}
+		iframe {
+			width: 50%;
+		}
 	}
 }
