@@ -1,9 +1,9 @@
 angular
 .module('myApp')
 
-.controller('SearchCtrl', ['$scope', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', SearchCtrl])
+.controller('SearchCtrl', ['$scope', '$location', '$anchorScroll', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', 'ytScrollTo', SearchCtrl])
 
-function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass){
+function SearchCtrl($scope, $location, $anchorScroll, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass, ytScrollTo){
 	var vm = this;
 	vm.initMap = initMap;
 	vm.vidSubmit = vidSubmit;
@@ -19,6 +19,9 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 	vm.saveSearch = saveSearch;
 	vm.addToPlaylist = ytVideoItems.services.setItem;
 	vm.computeCssClass = computeCssClass;
+	vm.scrollTo = scrollTo;
+	vm.checkScrollBtnStatus = checkScrollBtnStatus;
+	vm.offSet = false;
 	//Retrieving our saved variables, if any
 	vm.results = ytResults.getResults();
 	vm.chanResults = ytResults.getChanResults();
@@ -39,6 +42,11 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 			vm.status.channelButtonValue = ytResults.checkStatus(current, original, vm.status.channelButtonValue, showText, hideText);
 		});
 
+	document.onscroll = function(){
+		vm.checkScrollBtnStatus();
+	}
+	// document.documentElement.onscroll = vm.checkScrollBtnStatus();
+
 	function initMap() {
 		vm.map = new google.maps.Map(document.getElementById('map'), {
 			center: {lat: 39, lng: -99},
@@ -54,6 +62,14 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 
 		vm.circle.setMap(vm.map);
 		vm.circle.addListener('center_changed', function(){
+			update();
+		});
+
+		vm.circle.addListener('radius_changed', function(){
+			update();
+		});
+
+		function update(){
 			vm.center = vm.circle.getCenter();
 			vm.lat = vm.center.lat();
 			vm.lng = vm.center.lng();
@@ -63,7 +79,8 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 			vm.params.radius = JSON.stringify(vm.radius/1000);
 			vm.params.location = vm.params.lat+','+vm.params.lng;
 			vm.params.locationRadius = vm.params.radius+'km';
-		});
+			$scope.$apply();
+		}
 	}
 
 	function vidSubmit(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken){
@@ -82,6 +99,9 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 			ytSearchParams.set(vm.params);
 			//Saving the results to our service
 			ytResults.setResults(vm.results);
+
+			//Autoscroll up
+			vm.scrollTo('video-results');
 		})
 	}
 
@@ -98,6 +118,7 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 			vm.status.videosCollapsed = true;
 			ytResults.setStatus(vm.status);
 			ytResults.setChanResults(vm.chanResults);
+			vm.scrollTo('channel-results');
 		})
 	}
 
@@ -145,6 +166,16 @@ function SearchCtrl($scope, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearc
 
 	function computeCssClass(first, last){
 		return ytComputeCssClass(first, last);
+	}
+
+	function scrollTo(scrollLocation){
+		ytScrollTo().scrollToElement(scrollLocation);
+	}
+
+	function checkScrollBtnStatus(){
+		vm.offSet = ytScrollTo().checkScrollBtnStatus();
+		console.log(vm.offSet);
+		$scope.$apply();
 	}
 };
 

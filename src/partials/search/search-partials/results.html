@@ -1,10 +1,12 @@
 <div uib-collapse="search.status.videosCollapsed" id="video-results" class="results">
 	<h2>Video Results</h2>
 	<h2>We found {{ search.results.length }} results.</h2>
-	<form id="page-selector">
-			<button class="btn btn-default" id="prev-page" ng-click="search.vidSubmit(search.params.searchedKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius, search.params.prevPageToken)"><span class="glyphicon glyphicon-chevron-left"></span></button>
-			<button class="btn btn-default" id="next-page" ng-click="search.vidSubmit(search.params.searchedKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius, search.params.nextPageToken)"><span class="glyphicon glyphicon-chevron-right"></span></button>
-	</form>
+	<div id="page-selector-container">
+		<form id="page-selector">
+				<button class="btn btn-default" id="prev-page" ng-click="search.vidSubmit(search.params.searchedKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius, search.params.prevPageToken)"><span class="glyphicon glyphicon-chevron-left"></span></button>
+				<button class="btn btn-default" id="next-page" ng-click="search.vidSubmit(search.params.searchedKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius, search.params.nextPageToken)"><span class="glyphicon glyphicon-chevron-right"></span></button>
+		</form>
+	</div>
 	<div class="row results-row">
 		<div class="result" ng-repeat="result in search.results" ng-class="search.computeCssClass($first, $last)">
 			<div class="row inner-result">

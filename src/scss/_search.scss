@@ -46,14 +46,25 @@
 }
 
 .results {
-	#page-selector {
-		#prev-page, #next-page {
-			font-size: 0.7em;
-		}
-		#next-page {
-			float: right;
+	#page-selector-container {
+		position: relative;
+		#page-selector {
+			position: fixed;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: 2;
+			height: 2em;
+			#prev-page, #next-page {
+				font-size: 0.7em;
+			}
+			#next-page {
+				float: right;
+			}
 		}
 	}
+
 	margin: 2em 0;
 	h2, h3, .result-dir, .results-img-container {
 		text-align: center;

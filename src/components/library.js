@@ -4,6 +4,7 @@ angular
 .factory('ytSearchYouTube', ['$q', '$http', ytSearchYouTube])
 .factory('ytChanSearch', ['$q', '$http', ytChanSearch])
 .factory('ytComputeCssClass', [ytComputeCssClass])
+.factory('ytScrollTo', ['$location', '$anchorScroll', ytScrollTo])
 .service('ytChanFilter', [ytChanFilter])
 .service('ytSearchParams', [ytSearchParams])
 .service('ytResults', [ytResults])
@@ -340,6 +341,41 @@ function ytComputeCssClass(){
 			val = null;
 		}
 		return val;
+	}
+}
+
+function ytScrollTo($location, $anchorScroll){
+	return function(scrollLocation){
+		var services = {
+			scrollToElement: scrollToElement,
+			checkScrollBtnStatus: checkScrollBtnStatus
+		}
+
+		return services;
+
+		function scrollToElement(scrollLocation){
+			var element = document.getElementById(scrollLocation);
+			if(element){
+				console.log("element exists, should scroll");
+				$location.hash(scrollLocation);
+				$anchorScroll();
+			} else {
+				console.log("scroll to top");
+				window.scroll(0, 0);
+			}
+		}
+
+		function checkScrollBtnStatus(){
+			console.log("scroll class running?");
+			// var scrollBtn = document.getElementById('scroll-top-wrapper');
+			if(window.scrollY > 100){
+				console.log("button should show");
+				return true;
+			} else {
+				console.log("now should be hidden");
+				return false;
+			}
+		}	
 	}
 }
 
