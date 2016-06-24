@@ -356,23 +356,17 @@ function ytScrollTo($location, $anchorScroll){
 		function scrollToElement(scrollLocation){
 			var element = document.getElementById(scrollLocation);
 			if(element){
-				console.log("element exists, should scroll");
 				$location.hash(scrollLocation);
 				$anchorScroll();
 			} else {
-				console.log("scroll to top");
 				window.scroll(0, 0);
 			}
 		}
 
 		function checkScrollBtnStatus(){
-			console.log("scroll class running?");
-			// var scrollBtn = document.getElementById('scroll-top-wrapper');
 			if(window.scrollY > 100){
-				console.log("button should show");
 				return true;
 			} else {
-				console.log("now should be hidden");
 				return false;
 			}
 		}	

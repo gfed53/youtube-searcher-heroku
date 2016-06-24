@@ -42,10 +42,6 @@ function SearchCtrl($scope, $location, $anchorScroll, ytSearchYouTube, ytChanSea
 			vm.status.channelButtonValue = ytResults.checkStatus(current, original, vm.status.channelButtonValue, showText, hideText);
 		});
 
-	// document.onscroll = function(){
-	// 	vm.checkScrollBtnStatus();
-	// }
-
 	function initMap() {
 		vm.map = new google.maps.Map(document.getElementById('map'), {
 			center: {lat: 39, lng: -99},

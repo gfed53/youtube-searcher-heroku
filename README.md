@@ -2,9 +2,9 @@
 
 The following is taken from the "about" section of the app:
 
-## Intro
+## Introduction
 
-Welcome to the Ultimate YouTube Searcher. The goal of this app is to allow the user to gain more freedom in searching for YouTube videos. It was originally created with all of the hardcore YouTube junkies out there in mind (myself included), but of course can be enjoyed and used by anybody.
+Welcome to the Ultimate YouTube Searcher! The goal of this app is to allow the user to gain more freedom in searching for YouTube videos. It was originally created with all of the hardcore YouTube junkies out there in mind (myself included), but of course can be enjoyed and used by anybody.
 
 In the future there may be more search options available, so stay tuned, and in the meantime, enjoy!
 
@@ -30,6 +30,14 @@ You can remove the filter by clicking the "Clear Filter" button.
 
 
 You can also click the "Save Search" button to save and store the current search parameters as an item in your local storage. You can find all of your saved past searches in the "Personal" view. In the "Saved Searches" area of this view, clicking the "Grab!" button will activate the respective saved search and fill the current parameters. Note that this doesn't immediately initialize the search, so you can tweak any of the parameters as you wish before making your search.
+
+## Known Bugs/Issues
+
+Map sometimes doesn't expand as it should. Known work-around: Refresh page.
+
+When selecting from saved searches/playlist, sometimes wonky things can occur. Known work-around: Refresh page
+
+The date input still doesn't work in Mozilla Firefox. C'mon Mozilla, work with me here!
 
 
 (This ends the "about" section content)
