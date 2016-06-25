@@ -1,24 +1,38 @@
 body {
 	#page-header {
-		h1 {
-			text-align: center;
-			font-size: 2.5em;
-			font-weight: bold;
-			font-family: "Helvetica Neue", sans-serif;
-			padding: 1em;
-			color: #ecf0f1;
-			background-color: #27ae60;
-			border-radius: 0.4em;
+		#header-wrapper {
+			// position: relative;
+			h1 {
+				text-align: center;
+				font-size: 2.5em;
+				font-weight: bold;
+				font-family: "Helvetica Neue", sans-serif;
+				padding: 1em;
+				color: #ecf0f1;
+				background-color: #27ae60;
+				border-radius: 0.4em;
 
-		}
-		#credit {
-			text-align: right;
-			margin: 2em;
-			margin-right: 3em;
-			font-weight: bold;
+			}
+			#credit {
+				text-align: right;
+				margin: 2em;
+				margin-right: 3em;
+				font-weight: bold;
 
+			}
 		}
 	}
+	.fixed {
+			//Just for testing
+			position: fixed;
+		    top: 0;
+		    bottom: 0;
+		    left: 0;
+		    right: 0;
+		    background-color: white;
+		    z-index: 9999;
+		    // height: 19.2em;
+		}
 }
 
 @media screen and ($tablet){
