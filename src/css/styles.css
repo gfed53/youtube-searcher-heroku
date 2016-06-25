@@ -134,7 +134,7 @@ body .fixed {
     position: relative; }
     .results #page-selector-container #page-selector {
       position: fixed;
-      top: 0;
+      top: 42px;
       right: 0;
       bottom: 0;
       left: 0;
