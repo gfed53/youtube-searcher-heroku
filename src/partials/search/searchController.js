@@ -27,6 +27,7 @@ function SearchCtrl($scope, $location, $anchorScroll, ytSearchYouTube, ytChanSea
 	vm.params = ytSearchParams.get();
 	vm.status = ytResults.getStatus();
 	vm.offSet = checkScrollBtnStatus();
+	console.log(vm.offSet);
 
 	$scope.$watch('search.status.videosCollapsed', function(current, original){
 			var showText = 'Show Videos',
@@ -171,7 +172,7 @@ function SearchCtrl($scope, $location, $anchorScroll, ytSearchYouTube, ytChanSea
 
 	function checkScrollBtnStatus(){
 		var bool;
-		if(vm.results || vm.chanResults){
+		if(vm.results.length>0 || vm.chanResults.length>0){
 			bool = true;
 		} else {
 			bool = false;

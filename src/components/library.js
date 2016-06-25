@@ -5,6 +5,7 @@ angular
 .factory('ytChanSearch', ['$q', '$http', ytChanSearch])
 .factory('ytComputeCssClass', [ytComputeCssClass])
 .factory('ytScrollTo', ['$location', '$anchorScroll', ytScrollTo])
+.factory('ytFixedHeader', ytFixedHeader)
 .service('ytChanFilter', [ytChanFilter])
 .service('ytSearchParams', [ytSearchParams])
 .service('ytResults', [ytResults])
@@ -370,6 +371,47 @@ function ytScrollTo($location, $anchorScroll){
 				return false;
 			}
 		}	
+	}
+}
+
+function ytFixedHeader(){
+	return function(){
+		var services = {
+			fixedAdjustMenu: fixedAdjustMenu
+		}
+
+		return services;
+		
+		function fixedAdjustMenu(){
+			var pageHeader = document.getElementById('page-header'),
+			main = document.getElementById('header-wrapper'),
+			header = document.getElementById('mast-header'),
+			credit = document.getElementById('credit'),
+			content = document.getElementById('animate-view-container'),
+			menu = document.getElementById('header-menu'),
+			style = window.getComputedStyle(credit),
+			creditMargin = style.getPropertyValue('margin-top');
+			creditMargin = creditMargin.replace('px', '');
+			creditMargin = creditMargin*2;
+			console.log(menu.offsetHeight); //42
+
+			console.log(creditMargin); //56
+			var headerHeight = header.offsetHeight+20+credit.offsetHeight+creditMargin,
+			menuHeight = menu.offsetHeight;
+			console.log(main.offsetHeight); //156
+			var height = main.offsetHeight;
+			document.onscroll = function(){
+				if(window.scrollY > headerHeight){
+					menu.style.height = menuHeight+'px';
+					menu.className = 'fixed';
+					content.style.top = menu.style.height;
+					console.log(menu.style.height);
+				} else {
+					menu.className = '';
+				}
+				// console.log(window.scrollY); //202
+			}
+		}
 	}
 }
 
