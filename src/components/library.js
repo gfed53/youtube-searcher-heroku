@@ -404,10 +404,11 @@ function ytFixedHeader(){
 				if(window.scrollY > headerHeight){
 					menu.style.height = menuHeight+'px';
 					menu.className = 'fixed';
-					content.style.top = menu.style.height;
+					content.style.top = menuHeight+3+'px';
 					console.log(menu.style.height);
 				} else {
 					menu.className = '';
+					content.style.top = '0';
 				}
 				// console.log(window.scrollY); //202
 			}
