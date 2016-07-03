@@ -396,7 +396,6 @@ function ytFixedHeader(){
 			creditMargin = creditMargin*2;
 			var headerHeight = header.offsetHeight+20+credit.offsetHeight+creditMargin,
 			menuHeight = menu.offsetHeight; //42px
-			console.log(menuHeight); 
 			var height = main.offsetHeight;
 			document.onscroll = function(){
 				if(window.scrollY > headerHeight){

@@ -1,7 +1,6 @@
 body {
 	#page-header {
 		#header-wrapper {
-			// position: relative;
 			h1 {
 				text-align: center;
 				font-size: 2.5em;
@@ -23,7 +22,6 @@ body {
 		}
 	}
 	.fixed {
-			//Just for testing
 			position: fixed;
 		    top: 0;
 		    bottom: 0;
@@ -31,7 +29,6 @@ body {
 		    right: 0;
 		    background-color: white;
 		    z-index: 9999;
-		    // height: 19.2em;
 		}
 }
 

@@ -103,11 +103,6 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 				vm.offSet = true;
 			}, 1000);
 			
-		}).then(function(){
-			// console.log("runs");
-			//Autoscroll up
-			// vm.scrollTo('results-container');
-			// vm.offSet = true;
 		})
 	}
 

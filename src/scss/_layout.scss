@@ -4,10 +4,6 @@ html,body
     height: 100%;
     margin: 0px;
     padding: 0px;
-    #animate-view-container {
-    	//For testing
-    	// top: 19.2em;
-    }
 }
 
 @media screen and ($tablet){
@@ -19,14 +15,5 @@ html,body
 	    		}
 	    	}
 	    }	
-	}
-}
-
-//Testing
-@media screen and ($desktop){
-	body {
-		#animate-view-container {
-			// top: 19.2em;
-		}
 	}
 }
