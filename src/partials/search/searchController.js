@@ -1,9 +1,9 @@
 angular
 .module('myApp')
 
-.controller('SearchCtrl', ['$scope', '$location', '$anchorScroll', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', 'ytScrollTo', SearchCtrl])
+.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$anchorScroll', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', 'ytScrollTo', SearchCtrl])
 
-function SearchCtrl($scope, $location, $anchorScroll, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass, ytScrollTo){
+function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass, ytScrollTo){
 	var vm = this;
 	vm.initMap = initMap;
 	vm.vidSubmit = vidSubmit;
@@ -27,7 +27,8 @@ function SearchCtrl($scope, $location, $anchorScroll, ytSearchYouTube, ytChanSea
 	vm.params = ytSearchParams.get();
 	vm.status = ytResults.getStatus();
 	vm.offSet = checkScrollBtnStatus();
-	console.log(vm.offSet);
+
+	$location.url('/search');
 
 	$scope.$watch('search.status.videosCollapsed', function(current, original){
 			var showText = 'Show Videos',
@@ -96,9 +97,17 @@ function SearchCtrl($scope, $location, $anchorScroll, ytSearchYouTube, ytChanSea
 			//Saving the results to our service
 			ytResults.setResults(vm.results);
 
+			// Autoscroll up
+			$timeout(function(){
+				vm.scrollTo('scroll-point');
+				vm.offSet = true;
+			}, 1000);
+			
+		}).then(function(){
+			// console.log("runs");
 			//Autoscroll up
-			vm.scrollTo('results-container');
-			vm.offSet = true;
+			// vm.scrollTo('results-container');
+			// vm.offSet = true;
 		})
 	}
 
@@ -115,8 +124,11 @@ function SearchCtrl($scope, $location, $anchorScroll, ytSearchYouTube, ytChanSea
 			vm.status.videosCollapsed = true;
 			ytResults.setStatus(vm.status);
 			ytResults.setChanResults(vm.chanResults);
-			vm.scrollTo('results-container');
-			vm.offSet = true;
+			$timeout(function(){
+				vm.scrollTo('scroll-point');
+				vm.offSet = true;
+			}, 1000);
+			
 		})
 	}
 

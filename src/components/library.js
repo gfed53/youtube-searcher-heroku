@@ -355,6 +355,7 @@ function ytScrollTo($location, $anchorScroll){
 		return services;
 
 		function scrollToElement(scrollLocation){
+			$anchorScroll.yOffset = 45;
 			var element = document.getElementById(scrollLocation);
 			if(element){
 				$location.hash(scrollLocation);
@@ -393,24 +394,19 @@ function ytFixedHeader(){
 			creditMargin = style.getPropertyValue('margin-top');
 			creditMargin = creditMargin.replace('px', '');
 			creditMargin = creditMargin*2;
-			console.log(menu.offsetHeight); //42
-
-			console.log(creditMargin); //56
 			var headerHeight = header.offsetHeight+20+credit.offsetHeight+creditMargin,
-			menuHeight = menu.offsetHeight;
-			console.log(main.offsetHeight); //156
+			menuHeight = menu.offsetHeight; //42px
+			console.log(menuHeight); 
 			var height = main.offsetHeight;
 			document.onscroll = function(){
 				if(window.scrollY > headerHeight){
 					menu.style.height = menuHeight+'px';
 					menu.className = 'fixed';
 					content.style.top = menuHeight+3+'px';
-					console.log(menu.style.height);
 				} else {
 					menu.className = '';
 					content.style.top = '0';
 				}
-				// console.log(window.scrollY); //202
 			}
 		}
 	}

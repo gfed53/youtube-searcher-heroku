@@ -75,8 +75,7 @@ angular
 			'results@search': {
 				templateUrl: './partials/search/search-partials/results.html'
 			}
-		},
-		
+		}
 	}
 
 	$stateProvider
