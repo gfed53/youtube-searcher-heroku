@@ -151,7 +151,6 @@ function ytVideoItems(){
 		}
 		content = JSON.stringify(content);
 
-		// items.push(item);
 		localStorage.setItem(itemName, content);
 		alert("Video Added!");
 	}
@@ -198,10 +197,12 @@ function ytSearchParams(){
 		nextPageToken: undefined,
 		name: undefined,
 		date: undefined
-	};
+	},
+	dirty = false;
 
 	this.get = get;
 	this.set = set;
+	this.check = check;
 
 	function get(){
 		return params;
@@ -210,6 +211,15 @@ function ytSearchParams(){
 	function set(newParams){
 		for(var item in params){
 			params[item] = newParams[item];
+		}
+	}
+
+	function check(callback){
+		for(var item in params){
+			if(params[item]){
+				callback();
+				break;
+			}
 		}
 	}
 }

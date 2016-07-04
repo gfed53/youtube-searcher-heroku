@@ -27,6 +27,11 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 	vm.params = ytSearchParams.get();
 	vm.status = ytResults.getStatus();
 	vm.offSet = checkScrollBtnStatus();
+	//Automatically switching to advanced search view if we do have any defined params in service
+	$timeout(function(){
+		ytSearchParams.check(vm.toggleAdv);
+	});
+	
 
 	$location.url('/search');
 
@@ -91,9 +96,6 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 			vm.status.channelsCollapsed = true;
 			vm.status.videosCollapsed = false;
 			ytResults.setStatus(vm.status);
-
-			//Saving our params to our service
-			ytSearchParams.set(vm.params);
 			//Saving the results to our service
 			ytResults.setResults(vm.results);
 
@@ -143,6 +145,7 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 	}
 
 	function toggleAdv(){
+		console.log('toggle adv');
 		$('#advanced-search, #form-basic-video-search').slideToggle();
 		vm.initMap();
 	}
