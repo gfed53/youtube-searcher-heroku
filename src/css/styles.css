@@ -126,6 +126,8 @@ body .fixed {
     margin-top: 1.5em; }
   #advanced-search #save-search-wrapper {
     margin: 1em; }
+  #advanced-search #video-search-wrapper {
+    margin-bottom: 1em; }
   #advanced-search .btn-clear-select, #advanced-search .btn-toggle-map {
     margin: 0 0 1em 0; }
 

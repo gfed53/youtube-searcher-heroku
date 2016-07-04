@@ -132,6 +132,7 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 		vm.params.image = image;
 		vm.params.channelId = id;
 		vm.filterActive = true;
+		vm.scrollTo('form-advanced-video-search');
 	}
 
 	function chanClear(){
