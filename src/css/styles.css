@@ -113,10 +113,19 @@ body .fixed {
   margin-bottom: 3em; }
   #advanced-search #form-advanced-video-search {
     display: inline; }
-    #advanced-search #form-advanced-video-search #safe-search-wrapper {
-      margin: 1em; }
+    #advanced-search #form-advanced-video-search .cluster {
+      vertical-align: middle;
+      display: inline-block; }
+      #advanced-search #form-advanced-video-search .cluster .sub-cluster {
+        margin: 1em 0; }
+        #advanced-search #form-advanced-video-search .cluster .sub-cluster label {
+          text-align: left; }
+        #advanced-search #form-advanced-video-search .cluster .sub-cluster select {
+          text-align: right; }
   #advanced-search #form-channel-search {
     margin-top: 1.5em; }
+  #advanced-search #save-search-wrapper {
+    margin: 1em; }
   #advanced-search .btn-clear-select, #advanced-search .btn-toggle-map {
     margin: 0 0 1em 0; }
 

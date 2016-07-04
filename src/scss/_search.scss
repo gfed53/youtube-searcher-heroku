@@ -26,14 +26,26 @@
 	margin-bottom: 3em;
 	#form-advanced-video-search {
 		display: inline;
-		#safe-search-wrapper {
-			margin: 1em;
+		.cluster {
+			vertical-align: middle;
+			display: inline-block;
+			.sub-cluster {
+				margin: 1em 0;
+				label {
+					text-align: left;
+				}
+				select {
+					text-align: right;
+				}
+			}
 		}
 	}
 	#form-channel-search {
 		margin-top: 1.5em;
 	}
-
+	#save-search-wrapper {
+			margin: 1em;
+	}
 	.btn-clear-select, .btn-toggle-map {
 		margin: 0 0 1em 0;
 	}
