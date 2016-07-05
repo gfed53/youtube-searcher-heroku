@@ -216,7 +216,7 @@ function ytSearchParams(){
 
 	function check(callback){
 		for(var item in params){
-			if(params[item]){
+			if(params[item] && item != 'keyword'){
 				callback();
 				break;
 			}
