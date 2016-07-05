@@ -30,6 +30,7 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 	//Automatically switching to advanced search view if we have any defined params in service
 	$timeout(function(){
 		ytSearchParams.check(vm.toggleAdv);
+		console.log(vm.params);
 	});
 	
 
@@ -91,6 +92,7 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 		ytSearchYouTube(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken).getResults()
 		.then(function(response){
 			vm.results = response.data.items;
+			// console.log(vm.results);
 			vm.params.nextPageToken = response.data.nextPageToken;
 			vm.params.prevPageToken = response.data.prevPageToken;
 			vm.status.channelsCollapsed = true;
@@ -110,6 +112,7 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 
 	function setVideoId(videoId){
 		ytVideoItems.services.setVideoId(videoId);
+		// ytResults.setCurrentVideo(results, videoId);
 	}
 
 	function chanSubmit(channel){

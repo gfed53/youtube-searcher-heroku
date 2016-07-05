@@ -1,15 +1,21 @@
 
 #video {
-	.view-area-header, p {
+	.view-area-header, .video-title, p {
 		text-align: center;
 	}
 	#item {
+		margin-top: 3em;
 		margin-bottom: 15em;
 
 		
 	}
 	.view-area-header {
 		font-family: "Courgette", serif;
+	}
+
+	.video-title {
+		margin: 1em;
+		font-weight: bold;
 	}
 
 	iframe {

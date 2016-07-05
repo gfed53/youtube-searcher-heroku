@@ -240,14 +240,19 @@ body .fixed {
     .results h2 {
       font-size: 1.5em; } }
 
-#video .view-area-header, #video p {
+#video .view-area-header, #video .video-title, #video p {
   text-align: center; }
 
 #video #item {
+  margin-top: 3em;
   margin-bottom: 15em; }
 
 #video .view-area-header {
   font-family: "Courgette", serif; }
+
+#video .video-title {
+  margin: 1em;
+  font-weight: bold; }
 
 #video iframe {
   display: block;

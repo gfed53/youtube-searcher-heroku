@@ -3,6 +3,7 @@ angular
 .factory('ytTrustSrc', ['$sce', ytTrustSrc])
 .factory('ytSearchYouTube', ['$q', '$http', ytSearchYouTube])
 .factory('ytChanSearch', ['$q', '$http', ytChanSearch])
+.factory('ytCurrentVideo', ['$q', '$http', ytCurrentVideo])
 .factory('ytComputeCssClass', [ytComputeCssClass])
 .factory('ytScrollTo', ['$location', '$anchorScroll', ytScrollTo])
 .factory('ytFixedHeader', ytFixedHeader)
@@ -110,6 +111,35 @@ function ytChanFilter(){
 
 }
 
+function ytCurrentVideo($q, $http){
+	return function(id){
+		var url = "https://www.googleapis.com/youtube/v3/videos",
+		request = {
+			key: 'AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA',
+			part: 'snippet',
+			id: id
+		},
+		services = {
+			getVideo: getVideo
+		};
+		return services;
+
+		function getVideo(){
+			return $http({
+				method: 'GET',
+				url: url,
+				params: request
+			})
+			.then(function(response){
+				return $q.when(response);
+			},
+			function(response){
+				alert('Sorry, an error occured.');
+			});	
+		}	
+	}
+}
+
 function ytVideoItems(){
 	var currentVideoId;
 	var items = [
@@ -198,6 +228,8 @@ function ytSearchParams(){
 		name: undefined,
 		date: undefined
 	},
+	//Only used for check()
+	advParams = ['advKeyword', 'channel', 'channelId', 'image', 'order', 'after', 'before', 'safeSearch', 'location', 'locationRadius', 'lat', 'lng', 'radius'],
 	dirty = false;
 
 	this.get = get;
@@ -216,9 +248,13 @@ function ytSearchParams(){
 
 	function check(callback){
 		for(var item in params){
-			if(params[item] && item != 'keyword'){
-				callback();
-				break;
+			if(params[item]){
+				for(var i=0; i<advParams.length; i++){
+					if(item === advParams[i]){
+						callback();
+						return;
+					}
+				}
 			}
 		}
 	}
@@ -227,6 +263,7 @@ function ytSearchParams(){
 function ytResults(){
 	this.results = [];
 	this.chanResults = [];
+	this.currentVideo;
 	this.status = {
 		videosCollapsed: true,
 		channelsCollapsed: true,
@@ -240,6 +277,8 @@ function ytResults(){
 	this.getStatus = getStatus;
 	this.setStatus = setStatus;
 	this.checkStatus = checkStatus;
+	// this.setCurrentVideo = setCurrentVideo;
+	// this.getCurrentVideo = getCurrentVideo;
 
 	function checkStatus(newVal, oldVal, buttonValue, showText, hideText){
 		if(newVal === true){
