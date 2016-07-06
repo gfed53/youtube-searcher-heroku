@@ -260,8 +260,6 @@ body .fixed {
 #video .channel-title {
   display: inline-block;
   margin-right: 1em; }
-  #video .channel-title span {
-    font-size: 1.2em; }
 
 #video iframe {
   display: block;

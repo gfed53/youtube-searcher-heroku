@@ -30,7 +30,7 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 	//Automatically switching to advanced search view if we have any defined params in service
 	$timeout(function(){
 		ytSearchParams.check(vm.toggleAdv);
-		console.log(vm.params);
+		// console.log(vm.params);
 	});
 	
 
@@ -112,7 +112,6 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 
 	function setVideoId(videoId){
 		ytVideoItems.services.setVideoId(videoId);
-		// ytResults.setCurrentVideo(results, videoId);
 	}
 
 	function chanSubmit(channel){

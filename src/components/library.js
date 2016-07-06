@@ -307,8 +307,6 @@ function ytResults(){
 	this.getStatus = getStatus;
 	this.setStatus = setStatus;
 	this.checkStatus = checkStatus;
-	// this.setCurrentVideo = setCurrentVideo;
-	// this.getCurrentVideo = getCurrentVideo;
 
 	function checkStatus(newVal, oldVal, buttonValue, showText, hideText){
 		if(newVal === true){
@@ -376,7 +374,7 @@ function ytSearchHistory(ytSearchParams){
 	}
 
 	function set(params){
-		params.name = prompt('Enter a name for this saved search');
+		params.name = prompt('Enter a name for this saved search..');
 		params.name = params.name+'-uyts';
 		params.date = Date.now();
 		this.pastSearches.push(params);
