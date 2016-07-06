@@ -4,6 +4,7 @@ angular
 .factory('ytSearchYouTube', ['$q', '$http', ytSearchYouTube])
 .factory('ytChanSearch', ['$q', '$http', ytChanSearch])
 .factory('ytCurrentVideo', ['$q', '$http', ytCurrentVideo])
+.factory('ytCurrentChannel', ['$q', '$http', ytCurrentChannel])
 .factory('ytComputeCssClass', [ytComputeCssClass])
 .factory('ytScrollTo', ['$location', '$anchorScroll', ytScrollTo])
 .factory('ytFixedHeader', ytFixedHeader)
@@ -125,6 +126,35 @@ function ytCurrentVideo($q, $http){
 		return services;
 
 		function getVideo(){
+			return $http({
+				method: 'GET',
+				url: url,
+				params: request
+			})
+			.then(function(response){
+				return $q.when(response);
+			},
+			function(response){
+				alert('Sorry, an error occured.');
+			});	
+		}	
+	}
+}
+
+function ytCurrentChannel($q, $http){
+	return function(id){
+		var url = "https://www.googleapis.com/youtube/v3/channels",
+		request = {
+			key: 'AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA',
+			part: 'snippet',
+			id: id
+		},
+		services = {
+			getChannel: getChannel
+		};
+		return services;
+
+		function getChannel(){
 			return $http({
 				method: 'GET',
 				url: url,

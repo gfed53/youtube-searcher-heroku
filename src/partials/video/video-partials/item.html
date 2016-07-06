@@ -1,3 +1,7 @@
 <h3 class="video-title">{{ video.item.snippet.title }}</h3>
 <my-video></my-video>
 <p class="video-desc">{{ video.item.snippet.description }}</p>
+<div class="channel-info">
+<p class="channel-title">Channel: <span> {{ video.item.snippet.channelTitle }}</span></p>
+<button class="btn btn-default" ng-click="video.getChannel(video.item.snippet.channelId)">Filter</button>
+</div>

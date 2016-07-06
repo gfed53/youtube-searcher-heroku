@@ -254,6 +254,15 @@ body .fixed {
   margin: 1em;
   font-weight: bold; }
 
+#video .channel-info {
+  text-align: center; }
+
+#video .channel-title {
+  display: inline-block;
+  margin-right: 1em; }
+  #video .channel-title span {
+    font-size: 1.2em; }
+
 #video iframe {
   display: block;
   margin: 0 auto;
