@@ -7,7 +7,8 @@ angular
 .factory('ytCurrentChannel', ['$q', '$http', ytCurrentChannel])
 .factory('ytComputeCssClass', [ytComputeCssClass])
 .factory('ytScrollTo', ['$location', '$anchorScroll', ytScrollTo])
-.factory('ytFixedHeader', ytFixedHeader)
+.factory('ytFixedHeader', [ytFixedHeader])
+.factory('ytInitMap', [ytInitMap])
 .service('ytChanFilter', [ytChanFilter])
 .service('ytSearchParams', [ytSearchParams])
 .service('ytResults', [ytResults])
@@ -39,6 +40,7 @@ function ytSearchYouTube($q, $http) {
 			channelId: channelId,
 			videoEmbeddable: true,
 		};
+
 		var services = {
 			getResults: getResults
 		};
@@ -51,7 +53,6 @@ function ytSearchYouTube($q, $http) {
 				params: request
 			})
 			.then(function(response){
-				var results = response;
 				return $q.when(response);
 			},
 			function(response){
@@ -487,6 +488,42 @@ function ytFixedHeader(){
 		}
 	}
 }
+
+function ytInitMap(){
+	return function(callback){
+		var map = new google.maps.Map(document.getElementById('map'), {
+			center: {lat: 39, lng: -99},
+			zoom: 4
+		});
+
+		var circle = new google.maps.Circle({
+			center: {lat: 39, lng: -99},
+			radius: 100000,
+			editable: true,
+			draggable: true
+		});
+
+		circle.setMap(map);
+		circle.addListener('center_changed', function(){
+			callback();
+		});
+
+		circle.addListener('radius_changed', function(){
+			callback();
+		});
+
+		var services = {
+			map: map,
+			circle: circle
+		}
+
+		return services;
+	}
+}
+
+
+
+
 
 
 

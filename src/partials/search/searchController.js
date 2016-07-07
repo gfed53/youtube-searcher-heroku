@@ -1,9 +1,9 @@
 angular
 .module('myApp')
 
-.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$anchorScroll', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', 'ytScrollTo', SearchCtrl])
+.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$anchorScroll', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', SearchCtrl])
 
-function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass, ytScrollTo){
+function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass, ytScrollTo, ytInitMap){
 	var vm = this;
 	vm.initMap = initMap;
 	vm.vidSubmit = vidSubmit;
@@ -51,26 +51,30 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 		});
 
 	function initMap() {
-		vm.map = new google.maps.Map(document.getElementById('map'), {
-			center: {lat: 39, lng: -99},
-			zoom: 4
-		});
+		// vm.map = new google.maps.Map(document.getElementById('map'), {
+		// 	center: {lat: 39, lng: -99},
+		// 	zoom: 4
+		// });
 
-		vm.circle = new google.maps.Circle({
-			center: {lat: 39, lng: -99},
-			radius: 100000,
-			editable: true,
-			draggable: true
-		});
+		// vm.circle = new google.maps.Circle({
+		// 	center: {lat: 39, lng: -99},
+		// 	radius: 100000,
+		// 	editable: true,
+		// 	draggable: true
+		// });
 
-		vm.circle.setMap(vm.map);
-		vm.circle.addListener('center_changed', function(){
-			update();
-		});
+		// vm.circle.setMap(vm.map);
+		// vm.circle.addListener('center_changed', function(){
+		// 	update();
+		// });
 
-		vm.circle.addListener('radius_changed', function(){
-			update();
-		});
+		// vm.circle.addListener('radius_changed', function(){
+		// 	update();
+		// });
+
+		vm.mapObj = ytInitMap(update);
+		vm.map = vm.mapObj.map;
+		vm.circle = vm.mapObj.circle;
 
 		function update(){
 			vm.center = vm.circle.getCenter();
@@ -92,7 +96,6 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 		ytSearchYouTube(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken).getResults()
 		.then(function(response){
 			vm.results = response.data.items;
-			// console.log(vm.results);
 			vm.params.nextPageToken = response.data.nextPageToken;
 			vm.params.prevPageToken = response.data.prevPageToken;
 			vm.status.channelsCollapsed = true;
