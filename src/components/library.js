@@ -8,6 +8,7 @@ angular
 .factory('ytComputeCssClass', [ytComputeCssClass])
 .factory('ytScrollTo', ['$location', '$anchorScroll', ytScrollTo])
 .factory('ytFixedHeader', [ytFixedHeader])
+.factory('ytCheckScrollBtnStatus', [ytCheckScrollBtnStatus])
 .factory('ytInitMap', [ytInitMap])
 .service('ytChanFilter', [ytChanFilter])
 .service('ytSearchParams', [ytSearchParams])
@@ -486,6 +487,18 @@ function ytFixedHeader(){
 				}
 			}
 		}
+	}
+}
+
+function ytCheckScrollBtnStatus(){
+	return function(videoResults, channelResults){
+		var bool;
+		if(videoResults.length>0 || channelResults.length>0){
+			bool = true;
+		} else {
+			bool = false;
+		}
+		return bool;
 	}
 }
 

@@ -1,9 +1,9 @@
 angular
 .module('myApp')
 
-.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$anchorScroll', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', SearchCtrl])
+.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$anchorScroll', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', 'ytCheckScrollBtnStatus', SearchCtrl])
 
-function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass, ytScrollTo, ytInitMap){
+function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus){
 	var vm = this;
 	vm.initMap = initMap;
 	vm.vidSubmit = vidSubmit;
@@ -20,17 +20,15 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 	vm.addToPlaylist = ytVideoItems.services.setItem;
 	vm.computeCssClass = computeCssClass;
 	vm.scrollTo = scrollTo;
-	vm.checkScrollBtnStatus = checkScrollBtnStatus;
 	//Retrieving our saved variables, if any
 	vm.results = ytResults.getResults();
 	vm.chanResults = ytResults.getChanResults();
 	vm.params = ytSearchParams.get();
 	vm.status = ytResults.getStatus();
-	vm.offSet = checkScrollBtnStatus();
+	vm.offSet = ytCheckScrollBtnStatus(vm.results, vm.chanResults);
 	//Automatically switching to advanced search view if we have any defined params in service
 	$timeout(function(){
 		ytSearchParams.check(vm.toggleAdv);
-		// console.log(vm.params);
 	});
 	
 
@@ -51,27 +49,6 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 		});
 
 	function initMap() {
-		// vm.map = new google.maps.Map(document.getElementById('map'), {
-		// 	center: {lat: 39, lng: -99},
-		// 	zoom: 4
-		// });
-
-		// vm.circle = new google.maps.Circle({
-		// 	center: {lat: 39, lng: -99},
-		// 	radius: 100000,
-		// 	editable: true,
-		// 	draggable: true
-		// });
-
-		// vm.circle.setMap(vm.map);
-		// vm.circle.addListener('center_changed', function(){
-		// 	update();
-		// });
-
-		// vm.circle.addListener('radius_changed', function(){
-		// 	update();
-		// });
-
 		vm.mapObj = ytInitMap(update);
 		vm.map = vm.mapObj.map;
 		vm.circle = vm.mapObj.circle;
@@ -150,6 +127,7 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 	}
 
 	function toggleAdv(){
+		//Refactor(jQ, directive)
 		$('#advanced-search, #form-basic-video-search').slideToggle();
 		vm.initMap();
 	}
@@ -183,16 +161,6 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 
 	function scrollTo(scrollLocation){
 		ytScrollTo().scrollToElement(scrollLocation);
-	}
-
-	function checkScrollBtnStatus(){
-		var bool;
-		if(vm.results.length>0 || vm.chanResults.length>0){
-			bool = true;
-		} else {
-			bool = false;
-		}
-		return bool;
 	}
 };
 
