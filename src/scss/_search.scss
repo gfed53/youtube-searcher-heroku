@@ -21,8 +21,17 @@
 		display: block;
 }
 
-#advanced-search {
+.hidden {
 	display: none;
+}
+
+#form-basic-video-search,
+#advanced-search {
+	transition: 500ms linear all;
+}
+
+#advanced-search {
+	// display: none;
 	margin-bottom: 3em;
 	#form-advanced-video-search {
 		display: inline;
@@ -196,7 +205,7 @@
 		margin: 1em;
 	}
 	#advanced-search {
-		display: none;
+		// display: none;
 		margin-bottom: 3em;
 		#form-advanced-video-search {
 			display: inline;

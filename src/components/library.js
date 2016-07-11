@@ -262,11 +262,15 @@ function ytSearchParams(){
 	},
 	//Only used for check()
 	advParams = ['advKeyword', 'channel', 'channelId', 'image', 'order', 'after', 'before', 'safeSearch', 'location', 'locationRadius', 'lat', 'lng', 'radius'],
-	dirty = false;
+	type = {
+		basic: true,
+		advanced: false
+	};
 
 	this.get = get;
 	this.set = set;
-	this.check = check;
+	this.getSearchType = getSearchType;
+	this.setSearchType = setSearchType;
 
 	function get(){
 		return params;
@@ -289,6 +293,14 @@ function ytSearchParams(){
 				}
 			}
 		}
+	}
+
+	function getSearchType(){
+		return type;
+	}
+
+	function setSearchType(type){
+		type = type;
 	}
 }
 
@@ -473,6 +485,7 @@ function ytFixedHeader(){
 			creditMargin = style.getPropertyValue('margin-top');
 			creditMargin = creditMargin.replace('px', '');
 			creditMargin = creditMargin*2;
+			//20 is a number acquired from trial and error in finding a smooth transition between static to fixed nav bar.
 			var headerHeight = header.offsetHeight+20+credit.offsetHeight+creditMargin,
 			menuHeight = menu.offsetHeight; //42px
 			var height = main.offsetHeight;

@@ -1,4 +1,4 @@
-<form id="form-basic-video-search" class="form-inline" ng-submit="search.vidSubmit(search.params.keyword)">
+<form my-content-toggle="search.type.basic" id="form-basic-video-search" class="form-inline" ng-submit="search.vidSubmit(search.params.keyword)">
 	<div class="input-group">
 		<input type="text" class="form-control" ng-model="search.params.keyword" placeholder="Search Video..">
 		<span class="input-group-btn">
@@ -9,7 +9,7 @@
 <div class="button-wrapper">
 	<input class="btn btn-default" type="button" ng-click="search.toggleAdv()" value="Toggle Advanced">
 </div>
-<div id="advanced-search">
+<div my-content-toggle="search.type.advanced" id="advanced-search">
 	<div id="map-wrapper">
 		<div id="map"></div>
 		<span>({{ search.params.lat | number: 0 }}, {{ search.params.lng | number: 0}})</span>

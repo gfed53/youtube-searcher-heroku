@@ -21,14 +21,16 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 	vm.computeCssClass = computeCssClass;
 	vm.scrollTo = scrollTo;
 	//Retrieving our saved variables, if any
+	vm.type = ytSearchParams.getSearchType();
 	vm.results = ytResults.getResults();
 	vm.chanResults = ytResults.getChanResults();
 	vm.params = ytSearchParams.get();
 	vm.status = ytResults.getStatus();
 	vm.offSet = ytCheckScrollBtnStatus(vm.results, vm.chanResults);
-	//Automatically switching to advanced search view if we have any defined params in service
+
+	//If advanced view is active when revisiting state, we need to initMap() on ctrl start
 	$timeout(function(){
-		ytSearchParams.check(vm.toggleAdv);
+		vm.initMap();
 	});
 	
 
@@ -128,8 +130,16 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 
 	function toggleAdv(){
 		//Refactor(jQ, directive)
-		$('#advanced-search, #form-basic-video-search').slideToggle();
-		vm.initMap();
+		// $('#advanced-search, #form-basic-video-search').slideToggle();
+		console.log(vm.type);
+		vm.type.basic = !vm.type.basic;
+		vm.type.advanced = !vm.type.advanced;
+		ytSearchParams.setSearchType(vm.type);
+		console.log(vm.type);
+		// vm.initMap();
+		$timeout(function(){
+			vm.initMap();
+		});
 	}
 
 	function clearSelection(){
