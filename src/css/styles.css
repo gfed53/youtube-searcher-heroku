@@ -319,18 +319,6 @@ body .fixed {
 .my-thumbnail {
   width: 5em; }
 
-#form-basic-video-search.ng-enter,
-#form-basic-video-search.ng-leave.ng-leave-active,
-#advanced-search.ng-enter,
-#advanced-search.ng-leave.ng-leave-active {
-  opacity: 0; }
-
-#form-basic-video-search.ng-leave,
-#form-basic-video-search.ng-enter.ng-enter-active,
-#advanced-search.ng-leave,
-#advanced-search.ng-enter.ng-enter-active {
-  opacity: 1; }
-
 #results.ng-enter,
 #results.ng-leave.ng-leave-active {
   opacity: 0; }

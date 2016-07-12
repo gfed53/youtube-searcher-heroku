@@ -262,9 +262,9 @@ function ytSearchParams(){
 	},
 	//Only used for check()
 	advParams = ['advKeyword', 'channel', 'channelId', 'image', 'order', 'after', 'before', 'safeSearch', 'location', 'locationRadius', 'lat', 'lng', 'radius'],
-	type = {
-		basic: true,
-		advanced: false
+	_type_ = {
+		basic: false,
+		advanced: true
 	};
 
 	this.get = get;
@@ -296,11 +296,11 @@ function ytSearchParams(){
 	}
 
 	function getSearchType(){
-		return type;
+		return _type_;
 	}
 
 	function setSearchType(type){
-		type = type;
+		_type_ = type;
 	}
 }
 

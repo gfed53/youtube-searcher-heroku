@@ -1,21 +1,3 @@
-//Search Bars
-
-#form-basic-video-search.ng-enter,
-#form-basic-video-search.ng-leave.ng-leave-active,
-#advanced-search.ng-enter,
-#advanced-search.ng-leave.ng-leave-active {
-	// margin-right: 500em;
-	opacity: 0;
-}
-
-#form-basic-video-search.ng-leave,
-#form-basic-video-search.ng-enter.ng-enter-active,
-#advanced-search.ng-leave,
-#advanced-search.ng-enter.ng-enter-active {
-	// margin-right: 0;
-	opacity: 1;
-}
-
 //Results
 #results.ng-enter,
 #results.ng-leave.ng-leave-active {

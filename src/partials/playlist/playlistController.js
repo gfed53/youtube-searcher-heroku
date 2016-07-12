@@ -1,9 +1,9 @@
 angular
 .module('myApp')
 
-.controller('PlaylistCtrl', ['$state', 'ytVideoItems', 'ytSearchHistory', 'ytSearchParams', PlaylistCtrl])
+.controller('PlaylistCtrl', ['$state', '$timeout', 'ytVideoItems', 'ytSearchHistory', 'ytSearchParams', PlaylistCtrl])
 
-function PlaylistCtrl($state, ytVideoItems, ytSearchHistory, ytSearchParams){
+function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchParams){
 	var vm = this;
 	vm.items = ytVideoItems.services.getItems();
 	vm.setVideoId = setVideoId;
@@ -14,8 +14,14 @@ function PlaylistCtrl($state, ytVideoItems, ytSearchHistory, ytSearchParams){
 	vm.clearAll = clearAll;
 
 	function grab(search){
+		var type = {
+			basic: true,
+			advanced: false
+		};
 		ytSearchParams.set(search);
+		ytSearchParams.setSearchType(type);
 		$state.go('search');
+		
 	}
 
 	function clear(search){

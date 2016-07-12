@@ -129,14 +129,9 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 	}
 
 	function toggleAdv(){
-		//Refactor(jQ, directive)
-		// $('#advanced-search, #form-basic-video-search').slideToggle();
-		console.log(vm.type);
 		vm.type.basic = !vm.type.basic;
 		vm.type.advanced = !vm.type.advanced;
 		ytSearchParams.setSearchType(vm.type);
-		console.log(vm.type);
-		// vm.initMap();
 		$timeout(function(){
 			vm.initMap();
 		});
