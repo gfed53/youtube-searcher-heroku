@@ -13,8 +13,6 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	vm.clearItem = clearItem;
 	vm.clearAllVideos = clearAllVideos;
 	vm.clearAllSearches = clearAllSearches;
-	console.log(vm.pastSearches);
-	console.log(vm.items);
 
 	function grab(search){
 		var type = {

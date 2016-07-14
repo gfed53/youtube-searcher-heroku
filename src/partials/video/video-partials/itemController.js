@@ -22,9 +22,7 @@ function ItemCtrl($state, $stateParams, ytCurrentVideo, ytCurrentChannel, ytResu
 	function getVideoItem(id){
 		ytCurrentVideo(id).getVideo()
 		.then(function(response){
-			// console.log(response);
 			vm.item = response.data.items[0];
-			// console.log(vm.item);
 		})
 	}
 
@@ -32,7 +30,6 @@ function ItemCtrl($state, $stateParams, ytCurrentVideo, ytCurrentChannel, ytResu
 		ytCurrentChannel(videoId).getChannel()
 		.then(function(response){
 			vm.channel = response.data.items[0];
-			// console.log(vm.channel);
 			vm.params.channelId = vm.channel.id;
 			vm.params.image = vm.channel.snippet.thumbnails.default.url;
 			ytSearchParams.set(vm.params);
