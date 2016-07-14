@@ -11,7 +11,10 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	vm.grab = grab;
 	vm.clear = clear;
 	vm.clearItem = clearItem;
-	vm.clearAll = clearAll;
+	vm.clearAllVideos = clearAllVideos;
+	vm.clearAllSearches = clearAllSearches;
+	console.log(vm.pastSearches);
+	console.log(vm.items);
 
 	function grab(search){
 		var type = {
@@ -28,7 +31,7 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 		ytSearchHistory.clearItem(search);
 	}
 
-	function clearAll(){
+	function clearAllSearches(){
 		vm.pastSearches = [];
 		ytSearchHistory.clearAll();
 	}
@@ -37,6 +40,11 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 		var itemIndex = vm.items.indexOf(item);
 		vm.items.splice(itemIndex, 1);
 		ytVideoItems.services.clearItem(item.name);
+	}
+
+	function clearAllVideos(){
+		vm.items = [];
+		ytVideoItems.services.clearAllItems();
 	}
 
 	function setVideoId(videoId){

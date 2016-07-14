@@ -12,9 +12,11 @@
 <div uib-collapse="search.type.advanced" id="advanced-search">
 	<div id="map-wrapper">
 		<div id="map"></div>
-		<span>({{ search.params.lat | number: 0 }}, {{ search.params.lng | number: 0}})</span>
-		<input class="btn btn-default btn-clear-select" type="button" ng-click="search.clearSelection()" value="Clear Selection">
-		<span>{{ search.params.radius | number: 0 }}km</span>
+		<div id="map-hud" ng-if="search.params.location">
+			<span>({{ search.params.lat | number: 0 }}, {{ search.params.lng | number: 0}})</span>
+			<input class="btn btn-default btn-clear-select" type="button" ng-click="search.clearSelection()" value="Clear Selection">
+			<span>{{ search.params.radius | number: 0 }}km</span>
+		</div>
 	</div>
 	<form id="form-advanced-video-search" class="form-inline" ng-submit="search.vidSubmit(search.params.advKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius)">
 		<div class="cluster">

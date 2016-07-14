@@ -222,6 +222,7 @@ function ytVideoItems(){
 	}
 
 	function clearAllItems(){
+		items = [];
 		for(key in localStorage){
 			if(key.includes('uytp')){
 				localStorage.removeItem(key);
@@ -383,8 +384,8 @@ function ytSearchHistory(ytSearchParams){
 					}
 				}
 			}
-			return this.pastSearches;
 		}
+		return this.pastSearches;
 	}
 
 	function set(params){

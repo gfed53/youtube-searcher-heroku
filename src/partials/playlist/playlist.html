@@ -1,30 +1,39 @@
 <div id="playlist">
-	<h2>My Playlist</h2>
-	<ul id="playlist-items">
-		<li class="row" ng-repeat="item in playlist.items">
-			<div class="col-md-2 playlist-div">
-				<a ng-click="playlist.setVideoId(item.content.id)" ui-sref="video({videoId: item.content.id})"><img class="my-thumbnail" ng-src="{{item.content.thumb}}" alt="image"></a>
-			</div>
-			<div class="col-md-8 playlist-div">
-				<p>{{item.name}}</p>		
-			</div>
-			<div class="col-md-2 playlist-div">
-				<button class="btn btn-default" ng-click="playlist.clearItem(item)">Remove</button>
-			</div>
-		</li>
-	</ul>
+	<h2>Saved Videos</h2>
+	<div id="video-items-container" ng-if="playlist.items.length > 0">
+		<ul id="playlist-items">
+			<li class="row" ng-repeat="item in playlist.items">
+				<div class="col-md-2 playlist-div">
+					<a ng-click="playlist.setVideoId(item.content.id)" ui-sref="video({videoId: item.content.id})"><img class="my-thumbnail" ng-src="{{item.content.thumb}}" alt="image"></a>
+				</div>
+				<div class="col-md-8 playlist-div">
+					<p>{{item.name}}</p>		
+				</div>
+				<div class="col-md-2 playlist-div">
+					<button class="btn btn-default" ng-click="playlist.clearItem(item)">Remove</button>
+				</div>
+			</li>
+		</ul>
+		<button ng-click="playlist.clearAllVideos()" class="btn btn-default btn-playlist-clear">Clear Videos</button>
+	</div>
+	<p ng-if="playlist.items.length === 0">No saved videos present. See the "About" page for more info on how to save video.</p>
 	<h2>Saved Searches</h2>
-	<ul id="past-search-items" ng-if="playlist.pastSearches">
-		<li class="row" ng-repeat="search in playlist.pastSearches">
-			<div class="col-md-6">
-				<p class="emph">{{ search.name }}</p>
-				<p>{{ search.date | date : short }}</p>
-			</div>
-			<div class="col-md-6">
-				<button ng-click="playlist.grab(search)" class="btn btn-default">Grab!</button>
-				<button ng-click="playlist.clear(search)" class="btn btn-default">Remove</button>
-			</div>
-		</li>
-	</ul>
-	<button ng-click="playlist.clearAll()" class="btn btn-default btn-playlist-clear">Clear History</button>
+	<div id="past-search-container"  ng-if="playlist.pastSearches.length > 0">
+		<ul id="past-search-items">
+			<li class="row" ng-repeat="search in playlist.pastSearches">
+				<div class="col-md-6">
+					<p class="emph">{{ search.name }}</p>
+					<p>{{ search.date | date : short }}</p>
+				</div>
+				<div class="col-md-6">
+					<button ng-click="playlist.grab(search)" class="btn btn-default">Grab!</button>
+					<button ng-click="playlist.clear(search)" class="btn btn-default">Remove</button>
+				</div>
+			</li>
+		</ul>
+		<button ng-click="playlist.clearAllSearches()" class="btn btn-default btn-playlist-clear">Clear History</button>
+	</div>
+	<p ng-if="playlist.pastSearches.length === 0">No saved searches present. See the "About" page for more info on how to save searches.</p>
 </div>
+
+
