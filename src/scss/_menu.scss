@@ -1,13 +1,17 @@
 #menu {
-	font-size: 0.8em;
+	font-size: 0.7em;
 	#video-tab {
 		display: none;
 	}
 }
 
-@media screen and ($mobile2){
+.nav>li>a {
+		padding: 10px 8px;
+	}
+
+@media screen and ($mobile4){
 	#menu {
-		font-size: 1.2em;
+		font-size: 0.8em;
 	}
 	
 }
