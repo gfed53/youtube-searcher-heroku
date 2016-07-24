@@ -469,32 +469,56 @@ function ytScrollTo($location, $anchorScroll){
 
 function ytFixedHeader(){
 	return function(){
+		var pageHeader,
+		main,
+		header,
+		credit,
+		content,
+		menu,
+		menuUl,
+		style,
+		creditMargin,
+		headerHeight,
+		menuHeight,
+		height;
+
+
 		var services = {
-			fixedAdjustMenu: fixedAdjustMenu
+			fixedAdjustMenu: fixedAdjustMenu,
+			init: init
 		}
 
 		return services;
 		
 		function fixedAdjustMenu(){
-			var pageHeader = document.getElementById('page-header'),
-			main = document.getElementById('header-wrapper'),
-			header = document.getElementById('mast-header'),
-			credit = document.getElementById('credit'),
-			content = document.getElementById('animate-view-container'),
-			menu = document.getElementById('header-menu'),
-			style = window.getComputedStyle(credit),
+			pageHeader = document.getElementById('page-header');
+			main = document.getElementById('header-wrapper');
+			header = document.getElementById('mast-header');
+			credit = document.getElementById('credit');
+			content = document.getElementById('animate-view-container');
+			menu = document.getElementById('header-menu');
+			menuUl = document.getElementById('menu');
+			style = window.getComputedStyle(credit);
 			creditMargin = style.getPropertyValue('margin-top');
 			creditMargin = creditMargin.replace('px', '');
 			creditMargin = creditMargin*2;
 			//20 is a number acquired from trial and error in finding a smooth transition between static to fixed nav bar.
-			var headerHeight = header.offsetHeight+20+credit.offsetHeight+creditMargin,
-			menuHeight = menu.offsetHeight; //42px
-			var height = main.offsetHeight;
+			headerHeight = header.offsetHeight+20+credit.offsetHeight+creditMargin;
+			menuHeight = menuUl.offsetHeight;
+			height = main.offsetHeight;
+		}
+
+		function init(){
+			fixedAdjustMenu();
+			window.addEventListener('resize', function(){
+				fixedAdjustMenu();
+			});
 			document.onscroll = function(){
 				if(window.scrollY > headerHeight){
 					menu.style.height = menuHeight+'px';
 					menu.className = 'fixed';
 					content.style.top = menuHeight+3+'px';
+					// console.log('scrolling down');
 				} else {
 					menu.className = '';
 					content.style.top = '0';

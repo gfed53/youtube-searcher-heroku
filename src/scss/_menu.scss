@@ -1,4 +1,4 @@
-#menu {
+#header-menu {
 	font-size: 0.7em;
 	#video-tab {
 		display: none;
@@ -10,14 +10,14 @@
 	}
 
 @media screen and ($mobile4){
-	#menu {
+	#header-menu {
 		font-size: 0.8em;
 	}
 	
 }
 
 @media screen and ($desktop){
-	#menu {
+	#header-menu {
 		font-size: 1em;
 	}
 }

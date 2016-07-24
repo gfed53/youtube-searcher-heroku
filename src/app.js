@@ -10,7 +10,9 @@ angular
 .run(['$timeout', 'ytFixedHeader', '$rootScope', function($timeout, ytFixedHeader, $rootScope){
 	
 	$timeout(function(){
-		ytFixedHeader().fixedAdjustMenu();
+		// ytFixedHeader().fixedAdjustMenu();
+		ytFixedHeader().init();
+
 
 	}, 1000);
 
