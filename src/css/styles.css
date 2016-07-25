@@ -54,7 +54,7 @@ body .fixed {
   position: fixed;
   top: 0;
   bottom: 0;
-  left: 15px;
+  left: 0;
   right: 0;
   background-color: white;
   z-index: 9999; }
@@ -74,6 +74,9 @@ body .fixed {
 
 .nav > li > a {
   padding: 10px 8px; }
+
+.tabs-adjust {
+  padding-left: 15px; }
 
 @media screen and (min-width: 364px) {
   #header-menu {

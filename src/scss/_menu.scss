@@ -6,8 +6,12 @@
 }
 
 .nav>li>a {
-		padding: 10px 8px;
-	}
+	padding: 10px 8px;
+}
+
+.tabs-adjust {
+	padding-left: 15px;
+}
 
 @media screen and ($mobile4){
 	#header-menu {

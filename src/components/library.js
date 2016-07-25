@@ -476,6 +476,7 @@ function ytFixedHeader(){
 		content,
 		menu,
 		menuUl,
+		menuUlclass,
 		style,
 		creditMargin,
 		headerHeight,
@@ -498,6 +499,7 @@ function ytFixedHeader(){
 			content = document.getElementById('animate-view-container');
 			menu = document.getElementById('header-menu');
 			menuUl = document.getElementById('menu');
+			menuUlclass = menuUl.className;
 			style = window.getComputedStyle(credit);
 			creditMargin = style.getPropertyValue('margin-top');
 			creditMargin = creditMargin.replace('px', '');
@@ -518,10 +520,11 @@ function ytFixedHeader(){
 					menu.style.height = menuHeight+'px';
 					menu.className = 'fixed';
 					content.style.top = menuHeight+3+'px';
-					// console.log('scrolling down');
+					menuUl.className = menuUlclass+' tabs-adjust';
 				} else {
 					menu.className = '';
 					content.style.top = '0';
+					menuUl.className = menuUlclass;
 				}
 			}
 		}
