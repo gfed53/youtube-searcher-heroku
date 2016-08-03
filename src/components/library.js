@@ -1,7 +1,7 @@
 angular
 .module('myApp')
 .factory('ytTrustSrc', ['$sce', ytTrustSrc])
-.factory('ytSearchYouTube', ['$q', '$http', ytSearchYouTube])
+.factory('ytSearchYouTube', ['$q', '$http', 'ytTranslate', ytSearchYouTube])
 .factory('ytChanSearch', ['$q', '$http', ytChanSearch])
 .factory('ytCurrentVideo', ['$q', '$http', ytCurrentVideo])
 .factory('ytCurrentChannel', ['$q', '$http', ytCurrentChannel])
@@ -24,8 +24,9 @@ function ytTrustSrc($sce){
 	}
 }
 
-function ytSearchYouTube($q, $http) {
+function ytSearchYouTube($q, $http, ytTranslate) {
 	return function(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken){
+		
 		var url = 'https://www.googleapis.com/youtube/v3/search';
 		var request = {
 			key: 'AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA',
@@ -45,7 +46,9 @@ function ytSearchYouTube($q, $http) {
 		};
 
 		var services = {
+			// checkTrans: checkTrans,
 			getResults: getResults
+			// transAndResults: transAndResults
 		};
 		return services;
 
@@ -62,6 +65,26 @@ function ytSearchYouTube($q, $http) {
 				alert('error');
 			});
 		}
+
+		// function checkTrans(){
+		// 	if(lang){
+		// 		ytTranslate.translate(keyword, lang)
+		// 		.then(function(response){
+		// 			return $q.when(response);
+		// 		});
+		// 	} else {
+		// 		return $q;
+		// 	}
+		// }
+
+		// function transAndResults(){
+		// 	checkTrans().then(function(response){
+		// 		if(response){
+		// 			request.q = response.data.text[0];
+		// 		}
+		// 		getResults();
+		// 	});
+		// }
 	}
 };
 
@@ -579,6 +602,17 @@ function ytInitMap(){
 
 function ytTranslate($http, $q){
 
+	var langs = [{
+		label: "Spanish",
+		value: "es"
+	}, {
+		label: "Russian",
+		value: "ru"
+	}, {
+		label: "Japanese",
+		value: "jp"
+	}];
+
 	function translate(text, lang){
 		console.log('running');
 		var url = 'https://translate.yandex.net/api/v1.5/tr.json/translate',
@@ -644,6 +678,7 @@ function ytTranslate($http, $q){
 		// return tagList;
 	}
 
+	this.langs = langs;
 	this.translate = translate;
 	this.translateAll = translateAll;
 	this.getTagList = getTagList;

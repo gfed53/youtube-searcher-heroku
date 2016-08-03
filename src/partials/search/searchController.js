@@ -27,17 +27,8 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 	vm.params = ytSearchParams.get();
 	vm.status = ytResults.getStatus();
 	vm.offSet = ytCheckScrollBtnStatus(vm.results, vm.chanResults);
-
-	vm.langs = [{
-		label: "Spanish",
-		value: "es"
-	}, {
-		label: "Russian",
-		value: "ru"
-	}, {
-		label: "Japanese",
-		value: "jp"
-	}];
+	vm.langs = ytTranslate.langs;
+	vm.translate = translate;
 
 	//If advanced view is active when revisiting state, we need to initMap() on ctrl start
 	$timeout(function(){
@@ -177,6 +168,15 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 
 	function scrollTo(scrollLocation){
 		ytScrollTo().scrollToElement(scrollLocation);
+	}
+
+	function translate(keyword, lang){
+		console.log(keyword);
+		console.log(lang);
+		ytTranslate.translate(keyword, lang)
+		.then(function(response){
+			vm.params.advKeyword = response.data.text[0];
+		});
 	}
 };
 

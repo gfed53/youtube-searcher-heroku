@@ -49,31 +49,34 @@
 		</div>
 		<div class="cluster">
 			<div class="sub-cluster row">
-				<div class="col-md-4">
+				<div class="col-md-2">
 					<label for="date-after"> From: </label>	
 				</div>
-				<div class="col-md-8">
+				<div class="col-md-10">
 					<input class="form-control" ng-model="search.params.after" name="date-after" type="date">
 				</div>
 			</div>
 			<div class="sub-cluster row">
-				<div class="col-md-4">
+				<div class="col-md-2">
 					<label for="date-before"> To: </label>
 				</div>
-				<div class="col-md-8">
+				<div class="col-md-10">
 					<input class="form-control" ng-model="search.params.before" name="date-before" type="date">
 				</div>
 			</div>
 		</div>
-	<div class="row">
-		<div class="col-md-4">
-			<label for="translate">Translate to: </label>
+		<div id="translate-wrapper" class="cluster">
+			<div class=" sub-cluster row">
+				<div class="col-md-4">
+					<label for="translate">Translate Keyword: </label>
+				</div>
+				<div class="col-md-8">
+					<select name="translate"  class="form-control" id="" ng-model="search.params.lang" ng-options="item.label for item in search.langs"></select>
+				</div>
+			</div>
+			<div><input class="btn btn-default btn-go" type="button" ng-click="search.translate(search.params.advKeyword, search.params.lang.value)" value="Translate!"></div>
 		</div>
-		<div class="col-md-8">
-			<select name="translate"  class="form-control" id="" ng-model="search.params.translate" ng-options="item.label for item in search.langs"></select>
-		</div>
-		<pre>{{ search.params.translate }}</pre>
-	</div>
+	<!-- <pre>{{ search.params.lang.value }}</pre> -->
 		<div id="video-search-wrapper">
 			<div class="input-group input-group-lg">
 				<input autocomplete="on" type="text" class="form-control" ng-model="search.params.advKeyword" placeholder="Search Video..">
