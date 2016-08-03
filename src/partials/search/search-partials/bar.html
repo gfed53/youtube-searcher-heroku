@@ -65,7 +65,15 @@
 				</div>
 			</div>
 		</div>
-
+	<div class="row">
+		<div class="col-md-4">
+			<label for="translate">Translate to: </label>
+		</div>
+		<div class="col-md-8">
+			<select name="translate"  class="form-control" id="" ng-model="search.params.translate" ng-options="item.label for item in search.langs"></select>
+		</div>
+		<pre>{{ search.params.translate }}</pre>
+	</div>
 		<div id="video-search-wrapper">
 			<div class="input-group input-group-lg">
 				<input autocomplete="on" type="text" class="form-control" ng-model="search.params.advKeyword" placeholder="Search Video..">

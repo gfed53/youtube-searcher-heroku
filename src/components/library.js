@@ -15,6 +15,8 @@ angular
 .service('ytResults', [ytResults])
 .service('ytVideoItems', [ytVideoItems])
 .service('ytSearchHistory', ['ytSearchParams', ytSearchHistory])
+.service('ytTranslate', ['$http', '$q', ytTranslate]);
+
 
 function ytTrustSrc($sce){
 	return function(src){
@@ -575,7 +577,77 @@ function ytInitMap(){
 	}
 }
 
+function ytTranslate($http, $q){
 
+	function translate(text, lang){
+		console.log('running');
+		var url = 'https://translate.yandex.net/api/v1.5/tr.json/translate',
+		request = {
+			key: 'trnsl.1.1.20160728T161850Z.60e012cb689f9dfd.6f8cd99e32d858950d047eaffecf930701d73a38',
+			text: text,
+			lang: 'en-'+lang
+			};
+
+			return $http({
+				method: 'GET',
+				url: url,
+				params: request
+			})
+			.then(function(response){
+				// console.log(response);
+				console.log(response.data.text[0]);
+				return $q.when(response);
+			}, function(){
+				console.log('translate error');
+				alert('Error retrieving translation. Did you select a language?')
+			})
+		}
+
+	function translateAll(tag, list){
+		var deferred = $q.defer();
+		var tagList = tag;
+		var langArray = [];
+		console.log(tagList);
+		console.log(list);
+		for(lang in list){
+			if(list[lang] != 'en' && list[lang]){
+				langArray.push(list[lang]);
+			}
+		}
+
+		console.log(langArray);
+		var counter = langArray.length;
+		console.log(counter);
+
+		if(langArray.length === 0){
+			deferred.reject("No translations were necessary.");
+		}
+
+		for(var i = 0; i<langArray.length; i++){
+			translate(tag, langArray[i]).then(function(response){
+				console.log(response.data.text[0]);
+				tagList += ', '+response.data.text[0]+', ';
+				console.log(tagList);
+				counter--;
+				console.log(counter);
+					if(counter <= 0){
+						console.log('should return: '+tagList);
+						deferred.resolve(tagList);
+					}
+				});
+		}
+
+		return deferred.promise;
+	}
+
+	function getTagList(){
+		// return tagList;
+	}
+
+	this.translate = translate;
+	this.translateAll = translateAll;
+	this.getTagList = getTagList;
+}
 
 
 
