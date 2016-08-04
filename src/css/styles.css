@@ -153,16 +153,18 @@ body .fixed {
     position: relative; }
     .results #page-selector-container #page-selector {
       position: fixed;
-      top: 42px;
       right: 0;
       bottom: 0;
       left: 0;
-      z-index: 2;
-      height: 2em; }
+      z-index: 9999;
+      height: 2em;
+      background-color: rgba(255, 255, 255, 0.55); }
       .results #page-selector-container #page-selector #prev-page, .results #page-selector-container #page-selector #next-page {
         font-size: 0.7em; }
       .results #page-selector-container #page-selector #next-page {
         float: right; }
+  .results .fixed-page-selector {
+    position: fixed; }
   .results h2, .results h3, .results .result-dir, .results .results-img-container {
     text-align: center; }
   .results h2 {

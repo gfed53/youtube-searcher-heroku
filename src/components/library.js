@@ -542,7 +542,7 @@ function ytFixedHeader(){
 			height = main.offsetHeight;
 			pageSelector = document.getElementById('page-selector');
 			console.log(menuHeight);
-			pageSelector.style.top = menuHeight+'px';
+			// pageSelector.style.top = menuHeight+'px';
 			console.log(window.getComputedStyle(pageSelector).getPropertyValue('top'));
 		}
 
@@ -552,7 +552,10 @@ function ytFixedHeader(){
 				fixedAdjustMenu();
 			});
 			document.onscroll = function(){
+				console.log(window.scrollY);
+				console.log(pageSelector.offsetHeight);
 				if(window.scrollY > headerHeight){
+					//if distance between top of page-selector and top of viewport === height of menu
 					menu.style.height = menuHeight+'px';
 					menu.className = 'fixed';
 					content.style.top = menuHeight+3+'px';

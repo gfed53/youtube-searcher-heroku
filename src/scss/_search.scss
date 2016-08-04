@@ -79,8 +79,9 @@
 			right: 0;
 			bottom: 0;
 			left: 0;
-			z-index: 2;
+			z-index: 9999;
 			height: 2em;
+			background-color: rgba(255, 255, 255, 0.55);
 			#prev-page, #next-page {
 				font-size: 0.7em;
 			}
@@ -88,6 +89,9 @@
 				float: right;
 			}
 		}
+	}
+	.fixed-page-selector {
+		position: fixed;
 	}
 
 	margin: 2em 0;
