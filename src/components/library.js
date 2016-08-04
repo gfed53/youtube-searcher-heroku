@@ -512,7 +512,8 @@ function ytFixedHeader(){
 		creditMargin,
 		headerHeight,
 		menuHeight,
-		height;
+		height,
+		pageSelector;
 
 
 		var services = {
@@ -539,6 +540,10 @@ function ytFixedHeader(){
 			headerHeight = header.offsetHeight+20+credit.offsetHeight+creditMargin;
 			menuHeight = menuUl.offsetHeight;
 			height = main.offsetHeight;
+			pageSelector = document.getElementById('page-selector');
+			console.log(menuHeight);
+			pageSelector.style.top = menuHeight+'px';
+			console.log(window.getComputedStyle(pageSelector).getPropertyValue('top'));
 		}
 
 		function init(){
