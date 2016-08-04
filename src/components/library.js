@@ -8,6 +8,7 @@ angular
 .factory('ytComputeCssClass', [ytComputeCssClass])
 .factory('ytScrollTo', ['$location', '$anchorScroll', ytScrollTo])
 .factory('ytFixedHeader', [ytFixedHeader])
+// .service('ytFixedHeader', [ytFixedHeader])
 .factory('ytCheckScrollBtnStatus', [ytCheckScrollBtnStatus])
 .factory('ytInitMap', [ytInitMap])
 .service('ytChanFilter', [ytChanFilter])
@@ -507,7 +508,7 @@ function ytFixedHeader(){
 		content,
 		menu,
 		menuUl = document.getElementById('menu'),
-		menuUlclass = menuUl.className,
+		menuUlclass = 'nav nav-tabs ng-scope',
 		style,
 		creditMargin,
 		headerHeight,
@@ -560,10 +561,14 @@ function ytFixedHeader(){
 					menu.className = 'fixed';
 					content.style.top = menuHeight+3+'px';
 					menuUl.className = menuUlclass+' tabs-adjust';
+					console.log(menuUl.className);
+					console.log(menuUlclass);
 				} else {
 					menu.className = '';
 					content.style.top = '0';
 					menuUl.className = menuUlclass;
+					console.log(menuUlclass);
+					console.log(menuUl.className);
 				}
 			}
 		}
