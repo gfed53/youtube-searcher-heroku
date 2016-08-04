@@ -71,10 +71,10 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 		}
 	}
 
-	function vidSubmit(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken){
+	function vidSubmit(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken, lang){
 		vm.viewVideo = false;
 		vm.params.searchedKeyword = keyword;
-		ytSearchYouTube(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken).getResults()
+		ytSearchYouTube(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken, lang).transAndResults()
 		.then(function(response){
 			vm.results = response.data.items;
 			vm.params.nextPageToken = response.data.nextPageToken;

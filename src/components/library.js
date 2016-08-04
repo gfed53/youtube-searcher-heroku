@@ -25,7 +25,7 @@ function ytTrustSrc($sce){
 }
 
 function ytSearchYouTube($q, $http, ytTranslate) {
-	return function(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken){
+	return function(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken, lang){
 		
 		var url = 'https://www.googleapis.com/youtube/v3/search';
 		var request = {
@@ -46,9 +46,9 @@ function ytSearchYouTube($q, $http, ytTranslate) {
 		};
 
 		var services = {
-			// checkTrans: checkTrans,
-			getResults: getResults
-			// transAndResults: transAndResults
+			checkTrans: checkTrans,
+			getResults: getResults,
+			transAndResults: transAndResults
 		};
 		return services;
 
@@ -66,25 +66,31 @@ function ytSearchYouTube($q, $http, ytTranslate) {
 			});
 		}
 
-		// function checkTrans(){
-		// 	if(lang){
-		// 		ytTranslate.translate(keyword, lang)
-		// 		.then(function(response){
-		// 			return $q.when(response);
-		// 		});
-		// 	} else {
-		// 		return $q;
-		// 	}
-		// }
+		function checkTrans(keyword, lang){
+			var deferred = $q.defer();
+			if(lang){
+				ytTranslate.translate(keyword, lang)
+				.then(function(response){
+					deferred.resolve(response.data.text[0]);
+				});
+			} else {
+				deferred.resolve(keyword)
+			}
+			return deferred.promise;
+		}
 
-		// function transAndResults(){
-		// 	checkTrans().then(function(response){
-		// 		if(response){
-		// 			request.q = response.data.text[0];
-		// 		}
-		// 		getResults();
-		// 	});
-		// }
+		function transAndResults(){
+			var deferred = $q.defer();
+			checkTrans(keyword, lang).then(function(response){
+				console.log(response);
+				request.q = response;
+				getResults().then(function(response){
+					deferred.resolve(response);
+				})
+			});
+
+			return deferred.promise;
+		}
 	}
 };
 
@@ -633,7 +639,7 @@ function ytTranslate($http, $q){
 				return $q.when(response);
 			}, function(){
 				console.log('translate error');
-				alert('Error retrieving translation. Did you select a language?')
+				alert('Error retrieving translation. Did you select a language? Is the search bar empty?');
 			})
 		}
 

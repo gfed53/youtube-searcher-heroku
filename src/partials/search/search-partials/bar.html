@@ -18,7 +18,7 @@
 			<span>{{ search.params.radius | number: 0 }}km</span>
 		</div>
 	</div>
-	<form id="form-advanced-video-search" class="form-inline" ng-submit="search.vidSubmit(search.params.advKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius)">
+	<form id="form-advanced-video-search" class="form-inline" ng-submit="search.vidSubmit(search.params.advKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius, undefined, search.params.lang.value)">
 		<div class="cluster">
 			<div class="sub-cluster row">
 				<div class="col-md-4">
@@ -68,13 +68,13 @@
 		<div id="translate-wrapper" class="cluster">
 			<div class=" sub-cluster row">
 				<div class="col-md-4">
-					<label for="translate">Translate Keyword: </label>
+					<label for="translate">Auto-Translate: </label>
 				</div>
 				<div class="col-md-8">
 					<select name="translate"  class="form-control" id="" ng-model="search.params.lang" ng-options="item.label for item in search.langs"></select>
 				</div>
 			</div>
-			<div><input class="btn btn-default btn-go" type="button" ng-click="search.translate(search.params.advKeyword, search.params.lang.value)" value="Translate!"></div>
+			<!-- <div><input class="btn btn-default btn-go" type="button" ng-click="search.translate(search.params.advKeyword, search.params.lang.value)" value="Translate!"></div> -->
 		</div>
 	<!-- <pre>{{ search.params.lang.value }}</pre> -->
 		<div id="video-search-wrapper">
