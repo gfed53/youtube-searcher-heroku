@@ -85,8 +85,16 @@
 			#prev-page, #next-page {
 				font-size: 0.7em;
 			}
-			#next-page {
+			#prev-page-section, #next-page-section {
+				display: inline-block;
+			}
+			#next-page-section, {
 				float: right;
+			}
+			label {
+				color: rgba(39, 174, 96, 0.7);
+				vertical-align: sub;
+				margin: 0 1em;
 			}
 		}
 	}

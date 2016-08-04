@@ -161,8 +161,14 @@ body .fixed {
       background-color: rgba(255, 255, 255, 0.55); }
       .results #page-selector-container #page-selector #prev-page, .results #page-selector-container #page-selector #next-page {
         font-size: 0.7em; }
-      .results #page-selector-container #page-selector #next-page {
+      .results #page-selector-container #page-selector #prev-page-section, .results #page-selector-container #page-selector #next-page-section {
+        display: inline-block; }
+      .results #page-selector-container #page-selector #next-page-section {
         float: right; }
+      .results #page-selector-container #page-selector label {
+        color: rgba(39, 174, 96, 0.7);
+        vertical-align: sub;
+        margin: 0 1em; }
   .results .fixed-page-selector {
     position: fixed; }
   .results h2, .results h3, .results .result-dir, .results .results-img-container {

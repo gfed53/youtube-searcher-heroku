@@ -506,8 +506,8 @@ function ytFixedHeader(){
 		credit,
 		content,
 		menu,
-		menuUl,
-		menuUlclass,
+		menuUl = document.getElementById('menu'),
+		menuUlclass = menuUl.className,
 		style,
 		creditMargin,
 		headerHeight,
@@ -530,8 +530,8 @@ function ytFixedHeader(){
 			credit = document.getElementById('credit');
 			content = document.getElementById('animate-view-container');
 			menu = document.getElementById('header-menu');
-			menuUl = document.getElementById('menu');
-			menuUlclass = menuUl.className;
+			// menuUl = document.getElementById('menu');
+			// menuUlclass = menuUl.className;
 			style = window.getComputedStyle(credit);
 			creditMargin = style.getPropertyValue('margin-top');
 			creditMargin = creditMargin.replace('px', '');
@@ -541,9 +541,9 @@ function ytFixedHeader(){
 			menuHeight = menuUl.offsetHeight;
 			height = main.offsetHeight;
 			pageSelector = document.getElementById('page-selector');
-			console.log(menuHeight);
+			// console.log(menuHeight);
 			// pageSelector.style.top = menuHeight+'px';
-			console.log(window.getComputedStyle(pageSelector).getPropertyValue('top'));
+			// console.log(window.getComputedStyle(pageSelector).getPropertyValue('top'));
 		}
 
 		function init(){
@@ -552,8 +552,8 @@ function ytFixedHeader(){
 				fixedAdjustMenu();
 			});
 			document.onscroll = function(){
-				console.log(window.scrollY);
-				console.log(pageSelector.offsetHeight);
+				// console.log(window.scrollY);
+				// console.log(pageSelector.offsetHeight);
 				if(window.scrollY > headerHeight){
 					//if distance between top of page-selector and top of viewport === height of menu
 					menu.style.height = menuHeight+'px';

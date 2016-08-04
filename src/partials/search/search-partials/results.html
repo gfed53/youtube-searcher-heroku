@@ -3,8 +3,14 @@
 	<h2>We found {{ search.results.length }} results.</h2>
 	<div id="page-selector-container">
 		<form id="page-selector">
+			<div id="prev-page-section">
 				<button class="btn btn-default" id="prev-page" ng-click="search.vidSubmit(search.params.searchedKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius, search.params.prevPageToken)"><span class="glyphicon glyphicon-chevron-left"></span></button>
+				<label id="label-prev">Previous</label>
+			</div>
+			<div id="next-page-section">
+				<label id="label-next">Next</label>
 				<button class="btn btn-default" id="next-page" ng-click="search.vidSubmit(search.params.searchedKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius, search.params.nextPageToken)"><span class="glyphicon glyphicon-chevron-right"></span></button>
+			</div>
 		</form>
 	</div>
 	<div class="row results-row">
