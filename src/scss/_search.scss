@@ -31,7 +31,6 @@
 }
 
 #advanced-search {
-	// display: none;
 	margin-bottom: 3em;
 	#form-advanced-video-search {
 		display: inline;
@@ -46,6 +45,13 @@
 				select {
 					text-align: right;
 				}
+			}
+		}
+		#translate-wrapper {
+			display: block;
+			#translate-select {
+				margin: 0 auto;
+				max-width: 11em;
 			}
 		}
 	}
@@ -75,7 +81,6 @@
 		position: relative;
 		#page-selector {
 			position: fixed;
-			// top: 42px;
 			right: 0;
 			bottom: 0;
 			left: 0;
@@ -172,6 +177,19 @@
 	}
 }
 
+@media screen and ($tabletfix){
+	#advanced-search {
+		#form-advanced-video-search{
+			#translate-wrapper {
+				display: inline-block;
+				#translate-select {
+					max-width: 100%;
+				}
+			}
+		}
+	}
+}
+
 @media screen and ($tablet){
 	.results {
 		.result {
@@ -218,7 +236,6 @@
 		margin: 1em;
 	}
 	#advanced-search {
-		// display: none;
 		margin-bottom: 3em;
 		#form-advanced-video-search {
 			display: inline;

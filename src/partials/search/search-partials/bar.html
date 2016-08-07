@@ -71,12 +71,10 @@
 					<label for="translate">Auto-Translate: </label>
 				</div>
 				<div class="col-md-8">
-					<select name="translate"  class="form-control" id="" ng-model="search.params.lang" ng-options="item.label for item in search.langs"></select>
+					<select name="translate"  class="form-control" id="translate-select" ng-model="search.params.lang" ng-options="item.label for item in search.langs"></select>
 				</div>
 			</div>
-			<!-- <div><input class="btn btn-default btn-go" type="button" ng-click="search.translate(search.params.advKeyword, search.params.lang.value)" value="Translate!"></div> -->
 		</div>
-	<!-- <pre>{{ search.params.lang.value }}</pre> -->
 		<div id="video-search-wrapper">
 			<div class="input-group input-group-lg">
 				<input autocomplete="on" type="text" class="form-control" ng-model="search.params.advKeyword" placeholder="Search Video..">
