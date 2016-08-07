@@ -83,7 +83,6 @@ function ytSearchYouTube($q, $http, ytTranslate) {
 		function transAndResults(){
 			var deferred = $q.defer();
 			checkTrans(keyword, lang).then(function(response){
-				console.log(response);
 				request.q = response;
 				getResults().then(function(response){
 					deferred.resolve(response);
@@ -531,8 +530,6 @@ function ytFixedHeader(){
 			credit = document.getElementById('credit');
 			content = document.getElementById('animate-view-container');
 			menu = document.getElementById('header-menu');
-			// menuUl = document.getElementById('menu');
-			// menuUlclass = menuUl.className;
 			style = window.getComputedStyle(credit);
 			creditMargin = style.getPropertyValue('margin-top');
 			creditMargin = creditMargin.replace('px', '');
@@ -542,9 +539,6 @@ function ytFixedHeader(){
 			menuHeight = menuUl.offsetHeight;
 			height = main.offsetHeight;
 			pageSelector = document.getElementById('page-selector');
-			// console.log(menuHeight);
-			// pageSelector.style.top = menuHeight+'px';
-			// console.log(window.getComputedStyle(pageSelector).getPropertyValue('top'));
 		}
 
 		function init(){
@@ -553,22 +547,15 @@ function ytFixedHeader(){
 				fixedAdjustMenu();
 			});
 			document.onscroll = function(){
-				// console.log(window.scrollY);
-				// console.log(pageSelector.offsetHeight);
 				if(window.scrollY > headerHeight){
-					//if distance between top of page-selector and top of viewport === height of menu
 					menu.style.height = menuHeight+'px';
 					menu.className = 'fixed';
 					content.style.top = menuHeight+3+'px';
 					menuUl.className = menuUlclass+' tabs-adjust';
-					console.log(menuUl.className);
-					console.log(menuUlclass);
 				} else {
 					menu.className = '';
 					content.style.top = '0';
 					menuUl.className = menuUlclass;
-					console.log(menuUlclass);
-					console.log(menuUl.className);
 				}
 			}
 		}
@@ -622,6 +609,9 @@ function ytInitMap(){
 function ytTranslate($http, $q){
 
 	var langs = [{
+		label: "None",
+		value: ""
+	}, {
 		label: "Spanish",
 		value: "es"
 	}, {
@@ -629,11 +619,10 @@ function ytTranslate($http, $q){
 		value: "ru"
 	}, {
 		label: "Japanese",
-		value: "jp"
+		value: "ja"
 	}];
 
 	function translate(text, lang){
-		console.log('running');
 		var url = 'https://translate.yandex.net/api/v1.5/tr.json/translate',
 		request = {
 			key: 'trnsl.1.1.20160728T161850Z.60e012cb689f9dfd.6f8cd99e32d858950d047eaffecf930701d73a38',
@@ -647,11 +636,8 @@ function ytTranslate($http, $q){
 				params: request
 			})
 			.then(function(response){
-				// console.log(response);
-				console.log(response.data.text[0]);
 				return $q.when(response);
 			}, function(){
-				console.log('translate error');
 				alert('Error retrieving translation. Did you select a language? Is the search bar empty?');
 			})
 		}
@@ -660,17 +646,12 @@ function ytTranslate($http, $q){
 		var deferred = $q.defer();
 		var tagList = tag;
 		var langArray = [];
-		console.log(tagList);
-		console.log(list);
 		for(lang in list){
 			if(list[lang] != 'en' && list[lang]){
 				langArray.push(list[lang]);
 			}
 		}
-
-		console.log(langArray);
 		var counter = langArray.length;
-		console.log(counter);
 
 		if(langArray.length === 0){
 			deferred.reject("No translations were necessary.");
@@ -678,13 +659,9 @@ function ytTranslate($http, $q){
 
 		for(var i = 0; i<langArray.length; i++){
 			translate(tag, langArray[i]).then(function(response){
-				console.log(response.data.text[0]);
 				tagList += ', '+response.data.text[0]+', ';
-				console.log(tagList);
 				counter--;
-				console.log(counter);
 					if(counter <= 0){
-						console.log('should return: '+tagList);
 						deferred.resolve(tagList);
 					}
 				});
@@ -693,14 +670,9 @@ function ytTranslate($http, $q){
 		return deferred.promise;
 	}
 
-	function getTagList(){
-		// return tagList;
-	}
-
 	this.langs = langs;
 	this.translate = translate;
 	this.translateAll = translateAll;
-	this.getTagList = getTagList;
 }
 
 

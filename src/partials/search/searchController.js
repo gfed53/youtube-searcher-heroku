@@ -29,6 +29,7 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 	vm.offSet = ytCheckScrollBtnStatus(vm.results, vm.chanResults);
 	vm.langs = ytTranslate.langs;
 	vm.translate = translate;
+	vm.params.lang = vm.langs[0];
 
 	//If advanced view is active when revisiting state, we need to initMap() on ctrl start
 	$timeout(function(){
@@ -76,6 +77,11 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 		vm.params.searchedKeyword = keyword;
 		ytSearchYouTube(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken, lang).transAndResults()
 		.then(function(response){
+			//In case we make a translated search, we want to hold onto that query
+			vm.params.advKeyword = response.config.params.q;
+			vm.params.searchedKeyword = response.config.params.q;
+			//Also reset auto-translate in case we want to then grab the next page of the translated search (so the translator doesn't unnecessarily try to re-translate an already-translated word)
+			vm.params.lang = vm.langs[0];
 			vm.results = response.data.items;
 			vm.params.nextPageToken = response.data.nextPageToken;
 			vm.params.prevPageToken = response.data.prevPageToken;
@@ -173,8 +179,6 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 	}
 
 	function translate(keyword, lang){
-		console.log(keyword);
-		console.log(lang);
 		ytTranslate.translate(keyword, lang)
 		.then(function(response){
 			vm.params.advKeyword = response.data.text[0];
