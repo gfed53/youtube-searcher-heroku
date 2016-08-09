@@ -563,14 +563,47 @@ function ytFixedHeader(){
 }
 
 function ytCheckScrollBtnStatus(){
-	return function(videoResults, channelResults){
-		var bool;
-		if(videoResults.length>0 || channelResults.length>0){
-			bool = true;
-		} else {
-			bool = false;
+	// return function(videoResults, channelResults){
+	// 	var bool;
+	// 	if(videoResults.length>0 || channelResults.length>0){
+	// 		bool = true;
+	// 	} else {
+	// 		bool = false;
+	// 	}
+	// 	return bool;
+	// }
+	
+	return function(){
+		// var elem = document.getElementById('results-container');
+
+		function checkVisible(elm) {
+			var rect = elm.getBoundingClientRect();
+			var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+			return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
 		}
-		return bool;
+
+		function check(){
+			console.log('working?');
+			document.onscroll = function(){
+				console.log('scrolling');
+				if(document.getElementById('results-container')){
+					var elem = document.getElementById('results-container');
+					var scrollTop = document.getElementById('scroll-top');
+					if(checkVisible(elem)){
+						// var scrollTop = document.getElementById('scroll-top');
+						scrollTop.style.visibility = 'visible';
+					} else {
+						scrollTop.style.visibility = 'hidden';
+					}
+				}
+			}
+		}
+
+		var services = {
+			check: check
+		}
+
+		return services;
 	}
 }
 
@@ -628,19 +661,19 @@ function ytTranslate($http, $q){
 			key: 'trnsl.1.1.20160728T161850Z.60e012cb689f9dfd.6f8cd99e32d858950d047eaffecf930701d73a38',
 			text: text,
 			lang: 'en-'+lang
-			};
+		};
 
-			return $http({
-				method: 'GET',
-				url: url,
-				params: request
-			})
-			.then(function(response){
-				return $q.when(response);
-			}, function(){
-				alert('Error retrieving translation. Did you select a language? Is the search bar empty?');
-			})
-		}
+		return $http({
+			method: 'GET',
+			url: url,
+			params: request
+		})
+		.then(function(response){
+			return $q.when(response);
+		}, function(){
+			alert('Error retrieving translation. Did you select a language? Is the search bar empty?');
+		})
+	}
 
 	function translateAll(tag, list){
 		var deferred = $q.defer();
@@ -661,10 +694,10 @@ function ytTranslate($http, $q){
 			translate(tag, langArray[i]).then(function(response){
 				tagList += ', '+response.data.text[0]+', ';
 				counter--;
-					if(counter <= 0){
-						deferred.resolve(tagList);
-					}
-				});
+				if(counter <= 0){
+					deferred.resolve(tagList);
+				}
+			});
 		}
 
 		return deferred.promise;

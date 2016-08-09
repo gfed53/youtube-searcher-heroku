@@ -2,8 +2,8 @@
 <!-- Because of apparent DOM conflicts, results-container doesn't append to the DOM when we'd like it to (after a search), so an easy fix is to use an empty div which already exists on controller instantiation. -->
 <div id="scroll-point"></div>
 <div ui-view="results" id="results-container" ng-if="search.results || search.chanResults"></div>
-<div class="scroll-top-wrapper" id="scroll-top-wrapper" ng-click="search.scrollTo('scroll-point')" ng-if="search.offSet">
-	<span class="scroll-top-inner">
+<!-- <div class="scroll-top-wrapper" id="scroll-top-wrapper">
+	<span id="scroll-top" class="scroll-top-inner" ng-click="search.scrollTo('scroll-point')">
 		<i class="fa fa-2x fa-arrow-circle-up"></i>
 	</span>
-</div>
+</div> -->
