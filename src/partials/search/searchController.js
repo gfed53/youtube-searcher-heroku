@@ -98,7 +98,7 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 				vm.scrollTo('scroll-point');
 				vm.offSet = true;
 				ytFixedHeader().init();
-				ytCheckScrollBtnStatus().check();
+				// ytCheckScrollBtnStatus().check();
 			}, 1000);
 			
 		})
@@ -121,7 +121,7 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 				vm.scrollTo('scroll-point');
 				vm.offSet = true;
 				ytFixedHeader().init();
-				ytCheckScrollBtnStatus().check();
+				// ytCheckScrollBtnStatus().check();
 			}, 1000);
 			
 		})
