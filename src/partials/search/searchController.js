@@ -26,7 +26,6 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 	vm.chanResults = ytResults.getChanResults();
 	vm.params = ytSearchParams.get();
 	vm.status = ytResults.getStatus();
-	// vm.offSet = ytCheckScrollBtnStatus(vm.results, vm.chanResults);
 	vm.langs = ytTranslate.langs;
 	vm.translate = translate;
 	vm.params.lang = vm.langs[0];
@@ -35,9 +34,6 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 	$timeout(function(){
 		vm.initMap();
 	});
-
-	// ytCheckScrollBtnStatus().check();
-	
 
 	$location.url('/search');
 
@@ -98,7 +94,7 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 				vm.scrollTo('scroll-point');
 				vm.offSet = true;
 				ytFixedHeader().init();
-				// ytCheckScrollBtnStatus().check();
+				ytCheckScrollBtnStatus().check();
 			}, 1000);
 			
 		})
@@ -121,7 +117,7 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 				vm.scrollTo('scroll-point');
 				vm.offSet = true;
 				ytFixedHeader().init();
-				// ytCheckScrollBtnStatus().check();
+				ytCheckScrollBtnStatus().check();
 			}, 1000);
 			
 		})

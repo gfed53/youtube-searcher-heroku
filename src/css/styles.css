@@ -318,7 +318,8 @@ body .fixed {
   transition: all 0.5s ease-in-out; }
 
 #scroll-top {
-  transition: all 0.5s ease-in-out; }
+  transition: all 0.5s ease-in-out;
+  visibility: hidden; }
 
 #scroll-top:hover {
   color: #888888;

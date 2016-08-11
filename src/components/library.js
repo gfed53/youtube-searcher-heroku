@@ -498,79 +498,6 @@ function ytScrollTo($location, $anchorScroll){
 	}
 }
 
-// function ytFixedHeader(){
-// 	return function(){
-// 		var pageHeader,
-// 		main,
-// 		header,
-// 		credit,
-// 		content,
-// 		menu,
-// 		menuUl = document.getElementById('menu'),
-// 		menuUlclass = 'nav nav-tabs ng-scope',
-// 		style,
-// 		creditMargin,
-// 		headerHeight,
-// 		menuHeight,
-// 		height,
-// 		pageSelector;
-
-
-
-// 		// this.fixedAdjustMenu = fixedAdjustMenu;
-// 		// this.init = init;
-// 		var services = {
-// 			fixedAdjustMenu: fixedAdjustMenu,
-// 			init: init
-// 		}
-
-// 		return services;
-
-		
-// 		function fixedAdjustMenu(){
-// 			pageHeader = document.getElementById('page-header');
-// 			main = document.getElementById('header-wrapper');
-// 			header = document.getElementById('mast-header');
-// 			credit = document.getElementById('credit');
-// 			content = document.getElementById('animate-view-container');
-// 			menu = document.getElementById('header-menu');
-// 			menuUl = document.getElementById('menu');
-// 			style = window.getComputedStyle(credit);
-// 			creditMargin = style.getPropertyValue('margin-top');
-// 			creditMargin = creditMargin.replace('px', '');
-// 			creditMargin = creditMargin*2;
-// 			//20 is a number acquired from trial and error in finding a smooth transition between static to fixed nav bar.
-// 			headerHeight = header.offsetHeight+20+credit.offsetHeight+creditMargin;
-// 			menuHeight = menuUl.offsetHeight;
-// 			height = main.offsetHeight;
-// 			pageSelector = document.getElementById('page-selector');
-// 			console.log(menuHeight);
-// 			console.log(menu.offsetHeight);
-// 		}
-
-// 		function init(){
-// 			fixedAdjustMenu();
-// 			window.addEventListener('resize', function(){
-// 				fixedAdjustMenu();
-// 			});
-// 			document.onscroll = function(){
-// 				if(window.scrollY > headerHeight){
-// 					menu.style.height = menuHeight+'px';
-// 					menu.className = 'fixed';
-// 					content.style.top = menuHeight+3+'px';
-// 					menuUl.className = menuUlclass+' tabs-adjust';
-// 					console.log('ookay');
-// 				} else {
-// 					menu.className = '';
-// 					content.style.top = '0';
-// 					menuUl.className = menuUlclass;
-// 					console.log('and..');
-// 				}
-// 			}
-// 		}
-// 	}
-// }
-
 function ytFixedHeader(){
 	return function(){
 		var pageHeader,
@@ -618,6 +545,7 @@ function ytFixedHeader(){
 			fixedAdjustMenu();
 			window.addEventListener('resize', function(){
 				fixedAdjustMenu();
+				menu.style.height = menuHeight+'px';
 			});
 			document.onscroll = function(){
 				if(window.scrollY > headerHeight){
@@ -645,9 +573,7 @@ function ytCheckScrollBtnStatus(){
 		}
 
 		function check(){
-			// console.log('working?');
-			document.onscroll = function(){
-				// console.log('scrolling');
+			window.addEventListener('scroll', function(){
 				if(document.getElementById('results-container')){
 					var elem = document.getElementById('results-container');
 					var scrollTop = document.getElementById('scroll-top');
@@ -657,7 +583,7 @@ function ytCheckScrollBtnStatus(){
 						scrollTop.style.visibility = 'hidden';
 					}
 				}
-			}
+			});
 		}
 
 		var services = {
