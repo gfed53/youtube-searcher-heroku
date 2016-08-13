@@ -54,7 +54,6 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 
 	window.addEventListener('scroll', function(){
 		$scope.$apply(vm.scrollBtn = ytCheckScrollBtnStatus().check());
-		console.log(vm.scrollBtn);
 	});
 
 	function initMap() {
@@ -100,7 +99,6 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 				vm.scrollTo('scroll-point');
 				vm.offSet = true;
 				ytFixedHeader().init();
-				// ytCheckScrollBtnStatus().check(vm.scrollBtn);
 			}, 1000);
 			
 		})
@@ -123,7 +121,6 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 				vm.scrollTo('scroll-point');
 				vm.offSet = true;
 				ytFixedHeader().init();
-				// ytCheckScrollBtnStatus().check(vm.scrollBtn);
 			}, 1000);
 			
 		})

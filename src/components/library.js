@@ -578,7 +578,6 @@ function ytCheckScrollBtnStatus(){
 				var scrollTop = document.getElementsByClassName('scroll-top');
 				if(checkVisible(elem)){
 					return true;
-
 				} else {
 					return false;
 				}
