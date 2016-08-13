@@ -29,10 +29,10 @@
 .animate-view.ng-leave.ng-leave-active { opacity:0; }
 
 //Scroll Button
-.scroll-top-wrapper.ng-enter { opacity:0; }
-.scroll-top-wrapper.ng-enter-active { opacity:1; }
-.scroll-top-wrapper.ng-leave { opacity:1; }
-.scroll-top-wrapper.ng-leave-active { opacity:0; }
+.scroll-top.ng-enter { opacity:0; }
+.scroll-top.ng-enter-active { opacity:1; }
+.scroll-top.ng-leave { opacity:1; }
+.scroll-top.ng-leave-active { opacity:0; }
 
 @media screen and ($desktop){
 	#animate-view-container {

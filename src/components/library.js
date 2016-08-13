@@ -572,18 +572,19 @@ function ytCheckScrollBtnStatus(){
 			return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
 		}
 
-		function check(){
-			window.addEventListener('scroll', function(){
-				if(document.getElementById('results-container')){
-					var elem = document.getElementById('results-container');
-					var scrollTop = document.getElementById('scroll-top');
-					if(checkVisible(elem)){
-						scrollTop.style.visibility = 'visible';
-					} else {
-						scrollTop.style.visibility = 'hidden';
-					}
+		function check(show){
+			if(document.getElementById('results-container')){
+				var elem = document.getElementById('results-container');
+				var scrollTop = document.getElementsByClassName('scroll-top');
+				if(checkVisible(elem)){
+					return true;
+
+				} else {
+					return false;
 				}
-			});
+			} else {
+				return false;
+			}
 		}
 
 		var services = {

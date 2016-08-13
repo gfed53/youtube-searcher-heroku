@@ -154,9 +154,9 @@ body .fixed {
 .results {
   margin: 2em 0;
   transition: 1s linear all; }
-  .results #page-selector-container {
+  .results .page-selector-container {
     position: relative; }
-    .results #page-selector-container #page-selector {
+    .results .page-selector-container #page-selector {
       color: rgba(39, 174, 96, 0.7);
       position: fixed;
       right: 0;
@@ -165,17 +165,26 @@ body .fixed {
       z-index: 9999;
       height: 2em;
       background-color: rgba(255, 255, 255, 0.55); }
-      .results #page-selector-container #page-selector #prev-page, .results #page-selector-container #page-selector #next-page {
+      .results .page-selector-container #page-selector #prev-page, .results .page-selector-container #page-selector #next-page {
         font-size: 0.7em; }
-      .results #page-selector-container #page-selector #prev-page-section, .results #page-selector-container #page-selector #next-page-section {
+      .results .page-selector-container #page-selector #prev-page-section, .results .page-selector-container #page-selector #next-page-section {
         display: inline-block; }
-      .results #page-selector-container #page-selector #next-page-section {
+      .results .page-selector-container #page-selector #next-page-section {
         text-align: right; }
-      .results #page-selector-container #page-selector label {
+      .results .page-selector-container #page-selector label {
         vertical-align: sub;
         margin: 0 1em; }
   .results .fixed-page-selector {
     position: fixed; }
+  .results #channel-scroll-btn-bar {
+    color: rgba(39, 174, 96, 0.7);
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9998;
+    height: 2em;
+    background-color: rgba(255, 255, 255, 0.55); }
   .results h2, .results h3, .results .result-dir, .results .results-img-container {
     text-align: center; }
   .results h2 {
@@ -317,11 +326,10 @@ body .fixed {
   -o-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out; }
 
-#scroll-top {
-  transition: all 0.5s ease-in-out;
-  visibility: hidden; }
+.scroll-top {
+  transition: all 0.5s ease-in-out; }
 
-#scroll-top:hover {
+.scroll-top:hover {
   color: #888888;
   cursor: pointer;
   opacity: 1.0; }
@@ -362,16 +370,16 @@ body .fixed {
 .animate-view.ng-leave.ng-leave-active {
   opacity: 0; }
 
-.scroll-top-wrapper.ng-enter {
+.scroll-top.ng-enter {
   opacity: 0; }
 
-.scroll-top-wrapper.ng-enter-active {
+.scroll-top.ng-enter-active {
   opacity: 1; }
 
-.scroll-top-wrapper.ng-leave {
+.scroll-top.ng-leave {
   opacity: 1; }
 
-.scroll-top-wrapper.ng-leave-active {
+.scroll-top.ng-leave-active {
   opacity: 0; }
 
 @media screen and (min-width: 1024px) {

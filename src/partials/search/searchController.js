@@ -20,6 +20,7 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 	vm.addToPlaylist = ytVideoItems.services.setItem;
 	vm.computeCssClass = computeCssClass;
 	vm.scrollTo = scrollTo;
+	vm.scrollBtn = false;
 	//Retrieving our saved variables, if any
 	vm.type = ytSearchParams.getSearchType();
 	vm.results = ytResults.getResults();
@@ -50,6 +51,11 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 
 			vm.status.channelButtonValue = ytResults.checkStatus(current, original, vm.status.channelButtonValue, showText, hideText);
 		});
+
+	window.addEventListener('scroll', function(){
+		$scope.$apply(vm.scrollBtn = ytCheckScrollBtnStatus().check());
+		console.log(vm.scrollBtn);
+	});
 
 	function initMap() {
 		vm.mapObj = ytInitMap(update);
@@ -94,7 +100,7 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 				vm.scrollTo('scroll-point');
 				vm.offSet = true;
 				ytFixedHeader().init();
-				ytCheckScrollBtnStatus().check();
+				// ytCheckScrollBtnStatus().check(vm.scrollBtn);
 			}, 1000);
 			
 		})
@@ -117,7 +123,7 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 				vm.scrollTo('scroll-point');
 				vm.offSet = true;
 				ytFixedHeader().init();
-				ytCheckScrollBtnStatus().check();
+				// ytCheckScrollBtnStatus().check(vm.scrollBtn);
 			}, 1000);
 			
 		})
