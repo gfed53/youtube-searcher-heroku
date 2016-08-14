@@ -154,37 +154,6 @@ body .fixed {
 .results {
   margin: 2em 0;
   transition: 1s linear all; }
-  .results .page-selector-container {
-    position: relative; }
-    .results .page-selector-container #page-selector {
-      color: rgba(39, 174, 96, 0.7);
-      position: fixed;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 9999;
-      height: 2em;
-      background-color: rgba(255, 255, 255, 0.55); }
-      .results .page-selector-container #page-selector #prev-page, .results .page-selector-container #page-selector #next-page {
-        font-size: 0.7em; }
-      .results .page-selector-container #page-selector #prev-page-section, .results .page-selector-container #page-selector #next-page-section {
-        display: inline-block; }
-      .results .page-selector-container #page-selector #next-page-section {
-        text-align: right; }
-      .results .page-selector-container #page-selector label {
-        vertical-align: sub;
-        margin: 0 1em; }
-  .results .fixed-page-selector {
-    position: fixed; }
-  .results #channel-scroll-btn-bar {
-    color: rgba(39, 174, 96, 0.7);
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 9998;
-    height: 2em;
-    background-color: rgba(255, 255, 255, 0.55); }
   .results h2, .results h3, .results .result-dir, .results .results-img-container {
     text-align: center; }
   .results h2 {
@@ -224,6 +193,41 @@ body .fixed {
     border-bottom-width: 2px; }
   .results .first > .inner-result {
     border-top-width: 2px; }
+
+.page-selector-container {
+  position: relative; }
+  .page-selector-container #page-selector {
+    color: rgba(39, 174, 96, 0.7);
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    height: 2em;
+    background-color: rgba(255, 255, 255, 0.55); }
+    .page-selector-container #page-selector #prev-page, .page-selector-container #page-selector #next-page {
+      font-size: 0.7em; }
+    .page-selector-container #page-selector #prev-page-section, .page-selector-container #page-selector #next-page-section {
+      display: inline-block; }
+    .page-selector-container #page-selector #next-page-section {
+      text-align: right; }
+    .page-selector-container #page-selector label {
+      vertical-align: sub;
+      margin: 0 1em; }
+
+.fixed-page-selector {
+  position: fixed; }
+
+#channel-scroll-btn-bar {
+  color: rgba(39, 174, 96, 0.7);
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
+  height: 2em;
+  width: 10%;
+  margin: 0 auto; }
 
 @media screen and (min-width: 350px) {
   .results #page-selector #prev-page, .results #page-selector #next-page {

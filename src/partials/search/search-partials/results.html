@@ -4,16 +4,11 @@
 	<div class="page-selector-container">
 		<form id="page-selector">
 			<div class="row">
-				<div id="prev-page-section" class="col-xs-4">
+				<div id="prev-page-section" class="col-xs-6">
 					<button class="btn btn-default" id="prev-page" ng-click="search.vidSubmit(search.params.searchedKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius, search.params.prevPageToken)"><span class="glyphicon glyphicon-chevron-left"></span></button>
 					<label id="label-prev">Previous</label>
 				</div>
-				<div class="scroll-top-wrapper col-xs-4" id="scroll-top-wrapper">
-					<span class="scroll-top-inner">
-						<i ng-click="search.scrollTo('scroll-point')" class="fa fa-2x fa-arrow-circle-up scroll-top" id="scroll-top" ng-if="search.scrollBtn"></i>
-					</span>
-				</div>
-				<div id="next-page-section" class="col-xs-4">
+				<div id="next-page-section" class="col-xs-6">
 					<label id="label-next">Next</label>
 					<button class="btn btn-default" id="next-page" ng-click="search.vidSubmit(search.params.searchedKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius, search.params.nextPageToken)"><span class="glyphicon glyphicon-chevron-right"></span></button>
 				</div>
@@ -48,16 +43,7 @@
 <div uib-collapse="search.status.channelsCollapsed" id="channel-results" class="results">
 	<h2>Channel Results</h2>
 	<h2>We found {{ search.chanResults.length }} results.</h2>
-	<div class="page-selector-container">
-		<form id="channel-scroll-btn-bar">
-			<div class="row">
-				<div class="scroll-top-wrapper col-xs-4 col-xs-offset-4">
-					<span class="scroll-top-inner">
-						<i ng-click="search.scrollTo('scroll-point')" class="fa fa-2x fa-arrow-circle-up scroll-top" ng-if="search.scrollBtn"></i>
-					</span>
-				</div>
-		</form>
-	</div>
+	
 	<p class="result-dir">Select a channel by clicking on its image. The channel will then be added as a search filter.</p>
 	<div class="row results-row">
 		<div class="result" ng-repeat="result in search.chanResults" ng-class="search.computeCssClass($first, $last)">
@@ -72,4 +58,14 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div class="page-selector-container">
+	<form id="channel-scroll-btn-bar">
+		<div class="row">
+			<div class="scroll-top-wrapper col-xs-12">
+				<span class="scroll-top-inner">
+					<i ng-click="search.scrollTo('scroll-point')" class="fa fa-2x fa-arrow-circle-up scroll-top" ng-if="search.scrollBtn"></i>
+				</span>
+			</div>
+	</form>
 </div>
