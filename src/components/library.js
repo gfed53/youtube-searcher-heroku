@@ -147,7 +147,7 @@ function ytChanFilter(){
 
 function ytCurrentVideo($q, $http){
 	return function(id){
-		var url = "https://www.googleapis.com/youtube/v3/videos",
+		var url = 'https://www.googleapis.com/youtube/v3/videos',
 		request = {
 			key: 'AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA',
 			part: 'snippet',
@@ -245,7 +245,7 @@ function ytVideoItems(){
 		content = JSON.stringify(content);
 
 		localStorage.setItem(itemName, content);
-		alert("Video Added!");
+		alert('Video Added!');
 	}
 
 	function clearItem(name){
@@ -629,17 +629,32 @@ function ytInitMap(){
 function ytTranslate($http, $q){
 
 	var langs = [{
-		label: "None",
-		value: ""
+		label: 'None',
+		value: ''
 	}, {
-		label: "Spanish",
-		value: "es"
+		label: 'Arabic',
+		value: 'ar'
 	}, {
-		label: "Russian",
-		value: "ru"
+		label: 'Chinese',
+		value: 'zh'
 	}, {
-		label: "Japanese",
-		value: "ja"
+		label: 'French',
+		value: 'fr'
+	}, {
+		label: 'Hindi',
+		value: 'hi'
+	}, {
+		label: 'Italian',
+		value: 'it'
+	}, {
+		label: 'Japanese',
+		value: 'ja'
+	}, {
+		label: 'Russian',
+		value: 'ru'
+	}, {
+		label: 'Spanish',
+		value: 'es'
 	}];
 
 	function translate(text, lang){
@@ -674,7 +689,7 @@ function ytTranslate($http, $q){
 		var counter = langArray.length;
 
 		if(langArray.length === 0){
-			deferred.reject("No translations were necessary.");
+			deferred.reject('No translations were necessary.');
 		}
 
 		for(var i = 0; i<langArray.length; i++){
