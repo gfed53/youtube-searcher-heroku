@@ -1,12 +1,11 @@
 angular
 .module('myApp')
 
-.controller('HeaderCtrl', [HeaderCtrl])
+.controller('HeaderCtrl', [ '$timeout', HeaderCtrl])
 
-function HeaderCtrl(){
+function HeaderCtrl($timeout){
 	var vm = this;
-	$(document).ready(function() {
-		$('#mast-header').velocity({ translateX: [0, '-20em'] }, { duration: 500 });
-		$('#credit').velocity({ translateX: [0, '20em'] }, {duration: 600 });
-	});
+	$timeout(function(){
+		vm.active = true;
+	}, 100)
 };

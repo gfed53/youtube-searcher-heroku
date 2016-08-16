@@ -34,7 +34,7 @@ body {
   #about {
     font-size: 1em; } }
 
-body #page-header #header-wrapper h1 {
+body #page-header #header-wrapper #mast-header {
   text-align: center;
   font-size: 2.5em;
   font-weight: bold;
@@ -42,13 +42,17 @@ body #page-header #header-wrapper h1 {
   padding: 1em;
   color: #ecf0f1;
   background-color: #27ae60;
-  border-radius: 0.4em; }
+  border-radius: 0.4em;
+  position: relative;
+  transition: 500ms linear all; }
 
 body #page-header #header-wrapper #credit {
   text-align: right;
   margin: 2em;
   margin-right: 3em;
-  font-weight: bold; }
+  font-weight: bold;
+  position: relative;
+  transition: 500ms linear all; }
 
 body .fixed {
   position: fixed;
@@ -359,6 +363,18 @@ body .fixed {
     left: 0;
     right: 0;
     bottom: 0; }
+
+#mast-header.ng-enter {
+  right: 50em; }
+
+#mast-header.ng-enter.ng-enter-active {
+  right: 0; }
+
+#credit.ng-enter {
+  left: 75em; }
+
+#credit.ng-enter.ng-enter-active {
+  left: 0; }
 
 .animate-view.ng-enter {
   opacity: 0;

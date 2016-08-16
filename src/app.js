@@ -7,11 +7,9 @@ angular
 	$compileProvider.debugInfoEnabled(false);
 }])
 
-//For testing
 .run(['$timeout', 'ytFixedHeader', '$rootScope', function($timeout, ytFixedHeader, $rootScope){
 	
 	$timeout(function(){
-		// ytFixedHeader().fixedAdjustMenu();
 		ytFixedHeader().init();
 
 
