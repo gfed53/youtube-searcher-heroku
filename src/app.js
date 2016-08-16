@@ -1,9 +1,10 @@
 angular
 .module('myApp', ['ui.router', 'ui.bootstrap', 'ngAnimate'])
 
-.config(['$httpProvider', function($httpProvider){
+.config(['$httpProvider', '$compileProvider', function($httpProvider, $compileProvider){
 	$httpProvider.defaults.useXDomain = true;
 	delete $httpProvider.defaults.headers.common['X-Requested-With'];
+	$compileProvider.debugInfoEnabled(false);
 }])
 
 //For testing
