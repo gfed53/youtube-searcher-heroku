@@ -245,7 +245,7 @@ function ytVideoItems(){
 		content = JSON.stringify(content);
 
 		localStorage.setItem(itemName, content);
-		alert('Video Added!');
+		alert('Video Saved!');
 	}
 
 	function clearItem(name){
