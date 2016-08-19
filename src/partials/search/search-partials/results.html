@@ -39,11 +39,9 @@
 		</div>
 	</div>
 </div>
-
 <div uib-collapse="search.status.channelsCollapsed" id="channel-results" class="results">
 	<h2>Channel Results</h2>
 	<h2>We found {{ search.chanResults.length }} results.</h2>
-	
 	<p class="result-dir">Select a channel by clicking on its image. The channel will then be added as a search filter.</p>
 	<div class="row results-row">
 		<div class="result" ng-repeat="result in search.chanResults" ng-class="search.computeCssClass($first, $last)">
