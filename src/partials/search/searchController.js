@@ -1,7 +1,7 @@
 angular
 .module('myApp')
 
-.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$anchorScroll', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', 'ytCheckScrollBtnStatus', 'ytTranslate', 'ytFixedHeader', SearchCtrl])
+.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$anchorScroll', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', 'ytCheckScrollBtnStatus', 'ytTranslate', 'ytFixedHeader', 'ytSortOrder', SearchCtrl])
 
 function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus, ytTranslate, ytFixedHeader){
 	var vm = this;
@@ -30,7 +30,8 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 	vm.langs = ytTranslate.langs;
 	vm.translate = translate;
 	vm.params.lang = vm.langs[0];
-	vm.videosReverse = false;
+	vm.videosReverse = ytSortOrder.videosReverse;
+	vm.sort = sort;
 
 	//If advanced view is active when revisiting state, we need to initMap() on ctrl start
 	$timeout(function(){
@@ -190,8 +191,9 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 		});
 	}
 
-	function sort(reverse){
-		
+	function sort(){
+		vm.videosReverse = !vm.videosReverse;
+		ytSortOrder.videosReverse = vm.videosReverse;
 	}
 };
 

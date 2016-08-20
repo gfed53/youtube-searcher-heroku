@@ -717,6 +717,7 @@ function ytSortOrder(){
 		reverse: false
 	};
 
+	this.videoReverse = false;
 	this.order = order;
 	this.get = get;
 
