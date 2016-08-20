@@ -30,6 +30,7 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 	vm.langs = ytTranslate.langs;
 	vm.translate = translate;
 	vm.params.lang = vm.langs[0];
+	vm.videosReverse = false;
 
 	//If advanced view is active when revisiting state, we need to initMap() on ctrl start
 	$timeout(function(){
@@ -93,6 +94,7 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 			ytResults.setStatus(vm.status);
 			//Saving the results to our service
 			ytResults.setResults(vm.results);
+			console.log(vm.results);
 
 			// Autoscroll up
 			$timeout(function(){
@@ -186,6 +188,10 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 		.then(function(response){
 			vm.params.advKeyword = response.data.text[0];
 		});
+	}
+
+	function sort(reverse){
+		
 	}
 };
 

@@ -103,6 +103,7 @@
 <div class="btn-group-vertical" role="group" aria-label="...">
 	<button type="button" class="btn btn-default" id="btn-videos" ng-if="search.results.length > 0" ng-click="search.status.videosCollapsed = !search.status.videosCollapsed">{{search.status.videoButtonValue}}</button>
 	<button type="button" class="btn btn-default" id="btn-channels" ng-if="search.chanResults.length > 0" ng-click="search.status.channelsCollapsed = !search.status.channelsCollapsed">{{search.status.channelButtonValue}}</button>
+	<button type="button" class="btn btn-default" ng-if="search.results.length > 0" ng-click="search.videosReverse = !search.videosReverse">Video Order</button>
 </div>
 
 

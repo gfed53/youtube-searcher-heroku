@@ -16,7 +16,8 @@ angular
 .service('ytResults', [ytResults])
 .service('ytVideoItems', [ytVideoItems])
 .service('ytSearchHistory', ['ytSearchParams', ytSearchHistory])
-.service('ytTranslate', ['$http', '$q', ytTranslate]);
+.service('ytTranslate', ['$http', '$q', ytTranslate])
+.service('ytSortOrder', [ytSortOrder]);
 
 
 function ytTrustSrc($sce){
@@ -710,7 +711,25 @@ function ytTranslate($http, $q){
 	this.translateAll = translateAll;
 }
 
+function ytSortOrder(){
+	var sortObj = {
+		predicate: undefined,
+		reverse: false
+	};
 
+	this.order = order;
+	this.get = get;
+
+	function order(current, _predicate) {
+		sortObj.reverse = (_predicate === current) ? !reverse : false;
+		sortObj.predicate = _predicate;
+		return sortObj;
+	}
+
+	function get(){
+		return sortObj;
+	}
+}
 
 
 

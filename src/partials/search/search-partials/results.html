@@ -16,7 +16,7 @@
 		</form>
 	</div>
 	<div class="row results-row">
-		<div class="result" ng-repeat="result in search.results" ng-class="search.computeCssClass($first, $last)">
+		<div class="result" ng-repeat="result in search.results | orderBy: '$$hashKey':search.videosReverse" ng-class="search.computeCssClass($first, $last)">
 			<div class="row inner-result">
 				<div class="col-md-6 col-sm-6 tit-descrip-container">
 					<h3>{{result.snippet.title}}</h3>
