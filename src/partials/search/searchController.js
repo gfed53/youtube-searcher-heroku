@@ -95,7 +95,6 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 			ytResults.setStatus(vm.status);
 			//Saving the results to our service
 			ytResults.setResults(vm.results);
-			console.log(vm.results);
 
 			// Autoscroll up
 			$timeout(function(){
