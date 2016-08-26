@@ -1,9 +1,9 @@
 angular
 .module('myApp')
 
-.controller('PlaylistCtrl', ['$state', '$timeout', 'ytVideoItems', 'ytSearchHistory', 'ytSearchParams', PlaylistCtrl])
+.controller('PlaylistCtrl', ['$state', '$timeout', 'ytVideoItems', 'ytSearchHistory', 'ytSearchParams', 'ytPlaylistSort', PlaylistCtrl])
 
-function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchParams){
+function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchParams, ytPlaylistSort){
 	var vm = this;
 	vm.items = ytVideoItems.services.getItems();
 	vm.setVideoId = setVideoId;
@@ -13,6 +13,10 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	vm.clearItem = clearItem;
 	vm.clearAllVideos = clearAllVideos;
 	vm.clearAllSearches = clearAllSearches;
+	vm.videoReverse = ytPlaylistSort.videos.reverse;
+	vm.videoPredicate = ytPlaylistSort.videos.predicate;
+	vm.sortVideos = sortVideos;
+	console.log(vm.items);
 
 	function grab(search){
 		var type = {
@@ -22,7 +26,6 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 		ytSearchParams.set(search);
 		ytSearchParams.setSearchType(type);
 		$state.go('search');
-		
 	}
 
 	function clear(search){
@@ -48,4 +51,17 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	function setVideoId(videoId){
 		ytVideoItems.services.setVideoId(videoId);
 	}
+
+	function sortVideos(predicate){
+		var sortObj = ytPlaylistSort.order(vm.videoPredicate, predicate, ytPlaylistSort.videos);
+		vm.videoReverse = sortObj.reverse;
+		vm.videoPredicate = sortObj.predicate;
+	}
+
+
+
 };
+
+
+
+

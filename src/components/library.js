@@ -17,7 +17,8 @@ angular
 .service('ytVideoItems', [ytVideoItems])
 .service('ytSearchHistory', ['ytSearchParams', ytSearchHistory])
 .service('ytTranslate', ['$http', '$q', ytTranslate])
-.service('ytSortOrder', [ytSortOrder]);
+.service('ytSortOrder', [ytSortOrder])
+.service('ytPlaylistSort', [ytPlaylistSort]);
 
 
 function ytTrustSrc($sce){
@@ -239,9 +240,11 @@ function ytVideoItems(){
 
 	function setItem(name, id, thumb){
 		var itemName = name+'-uytp',
+		date = new Date();
 		content = {
 			id: id,
-			thumb: thumb
+			thumb: thumb,
+			date: date
 		}
 		content = JSON.stringify(content);
 
@@ -732,5 +735,33 @@ function ytSortOrder(){
 	}
 }
 
+function ytPlaylistSort(){
+	this.videos = {
+		reverse: false,
+		predicate: '$$hashKey'
+	};
+
+	this.searches = {
+		reverse: false,
+		predicate: '$$hashKey'
+	};
+	//Name
+	this.order = order;
+	this.get = get;
+
+	function order(current, _predicate, type) {
+		type.reverse = (_predicate === current) ? !type.reverse : false;
+		type.predicate = _predicate;
+		var sortObj = {
+			reverse: type.reverse,
+			predicate: type.predicate
+		}
+		return sortObj;
+	}
+
+	function get(){
+		return sortObj;
+	}
+}
 
 

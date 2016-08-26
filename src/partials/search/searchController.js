@@ -3,7 +3,7 @@ angular
 
 .controller('SearchCtrl', ['$scope', '$location', '$timeout', '$anchorScroll', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', 'ytCheckScrollBtnStatus', 'ytTranslate', 'ytFixedHeader', 'ytSortOrder', SearchCtrl])
 
-function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus, ytTranslate, ytFixedHeader){
+function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus, ytTranslate, ytFixedHeader, ytSortOrder){
 	var vm = this;
 	vm.initMap = initMap;
 	vm.vidSubmit = vidSubmit;
