@@ -13,6 +13,11 @@
 				<span ng-if="!playlist.videoReverse && playlist.videoPredicate === 'content.dateAdded'" class="glyphicon glyphicon-triangle-top"></span>
 				<span ng-if="playlist.videoReverse && playlist.videoPredicate === 'content.dateAdded'" class="glyphicon glyphicon-triangle-bottom"></span>
 			</button>
+			<button class="btn btn-default" ng-click="playlist.sortVideos('content.datePublished')">
+			Date Published
+				<span ng-if="!playlist.videoReverse && playlist.videoPredicate === 'content.datePublished'" class="glyphicon glyphicon-triangle-top"></span>
+				<span ng-if="playlist.videoReverse && playlist.videoPredicate === 'content.datePublished'" class="glyphicon glyphicon-triangle-bottom"></span>
+			</button>
 		</div>
 	</div>	
 	<div id="video-items-container" ng-if="playlist.items.length > 0">
