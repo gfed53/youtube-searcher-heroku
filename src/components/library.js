@@ -242,6 +242,7 @@ function ytVideoItems(){
 		var itemName = result.snippet.title+'-uytp',
 		dateAdded = new Date();
 		content = {
+			name: result.snippet.title,
 			id: result.snippet.id,
 			thumb: result.snippet.thumbnails.default.url,
 			dateAdded: dateAdded,

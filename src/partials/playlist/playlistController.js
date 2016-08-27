@@ -17,7 +17,6 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	vm.videoPredicate = ytPlaylistSort.videos.predicate;
 	vm.sortVideos = sortVideos;
 	console.log(vm.items);
-	console.log(localStorage);
 
 	function grab(search){
 		var type = {
