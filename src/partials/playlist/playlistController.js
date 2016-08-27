@@ -16,7 +16,7 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	vm.videoReverse = ytPlaylistSort.videos.reverse;
 	vm.videoPredicate = ytPlaylistSort.videos.predicate;
 	vm.sortVideos = sortVideos;
-	console.log(vm.items);
+	console.log(vm.pastSearches);
 
 	function grab(search){
 		var type = {

@@ -240,7 +240,8 @@ function ytVideoItems(){
 
 	function setItem(result){
 		var itemName = result.snippet.title+'-uytp',
-		dateAdded = new Date();
+		dateAdded = new Date(),
+		//Instead of creating a new object, just use result object passed in?
 		content = {
 			name: result.snippet.title,
 			id: result.snippet.id,
@@ -248,7 +249,8 @@ function ytVideoItems(){
 			dateAdded: dateAdded,
 			datePublished: result.snippet.publishedAt
 		}
-
+		content
+		console.log(result);
 		console.log(content);
 		content = JSON.stringify(content);
 
