@@ -238,14 +238,17 @@ function ytVideoItems(){
 		return items;
 	}
 
-	function setItem(name, id, thumb){
-		var itemName = name+'-uytp',
-		date = new Date();
+	function setItem(result){
+		var itemName = result.snippet.title+'-uytp',
+		dateAdded = new Date();
 		content = {
-			id: id,
-			thumb: thumb,
-			date: date
+			id: result.snippet.id,
+			thumb: result.snippet.thumbnails.default.url,
+			dateAdded: dateAdded,
+			datePublished: result.snippet.publishedAt
 		}
+
+		console.log(content);
 		content = JSON.stringify(content);
 
 		localStorage.setItem(itemName, content);

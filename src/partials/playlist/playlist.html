@@ -3,7 +3,7 @@
 	<div id="sort-buttons">
 		<label>Sort By:</label>
 		<button class="btn btn-default" ng-click="playlist.sortVideos('name')">Name</button>
-		<button class="btn btn-default" ng-click="playlist.sortVideos('content.date')">Date Added</button>
+		<button class="btn btn-default" ng-click="playlist.sortVideos('content.dateAdded')">Date Added</button>
 	</div>	
 	<div id="video-items-container" ng-if="playlist.items.length > 0">
 		<ul id="playlist-items">
