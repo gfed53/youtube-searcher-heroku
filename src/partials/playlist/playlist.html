@@ -2,8 +2,18 @@
 	<h2>Saved Videos</h2>
 	<div id="sort-buttons">
 		<label>Sort By:</label>
-		<button class="btn btn-default" ng-click="playlist.sortVideos('name')">Name</button>
-		<button class="btn btn-default" ng-click="playlist.sortVideos('content.dateAdded')">Date Added</button>
+		<div class="btn-group btn-group-srt" role="group" aria-label="...">
+			<button class="btn btn-default" ng-click="playlist.sortVideos('name')">
+				Name
+				<span ng-if="!playlist.videoReverse && playlist.videoPredicate === 'name'" class="glyphicon glyphicon-triangle-top"></span>
+				<span ng-if="playlist.videoReverse && playlist.videoPredicate === 'name'" class="glyphicon glyphicon-triangle-bottom"></span>
+			</button>
+			<button class="btn btn-default" ng-click="playlist.sortVideos('content.dateAdded')">
+			Date Added
+				<span ng-if="!playlist.videoReverse && playlist.videoPredicate === 'content.dateAdded'" class="glyphicon glyphicon-triangle-top"></span>
+				<span ng-if="playlist.videoReverse && playlist.videoPredicate === 'content.dateAdded'" class="glyphicon glyphicon-triangle-bottom"></span>
+			</button>
+		</div>
 	</div>	
 	<div id="video-items-container" ng-if="playlist.items.length > 0">
 		<ul id="playlist-items">

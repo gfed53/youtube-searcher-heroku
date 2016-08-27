@@ -8,7 +8,11 @@
 			}
 		}
 	}
-	.btn-playlist-clear {
+	.btn-playlist-clear, #sort-buttons {
 		margin: 2em 0;
+	}
+
+	.btn-group-srt {
+		display: inline-block;
 	}
 }

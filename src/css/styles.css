@@ -97,8 +97,11 @@ body .fixed {
     #playlist #playlist-items .playlist-div p, #playlist #past-search-items .playlist-div p {
       max-width: 20em; }
 
-#playlist .btn-playlist-clear {
+#playlist .btn-playlist-clear, #playlist #sort-buttons {
   margin: 2em 0; }
+
+#playlist .btn-group-srt {
+  display: inline-block; }
 
 #bar {
   text-align: center;
