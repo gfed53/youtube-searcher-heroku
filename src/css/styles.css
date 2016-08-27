@@ -16,6 +16,8 @@ body {
     font-weight: bold; }
   body .emph {
     font-size: 1.2em; }
+  body .bold {
+    font-weight: 600; }
 
 @media screen and (min-width: 1024px) {
   body #content, body #page-footer, body input {

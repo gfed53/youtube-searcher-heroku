@@ -27,7 +27,9 @@
 					<a ng-click="playlist.setVideoId(item.content.id)" ui-sref="video({videoId: item.content.id})"><img class="my-thumbnail" ng-src="{{item.content.thumb}}" alt="image"></a>
 				</div>
 				<div class="col-md-8 playlist-div">
-					<p>{{ item.content.name || item.name }}</p>
+					<p class="emph">{{ item.content.name || item.name }}</p>
+					<p><span class="bold">ADDED:</span> {{ item.content.dateAdded | date : short }}</p>
+					<p><span class="bold">PUBLISHED:</span> {{ item.content.datePublished | date : short }}</p>
 				</div>
 				<div class="col-md-2 playlist-div">
 					<button class="btn btn-default" ng-click="playlist.clearItem(item)">Remove</button>
@@ -43,7 +45,7 @@
 			<li class="row" ng-repeat="search in playlist.pastSearches">
 				<div class="col-md-6">
 					<p class="emph">{{ search.name }}</p>
-					<p>{{ search.date | date : short }}</p>
+					<p><span class="bold">CREATED:</span> {{ search.date | date : short }}</p>
 				</div>
 				<div class="col-md-6">
 					<button ng-click="playlist.grab(search)" class="btn btn-default">Grab!</button>
