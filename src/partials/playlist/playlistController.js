@@ -13,9 +13,12 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	vm.clearItem = clearItem;
 	vm.clearAllVideos = clearAllVideos;
 	vm.clearAllSearches = clearAllSearches;
-	vm.videoReverse = ytPlaylistSort.videos.reverse;
-	vm.videoPredicate = ytPlaylistSort.videos.predicate;
+	vm.videosReverse = ytPlaylistSort.videos.reverse;
+	vm.videosPredicate = ytPlaylistSort.videos.predicate;
+	vm.searchesReverse = ytPlaylistSort.searches.reverse;
+	vm.searchesPredicate = ytPlaylistSort.searches.predicate;
 	vm.sortVideos = sortVideos;
+	vm.sortSearches = sortSearches;
 	console.log(vm.pastSearches);
 
 	function grab(search){
@@ -53,12 +56,16 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	}
 
 	function sortVideos(predicate){
-		var sortObj = ytPlaylistSort.order(vm.videoPredicate, predicate, ytPlaylistSort.videos);
-		vm.videoReverse = sortObj.reverse;
-		vm.videoPredicate = sortObj.predicate;
+		var sortObj = ytPlaylistSort.order(vm.videosPredicate, predicate, ytPlaylistSort.videos);
+		vm.videosReverse = sortObj.reverse;
+		vm.videosPredicate = sortObj.predicate;
 	}
 
-
+	function sortSearches(predicate){
+		var sortObj = ytPlaylistSort.order(vm.searchesPredicate, predicate, ytPlaylistSort.searches);
+		vm.searchesReverse = sortObj.reverse;
+		vm.searchesPredicate = sortObj.predicate;
+	}
 
 };
 
