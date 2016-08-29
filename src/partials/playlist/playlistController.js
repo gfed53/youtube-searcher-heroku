@@ -20,6 +20,7 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	vm.sortVideos = sortVideos;
 	vm.sortSearches = sortSearches;
 	console.log(vm.pastSearches);
+	console.log(vm.items);
 
 	function grab(search){
 		var type = {

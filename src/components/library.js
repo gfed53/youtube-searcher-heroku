@@ -241,15 +241,8 @@ function ytVideoItems(){
 	function setItem(result){
 		var itemName = result.snippet.title+'-uytp',
 		dateAdded = new Date(),
-		//Instead of creating a new object, just use result object passed in?
-		content = {
-			name: result.snippet.title,
-			id: result.snippet.id,
-			thumb: result.snippet.thumbnails.default.url,
-			dateAdded: dateAdded,
-			datePublished: result.snippet.publishedAt
-		}
-		content
+		content = result;
+		content.dateAdded = dateAdded;
 		console.log(result);
 		console.log(content);
 		content = JSON.stringify(content);
@@ -431,6 +424,7 @@ function ytSearchHistory(ytSearchParams){
 
 	function set(params){
 		params.name = prompt('Enter a name for this saved search..');
+		params.nameShrt = params.name;
 		params.name = params.name+'-uyts';
 		params.date = Date.now();
 		this.pastSearches.push(params);

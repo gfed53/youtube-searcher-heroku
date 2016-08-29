@@ -13,7 +13,7 @@
 				<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'content.dateAdded'" class="glyphicon glyphicon-triangle-top"></span>
 				<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'content.dateAdded'" class="glyphicon glyphicon-triangle-bottom"></span>
 			</button>
-			<button class="btn btn-default" ng-click="playlist.sortVideos('content.datePublished')">
+			<button class="btn btn-default" ng-click="playlist.sortVideos('content.datePublished || content.snippet.publishedAt')">
 			Date Published
 				<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'content.datePublished'" class="glyphicon glyphicon-triangle-top"></span>
 				<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'content.datePublished'" class="glyphicon glyphicon-triangle-bottom"></span>
@@ -24,12 +24,12 @@
 		<ul id="playlist-items">
 			<li class="row" ng-repeat="item in playlist.items | orderBy:playlist.videosPredicate:playlist.videosReverse">
 				<div class="col-md-2 playlist-div">
-					<a ng-click="playlist.setVideoId(item.content.id)" ui-sref="video({videoId: item.content.id})"><img class="my-thumbnail" ng-src="{{item.content.thumb}}" alt="image"></a>
+					<a ng-click="playlist.setVideoId(item.content.id)" ui-sref="video({videoId: item.content.id})"><img class="my-thumbnail" ng-src="{{item.content.thumb || item.content.snippet.thumbnails.default.url}}" alt="image"></a>
 				</div>
 				<div class="col-md-8 playlist-div">
 					<p class="emph">{{ item.content.name || item.name }}</p>
 					<p><span class="bold">ADDED:</span> {{ item.content.dateAdded | date : short }}</p>
-					<p><span class="bold">PUBLISHED:</span> {{ item.content.datePublished | date : short }}</p>
+					<p><span class="bold">PUBLISHED:</span> {{ item.content.datePublished || item.content.snippet.publishedAt | date : short }}</p>
 				</div>
 				<div class="col-md-2 playlist-div">
 					<button class="btn btn-default" ng-click="playlist.clearItem(item)">Remove</button>
@@ -48,23 +48,18 @@
 				<span ng-if="!playlist.searchesReverse && playlist.searchesPredicate === 'name'" class="glyphicon glyphicon-triangle-top"></span>
 				<span ng-if="playlist.searchesReverse && playlist.searchesPredicate === 'name'" class="glyphicon glyphicon-triangle-bottom"></span>
 			</button>
-			<button class="btn btn-default" ng-click="playlist.sortSearches('content.date')">
+			<button class="btn btn-default" ng-click="playlist.sortSearches('date')">
 			Date Added
-				<span ng-if="!playlist.searchesReverse && playlist.searchesPredicate === 'content.date'" class="glyphicon glyphicon-triangle-top"></span>
-				<span ng-if="playlist.searchesReverse && playlist.searchesPredicate === 'content.date'" class="glyphicon glyphicon-triangle-bottom"></span>
+				<span ng-if="!playlist.searchesReverse && playlist.searchesPredicate === 'date'" class="glyphicon glyphicon-triangle-top"></span>
+				<span ng-if="playlist.searchesReverse && playlist.searchesPredicate === 'date'" class="glyphicon glyphicon-triangle-bottom"></span>
 			</button>
-<!-- 			<button class="btn btn-default" ng-click="playlist.sortVideos('content.datePublished')">
-			Date Published
-				<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'content.datePublished'" class="glyphicon glyphicon-triangle-top"></span>
-				<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'content.datePublished'" class="glyphicon glyphicon-triangle-bottom"></span>
-			</button> -->
 		</div>
 	</div>
 	<div id="past-search-container"  ng-if="playlist.pastSearches.length > 0">
 		<ul id="past-search-items">
 			<li class="row" ng-repeat="search in playlist.pastSearches | orderBy:playlist.searchesPredicate:playlist.searchesReverse">
 				<div class="col-md-6">
-					<p class="emph">{{ search.name }}</p>
+					<p class="emph">{{ search.nameShrt || search.name }}</p>
 					<p><span class="bold">CREATED:</span> {{ search.date | date : short }}</p>
 				</div>
 				<div class="col-md-6">
