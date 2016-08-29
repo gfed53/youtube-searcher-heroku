@@ -19,8 +19,6 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	vm.searchesPredicate = ytPlaylistSort.searches.predicate;
 	vm.sortVideos = sortVideos;
 	vm.sortSearches = sortSearches;
-	console.log(vm.pastSearches);
-	console.log(vm.items);
 
 	function grab(search){
 		var type = {
@@ -60,6 +58,8 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 		var sortObj = ytPlaylistSort.order(vm.videosPredicate, predicate, ytPlaylistSort.videos);
 		vm.videosReverse = sortObj.reverse;
 		vm.videosPredicate = sortObj.predicate;
+		console.log(vm.videosPredicate);
+		console.log(vm.videosReverse);
 	}
 
 	function sortSearches(predicate){

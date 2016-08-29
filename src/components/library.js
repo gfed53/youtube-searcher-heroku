@@ -243,8 +243,6 @@ function ytVideoItems(){
 		dateAdded = new Date(),
 		content = result;
 		content.dateAdded = dateAdded;
-		console.log(result);
-		console.log(content);
 		content = JSON.stringify(content);
 
 		localStorage.setItem(itemName, content);
