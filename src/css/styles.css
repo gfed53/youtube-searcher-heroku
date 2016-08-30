@@ -92,6 +92,10 @@ body .fixed {
   #header-menu {
     font-size: 1em; } }
 
+#playlist h2 {
+  display: inline-block;
+  font-size: 1.5em; }
+
 #playlist #playlist-items, #playlist #past-search-items {
   list-style-type: decimal; }
   #playlist #playlist-items .playlist-div, #playlist #past-search-items .playlist-div {
@@ -99,11 +103,19 @@ body .fixed {
     #playlist #playlist-items .playlist-div p, #playlist #past-search-items .playlist-div p {
       max-width: 20em; }
 
-#playlist .btn-playlist-clear, #playlist #sort-buttons {
+#playlist .btn-playlist-clear, #playlist .sort-buttons {
   margin: 2em 0; }
+
+#playlist .btn-play-toggle {
+  vertical-align: middle;
+  margin: 0 0 1em 1em; }
 
 #playlist .btn-group-srt {
   display: inline-block; }
+
+@media screen and (min-width: 364px) {
+  #playlist h2 {
+    font-size: 2em; } }
 
 #bar {
   text-align: center;

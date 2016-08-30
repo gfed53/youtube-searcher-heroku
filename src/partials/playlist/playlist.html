@@ -1,26 +1,32 @@
 <div id="playlist">
-	<h2>Saved Videos</h2>
-	<div class="sort-buttons">
-		<label>Sort By:</label>
-		<div class="btn-group btn-group-srt" role="group" aria-label="...">
-			<button class="btn btn-default" ng-click="playlist.sortVideos('name')">
-				Name
-				<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'name'" class="glyphicon glyphicon-triangle-top"></span>
-				<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'name'" class="glyphicon glyphicon-triangle-bottom"></span>
-			</button>
-			<button class="btn btn-default" ng-click="playlist.sortVideos('content.dateAdded')">
-				Date Added
-				<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'content.dateAdded'" class="glyphicon glyphicon-triangle-top"></span>
-				<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'content.dateAdded'" class="glyphicon glyphicon-triangle-bottom"></span>
-			</button>
-			<button class="btn btn-default" ng-click="playlist.sortVideos('content.snippet.publishedAt || content.datePublished')">
-				Date Published
-				<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'content.snippet.publishedAt || content.datePublished'" class="glyphicon glyphicon-triangle-top"></span>
-				<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'content.snippet.publishedAt || content.datePublished'" class="glyphicon glyphicon-triangle-bottom"></span>
-			</button>
+	<div class="playlist-section-header">
+		<h2>Saved Videos</h2>
+		<button class="btn btn-default btn-play-toggle" ng-click="playlist.videosCollapse = !playlist.videosCollapse">
+			<span ng-if="playlist.videosCollapse">Expand</span>
+			<span ng-if="!playlist.videosCollapse">Collapse</span>
+		</button>
+	</div>
+	<div id="video-items-container" ng-if="playlist.items.length > 0" uib-collapse="playlist.videosCollapse">
+		<div class="sort-buttons">
+			<label>Sort By:</label>
+			<div class="btn-group btn-group-srt" role="group" aria-label="...">
+				<button class="btn btn-default" ng-click="playlist.sortVideos('name')">
+					Name
+					<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'name'" class="glyphicon glyphicon-triangle-top"></span>
+					<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'name'" class="glyphicon glyphicon-triangle-bottom"></span>
+				</button>
+				<button class="btn btn-default" ng-click="playlist.sortVideos('content.dateAdded')">
+					Date Added
+					<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'content.dateAdded'" class="glyphicon glyphicon-triangle-top"></span>
+					<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'content.dateAdded'" class="glyphicon glyphicon-triangle-bottom"></span>
+				</button>
+				<button class="btn btn-default" ng-click="playlist.sortVideos('content.snippet.publishedAt || content.datePublished')">
+					Date Published
+					<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'content.snippet.publishedAt || content.datePublished'" class="glyphicon glyphicon-triangle-top"></span>
+					<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'content.snippet.publishedAt || content.datePublished'" class="glyphicon glyphicon-triangle-bottom"></span>
+				</button>
+			</div>
 		</div>
-	</div>	
-	<div id="video-items-container" ng-if="playlist.items.length > 0">
 		<uib-accordion>
 			<uib-accordion-group ng-repeat="item in playlist.items | orderBy:playlist.videosPredicate:playlist.videosReverse">
 				<uib-accordion-heading>
@@ -41,53 +47,49 @@
 				</div>
 			</uib-accordion-group>
 		</uib-accordion>
-		<!-- <ul id="playlist-items">
-			<li class="row" ng-repeat="item in playlist.items | orderBy:playlist.videosPredicate:playlist.videosReverse">
-				<div class="col-md-2 playlist-div">
-					<a ng-click="playlist.setVideoId(item.content.id)" ui-sref="video({videoId: item.content.id})"><img class="my-thumbnail" ng-src="{{item.content.thumb || item.content.snippet.thumbnails.default.url}}" alt="image"></a>
-				</div>
-				<div class="col-md-8 playlist-div">
-					<p class="emph">{{ item.content.name || item.content.snippet.title || item.name }}</p>
-					<p><span class="bold">ADDED:</span> {{ item.content.dateAdded | date : short }}</p>
-					<p><span class="bold">PUBLISHED:</span> {{ item.content.datePublished || item.content.snippet.publishedAt | date : short }}</p>
-				</div>
-				<div class="col-md-2 playlist-div">
-					<button class="btn btn-default" ng-click="playlist.clearItem(item)">Remove</button>
-				</div>
-			</li>
-		</ul> -->
 		<button ng-click="playlist.clearAllVideos()" class="btn btn-default btn-playlist-clear">Clear Videos</button>
 	</div>
 	<p ng-if="playlist.items.length === 0">No saved videos present. See the "About" page for more info on how to save video.</p>
-	<h2>Saved Searches</h2>
-	<div class="sort-buttons">
-		<label>Sort By:</label>
-		<div class="btn-group btn-group-srt" role="group" aria-label="...">
-			<button class="btn btn-default" ng-click="playlist.sortSearches('name')">
-				Name
-				<span ng-if="!playlist.searchesReverse && playlist.searchesPredicate === 'name'" class="glyphicon glyphicon-triangle-top"></span>
-				<span ng-if="playlist.searchesReverse && playlist.searchesPredicate === 'name'" class="glyphicon glyphicon-triangle-bottom"></span>
-			</button>
-			<button class="btn btn-default" ng-click="playlist.sortSearches('date')">
-				Date Added
-				<span ng-if="!playlist.searchesReverse && playlist.searchesPredicate === 'date'" class="glyphicon glyphicon-triangle-top"></span>
-				<span ng-if="playlist.searchesReverse && playlist.searchesPredicate === 'date'" class="glyphicon glyphicon-triangle-bottom"></span>
-			</button>
-		</div>
+	<div class="playlist-section-header">
+		<h2>Saved Searches</h2>
+		<button class="btn btn-default btn-play-toggle" ng-click="playlist.searchesCollapse = !playlist.searchesCollapse">
+			<span ng-if="playlist.searchesCollapse">Expand</span>
+			<span ng-if="!playlist.searchesCollapse">Collapse</span>
+		</button>
 	</div>
-	<div id="past-search-container"  ng-if="playlist.pastSearches.length > 0">
-		<ul id="past-search-items">
-			<li class="row" ng-repeat="search in playlist.pastSearches | orderBy:playlist.searchesPredicate:playlist.searchesReverse">
-				<div class="col-md-6">
-					<p class="emph">{{ search.nameShrt || search.name }}</p>
-					<p><span class="bold">CREATED:</span> {{ search.date | date : short }}</p>
+	<div id="past-search-container" ng-if="playlist.pastSearches.length > 0" uib-collapse="playlist.searchesCollapse">
+		<div class="sort-buttons">
+			<label>Sort By:</label>
+			<div class="btn-group btn-group-srt" role="group" aria-label="...">
+				<button class="btn btn-default" ng-click="playlist.sortSearches('name')">
+					Name
+					<span ng-if="!playlist.searchesReverse && playlist.searchesPredicate === 'name'" class="glyphicon glyphicon-triangle-top"></span>
+					<span ng-if="playlist.searchesReverse && playlist.searchesPredicate === 'name'" class="glyphicon glyphicon-triangle-bottom"></span>
+				</button>
+				<button class="btn btn-default" ng-click="playlist.sortSearches('date')">
+					Date Added
+					<span ng-if="!playlist.searchesReverse && playlist.searchesPredicate === 'date'" class="glyphicon glyphicon-triangle-top"></span>
+					<span ng-if="playlist.searchesReverse && playlist.searchesPredicate === 'date'" class="glyphicon glyphicon-triangle-bottom"></span>
+				</button>
+			</div>
+		</div>		
+		<uib-accordion>
+			<uib-accordion-group ng-repeat="search in playlist.pastSearches | orderBy:playlist.searchesPredicate:playlist.searchesReverse">
+				<uib-accordion-heading>
+					{{ search.nameShrt || search.name }}
+				</uib-accordion-heading>
+				<div class="row">
+					<div class="col-md-6">
+						<p class="emph">{{ search.nameShrt || search.name }}</p>
+						<p><span class="bold">CREATED:</span> {{ search.date | date : short }}</p>
+					</div>
+					<div class="col-md-6">
+						<button ng-click="playlist.grab(search)" class="btn btn-default">Grab!</button>
+						<button ng-click="playlist.clear(search)" class="btn btn-default">Remove</button>
+					</div>
 				</div>
-				<div class="col-md-6">
-					<button ng-click="playlist.grab(search)" class="btn btn-default">Grab!</button>
-					<button ng-click="playlist.clear(search)" class="btn btn-default">Remove</button>
-				</div>
-			</li>
-		</ul>
+			</uib-accordion-group>
+		</uib-accordion>
 		<button ng-click="playlist.clearAllSearches()" class="btn btn-default btn-playlist-clear">Clear History</button>
 	</div>
 	<p ng-if="playlist.pastSearches.length === 0">No saved searches present. See the "About" page for more info on how to save searches.</p>

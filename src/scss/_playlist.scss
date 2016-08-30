@@ -1,4 +1,8 @@
 #playlist {
+	h2 {
+		display: inline-block;
+		font-size: 1.5em;
+	}
 	#playlist-items, #past-search-items {
 		list-style-type: decimal;
 		.playlist-div {
@@ -8,11 +12,24 @@
 			}
 		}
 	}
-	.btn-playlist-clear, #sort-buttons {
+	.btn-playlist-clear, .sort-buttons {
 		margin: 2em 0;
+	}
+
+	.btn-play-toggle {
+		vertical-align: middle;
+		margin: 0 0 1em 1em;
 	}
 
 	.btn-group-srt {
 		display: inline-block;
+	}
+}
+
+@media screen and ($mobile4){
+	#playlist {
+		h2 {
+			font-size: 2em;
+		}
 	}
 }

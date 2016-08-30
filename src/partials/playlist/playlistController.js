@@ -17,6 +17,8 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	vm.videosPredicate = ytPlaylistSort.videos.predicate;
 	vm.searchesReverse = ytPlaylistSort.searches.reverse;
 	vm.searchesPredicate = ytPlaylistSort.searches.predicate;
+	vm.videosCollapse = true;
+	vm.searchesCollapse = true;
 	vm.sortVideos = sortVideos;
 	vm.sortSearches = sortSearches;
 
