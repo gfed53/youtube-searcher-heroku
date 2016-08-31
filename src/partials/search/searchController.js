@@ -40,19 +40,19 @@ function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube,
 
 	$location.url('/search');
 
-	$scope.$watch('search.status.videosCollapsed', function(current, original){
-			var showText = 'Show Videos',
-			hideText = 'Hide Videos';
+	// $scope.$watch('search.status.videosCollapsed', function(current, original){
+	// 		var showText = 'Show Videos',
+	// 		hideText = 'Hide Videos';
 			
-			vm.status.videoButtonValue = ytResults.checkStatus(current, original, vm.status.videoButtonValue, showText, hideText);
-		});
+	// 		vm.status.videoButtonValue = ytResults.checkStatus(current, original, vm.status.videoButtonValue, showText, hideText);
+	// 	});
 
-	$scope.$watch('search.status.channelsCollapsed', function(current, original){
-			var showText = 'Show Channels',
-			hideText = 'Hide Channels';
+	// $scope.$watch('search.status.channelsCollapsed', function(current, original){
+	// 		var showText = 'Show Channels',
+	// 		hideText = 'Hide Channels';
 
-			vm.status.channelButtonValue = ytResults.checkStatus(current, original, vm.status.channelButtonValue, showText, hideText);
-		});
+	// 		vm.status.channelButtonValue = ytResults.checkStatus(current, original, vm.status.channelButtonValue, showText, hideText);
+	// 	});
 
 	window.addEventListener('scroll', function(){
 		$scope.$apply(vm.scrollBtn = ytCheckScrollBtnStatus().check());

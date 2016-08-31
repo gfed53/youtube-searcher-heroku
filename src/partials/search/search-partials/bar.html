@@ -101,8 +101,22 @@
 	</div>
 </div>
 <div class="btn-group-vertical" role="group" aria-label="...">
-	<button type="button" class="btn btn-default" id="btn-videos" ng-if="search.results.length > 0" ng-click="search.status.videosCollapsed = !search.status.videosCollapsed">{{search.status.videoButtonValue}}</button>
-	<button type="button" class="btn btn-default" id="btn-channels" ng-if="search.chanResults.length > 0" ng-click="search.status.channelsCollapsed = !search.status.channelsCollapsed">{{search.status.channelButtonValue}}</button>
+	<button type="button" class="btn btn-default" id="btn-videos" ng-if="search.results.length > 0" ng-click="search.status.videosCollapsed = !search.status.videosCollapsed">
+		<span ng-if="search.status.videosCollapsed">
+			Show Videos
+		</span>
+		<span ng-if="!search.status.videosCollapsed">
+			Hide Videos
+		</span>
+	</button>
+	<button type="button" class="btn btn-default" id="btn-channels" ng-if="search.chanResults.length > 0" ng-click="search.status.channelsCollapsed = !search.status.channelsCollapsed">
+		<span ng-if="search.status.channelsCollapsed">
+			Show Channels
+		</span>
+		<span ng-if="!search.status.channelsCollapsed">
+			Hide Channels
+		</span>
+	</button>
 	<button type="button" class="btn btn-default" ng-if="search.results.length > 0" ng-click="search.sort()">Video Order
 	<span ng-if="!search.videosReverse" class="glyphicon glyphicon-triangle-top"></span>
 	<span ng-if="search.videosReverse" class="glyphicon glyphicon-triangle-bottom"></span>
