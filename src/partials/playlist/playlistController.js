@@ -21,6 +21,8 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	vm.searchesCollapse = true;
 	vm.sortVideos = sortVideos;
 	vm.sortSearches = sortSearches;
+	vm.videoTabStatus = false;
+	vm.closeAll = closeAll;
 
 	function grab(search){
 		var type = {
@@ -37,7 +39,6 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	}
 
 	function clearAllSearches(){
-		// vm.pastSearches = [];
 		vm.pastSearches = ytSearchHistory.clearAll();
 	}
 
@@ -48,7 +49,6 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	}
 
 	function clearAllVideos(){
-		// vm.items = [];
 		vm.items = ytVideoItems.services.clearAllItems();
 	}
 
@@ -66,6 +66,12 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 		var sortObj = ytPlaylistSort.order(vm.searchesPredicate, predicate, ytPlaylistSort.searches);
 		vm.searchesReverse = sortObj.reverse;
 		vm.searchesPredicate = sortObj.predicate;
+	}
+
+	function closeAll(){
+		vm.items.forEach(function(e){
+			e.state = false;
+		});
 	}
 
 };
