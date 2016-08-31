@@ -24,8 +24,7 @@ body {
     font-size: 1em; } }
 
 #about {
-  margin: 2.5em 2em 10em 2em;
-  font-weight: bold; }
+  margin: 2.5em 2em 10em 2em; }
   #about #about-intro {
     margin: 2em 0; }
   #about #about-guide h2 {
