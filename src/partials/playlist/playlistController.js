@@ -68,12 +68,11 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 		vm.searchesPredicate = sortObj.predicate;
 	}
 
-	function closeAll(){
-		vm.items.forEach(function(e){
+	function closeAll(group){
+		group.forEach(function(e){
 			e.state = false;
 		});
 	}
-
 };
 
 

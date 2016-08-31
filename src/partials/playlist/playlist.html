@@ -28,7 +28,7 @@
 			</div>
 		</div>
 		<div>
-			<button class="btn btn-default btn-close-all" ng-click="playlist.closeAll()">Close All</button>
+			<button class="btn btn-default btn-close-all" ng-click="playlist.closeAll(playlist.items)">Close All</button>
 		</div>
 		<uib-accordion close-others="false">
 			<uib-accordion-group ng-repeat="item in playlist.items | orderBy:playlist.videosPredicate:playlist.videosReverse" is-open="item.state">
@@ -75,12 +75,12 @@
 					<span ng-if="playlist.searchesReverse && playlist.searchesPredicate === 'date'" class="glyphicon glyphicon-triangle-bottom"></span>
 				</button>
 			</div>
-			<div>
-				<button class="btn btn-default btn-close-all">Close All</button>
-			</div>
-		</div>		
+		</div>
+		<div>
+			<button class="btn btn-default btn-close-all" ng-click="playlist.closeAll(playlist.pastSearches)">Close All</button>
+		</div>
 		<uib-accordion close-others="false">
-			<uib-accordion-group ng-repeat="search in playlist.pastSearches | orderBy:playlist.searchesPredicate:playlist.searchesReverse">
+			<uib-accordion-group ng-repeat="search in playlist.pastSearches | orderBy:playlist.searchesPredicate:playlist.searchesReverse" is-open="search.state">
 				<uib-accordion-heading>
 					{{ search.nameShrt || search.name }}
 				</uib-accordion-heading>

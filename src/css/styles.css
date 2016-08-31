@@ -115,6 +115,9 @@ body .fixed {
 #playlist .btn-group-srt {
   display: inline-block; }
 
+#playlist .btn-close-all {
+  margin-bottom: 1em; }
+
 @media screen and (min-width: 364px) {
   #playlist h2 {
     font-size: 2em; } }
