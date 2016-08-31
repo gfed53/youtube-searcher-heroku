@@ -37,8 +37,8 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	}
 
 	function clearAllSearches(){
-		vm.pastSearches = [];
-		ytSearchHistory.clearAll();
+		// vm.pastSearches = [];
+		vm.pastSearches = ytSearchHistory.clearAll();
 	}
 
 	function clearItem(item){
@@ -48,8 +48,8 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	}
 
 	function clearAllVideos(){
-		vm.items = [];
-		ytVideoItems.services.clearAllItems();
+		// vm.items = [];
+		vm.items = ytVideoItems.services.clearAllItems();
 	}
 
 	function setVideoId(videoId){

@@ -254,12 +254,16 @@ function ytVideoItems(){
 	}
 
 	function clearAllItems(){
-		items = [];
-		for(key in localStorage){
-			if(key.includes('uytp')){
-				localStorage.removeItem(key);
+		var bool = confirm('Caution! This will permanently erased all of your saved videos. Are you sure you want to proceed?');
+		if(bool){
+			items = [];
+			for(key in localStorage){
+				if(key.includes('uytp')){
+					localStorage.removeItem(key);
+				}
 			}
 		}
+		return items;
 	}
 
 	function getVideoId(){
@@ -437,12 +441,17 @@ function ytSearchHistory(ytSearchParams){
 
 	function clearAll(){
 		//Clears all past searches
-		this.pastSearches = [];
-		for(key in localStorage){
-			if(key.includes('uyts')){
-				localStorage.removeItem(key);
+		var bool = confirm('Caution! This will permanently erased all of your saved searches. Are you sure you want to proceed?');
+		if(bool){
+			this.pastSearches = [];
+			for(key in localStorage){
+				if(key.includes('uyts')){
+					localStorage.removeItem(key);
+				}
 			}
 		}
+
+		return this.pastSearches;
 	}
 
 	function getIndexIfObjWithAttr(array, attr, value) {
