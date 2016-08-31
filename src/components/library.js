@@ -8,7 +8,6 @@ angular
 .factory('ytComputeCssClass', [ytComputeCssClass])
 .factory('ytScrollTo', ['$location', '$anchorScroll', ytScrollTo])
 .factory('ytFixedHeader', [ytFixedHeader])
-// .service('ytFixedHeader', [ytFixedHeader])
 .factory('ytCheckScrollBtnStatus', [ytCheckScrollBtnStatus])
 .factory('ytInitMap', [ytInitMap])
 .service('ytChanFilter', [ytChanFilter])

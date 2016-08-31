@@ -27,7 +27,7 @@
 				</button>
 			</div>
 		</div>
-		<uib-accordion>
+		<uib-accordion close-others="false">
 			<uib-accordion-group ng-repeat="item in playlist.items | orderBy:playlist.videosPredicate:playlist.videosReverse">
 				<uib-accordion-heading>
 					{{ item.content.name || item.content.snippet.title || item.name }}
@@ -42,7 +42,7 @@
 						<p><span class="bold">PUBLISHED:</span> {{ item.content.datePublished || item.content.snippet.publishedAt | date : short }}</p>
 					</div>
 					<div class="col-md-2 playlist-div">
-						<button class="btn btn-default" ng-click="playlist.clearItem(item)">Remove</button>
+						<button class="btn btn-danger" ng-click="playlist.clearItem(item)">Remove</button>
 					</div>
 				</div>
 			</uib-accordion-group>
@@ -73,7 +73,7 @@
 				</button>
 			</div>
 		</div>		
-		<uib-accordion>
+		<uib-accordion close-others="false">
 			<uib-accordion-group ng-repeat="search in playlist.pastSearches | orderBy:playlist.searchesPredicate:playlist.searchesReverse">
 				<uib-accordion-heading>
 					{{ search.nameShrt || search.name }}
@@ -83,13 +83,13 @@
 						<p><span class="bold">CREATED:</span> {{ search.date | date : short }}</p>
 					</div>
 					<div class="col-md-6">
-						<button ng-click="playlist.grab(search)" class="btn btn-default">Grab!</button>
-						<button ng-click="playlist.clear(search)" class="btn btn-default">Remove</button>
+						<button ng-click="playlist.grab(search)" class="btn btn-success">Grab!</button>
+						<button ng-click="playlist.clear(search)" class="btn btn-danger">Remove</button>
 					</div>
 				</div>
 			</uib-accordion-group>
 		</uib-accordion>
-		<button ng-click="playlist.clearAllSearches()" class="btn btn-danger btn-playlist-clear">Clear History</button>
+		<button ng-click="playlist.clearAllSearches()" class="btn btn-danger btn-playlist-clear">Clear Searches</button>
 	</div>
 	<p ng-if="playlist.pastSearches.length === 0">No saved searches present. See the "About" page for more info on how to save searches.</p>
 </div>
