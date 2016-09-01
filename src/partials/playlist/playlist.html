@@ -37,7 +37,7 @@
 				</uib-accordion-heading>
 				<div class="row">
 					<div class="col-md-2 playlist-div">
-						<a ng-click="playlist.setVideoId(item.content.id)" ui-sref="video({videoId: item.content.id})"><img class="my-thumbnail" ng-src="{{item.content.thumb || item.content.snippet.thumbnails.default.url}}" alt="image"></a>
+						<a ng-click="playlist.setVideoId(item.content.id)" ui-sref="video({videoId: item.content.id.videoId})"><img class="my-thumbnail" ng-src="{{item.content.thumb || item.content.snippet.thumbnails.default.url}}" alt="image"></a>
 					</div>
 					<div class="col-md-8 playlist-div">
 						<p class="emph">{{ item.content.name || item.content.snippet.title || item.name }}</p>
