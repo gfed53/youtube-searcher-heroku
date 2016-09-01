@@ -425,11 +425,13 @@ function ytSearchHistory(ytSearchParams){
 
 	function set(params){
 		params.name = prompt('Enter a name for this saved search..');
-		params.nameShrt = params.name;
-		params.name = params.name+'-uyts';
-		params.date = Date.now();
-		this.pastSearches.push(params);
-		localStorage.setItem(params.name, JSON.stringify(params));
+		if(params.name){
+			params.nameShrt = params.name;
+			params.name = params.name+'-uyts';
+			params.date = Date.now();
+			this.pastSearches.push(params);
+			localStorage.setItem(params.name, JSON.stringify(params));
+		}
 	}
 
 	function clearItem(search){
