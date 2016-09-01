@@ -431,6 +431,9 @@ function ytSearchHistory(ytSearchParams){
 			params.date = Date.now();
 			this.pastSearches.push(params);
 			localStorage.setItem(params.name, JSON.stringify(params));
+		} else if(params.name === "") {
+			alert("Failed. You must enter a name for the search to be saved.");
+			this.set(params);
 		}
 	}
 
