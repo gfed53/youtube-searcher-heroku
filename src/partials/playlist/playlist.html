@@ -25,13 +25,19 @@
 					<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'content.snippet.publishedAt || content.datePublished'" class="glyphicon glyphicon-triangle-top"></span>
 					<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'content.snippet.publishedAt || content.datePublished'" class="glyphicon glyphicon-triangle-bottom"></span>
 				</button>
+<!-- 				<label for="">Filter By:</label>
+				<input type="text" class="form-control" ng-model="playlist.videoFilter" placeholder="keyword.."> -->
 			</div>
+		</div>
+		<div class="filter-buttons">
+			<label for="">Filter By:</label>
+			<input type="text" class="form-control" ng-model="playlist.videoFilter" placeholder="keyword..">
 		</div>
 		<div>
 			<button class="btn btn-default btn-close-all" ng-click="playlist.closeAll(playlist.items)">Close All</button>
 		</div>
 		<uib-accordion close-others="false">
-			<uib-accordion-group ng-repeat="item in playlist.items | orderBy:playlist.videosPredicate:playlist.videosReverse" is-open="item.state">
+			<uib-accordion-group ng-repeat="item in playlist.items | orderBy:playlist.videosPredicate:playlist.videosReverse | filter:playlist.videoFilter" is-open="item.state">
 				<uib-accordion-heading>
 					{{ item.content.name || item.content.snippet.title || item.name }}
 				</uib-accordion-heading>

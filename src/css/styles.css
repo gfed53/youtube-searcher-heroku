@@ -118,9 +118,14 @@ body .fixed {
 #playlist .btn-close-all {
   margin-bottom: 1em; }
 
+#playlist .filter-buttons {
+  margin: 1em 0; }
+
 @media screen and (min-width: 364px) {
   #playlist h2 {
-    font-size: 2em; } }
+    font-size: 2em; }
+  #playlist .filter-buttons input {
+    width: 12em; } }
 
 #bar {
   text-align: center;
