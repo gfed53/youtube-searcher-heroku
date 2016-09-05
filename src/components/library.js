@@ -779,7 +779,8 @@ function ytPlaylistSort(){
 function ytFilters(){
 	return function(){
 		var services = {
-			addedAfterFilter: addedAfterFilter
+			addedAfterFilter: addedAfterFilter,
+			addedBeforeFilter: addedBeforeFilter
 		};
 
 		return services;
@@ -790,6 +791,20 @@ function ytFilters(){
 					var dateAdded = parseInt(moment(video.content.dateAdded).format('X')),
 					after = parseInt(moment(videoFilter.addedAfter).format('X'));
 					return (dateAdded >= after);
+				} else {
+					return false;
+				}
+			} else {
+				return true;
+			}
+		}
+
+		function addedBeforeFilter(video, videoFilter){
+			if(videoFilter && videoFilter.addedBefore){
+				if(video.content.dateAdded){
+					var dateAdded = parseInt(moment(video.content.dateAdded).format('X')),
+					before = parseInt(moment(videoFilter.addedBefore).format('X'));
+					return (dateAdded < before);
 				} else {
 					return false;
 				}

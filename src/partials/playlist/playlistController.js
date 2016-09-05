@@ -26,6 +26,7 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	console.log(vm.items);
 	console.log(vm.pastSearches);
 	vm.addedAfterFilter = addedAfterFilter;
+	vm.addedBeforeFilter = addedBeforeFilter;
 	vm.sampleFilterToggle = true;
 	vm.sampleFilter = sampleFilter;
 	vm.now = moment().format('X');
@@ -85,6 +86,11 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	function addedAfterFilter(video){
 		return ytFilters().addedAfterFilter(video, vm.videoFilter);
 	}
+
+	function addedBeforeFilter(video){
+		return ytFilters().addedBeforeFilter(video, vm.videoFilter);
+	}
+
 	//testing
 	function sampleFilter(video){
 		return (vm.sampleFilterToggle ? video.content.id : true);
