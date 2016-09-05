@@ -125,7 +125,8 @@ body .fixed {
   #playlist h2 {
     font-size: 2em; }
   #playlist .filter-buttons input {
-    width: 12em; } }
+    width: 12em;
+    display: inline-block; } }
 
 #bar {
   text-align: center;

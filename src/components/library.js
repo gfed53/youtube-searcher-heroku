@@ -10,6 +10,7 @@ angular
 .factory('ytFixedHeader', [ytFixedHeader])
 .factory('ytCheckScrollBtnStatus', [ytCheckScrollBtnStatus])
 .factory('ytInitMap', [ytInitMap])
+.factory('ytFilters', [ytFilters])
 .service('ytChanFilter', [ytChanFilter])
 .service('ytSearchParams', [ytSearchParams])
 .service('ytResults', [ytResults])
@@ -239,7 +240,7 @@ function ytVideoItems(){
 
 	function setItem(result){
 		var itemName = result.snippet.title+'-uytp',
-		dateAdded = new Date(),
+		dateAdded = Date.now(),
 		content = result;
 		content.dateAdded = dateAdded;
 		content = JSON.stringify(content);
@@ -772,6 +773,30 @@ function ytPlaylistSort(){
 
 	function get(){
 		return sortObj;
+	}
+}
+
+function ytFilters(){
+	return function(){
+		var services = {
+			addedAfterFilter: addedAfterFilter
+		};
+
+		return services;
+
+		function addedAfterFilter(video, videoFilter){
+			if(videoFilter && videoFilter.addedAfter){
+				if(video.content.dateAdded){
+					var dateAdded = parseInt(moment(video.content.dateAdded).format('X')),
+					after = parseInt(moment(videoFilter.addedAfter).format('X'));
+					return (dateAdded >= after);
+				} else {
+					return false;
+				}
+			} else {
+				return true;
+			}
+		}
 	}
 }
 

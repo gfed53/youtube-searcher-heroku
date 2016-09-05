@@ -33,9 +33,6 @@
 	}
 	.filter-buttons {
 		margin: 1em 0;
-		// input {
-		// 	width: 8em;
-		// }
 	}
 }
 
@@ -47,6 +44,7 @@
 		.filter-buttons {
 			input {
 				width: 12em;
+				display: inline-block;
 			}
 		}
 	}

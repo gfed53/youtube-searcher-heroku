@@ -1,9 +1,9 @@
 angular
 .module('myApp')
 
-.controller('PlaylistCtrl', ['$state', '$timeout', 'ytVideoItems', 'ytSearchHistory', 'ytSearchParams', 'ytPlaylistSort', PlaylistCtrl])
+.controller('PlaylistCtrl', ['$state', '$timeout', 'ytVideoItems', 'ytSearchHistory', 'ytSearchParams', 'ytPlaylistSort', 'ytFilters', PlaylistCtrl])
 
-function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchParams, ytPlaylistSort){
+function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchParams, ytPlaylistSort, ytFilters){
 	var vm = this;
 	vm.items = ytVideoItems.services.getItems();
 	vm.setVideoId = setVideoId;
@@ -24,6 +24,13 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	vm.videoTabStatus = false;
 	vm.closeAll = closeAll;
 	console.log(vm.items);
+	console.log(vm.pastSearches);
+	vm.addedAfterFilter = addedAfterFilter;
+	vm.sampleFilterToggle = true;
+	vm.sampleFilter = sampleFilter;
+	vm.now = moment().format('X');
+	vm.now = parseInt(vm.now);
+	console.log(vm.now);
 	
 	function grab(search){
 		var type = {
@@ -74,6 +81,15 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 			e.state = false;
 		});
 	}
+
+	function addedAfterFilter(video){
+		return ytFilters().addedAfterFilter(video, vm.videoFilter);
+	}
+	//testing
+	function sampleFilter(video){
+		return (vm.sampleFilterToggle ? video.content.id : true);
+	}
+	//
 };
 
 
