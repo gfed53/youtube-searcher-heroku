@@ -788,8 +788,8 @@ function ytFilters(){
 		function addedAfterFilter(video, videoFilter){
 			if(videoFilter && videoFilter.addedAfter){
 				if(video.content.dateAdded){
-					var dateAdded = parseInt(moment(video.content.dateAdded).format('X')),
-					after = parseInt(moment(videoFilter.addedAfter).format('X'));
+					var dateAdded = parseInt(moment(video.content.dateAdded).format('X'), 10),
+					after = parseInt(moment(videoFilter.addedAfter).format('X'), 10);
 					return (dateAdded >= after);
 				} else {
 					return false;
@@ -802,8 +802,8 @@ function ytFilters(){
 		function addedBeforeFilter(video, videoFilter){
 			if(videoFilter && videoFilter.addedBefore){
 				if(video.content.dateAdded){
-					var dateAdded = parseInt(moment(video.content.dateAdded).format('X')),
-					before = parseInt(moment(videoFilter.addedBefore).format('X'));
+					var dateAdded = parseInt(moment(video.content.dateAdded).format('X'), 10),
+					before = parseInt(moment(videoFilter.addedBefore).format('X'), 10);
 					return (dateAdded < before);
 				} else {
 					return false;
