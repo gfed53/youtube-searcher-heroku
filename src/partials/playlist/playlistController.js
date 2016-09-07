@@ -23,17 +23,10 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	vm.sortSearches = sortSearches;
 	vm.videoTabStatus = false;
 	vm.closeAll = closeAll;
-	console.log(vm.items);
-	console.log(vm.pastSearches);
 	vm.addedAfterVideos = addedAfterVideos;
 	vm.addedBeforeVideos = addedBeforeVideos;
 	vm.addedAfterSearches = addedAfterSearches;
 	vm.addedBeforeSearches = addedBeforeSearches;
-	vm.sampleFilterToggle = true;
-	vm.sampleFilter = sampleFilter;
-	vm.now = moment().format('X');
-	vm.now = parseInt(vm.now);
-	console.log(vm.now);
 	
 	function grab(search){
 		var type = {
@@ -100,12 +93,6 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	function addedBeforeSearches(search){
 		return ytFilters().addedBeforeSearches(search, vm.searchesFilter);
 	}
-
-	//testing
-	function sampleFilter(video){
-		return (vm.sampleFilterToggle ? video.content.id : true);
-	}
-	//
 };
 
 

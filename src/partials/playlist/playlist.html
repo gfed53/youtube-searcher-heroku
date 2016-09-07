@@ -39,7 +39,7 @@
 			<button class="btn btn-default btn-close-all" ng-click="playlist.closeAll(playlist.items)">Close All</button>
 		</div>
 		<uib-accordion close-others="false">
-			<uib-accordion-group ng-repeat="item in playlist.items | orderBy:playlist.videosPredicate:playlist.videosReverse | filter:playlist.videoFilter.keyword | filter:playlist.addedAfterVideos | filter:playlist.addedBeforeVideos | filter:playlist.sampleFilter" is-open="item.state">
+			<uib-accordion-group ng-repeat="item in playlist.items | orderBy:playlist.videosPredicate:playlist.videosReverse | filter:playlist.videoFilter.keyword | filter:playlist.addedAfterVideos | filter:playlist.addedBeforeVideos" is-open="item.state">
 				<uib-accordion-heading>
 					{{ item.content.name || item.content.snippet.title || item.name }}
 				</uib-accordion-heading>
