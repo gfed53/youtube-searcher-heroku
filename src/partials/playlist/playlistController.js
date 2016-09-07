@@ -25,8 +25,10 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 	vm.closeAll = closeAll;
 	console.log(vm.items);
 	console.log(vm.pastSearches);
-	vm.addedAfterFilter = addedAfterFilter;
-	vm.addedBeforeFilter = addedBeforeFilter;
+	vm.addedAfterVideos = addedAfterVideos;
+	vm.addedBeforeVideos = addedBeforeVideos;
+	vm.addedAfterSearches = addedAfterSearches;
+	vm.addedBeforeSearches = addedBeforeSearches;
 	vm.sampleFilterToggle = true;
 	vm.sampleFilter = sampleFilter;
 	vm.now = moment().format('X');
@@ -83,12 +85,20 @@ function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchP
 		});
 	}
 
-	function addedAfterFilter(video){
-		return ytFilters().addedAfterFilter(video, vm.videoFilter);
+	function addedAfterVideos(video){
+		return ytFilters().addedAfterVideos(video, vm.videoFilter);
 	}
 
-	function addedBeforeFilter(video){
-		return ytFilters().addedBeforeFilter(video, vm.videoFilter);
+	function addedBeforeVideos(video){
+		return ytFilters().addedBeforeVideos(video, vm.videoFilter);
+	}
+
+	function addedAfterSearches(search){
+		return ytFilters().addedAfterSearches(search, vm.searchesFilter);
+	}
+
+	function addedBeforeSearches(search){
+		return ytFilters().addedBeforeSearches(search, vm.searchesFilter);
 	}
 
 	//testing

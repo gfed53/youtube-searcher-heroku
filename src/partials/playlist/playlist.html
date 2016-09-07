@@ -39,7 +39,7 @@
 			<button class="btn btn-default btn-close-all" ng-click="playlist.closeAll(playlist.items)">Close All</button>
 		</div>
 		<uib-accordion close-others="false">
-			<uib-accordion-group ng-repeat="item in playlist.items | orderBy:playlist.videosPredicate:playlist.videosReverse | filter:playlist.videoFilter.keyword | filter:playlist.addedAfterFilter | filter:playlist.addedBeforeFilter | filter:playlist.sampleFilter" is-open="item.state">
+			<uib-accordion-group ng-repeat="item in playlist.items | orderBy:playlist.videosPredicate:playlist.videosReverse | filter:playlist.videoFilter.keyword | filter:playlist.addedAfterVideos | filter:playlist.addedBeforeVideos | filter:playlist.sampleFilter" is-open="item.state">
 				<uib-accordion-heading>
 					{{ item.content.name || item.content.snippet.title || item.name }}
 				</uib-accordion-heading>
@@ -87,16 +87,16 @@
 		<div class="filter-buttons">
 			<label for="">Filter By:</label>
 			<input type="text" class="form-control" ng-model="playlist.searchesFilter.keyword" placeholder="keyword..">
-			<!-- <label for="">Added After</label>
-			<input class="form-control" ng-model="playlist.videoFilter.addedAfter" type="date">
+			<label for="">Added After</label>
+			<input class="form-control" ng-model="playlist.searchesFilter.addedAfter" type="date">
 			<label for="">Added Before</label>
-			<input class="form-control" ng-model="playlist.videoFilter.addedBefore" type="date"> -->
+			<input class="form-control" ng-model="playlist.searchesFilter.addedBefore" type="date">
 		</div>
 		<div>
 			<button class="btn btn-default btn-close-all" ng-click="playlist.closeAll(playlist.pastSearches)">Close All</button>
 		</div>
 		<uib-accordion close-others="false">
-			<uib-accordion-group ng-repeat="search in playlist.pastSearches | orderBy:playlist.searchesPredicate:playlist.searchesReverse | filter:playlist.searchesFilter.keyword" is-open="search.state">
+			<uib-accordion-group ng-repeat="search in playlist.pastSearches | orderBy:playlist.searchesPredicate:playlist.searchesReverse | filter:playlist.searchesFilter.keyword | filter:playlist.addedAfterSearches | filter:playlist.addedBeforeSearches" is-open="search.state">
 				<uib-accordion-heading>
 					{{ search.nameShrt || search.name }}
 				</uib-accordion-heading>

@@ -779,17 +779,19 @@ function ytPlaylistSort(){
 function ytFilters(){
 	return function(){
 		var services = {
-			addedAfterFilter: addedAfterFilter,
-			addedBeforeFilter: addedBeforeFilter
+			addedAfterVideos: addedAfterVideos,
+			addedBeforeVideos: addedBeforeVideos,
+			addedAfterSearches: addedAfterSearches,
+			addedBeforeSearches: addedBeforeSearches
 		};
 
 		return services;
 
-		function addedAfterFilter(video, videoFilter){
-			if(videoFilter && videoFilter.addedAfter){
-				if(video.content.dateAdded){
-					var dateAdded = parseInt(moment(video.content.dateAdded).format('X'), 10),
-					after = parseInt(moment(videoFilter.addedAfter).format('X'), 10);
+		function addedAfterVideos(item, filter){
+			if(filter && filter.addedAfter){
+				if(item.content.dateAdded){
+					var dateAdded = parseInt(moment(item.content.dateAdded).format('X'), 10),
+					after = parseInt(moment(filter.addedAfter).format('X'), 10);
 					return (dateAdded >= after);
 				} else {
 					return false;
@@ -799,7 +801,7 @@ function ytFilters(){
 			}
 		}
 
-		function addedBeforeFilter(video, videoFilter){
+		function addedBeforeVideos(video, videoFilter){
 			if(videoFilter && videoFilter.addedBefore){
 				if(video.content.dateAdded){
 					var dateAdded = parseInt(moment(video.content.dateAdded).format('X'), 10),
@@ -808,6 +810,26 @@ function ytFilters(){
 				} else {
 					return false;
 				}
+			} else {
+				return true;
+			}
+		}
+
+		function addedAfterSearches(item, filter){
+			if(filter && filter.addedAfter){
+				var dateAdded = parseInt(moment(item.date).format('X'), 10),
+				after = parseInt(moment(filter.addedAfter).format('X'), 10);
+				return (dateAdded >= after);
+			} else {
+				return true;
+			}
+		}
+
+		function addedBeforeSearches(item, filter){
+			if(filter && filter.addedBefore){
+				var dateAdded = parseInt(moment(item.date).format('X'), 10),
+				before = parseInt(moment(filter.addedBefore).format('X'), 10);
+				return (dateAdded < before);
 			} else {
 				return true;
 			}
