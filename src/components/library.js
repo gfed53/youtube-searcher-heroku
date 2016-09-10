@@ -30,7 +30,7 @@
 
 	function ytSearchYouTube($q, $http, ytTranslate) {
 		return function(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken, lang){
-			
+
 			var url = 'https://www.googleapis.com/youtube/v3/search';
 			var request = {
 				key: 'AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA',
@@ -789,51 +789,59 @@
 			return services;
 
 			function addedAfterVideos(item, filter){
+				var bool;
 				if(filter && filter.addedAfter){
 					if(item.content.dateAdded){
 						var dateAdded = parseInt(moment(item.content.dateAdded).format('X'), 10),
 						after = parseInt(moment(filter.addedAfter).format('X'), 10);
-						return (dateAdded >= after);
+						bool = (dateAdded >= after);
 					} else {
-						return false;
+						bool = false;
 					}
 				} else {
-					return true;
+					bool = true;
 				}
+				return bool;
 			}
 
 			function addedBeforeVideos(video, videoFilter){
+				var bool;
 				if(videoFilter && videoFilter.addedBefore){
 					if(video.content.dateAdded){
 						var dateAdded = parseInt(moment(video.content.dateAdded).format('X'), 10),
 						before = parseInt(moment(videoFilter.addedBefore).format('X'), 10);
-						return (dateAdded < before);
+						bool = (dateAdded < before);
 					} else {
-						return false;
+						bool = false;
 					}
 				} else {
-					return true;
+					bool = true;
 				}
+				return bool;
 			}
 
 			function addedAfterSearches(item, filter){
+				var bool;
 				if(filter && filter.addedAfter){
 					var dateAdded = parseInt(moment(item.date).format('X'), 10),
 					after = parseInt(moment(filter.addedAfter).format('X'), 10);
-					return (dateAdded >= after);
+					bool = (dateAdded >= after);
 				} else {
-					return true;
+					bool = true;
 				}
+				return bool;
 			}
 
 			function addedBeforeSearches(item, filter){
+				var bool;
 				if(filter && filter.addedBefore){
 					var dateAdded = parseInt(moment(item.date).format('X'), 10),
 					before = parseInt(moment(filter.addedBefore).format('X'), 10);
-					return (dateAdded < before);
+					bool = (dateAdded < before);
 				} else {
-					return true;
+					bool = true;
 				}
+				return bool;
 			}
 		}
 	}
