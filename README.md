@@ -14,7 +14,7 @@ You can simply do a basic video search via the default search bar. Clicking "Tog
 
 Currently, you can search by location, result order, safe search settings, date range (from, to), and also by a particular channel filter.
 
-The location parameter uses Google Maps to allow the user to select a portion of the map using an adjustable circular selector. Due to the limits of the API, radii of selections cannot exceed 100 kilometers. You can clear the selection by clicking the "Clear Selection" button. The coordinates of the center of the circle and its radius are displayed to the left and right of the "Clear Selection" button, respectively.
+The location parameter uses Google Maps to allow the user to select a portion of the map using an adjustable circular selector. Due to the limits of the API, radii of selections cannot exceed 1000 kilometers. You can clear the selection by clicking the "Clear Selection" button. The coordinates of the center of the circle and its radius are displayed to the left and right of the "Clear Selection" button, respectively.
 
 
 If you want to search the contents of a specific channel, here's what you do:
