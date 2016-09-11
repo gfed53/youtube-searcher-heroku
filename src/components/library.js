@@ -21,13 +21,14 @@
 	.service('ytSortOrder', [ytSortOrder])
 	.service('ytPlaylistSort', [ytPlaylistSort]);
 
-
+	//Used to follow security measures with YoTube video links in particular 
 	function ytTrustSrc($sce){
 		return function(src){
 			return $sce.trustAsResourceUrl(src);
 		}
 	}
 
+	//Searches the API for videos based on search params
 	function ytSearchYouTube($q, $http, ytTranslate) {
 		return function(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken, lang){
 
@@ -70,6 +71,7 @@
 				});
 			}
 
+			//Checks to see if a language to which the query should be translated is selected
 			function checkTrans(keyword, lang){
 				var deferred = $q.defer();
 				if(lang){
@@ -82,7 +84,7 @@
 				}
 				return deferred.promise;
 			}
-
+			//Translates query if necessary, then runs search
 			function transAndResults(){
 				var deferred = $q.defer();
 				checkTrans(keyword, lang).then(function(response){
@@ -97,6 +99,7 @@
 		}
 	};
 
+	//Searches the API for channels based on search query
 	function ytChanSearch($q, $http){
 		return function(channel){
 			var url = 'https://www.googleapis.com/youtube/v3/search';
@@ -130,6 +133,7 @@
 		}
 	}
 
+	//Filters a video search by channel
 	function ytChanFilter(){
 		this.id = '';
 		this.image = '';
@@ -148,6 +152,7 @@
 
 	}
 
+	//Used to retrieve necessary data from a particular video (in video player section)
 	function ytCurrentVideo($q, $http){
 		return function(id){
 			var url = 'https://www.googleapis.com/youtube/v3/videos',
@@ -176,7 +181,7 @@
 			}	
 		}
 	}
-
+	//Used to get back a video's channel data (which requires a different call from ytCurrentVideo)
 	function ytCurrentChannel($q, $http){
 		return function(id){
 			var url = "https://www.googleapis.com/youtube/v3/channels",
@@ -206,6 +211,7 @@
 		}
 	}
 
+	//Used for saving videos to the user's local storage (in the playlist/saved content section)
 	function ytVideoItems(){
 		var currentVideoId;
 		var items = [
@@ -276,6 +282,7 @@
 		}
 	};
 
+	//Where saved search params are stored (so while switching views/controllers, changes in search params will be kept)
 	function ytSearchParams(){
 		var params = {
 			keyword: undefined,
@@ -298,8 +305,6 @@
 			name: undefined,
 			date: undefined
 		},
-		//Only used for check()
-		advParams = ['advKeyword', 'channel', 'channelId', 'image', 'order', 'after', 'before', 'safeSearch', 'location', 'locationRadius', 'lat', 'lng', 'radius'],
 		_type_ = {
 			basic: false,
 			advanced: true
@@ -320,19 +325,6 @@
 			}
 		}
 
-		function check(callback){
-			for(var item in params){
-				if(params[item]){
-					for(var i=0; i<advParams.length; i++){
-						if(item === advParams[i]){
-							callback();
-							return;
-						}
-					}
-				}
-			}
-		}
-
 		function getSearchType(){
 			return _type_;
 		}
@@ -342,6 +334,7 @@
 		}
 	}
 
+	//Where video and channel results are stored (so while switching views/controllers, these will be kept)
 	function ytResults(){
 		this.results = [];
 		this.chanResults = [];
@@ -360,6 +353,7 @@
 		this.setStatus = setStatus;
 		this.checkStatus = checkStatus;
 
+		//TODO just easier method to toggle button text (like <span>)
 		function checkStatus(newVal, oldVal, buttonValue, showText, hideText){
 			if(newVal === true){
 				buttonValue = showText;
@@ -394,6 +388,7 @@
 		}
 	}
 
+	//Used for saving past searches to the user's local storage (in the playlist/saved content section)
 	function ytSearchHistory(ytSearchParams){
 		this.pastSearches = [];
 		this.get = get;
@@ -471,6 +466,7 @@
 
 	}
 
+	//A style tweak for the outer border of the results div. This will ensure thick borders all around, but in between each result, only thin borders (ngRepeat conflict)
 	function ytComputeCssClass(){
 		return function(first, last){
 			var val;
@@ -485,6 +481,7 @@
 		}
 	}
 
+	//Used on the bottom scroll button to scroll to the top of the results div
 	function ytScrollTo($location, $anchorScroll){
 		return function(scrollLocation){
 			var services = {
@@ -515,6 +512,7 @@
 		}
 	}
 
+	//Makes our menu toggle from static menu to fixed header on appropriate scrollY point.
 	function ytFixedHeader(){
 		return function(){
 			var pageHeader,
@@ -580,6 +578,7 @@
 		}
 	}
 
+	//Determines whether scroll button should be attached to DOM or not when arriving at search state.
 	function ytCheckScrollBtnStatus(){
 		
 		return function(){
