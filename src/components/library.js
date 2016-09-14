@@ -610,6 +610,7 @@
 		}
 	}
 
+	//Initializes the map used in the search section
 	function ytInitMap(){
 		return function(callback){
 			var map = new google.maps.Map(document.getElementById('map'), {
@@ -642,6 +643,7 @@
 		}
 	}
 
+	//Handles all of the translation functionality used in the search section
 	function ytTranslate($http, $q){
 
 		var langs = [{
@@ -726,6 +728,7 @@
 		this.translateAll = translateAll;
 	}
 
+	//Handles the result sorting in the search section
 	function ytSortOrder(){
 		var sortObj = {
 			predicate: undefined,
@@ -747,6 +750,7 @@
 		}
 	}
 
+	//Handles the saved videos and searches sorting in the saved content section 
 	function ytPlaylistSort(){
 		this.videos = {
 			reverse: false,
@@ -776,6 +780,7 @@
 		}
 	}
 
+	//Handles the filtering functionality of the saved content in the saved content section
 	function ytFilters(){
 		return function(){
 			var services = {
