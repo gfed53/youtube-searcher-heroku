@@ -29,7 +29,9 @@
 		vm.addedAfterSearches = addedAfterSearches;
 		vm.addedBeforeSearches = addedBeforeSearches;
 		
+		//Grabs one of our saved searches, then automatically switches to the search state in its advanced search mode.
 		function grab(search){
+			//type: an object maintained in a service which keeps track of what search mode is visible ('true' would mean it's collapsed - not visible).
 			var type = {
 				basic: true,
 				advanced: false
@@ -39,14 +41,17 @@
 			$state.go('search');
 		}
 
+		//Removes selected search from history/localStorage (permanently)
 		function clear(search){
 			ytSearchHistory.clearItem(search);
 		}
 
+		//Removes ALL searches from history/localStorage (permanently!)
 		function clearAllSearches(){
 			vm.pastSearches = ytSearchHistory.clearAll();
 		}
 
+		//Removes selected video item from history/localStorage (permanently)
 		function clearItem(item){
 			var itemIndex = vm.items.indexOf(item);
 			vm.items.splice(itemIndex, 1);

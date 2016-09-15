@@ -23,6 +23,7 @@
 		vm.scrollTo = scrollTo;
 		vm.scrollBtn = false;
 		//Retrieving our saved variables, if any
+		//type refers to the search type, whether the user sees the basic or advanced search in the view
 		vm.type = ytSearchParams.getSearchType();
 		vm.results = ytResults.getResults();
 		vm.chanResults = ytResults.getChanResults();
