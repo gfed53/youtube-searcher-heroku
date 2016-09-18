@@ -11,9 +11,14 @@
 			<label>Sort By:</label>
 			<div class="btn-group btn-group-srt" role="group" aria-label="...">
 				<button class="btn btn-default" ng-click="playlist.sortVideos('name')">
-					Name
+					Video
 					<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'name'" class="glyphicon glyphicon-triangle-top"></span>
 					<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'name'" class="glyphicon glyphicon-triangle-bottom"></span>
+				</button>
+				<button class="btn btn-default" ng-click="playlist.sortVideos('content.snippet.channelTitle')">
+					Channel
+					<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'content.snippet.channelTitle'" class="glyphicon glyphicon-triangle-top"></span>
+					<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'content.snippet.channelTitle'" class="glyphicon glyphicon-triangle-bottom"></span>
 				</button>
 				<button class="btn btn-default" ng-click="playlist.sortVideos('content.dateAdded')">
 					Date Added
@@ -49,7 +54,7 @@
 					</div>
 					<div class="col-md-8 playlist-div">
 						<p class="emph">{{ item.content.name || item.content.snippet.title || item.name }}</p>
-						<p><span class="bold">ADDED:</span> {{ item.content.dateAdded | date : short }}</p>
+						<p><span class="bold">CHANNEL:</span> {{ item.content.snippet.channelTitle }}</p><p><span class="bold">ADDED:</span> {{ item.content.dateAdded | date : short }}</p>
 						<p><span class="bold">PUBLISHED:</span> {{ item.content.datePublished || item.content.snippet.publishedAt | date : short }}</p>
 					</div>
 					<div class="col-md-2 playlist-div">
