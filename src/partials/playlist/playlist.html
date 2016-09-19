@@ -44,7 +44,7 @@
 			<button class="btn btn-default btn-close-all" ng-click="playlist.closeAll(playlist.items)">Close All</button>
 		</div>
 		<uib-accordion close-others="false">
-			<uib-accordion-group ng-repeat="item in playlist.items | orderBy:playlist.videosPredicate:playlist.videosReverse | filter:playlist.videoFilter.keyword | filter:playlist.addedAfterVideos | filter:playlist.addedBeforeVideos" is-open="item.state">
+			<uib-accordion-group ng-repeat="item in playlist.items | orderBy:playlist.videosPredicate:playlist.videosReverse | filter:playlist.videoFilter.keyword | filter:playlist.addedAfterVideos | filter:playlist.addedBeforeVideos track by item.name" is-open="item.state">
 				<uib-accordion-heading>
 					{{ item.content.name || item.content.snippet.title || item.name }}
 				</uib-accordion-heading>
@@ -101,7 +101,7 @@
 			<button class="btn btn-default btn-close-all" ng-click="playlist.closeAll(playlist.pastSearches)">Close All</button>
 		</div>
 		<uib-accordion close-others="false">
-			<uib-accordion-group ng-repeat="search in playlist.pastSearches | orderBy:playlist.searchesPredicate:playlist.searchesReverse | filter:playlist.searchesFilter.keyword | filter:playlist.addedAfterSearches | filter:playlist.addedBeforeSearches" is-open="search.state">
+			<uib-accordion-group ng-repeat="search in playlist.pastSearches | orderBy:playlist.searchesPredicate:playlist.searchesReverse | filter:playlist.searchesFilter.keyword | filter:playlist.addedAfterSearches | filter:playlist.addedBeforeSearches  track by search.name" is-open="search.state">
 				<uib-accordion-heading>
 					{{ search.nameShrt || search.name }}
 				</uib-accordion-heading>
