@@ -1,6 +1,6 @@
 <ul id="menu" class="nav nav-tabs">
 	<li role="presentation"><a ui-sref="about" ui-sref-active="active">About</a></li>
-	<li id="video-tab" role="presentation"><a ui-sref="video({videoId: menu.videoId})" ui-sref-active="active">Video Player</a></li>
+	<li id="video-tab" ng-if="menu.videoActive" role="presentation"><a ui-sref="video({videoId: menu.videoId})" ui-sref-active="active">Video Player</a></li>
 	<li role="presentation"><a ui-sref="playlist" ui-sref-active="active">My Saved Content</a></li>
 	<li role="presentation"><a ui-sref="search" ui-sref-active="active">Search</li>
 </ul>

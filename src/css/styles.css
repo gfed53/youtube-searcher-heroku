@@ -75,8 +75,6 @@ body .fixed {
 
 #header-menu {
   font-size: 0.7em; }
-  #header-menu #video-tab {
-    display: none; }
 
 .nav > li > a {
   padding: 10px 8px; }
