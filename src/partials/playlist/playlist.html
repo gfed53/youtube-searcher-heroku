@@ -8,7 +8,7 @@
 	</div>
 	<div id="video-items-container" ng-if="playlist.items.length > 0" uib-collapse="playlist.videosCollapse">
 		<div class="sort-buttons">
-			<label>Sort By:</label>
+			<h3 class="sort-buttons-header">Sort By:</h3>
 			<div class="btn-group btn-group-srt" role="group" aria-label="...">
 				<button class="btn btn-default" ng-click="playlist.sortVideos('name')">
 					Video
@@ -33,7 +33,7 @@
 			</div>
 		</div>
 		<div class="filter-inputs">
-			<p>Filter By:</p>
+			<h3 class="filter-buttons-header">Filter By:</h3>
 			<div class="filter-input-group filter-input-group-keyword">
 				<label class="filt-label" for="">Keyword:</label>
 				<input type="text" class="form-control" ng-model="playlist.videoFilter.keyword" placeholder="keyword..">
@@ -82,7 +82,7 @@
 	</div>
 	<div id="past-search-container" ng-if="playlist.pastSearches.length > 0" uib-collapse="playlist.searchesCollapse">
 		<div class="sort-buttons">
-			<label>Sort By:</label>
+			<h3>Sort By:</h3>
 			<div class="btn-group btn-group-srt" role="group" aria-label="...">
 				<button class="btn btn-default" ng-click="playlist.sortSearches('name')">
 					Name
@@ -96,17 +96,18 @@
 				</button>
 			</div>
 		</div>
-		<div class="row filter-inputs">
-			<div class="col-sm-3">
-				<label class="filt-label" for="">Filter By:</label>
+		<div class="filter-inputs">
+			<h3 class="filter-buttons-header">Filter By:</h3>
+			<div class="filter-input-group filter-input-group-keyword">
+				<label class="filt-label" for="">Keyword:</label>
 				<input type="text" class="form-control" ng-model="playlist.searchesFilter.keyword" placeholder="keyword..">
 			</div>
-			<div class="col-sm-3">
-				<label class="filt-label" for="">Added After</label>
+			<div class="filter-input-group">
+				<label class="filt-label" for="">Added After:</label>
 				<input class="form-control" ng-model="playlist.searchesFilter.addedAfter" type="date">
 			</div>
-			<div class="col-sm-3">
-				<label class="filt-label" for="">Added Before</label>
+			<div class="filter-input-group">
+				<label class="filt-label" for="">Added Before:</label>
 				<input class="form-control" ng-model="playlist.searchesFilter.addedBefore" type="date">
 			</div>
 		</div>

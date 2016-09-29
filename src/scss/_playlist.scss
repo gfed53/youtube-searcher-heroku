@@ -23,6 +23,9 @@
 		vertical-align: middle;
 		margin: 0 0 1em 1em;
 	}
+	.filter-buttons-header {
+		text-align: left;
+	}
 
 	.btn-group-srt {
 		display: inline-block;
@@ -69,10 +72,6 @@
 				display: inline-block;
 			}
 		}
-		
-		// .filt-label {
-		// 	display: inline-block;
-		// }
 	}
 }
 

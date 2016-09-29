@@ -111,6 +111,9 @@ body .fixed {
   vertical-align: middle;
   margin: 0 0 1em 1em; }
 
+#playlist .filter-buttons-header {
+  text-align: left; }
+
 #playlist .btn-group-srt {
   display: inline-block; }
 
