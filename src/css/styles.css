@@ -114,8 +114,11 @@ body .fixed {
 #playlist .filter-buttons-header {
   text-align: left; }
 
-#playlist .btn-group-srt {
-  display: inline-block; }
+#playlist .sort-buttons {
+  display: none; }
+
+#playlist .sort-buttons-mobile {
+  display: block; }
 
 #playlist .btn-close-all {
   margin-bottom: 1em; }
@@ -137,6 +140,12 @@ body .fixed {
   #playlist .filter-inputs input {
     width: 12em;
     display: inline-block; } }
+
+@media screen and (min-width: 403px) {
+  #playlist .sort-buttons {
+    display: block; }
+  #playlist .sort-buttons-mobile {
+    display: none; } }
 
 @media screen and (min-width: 768px) {
   #playlist .filter-inputs {

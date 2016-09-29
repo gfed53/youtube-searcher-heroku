@@ -27,10 +27,12 @@
 		text-align: left;
 	}
 
-	.btn-group-srt {
-		display: inline-block;
+	.sort-buttons {
+		display: none;
 	}
-
+	.sort-buttons-mobile {
+		display: block;
+	}
 	.btn-close-all {
 		margin-bottom: 1em;
 	}
@@ -61,6 +63,17 @@
 			}
 		}
 		
+	}
+}
+
+@media screen and ($mobile5){
+	#playlist {
+		.sort-buttons {
+			display: block;
+		}
+		.sort-buttons-mobile{
+			display: none;
+		}
 	}
 }
 
