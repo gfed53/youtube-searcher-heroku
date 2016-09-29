@@ -32,13 +32,20 @@
 				</button>
 			</div>
 		</div>
-		<div class="filter-buttons">
-			<label for="">Filter By:</label>
-			<input type="text" class="form-control" ng-model="playlist.videoFilter.keyword" placeholder="keyword..">
-			<label for="">Added After</label>
-			<input class="form-control" ng-model="playlist.videoFilter.addedAfter" type="date">
-			<label for="">Added Before</label>
-			<input class="form-control" ng-model="playlist.videoFilter.addedBefore" type="date">
+		<div class="filter-inputs">
+			<p>Filter By:</p>
+			<div class="filter-input-group filter-input-group-keyword">
+				<label class="filt-label" for="">Keyword:</label>
+				<input type="text" class="form-control" ng-model="playlist.videoFilter.keyword" placeholder="keyword..">
+			</div>
+			<div class="filter-input-group">
+				<label class="filt-label" for="">Added After:</label>
+				<input class="form-control" ng-model="playlist.videoFilter.addedAfter" type="date">
+			</div>
+			<div class="filter-input-group">
+				<label class="filt-label" for="">Added Before:</label>
+				<input class="form-control" ng-model="playlist.videoFilter.addedBefore" type="date">
+			</div>
 		</div>
 		<div>
 			<button class="btn btn-default btn-close-all" ng-click="playlist.closeAll(playlist.items)">Close All</button>
@@ -89,13 +96,19 @@
 				</button>
 			</div>
 		</div>
-		<div class="filter-buttons">
-			<label for="">Filter By:</label>
-			<input type="text" class="form-control" ng-model="playlist.searchesFilter.keyword" placeholder="keyword..">
-			<label for="">Added After</label>
-			<input class="form-control" ng-model="playlist.searchesFilter.addedAfter" type="date">
-			<label for="">Added Before</label>
-			<input class="form-control" ng-model="playlist.searchesFilter.addedBefore" type="date">
+		<div class="row filter-inputs">
+			<div class="col-sm-3">
+				<label class="filt-label" for="">Filter By:</label>
+				<input type="text" class="form-control" ng-model="playlist.searchesFilter.keyword" placeholder="keyword..">
+			</div>
+			<div class="col-sm-3">
+				<label class="filt-label" for="">Added After</label>
+				<input class="form-control" ng-model="playlist.searchesFilter.addedAfter" type="date">
+			</div>
+			<div class="col-sm-3">
+				<label class="filt-label" for="">Added Before</label>
+				<input class="form-control" ng-model="playlist.searchesFilter.addedBefore" type="date">
+			</div>
 		</div>
 		<div>
 			<button class="btn btn-default btn-close-all" ng-click="playlist.closeAll(playlist.pastSearches)">Close All</button>

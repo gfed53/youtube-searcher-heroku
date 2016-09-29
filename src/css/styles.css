@@ -117,15 +117,29 @@ body .fixed {
 #playlist .btn-close-all {
   margin-bottom: 1em; }
 
-#playlist .filter-buttons {
-  margin: 1em 0; }
+#playlist .filter-inputs {
+  margin: 1em 0;
+  text-align: center; }
+
+#playlist .filt-label {
+  display: block; }
 
 @media screen and (min-width: 364px) {
   #playlist h2 {
     font-size: 2em; }
-  #playlist .filter-buttons input {
+  #playlist .filter-inputs .filter-input-group {
+    display: inline-block; }
+  #playlist .filter-inputs .filter-input-group-keyword {
+    display: block; }
+  #playlist .filter-inputs input {
     width: 12em;
     display: inline-block; } }
+
+@media screen and (min-width: 768px) {
+  #playlist .filter-inputs {
+    text-align: left; }
+    #playlist .filter-inputs .filter-input-group-keyword {
+      display: inline-block; } }
 
 #bar {
   text-align: center;

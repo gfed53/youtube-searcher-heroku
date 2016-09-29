@@ -31,8 +31,12 @@
 	.btn-close-all {
 		margin-bottom: 1em;
 	}
-	.filter-buttons {
+	.filter-inputs {
 		margin: 1em 0;
+		text-align: center;
+	}
+	.filt-label {
+		display: block;
 	}
 }
 
@@ -41,12 +45,34 @@
 		h2 {
 			font-size: 2em;
 		}
-		.filter-buttons {
+		.filter-inputs {
+			.filter-input-group {
+				display: inline-block;
+			}
+			.filter-input-group-keyword {
+				display: block;
+			}
 			input {
 				width: 12em;
 				display: inline-block;
 			}
 		}
+		
+	}
+}
+
+@media screen and ($tablet){
+	#playlist {
+		.filter-inputs {
+			text-align: left;
+			.filter-input-group-keyword {
+				display: inline-block;
+			}
+		}
+		
+		// .filt-label {
+		// 	display: inline-block;
+		// }
 	}
 }
 
