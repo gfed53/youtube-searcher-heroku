@@ -578,6 +578,10 @@
 		}
 	}
 
+	//TODO: Create a new service for fix-adjust menu that uses ngClass in the view, a callback that will update a controller variable that will determine whether to add the .fixed class
+	//OR....
+	//Use the same service, but alter it in a way that can be used with two different navbars, the original static nav tabs and perhaps a fixed side nav. 
+
 	//Determines whether scroll button should be attached to DOM or not when arriving at search state.
 	function ytCheckScrollBtnStatus(){
 		
