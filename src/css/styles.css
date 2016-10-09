@@ -5,6 +5,9 @@ html, body {
   padding: 0px;
   background-color: #fbfbfb; }
 
+.body-fixed-nav {
+  padding-top: 70px; }
+
 @media screen and (min-width: 768px) {
   body #animate-view-container .animate-view #playlist, body #animate-view-container .animate-view #results-container {
     margin: 0 3em; } }
@@ -15,6 +18,9 @@ body {
     background-color: #f39c12;
     color: white;
     font-weight: bold; }
+  body .navbar-default .navbar-nav > li .active {
+    color: #F39C12;
+    font-weight: 600; }
   body .emph {
     font-size: 1.2em; }
   body .bold {

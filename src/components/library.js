@@ -528,12 +528,14 @@
 			headerHeight,
 			menuHeight,
 			height,
-			pageSelector;
+			pageSelector,
+			body = document.getElementsByTagName('body');
 
 
 			var services = {
 				fixedAdjustMenu: fixedAdjustMenu,
-				init: init
+				init: init,
+				altAdjust
 			}
 
 			return services;
@@ -553,7 +555,8 @@
 				headerHeight = header.offsetHeight+20+credit.offsetHeight+creditMargin;
 				menuHeight = menuUl.offsetHeight;
 				height = main.offsetHeight;
-				pageSelector = document.getElementById('page-selector');
+				pageSelector = document.getElementById('page-selector'),
+				altHeaderHeight;
 			}
 
 			function init(){
@@ -574,6 +577,31 @@
 						menuUl.className = menuUlclass;
 					}
 				}
+			}
+
+			function setHeaderSize(){
+				pageHeader = document.getElementById('page-header');
+				headerHeight = pageHeader.offsetHeight;
+				// console.log(headerHeight);
+			}
+
+			function altAdjust(showCB, hideCB){
+				// setHeaderSize();
+				window.addEventListener('resize', function(){
+					setHeaderSize();
+				});
+				window.addEventListener('scroll', function(){
+					setHeaderSize();
+					if(window.scrollY > (headerHeight*1.5)){
+						// console.log('should show');
+						showCB();
+						body.className = 'body-fixed-nav';
+					} else {
+						// console.log('should hide');
+						hideCB();
+						body.className = '';
+					}
+				});
 			}
 		}
 	}
