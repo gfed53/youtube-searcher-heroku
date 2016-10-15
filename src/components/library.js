@@ -529,7 +529,7 @@
 			menuHeight,
 			height,
 			pageSelector,
-			body = document.getElementsByTagName('body');
+			body = document.getElementsByTagName('body')[0];
 
 			var services = {
 				init: init
