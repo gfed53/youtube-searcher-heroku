@@ -9,17 +9,15 @@ function MenuCtrl($scope, $rootScope, ytVideoItems, ytFixedHeader){
 	vm.videoActive = false;
 	vm.showFixed = false;
 
-	ytFixedHeader().altAdjust(show,hide);
+	ytFixedHeader().init(show,hide);
 
 	function show(){
-		// console.log('should show CB');
 		$scope.$apply(function(){
 			vm.showFixed = true;
 		});
 	}
 
 	function hide(){
-		// console.log('should hide CB');
 		$scope.$apply(function(){
 			vm.showFixed = false;
 		});

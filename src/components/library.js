@@ -531,73 +531,27 @@
 			pageSelector,
 			body = document.getElementsByTagName('body');
 
-
 			var services = {
-				fixedAdjustMenu: fixedAdjustMenu,
-				init: init,
-				altAdjust
+				init: init
 			}
 
 			return services;
-			
-			function fixedAdjustMenu(){
-				pageHeader = document.getElementById('page-header');
-				main = document.getElementById('header-wrapper');
-				header = document.getElementById('mast-header');
-				credit = document.getElementById('credit');
-				content = document.getElementById('animate-view-container');
-				menu = document.getElementById('header-menu');
-				style = window.getComputedStyle(credit);
-				creditMargin = style.getPropertyValue('margin-top');
-				creditMargin = creditMargin.replace('px', '');
-				creditMargin = creditMargin*2;
-				//20 is a number acquired from trial and error in finding a smooth transition between static to fixed nav bar.
-				headerHeight = header.offsetHeight+20+credit.offsetHeight+creditMargin;
-				menuHeight = menuUl.offsetHeight;
-				height = main.offsetHeight;
-				pageSelector = document.getElementById('page-selector'),
-				altHeaderHeight;
-			}
-
-			function init(){
-				fixedAdjustMenu();
-				window.addEventListener('resize', function(){
-					fixedAdjustMenu();
-					menu.style.height = menuHeight+'px';
-				});
-				document.onscroll = function(){
-					if(window.scrollY > headerHeight){
-						menu.style.height = menuHeight+'px';
-						menu.className = 'fixed';
-						content.style.top = menuHeight+3+'px';
-						menuUl.className = menuUlclass+' tabs-adjust';
-					} else {
-						menu.className = '';
-						content.style.top = '0';
-						menuUl.className = menuUlclass;
-					}
-				}
-			}
 
 			function setHeaderSize(){
 				pageHeader = document.getElementById('page-header');
 				headerHeight = pageHeader.offsetHeight;
-				// console.log(headerHeight);
 			}
 
-			function altAdjust(showCB, hideCB){
-				// setHeaderSize();
+			function init(showCB, hideCB){
 				window.addEventListener('resize', function(){
 					setHeaderSize();
 				});
 				window.addEventListener('scroll', function(){
 					setHeaderSize();
 					if(window.scrollY > (headerHeight*1.5)){
-						// console.log('should show');
 						showCB();
 						body.className = 'body-fixed-nav';
 					} else {
-						// console.log('should hide');
 						hideCB();
 						body.className = '';
 					}
@@ -605,12 +559,6 @@
 			}
 		}
 	}
-
-	//TODO: Create a new service for fix-adjust menu that uses ngClass in the view, a callback that will update a controller variable that will determine whether to add the .fixed class
-	//OR....
-	//Use the same service, but alter it in a way that can be used with two different navbars, the original static nav tabs and perhaps a fixed side nav. 
-
-	//Determines whether scroll button should be attached to DOM or not when arriving at search state.
 	function ytCheckScrollBtnStatus(){
 		
 		return function(){
