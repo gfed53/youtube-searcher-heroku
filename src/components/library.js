@@ -492,7 +492,7 @@
 			return services;
 
 			function scrollToElement(scrollLocation){
-				$anchorScroll.yOffset = 45;
+				$anchorScroll.yOffset = 55;
 				var element = document.getElementById(scrollLocation);
 				if(element){
 					$location.hash(scrollLocation);

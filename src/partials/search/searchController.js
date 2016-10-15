@@ -88,7 +88,6 @@
 				$timeout(function(){
 					vm.scrollTo('scroll-point');
 					vm.offSet = true;
-					ytFixedHeader().init();
 				}, 1000);
 				
 			})
