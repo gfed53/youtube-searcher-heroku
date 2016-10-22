@@ -6,6 +6,7 @@ var connect = require('gulp-connect');
 var uglify = require('gulp-uglify');
 var ngmin = require('gulp-ngmin');
 var minifyHtml = require('gulp-minify-html');
+var htmlmin = require('gulp-htmlmin');
 var minifyCss = require('gulp-minify-css');
 var usemin = require('gulp-usemin');
 var rev = require('gulp-rev');
@@ -49,21 +50,30 @@ gulp.task('clean', function(){
 	del(paths.build);
 });
 
-gulp.task('copy', [ 'clean' ], function() {
-	gulp.src( paths.html )
-	.pipe(gulp.dest('build/'));
+gulp.task('htmlmin', [ 'clean' ], function(){
+	var allHtml = paths.index.concat(paths.html);
+	return gulp.src( './src/**/*.html' )
+		.pipe(htmlmin({collapseWhitespace: true}))
+		.pipe(gulp.dest( paths.build ));
 });
 
-gulp.task('usemin', [ 'copy' ], function(){
-	gulp.src( paths.index )
-	.pipe(usemin({
-		css: [ minifyCss(), 'concat' ],
-		js: [ ngmin(), uglify() ]
-	}))
-	.pipe(gulp.dest( paths.build ))
+gulp.task('usemin', [ 'htmlmin' ], function(){
+	return gulp.src( paths.index )
+		.pipe(usemin({
+			css: [ minifyCss(), 'concat' ],
+			js: [ ngmin(), uglify() ]
+		}))
+		.pipe(gulp.dest( paths.build ))
 });
 
-gulp.task('build', ['usemin']);
+gulp.task('indexmin', [ 'usemin' ], function(){
+	var allHtml = paths.index.concat(paths.html);
+	return gulp.src( './build/*.html' )
+		.pipe(htmlmin({collapseWhitespace: true}))
+		.pipe(gulp.dest( paths.build ));
+});
+
+gulp.task('build', ['indexmin']);
 
 //Default
 gulp.task('default', ['jshint', 'sass', 'watch']);
