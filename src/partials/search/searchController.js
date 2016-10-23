@@ -2,9 +2,9 @@
 	angular
 	.module('myApp')
 
-	.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$anchorScroll', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', 'ytCheckScrollBtnStatus', 'ytTranslate', 'ytFixedHeader', 'ytSortOrder', SearchCtrl])
+	.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$anchorScroll', '$uibModal', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', 'ytCheckScrollBtnStatus', 'ytTranslate', 'ytFixedHeader', 'ytSortOrder', SearchCtrl])
 
-	function SearchCtrl($scope, $location, $timeout, $anchorScroll, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus, ytTranslate, ytFixedHeader, ytSortOrder){
+	function SearchCtrl($scope, $location, $timeout, $anchorScroll, $uibModal, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus, ytTranslate, ytFixedHeader, ytSortOrder){
 		var vm = this;
 		vm.initMap = initMap;
 		vm.vidSubmit = vidSubmit;
@@ -19,7 +19,7 @@
 		vm.searchAndChanFilter = searchAndChanFilter;
 		vm.saveSearch = saveSearch;
 		vm.addToPlaylist = addToPlaylist;
-		vm.isSaved = isSaved;
+		vm.videoIsSaved = videoIsSaved;
 		vm.computeCssClass = computeCssClass;
 		vm.scrollTo = scrollTo;
 		vm.scrollBtn = false;
@@ -35,6 +35,7 @@
 		vm.params.lang = vm.langs[0];
 		vm.videosReverse = ytSortOrder.videosReverse;
 		vm.sort = sort;
+		vm.openModal = openModal;
 
 		//If advanced view is active when revisiting state, we need to initMap() on ctrl start
 		$timeout(function(){
@@ -161,6 +162,11 @@
 
 		function saveSearch(params){
 			ytSearchHistory.set(params);
+			// openModal();
+		}
+
+		function searchIsSaved(params){
+
 		}
 
 		function addToPlaylist(result){
@@ -168,7 +174,7 @@
 			vm.savedVideo = result;
 		}
 
-		function isSaved(result){
+		function videoIsSaved(result){
 			return (vm.savedVideo === result);
 		}
 
@@ -190,6 +196,23 @@
 		function sort(){
 			vm.videosReverse = !vm.videosReverse;
 			ytSortOrder.videosReverse = vm.videosReverse;
+		}
+
+		//TODO: Move to service, then use service within ytSearchHistory.set, use the output values of modal service in .set(), if value === 'cancel', abort, else, set it equal to params.name, and continue
+		function openModal(){
+			var modalInstance = $uibModal.open({
+				templateUrl: './partials/search/search-partials/modals/search-saved-modal.html',
+				controller: 'SearchSavedModalController',
+				controllerAs: 'searchModal'
+			});
+
+			modalInstance.result.then(function(result){
+				console.log(result);
+				//Set input equal to params.name
+			}, function(error){
+				console.log(error);
+				//Set a value that will trigger termination of the saving process.
+			});
 		}
 	};
 })();
