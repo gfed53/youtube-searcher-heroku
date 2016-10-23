@@ -30,6 +30,7 @@
 					</div>
 					<div class="playlist-button-wrapper">
 						<input class="btn btn-default" type="button" value="Add to Playlist" ng-click="search.addToPlaylist(result)">
+						<div ng-if="search.isSaved(result)" class="alert alert-success alert-video-saved" role="alert">Video Saved!</div>
 					</div>
 				</div>
 				<div class="col-md-6 results-img-container">

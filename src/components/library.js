@@ -253,7 +253,6 @@
 			content = JSON.stringify(content);
 
 			localStorage.setItem(itemName, content);
-			alert('Video Saved!');
 		}
 
 		function clearItem(name){

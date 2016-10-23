@@ -18,7 +18,8 @@
 		vm.clearSelection = clearSelection;
 		vm.searchAndChanFilter = searchAndChanFilter;
 		vm.saveSearch = saveSearch;
-		vm.addToPlaylist = ytVideoItems.services.setItem;
+		vm.addToPlaylist = addToPlaylist;
+		vm.isSaved = isSaved;
 		vm.computeCssClass = computeCssClass;
 		vm.scrollTo = scrollTo;
 		vm.scrollBtn = false;
@@ -160,6 +161,15 @@
 
 		function saveSearch(params){
 			ytSearchHistory.set(params);
+		}
+
+		function addToPlaylist(result){
+			ytVideoItems.services.setItem(result);
+			vm.savedVideo = result;
+		}
+
+		function isSaved(result){
+			return (vm.savedVideo === result);
 		}
 
 		function computeCssClass(first, last){
