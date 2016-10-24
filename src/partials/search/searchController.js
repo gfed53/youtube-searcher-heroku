@@ -35,7 +35,7 @@
 		vm.params.lang = vm.langs[0];
 		vm.videosReverse = ytSortOrder.videosReverse;
 		vm.sort = sort;
-		vm.openModal = openModal;
+		// vm.openModal = openModal;
 
 		//If advanced view is active when revisiting state, we need to initMap() on ctrl start
 		$timeout(function(){
@@ -161,7 +161,7 @@
 		}
 
 		function saveSearch(params){
-			ytSearchHistory.set(params);
+			ytSearchHistory.set(params, ytSearchHistory);
 			// openModal();
 		}
 

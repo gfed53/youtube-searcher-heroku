@@ -12,11 +12,12 @@
 	.factory('ytCheckScrollBtnStatus', [ytCheckScrollBtnStatus])
 	.factory('ytInitMap', [ytInitMap])
 	.factory('ytFilters', [ytFilters])
+	.factory('ytSearchSavedModal', ['$q', '$uibModal', ytSearchSavedModal])
 	.service('ytChanFilter', [ytChanFilter])
 	.service('ytSearchParams', [ytSearchParams])
 	.service('ytResults', [ytResults])
 	.service('ytVideoItems', [ytVideoItems])
-	.service('ytSearchHistory', ['ytSearchParams', ytSearchHistory])
+	.service('ytSearchHistory', ['ytSearchSavedModal', 'ytSearchParams', ytSearchHistory])
 	.service('ytTranslate', ['$http', '$q', ytTranslate])
 	.service('ytSortOrder', [ytSortOrder])
 	.service('ytPlaylistSort', [ytPlaylistSort]);
@@ -388,7 +389,7 @@
 	}
 
 	//Used for saving past searches to the user's local storage (in the playlist/saved content section)
-	function ytSearchHistory(ytSearchParams){
+	function ytSearchHistory(ytSearchSavedModal, ytSearchParams){
 		this.pastSearches = [];
 		this.get = get;
 		this.set = set;
@@ -419,18 +420,28 @@
 			return this.pastSearches;
 		}
 
-		function set(params){
-			params.name = prompt('Enter a name for this saved search..');
-			if(params.name){
-				params.nameShrt = params.name;
-				params.name = params.name+'-uyts';
-				params.date = Date.now();
-				this.pastSearches.push(params);
-				localStorage.setItem(params.name, JSON.stringify(params));
-			} else if(params.name === "") {
-				alert("Failed. You must enter a name for the search to be saved.");
-				this.set(params);
-			}
+		function setModalName(params){
+			
+		}
+
+		function set(params, service){
+			ytSearchSavedModal().openModal()
+			.then(function(name){
+				params.name = name;
+				console.log(params.name);
+				if(params.name === 'cancel'){
+					//Aborted
+				} else if(params.name){
+					params.nameShrt = params.name;
+					params.name = params.name+'-uyts';
+					params.date = Date.now();
+					service.pastSearches.push(params);
+					localStorage.setItem(params.name, JSON.stringify(params));
+				} else if(params.name === "") {
+					//What shall we do here?
+					service.set(params);
+				}
+			});
 		}
 
 		function clearItem(search){
@@ -828,6 +839,42 @@
 			}
 		}
 	}
+
+	function ytSearchSavedModal($q, $uibModal){
+		return function(){
+			var services = {
+				openModal: openModal
+			};
+
+			function openModal(){
+				var deferred = $q.defer();
+				var modalInstance = $uibModal.open({
+					templateUrl: './partials/search/search-partials/modals/search-saved-modal.html',
+					controller: 'SearchSavedModalController',
+					controllerAs: 'searchModal'
+				});
+
+				modalInstance.result.then(function(result){
+					console.log(result);
+					//Set input equal to params.name
+					deferred.resolve(result);
+				}, function(error){
+					console.log(error);
+					deferred.resolve(error);
+					//Set a value that will trigger termination of the saving process.
+				});
+
+				return deferred.promise;
+			}
+
+			return services;
+		}
+	}
+
+
 })();
+
+
+
 
 
