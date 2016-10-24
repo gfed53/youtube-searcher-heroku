@@ -437,9 +437,10 @@
 					params.date = Date.now();
 					service.pastSearches.push(params);
 					localStorage.setItem(params.name, JSON.stringify(params));
-				} else if(params.name === "") {
+				} else {
 					//What shall we do here?
-					service.set(params);
+					// console.log(service.set);
+					service.set(params, service);
 				}
 			});
 		}
