@@ -7,3 +7,18 @@
 	width: 50%;
 	margin-top: 1em;
 }
+
+//Search-saved-modal
+.modal-body {
+	text-align: center;
+}
+
+.search-modal-input {
+	margin: 0 auto;
+}
+
+@media screen and ($mobile5){
+	.search-modal-input {
+		width: 75%;
+	}
+}

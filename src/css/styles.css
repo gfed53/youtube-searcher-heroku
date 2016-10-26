@@ -412,6 +412,16 @@ body .fixed {
   width: 50%;
   margin-top: 1em; }
 
+.modal-body {
+  text-align: center; }
+
+.search-modal-input {
+  margin: 0 auto; }
+
+@media screen and (min-width: 403px) {
+  .search-modal-input {
+    width: 75%; } }
+
 #results.ng-enter,
 #results.ng-leave.ng-leave-active {
   opacity: 0; }
