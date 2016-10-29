@@ -9,7 +9,7 @@
 	.factory('ytComputeCssClass', [ytComputeCssClass])
 	.factory('ytScrollTo', ['$location', '$anchorScroll', ytScrollTo])
 	.factory('ytFixedHeader', [ytFixedHeader])
-	.factory('ytCheckScrollBtnStatus', [ytCheckScrollBtnStatus])
+	.factory('ytCheckScrollBtnStatus', ['$state', ytCheckScrollBtnStatus])
 	.factory('ytInitMap', [ytInitMap])
 	.factory('ytFilters', [ytFilters])
 	.factory('ytSearchSavedModal', ['$q', '$uibModal', ytSearchSavedModal])
@@ -570,26 +570,31 @@
 			}
 		}
 	}
-	function ytCheckScrollBtnStatus(){
+	function ytCheckScrollBtnStatus($state){
 		
 		return function(){
 			function checkVisible(elm) {
 				var rect = elm.getBoundingClientRect();
 				var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
-				return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
+				return !(rect.bottom < 0 || rect.top - viewHeight >= -500);
 			}
 
 			function check(videos, channels){
-				if(videos.length > 0 || channels.length > 0){
-					var elem = document.getElementById('results-container');
-					var scrollTop = document.getElementsByClassName('scroll-top');
-					if(checkVisible(elem)){
-						return true;
+				// console.log($state);
+				// console.log(videos);
+				if($state.current.name === 'search'){
+					if(videos.length > 0 || channels.length > 0){
+						// console.log('running?');
+						var elem = document.getElementById('results-container');
+						var scrollTop = document.getElementsByClassName('scroll-top');
+						if(checkVisible(elem)){
+							return true;
+						} else {
+							return false;
+						}
 					} else {
 						return false;
 					}
-				} else {
-					return false;
 				}
 			}
 
