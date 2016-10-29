@@ -45,7 +45,7 @@
 		$location.url('/search');
 
 		window.addEventListener('scroll', function(){
-			$scope.$apply(vm.scrollBtn = ytCheckScrollBtnStatus().check());
+			$scope.$apply(vm.scrollBtn = ytCheckScrollBtnStatus().check(vm.results, vm.chanResults));
 		});
 
 		function initMap() {
@@ -111,7 +111,6 @@
 				$timeout(function(){
 					vm.scrollTo('scroll-point');
 					vm.offSet = true;
-					ytFixedHeader().init();
 				}, 1000);
 				
 			})

@@ -579,8 +579,8 @@
 				return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
 			}
 
-			function check(show){
-				if(document.getElementById('results-container')){
+			function check(videos, channels){
+				if(videos.length > 0 || channels.length > 0){
 					var elem = document.getElementById('results-container');
 					var scrollTop = document.getElementsByClassName('scroll-top');
 					if(checkVisible(elem)){

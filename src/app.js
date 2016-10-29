@@ -9,9 +9,6 @@
 	}])
 
 	.run(['$timeout', 'ytFixedHeader', '$rootScope', function($timeout, ytFixedHeader, $rootScope){
-		$timeout(function(){
-			// ytFixedHeader().init();
-		}, 1000);
 		$rootScope.$on('$stateChangeSuccess', function(){
 			window.scrollTo(0,0);
 		});

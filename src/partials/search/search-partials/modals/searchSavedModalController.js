@@ -5,7 +5,6 @@
 
 	function SearchSavedModalController($uibModalInstance){
 		var vm = this;
-		// vm.savedSearch;
 		vm.ok = ok;
 		vm.cancel = cancel;
 
