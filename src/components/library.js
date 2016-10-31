@@ -13,10 +13,11 @@
 	.factory('ytInitMap', [ytInitMap])
 	.factory('ytFilters', [ytFilters])
 	.factory('ytSearchSavedModal', ['$q', '$uibModal', ytSearchSavedModal])
+	.factory('ytDangerModal', ['$q', '$uibModal', ytDangerModal])
 	.service('ytChanFilter', [ytChanFilter])
 	.service('ytSearchParams', [ytSearchParams])
 	.service('ytResults', [ytResults])
-	.service('ytVideoItems', [ytVideoItems])
+	.service('ytVideoItems', ['ytDangerModal', ytVideoItems])
 	.service('ytSearchHistory', ['ytSearchSavedModal', 'ytSearchParams', ytSearchHistory])
 	.service('ytTranslate', ['$http', '$q', ytTranslate])
 	.service('ytSortOrder', [ytSortOrder])
@@ -213,7 +214,7 @@
 	}
 
 	//Used for saving videos to the user's local storage (in the playlist/saved content section)
-	function ytVideoItems(){
+	function ytVideoItems(ytDangerModal){
 		var currentVideoId;
 		var items = [
 		];
@@ -260,17 +261,23 @@
 			localStorage.removeItem(name);
 		}
 
-		function clearAllItems(){
-			var bool = confirm('Caution! This will permanently erased all of your saved videos. Are you sure you want to proceed?');
-			if(bool){
+		//TODO: improve logic
+		function clearAllItems(currentList){
+			console.log(currentList);
+			ytDangerModal().openModal()
+			.then(function(){
 				items = [];
 				for(key in localStorage){
 					if(key.includes('uytp')){
 						localStorage.removeItem(key);
 					}
 				}
-			}
-			return items;
+
+				return items;
+			}, function(){
+				console.log(currentList);
+				return currentList;
+			});
 		}
 
 		function getVideoId(){
@@ -872,6 +879,35 @@
 
 				return deferred.promise;
 			}
+
+			return services;
+		}
+	}
+
+	function ytDangerModal($q, $uibModal){
+		return function(){
+			var services = {
+				openModal: openModal
+			};
+
+			function openModal(){
+				var deferred = $q.defer();
+				var modalInstance = $uibModal.open({
+					templateUrl: './partials/playlist/playlist-partials/modals/danger-modal.html',
+					controller: 'DangerModalController',
+					controllerAs: 'dangerModal'
+				});
+
+				modalInstance.result.then(function(){
+						console.log('do it');
+						deferred.resolve();
+					}, function(error){
+						console.log(error);
+						deferred.reject(error);
+					});
+
+					return deferred.promise;
+				}
 
 			return services;
 		}

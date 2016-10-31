@@ -28,6 +28,8 @@
 		vm.addedBeforeVideos = addedBeforeVideos;
 		vm.addedAfterSearches = addedAfterSearches;
 		vm.addedBeforeSearches = addedBeforeSearches;
+
+		console.log(vm.items);
 		
 		//Grabs one of our saved searches, then automatically switches to the search state in its advanced search mode.
 		function grab(search){
@@ -48,6 +50,7 @@
 
 		//Removes ALL searches from history/localStorage (permanently!)
 		function clearAllSearches(){
+			//TODO: implement same as clearAllVideos
 			vm.pastSearches = ytSearchHistory.clearAll();
 		}
 
@@ -58,8 +61,11 @@
 			ytVideoItems.services.clearItem(item.name);
 		}
 
+		//TODO: improve logic
 		function clearAllVideos(){
-			vm.items = ytVideoItems.services.clearAllItems();
+			console.log(vm.items);
+			var items = ytVideoItems.services.clearAllItems(vm.items);
+			vm.items = items;
 		}
 
 		function setVideoId(videoId){
