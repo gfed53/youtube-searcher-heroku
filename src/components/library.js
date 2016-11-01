@@ -17,7 +17,7 @@
 	.service('ytChanFilter', [ytChanFilter])
 	.service('ytSearchParams', [ytSearchParams])
 	.service('ytResults', [ytResults])
-	.service('ytVideoItems', ['ytDangerModal', ytVideoItems])
+	.service('ytVideoItems', ['$q', 'ytDangerModal', ytVideoItems])
 	.service('ytSearchHistory', ['ytSearchSavedModal', 'ytSearchParams', ytSearchHistory])
 	.service('ytTranslate', ['$http', '$q', ytTranslate])
 	.service('ytSortOrder', [ytSortOrder])
@@ -214,7 +214,7 @@
 	}
 
 	//Used for saving videos to the user's local storage (in the playlist/saved content section)
-	function ytVideoItems(ytDangerModal){
+	function ytVideoItems($q, ytDangerModal){
 		var currentVideoId;
 		var items = [
 		];
@@ -262,8 +262,9 @@
 		}
 
 		//TODO: improve logic
-		function clearAllItems(currentList){
-			console.log(currentList);
+		function clearAllItems(){
+			var deferred = $q.defer();
+			console.log(items);
 			ytDangerModal().openModal()
 			.then(function(){
 				items = [];
@@ -273,11 +274,12 @@
 					}
 				}
 
-				return items;
+				deferred.resolve(items);
 			}, function(){
-				console.log(currentList);
-				return currentList;
+				deferred.reject();
 			});
+
+			return deferred.promise;
 		}
 
 		function getVideoId(){
@@ -425,10 +427,6 @@
 				}
 			}
 			return this.pastSearches;
-		}
-
-		function setModalName(params){
-			
 		}
 
 		function set(params, service){

@@ -63,9 +63,12 @@
 
 		//TODO: improve logic
 		function clearAllVideos(){
-			console.log(vm.items);
-			var items = ytVideoItems.services.clearAllItems(vm.items);
-			vm.items = items;
+			// console.log(vm.items);
+			ytVideoItems.services.clearAllItems()
+			.then(function(items){
+				vm.items = items;
+			});
+			
 		}
 
 		function setVideoId(videoId){
