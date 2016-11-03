@@ -23,7 +23,7 @@
 	.service('ytSortOrder', [ytSortOrder])
 	.service('ytPlaylistSort', [ytPlaylistSort]);
 
-	//Used to follow security measures with YoTube video links in particular 
+	//Used to follow security measures with YouTube video links in particular 
 	function ytTrustSrc($sce){
 		return function(src){
 			return $sce.trustAsResourceUrl(src);
@@ -263,7 +263,6 @@
 		//TODO: improve logic
 		function clearAllItems(){
 			var deferred = $q.defer();
-			console.log(items);
 			ytDangerModal().openModal()
 			.then(function(){
 				items = [];
@@ -441,8 +440,6 @@
 					pastSearches.push(params);
 					localStorage.setItem(params.name, JSON.stringify(params));
 				} else {
-					//What shall we do here?
-					// console.log(service.set);
 					service.set(params, service);
 				}
 			});
@@ -864,13 +861,9 @@
 				});
 
 				modalInstance.result.then(function(result){
-					console.log(result);
-					//Set input equal to params.name
 					deferred.resolve(result);
 				}, function(error){
-					console.log(error);
 					deferred.resolve(error);
-					//Set a value that will trigger termination of the saving process.
 				});
 
 				return deferred.promise;

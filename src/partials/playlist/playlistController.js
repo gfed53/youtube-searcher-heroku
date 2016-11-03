@@ -29,8 +29,6 @@
 		vm.addedAfterSearches = addedAfterSearches;
 		vm.addedBeforeSearches = addedBeforeSearches;
 
-		console.log(vm.items);
-		
 		//Grabs one of our saved searches, then automatically switches to the search state in its advanced search mode.
 		function grab(search){
 			//type: an object maintained in a service which keeps track of what search mode is visible ('true' would mean it's collapsed - not visible).
@@ -50,7 +48,6 @@
 
 		//Removes ALL searches from history/localStorage (permanently!)
 		function clearAllSearches(){
-			//TODO: implement same as clearAllVideos
 			ytSearchHistory.clearAll()
 			.then(function(searches){
 				vm.pastSearches = searches;
@@ -66,7 +63,6 @@
 
 		//TODO: improve logic
 		function clearAllVideos(){
-			// console.log(vm.items);
 			ytVideoItems.services.clearAllItems()
 			.then(function(items){
 				vm.items = items;
