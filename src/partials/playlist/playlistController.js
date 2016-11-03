@@ -51,7 +51,10 @@
 		//Removes ALL searches from history/localStorage (permanently!)
 		function clearAllSearches(){
 			//TODO: implement same as clearAllVideos
-			vm.pastSearches = ytSearchHistory.clearAll();
+			ytSearchHistory.clearAll()
+			.then(function(searches){
+				vm.pastSearches = searches;
+			});
 		}
 
 		//Removes selected video item from history/localStorage (permanently)

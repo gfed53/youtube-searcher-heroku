@@ -18,7 +18,7 @@
 	.service('ytSearchParams', [ytSearchParams])
 	.service('ytResults', [ytResults])
 	.service('ytVideoItems', ['$q', 'ytDangerModal', ytVideoItems])
-	.service('ytSearchHistory', ['ytSearchSavedModal', 'ytSearchParams', ytSearchHistory])
+	.service('ytSearchHistory', ['$q', 'ytSearchSavedModal', 'ytDangerModal', 'ytSearchParams', ytSearchHistory])
 	.service('ytTranslate', ['$http', '$q', ytTranslate])
 	.service('ytSortOrder', [ytSortOrder])
 	.service('ytPlaylistSort', [ytPlaylistSort]);
@@ -216,8 +216,7 @@
 	//Used for saving videos to the user's local storage (in the playlist/saved content section)
 	function ytVideoItems($q, ytDangerModal){
 		var currentVideoId;
-		var items = [
-		];
+		var items = [];
 
 		this.services = {
 			getItems: getItems,
@@ -398,8 +397,8 @@
 	}
 
 	//Used for saving past searches to the user's local storage (in the playlist/saved content section)
-	function ytSearchHistory(ytSearchSavedModal, ytSearchParams){
-		this.pastSearches = [];
+	function ytSearchHistory($q, ytSearchSavedModal, ytDangerModal, ytSearchParams){
+		var pastSearches = [];
 		this.get = get;
 		this.set = set;
 		this.clearItem = clearItem;
@@ -419,28 +418,27 @@
 								obj.before = new Date(obj.before);
 							}
 							//This is here to avoid existent objects getting reappended to the array within the session when they shouldn't be
-							if(getIndexIfObjWithAttr(this.pastSearches, 'name', obj.name) === -1){
-								this.pastSearches.push(obj);
+							if(getIndexIfObjWithAttr(pastSearches, 'name', obj.name) === -1){
+								pastSearches.push(obj);
 							}
 						}
 					}
 				}
 			}
-			return this.pastSearches;
+			return pastSearches;
 		}
 
 		function set(params, service){
 			ytSearchSavedModal().openModal()
 			.then(function(name){
 				params.name = name;
-				console.log(params.name);
 				if(params.name === 'cancel'){
 					//Aborted
 				} else if(params.name){
 					params.nameShrt = params.name;
 					params.name = params.name+'-uyts';
 					params.date = Date.now();
-					service.pastSearches.push(params);
+					pastSearches.push(params);
 					localStorage.setItem(params.name, JSON.stringify(params));
 				} else {
 					//What shall we do here?
@@ -451,24 +449,27 @@
 		}
 
 		function clearItem(search){
-			var searchIndex = this.pastSearches.indexOf(search);
-			this.pastSearches.splice(searchIndex, 1);
+			var searchIndex = pastSearches.indexOf(search);
+			pastSearches.splice(searchIndex, 1);
 			localStorage.removeItem(search.name);
 		}
 
 		function clearAll(){
 			//Clears all past searches
-			var bool = confirm('Caution! This will permanently erased all of your saved searches. Are you sure you want to proceed?');
-			if(bool){
-				this.pastSearches = [];
+			var deferred = $q.defer();
+			ytDangerModal().openModal()
+			.then(function(){
+				pastSearches = [];
 				for(key in localStorage){
 					if(key.includes('uyts')){
 						localStorage.removeItem(key);
 					}
 				}
-			}
-
-			return this.pastSearches;
+				deferred.resolve(pastSearches);
+			}, function(){
+				deferred.reject();
+			})
+			return deferred.promise;
 		}
 
 		function getIndexIfObjWithAttr(array, attr, value) {
@@ -585,11 +586,8 @@
 			}
 
 			function check(videos, channels){
-				// console.log($state);
-				// console.log(videos);
 				if($state.current.name === 'search'){
 					if(videos.length > 0 || channels.length > 0){
-						// console.log('running?');
 						var elem = document.getElementById('results-container');
 						var scrollTop = document.getElementsByClassName('scroll-top');
 						if(checkVisible(elem)){
@@ -897,10 +895,8 @@
 				});
 
 				modalInstance.result.then(function(){
-						console.log('do it');
 						deferred.resolve();
 					}, function(error){
-						console.log(error);
 						deferred.reject(error);
 					});
 
