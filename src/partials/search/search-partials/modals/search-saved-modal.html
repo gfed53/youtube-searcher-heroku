@@ -1,8 +1,10 @@
-<div class="modal-body">
-    <p>Enter a name for this saved search..</p>
-    <input ng-model="searchModal.savedSearch" type="text" class="form-control search-modal-input" placeholder="ex. Taco Recipes, early '14">
-</div>
-<div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="searchModal.ok()">OK</button>
-    <button class="btn btn-warning" type="button" ng-click="searchModal.cancel()">Cancel</button>
-</div>
+<form ng-submit="searchModal.ok()">
+    <div class="modal-body">
+        <p>Enter a name for this saved search..</p>
+        <input autofocus ng-model="searchModal.savedSearch" type="text" class="form-control search-modal-input" placeholder="ex. Taco Recipes, early '14">
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="searchModal.cancel()">Cancel</button>
+    </div>
+</form>
