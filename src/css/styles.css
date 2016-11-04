@@ -126,7 +126,7 @@ body .fixed {
 #playlist .sort-buttons-mobile {
   display: block; }
 
-#playlist .btn-close-all {
+#playlist .btn-toggle-all {
   margin-bottom: 1em; }
 
 #playlist .filter-inputs {

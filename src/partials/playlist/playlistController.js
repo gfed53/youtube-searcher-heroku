@@ -24,6 +24,7 @@
 		vm.sortSearches = sortSearches;
 		vm.videoTabStatus = false;
 		vm.closeAll = closeAll;
+		vm.openAll = openAll;
 		vm.addedAfterVideos = addedAfterVideos;
 		vm.addedBeforeVideos = addedBeforeVideos;
 		vm.addedAfterSearches = addedAfterSearches;
@@ -89,6 +90,12 @@
 		function closeAll(group){
 			group.forEach(function(e){
 				e.state = false;
+			});
+		}
+
+		function openAll(group){
+			group.forEach(function(e){
+				e.state = true;
 			});
 		}
 
