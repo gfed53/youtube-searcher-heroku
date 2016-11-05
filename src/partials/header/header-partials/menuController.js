@@ -9,7 +9,7 @@ function MenuCtrl($scope, $rootScope, $timeout, ytVideoItems, ytFixedHeader, ytD
 	vm.videoActive = false;
 	vm.showFixed = false;
 
-	ytFixedHeader().init(show,hide);
+	// ytFixedHeader().init(show,hide);
 
 	function show(){
 		$scope.$apply(function(){
