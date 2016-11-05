@@ -1,9 +1,9 @@
 angular
 .module('myApp')
 
-.controller('MenuCtrl', ['$scope', '$rootScope', '$timeout', 'ytVideoItems', 'ytFixedHeader', MenuCtrl])
+.controller('MenuCtrl', ['$scope', '$rootScope', '$timeout', 'ytVideoItems', 'ytFixedHeader', 'ytDropdown', MenuCtrl])
 
-function MenuCtrl($scope, $rootScope, $timeout, ytVideoItems, ytFixedHeader){
+function MenuCtrl($scope, $rootScope, $timeout, ytVideoItems, ytFixedHeader, ytDropdown){
 	var vm = this;
 	vm.videoId = ytVideoItems.services.getVideoId();
 	vm.videoActive = false;

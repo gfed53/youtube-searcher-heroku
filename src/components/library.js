@@ -9,6 +9,7 @@
 	.factory('ytComputeCssClass', [ytComputeCssClass])
 	.factory('ytScrollTo', ['$location', '$anchorScroll', ytScrollTo])
 	.factory('ytFixedHeader', [ytFixedHeader])
+	.factory('ytDropdown', ytDropdown)
 	.factory('ytCheckScrollBtnStatus', ['$state', ytCheckScrollBtnStatus])
 	.factory('ytInitMap', [ytInitMap])
 	.factory('ytFilters', [ytFilters])
@@ -573,6 +574,35 @@
 			}
 		}
 	}
+
+	//Might not be necessary, will most likely be removed.
+	function ytDropdown(){
+		return function(){
+			var open = false;
+			function getStatus(){
+				return open;
+			}
+
+			function init(element, callback){
+				document.addEventListener("click", function(e){
+					if(!element.is(e.target) && element.has(e.target).length === 0){
+						if(document.getElementById("menu-dropdown-content")){
+							open = false;
+							callback();
+						}
+					}
+				});
+			}
+			var services = {
+				init: init,
+				open: open,
+				getStatus: getStatus
+			}
+			return services;
+
+		}
+	}
+
 	function ytCheckScrollBtnStatus($state){
 		
 		return function(){
