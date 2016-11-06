@@ -3,10 +3,14 @@
 	.navbar-nav>li>a {
 		line-height: 28px;
 	}
+
+	#menu-fixed {
+		transition: 0.25s linear all;
+	}
+
 	.menu-fixed-no-scroll {
-		// background-color: #FBFBFB;
-		background-color: transparent;
-		border: none;
+		background-color: #FBFBFB;
+		border-color: transparent;
 	}
 }
 

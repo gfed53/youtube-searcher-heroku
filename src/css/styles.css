@@ -74,9 +74,11 @@ body #page-header #header-wrapper #credit {
   font-size: 0.7em; }
   #header-menu .navbar-nav > li > a {
     line-height: 28px; }
+  #header-menu #menu-fixed {
+    transition: 0.25s linear all; }
   #header-menu .menu-fixed-no-scroll {
-    background-color: transparent;
-    border: none; }
+    background-color: #FBFBFB;
+    border-color: transparent; }
 
 .nav > li > a {
   padding: 10px 8px; }
