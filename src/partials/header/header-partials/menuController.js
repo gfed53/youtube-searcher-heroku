@@ -1,17 +1,18 @@
 angular
 .module('myApp')
 
-.controller('MenuCtrl', ['$scope', '$rootScope', '$timeout', 'ytVideoItems', 'ytFixedHeader', 'ytCheckScrollY', 'ytDropdown', MenuCtrl])
+.controller('MenuCtrl', ['$scope', '$rootScope', '$timeout', 'ytVideoItems', 'ytCheckScrollY', MenuCtrl])
 
-function MenuCtrl($scope, $rootScope, $timeout, ytVideoItems, ytFixedHeader, ytCheckScrollY, ytDropdown){
+function MenuCtrl($scope, $rootScope, $timeout, ytVideoItems, ytCheckScrollY){
 	var vm = this;
 	vm.videoId = ytVideoItems.services.getVideoId();
 	vm.videoActive = false;
 	vm.showFixed = false;
 	vm.update = update;
+	vm.updateOnClick = updateOnClick;
 	vm.noScroll = true;
+	vm.collapsed = true;
 
-	// ytFixedHeader().init(show,hide);
 	ytCheckScrollY().init(vm.update);
 
 	function update(bool){
@@ -20,16 +21,9 @@ function MenuCtrl($scope, $rootScope, $timeout, ytVideoItems, ytFixedHeader, ytC
 		});		
 	}
 
-	function show(){
-		$scope.$apply(function(){
-			vm.showFixed = true;
-		});
-	}
-
-	function hide(){
-		$scope.$apply(function(){
-			vm.showFixed = false;
-		});
+	//Seperate function since digest is already in progress when clicked
+	function updateOnClick(){
+		vm.collapsed = !vm.collapsed;
 	}
 
 	//Once we switch to the video state (by clicking on a video to watch), the video tab will now be visible from now on, so we have access to it for the duration of the session
@@ -38,5 +32,6 @@ function MenuCtrl($scope, $rootScope, $timeout, ytVideoItems, ytFixedHeader, ytC
 			vm.videoActive = true;
 			vm.videoId = ytVideoItems.services.getVideoId();
 		}
+		vm.collapsed = true;
 	});
 }

@@ -8,8 +8,6 @@
 	.factory('ytCurrentChannel', ['$q', '$http', ytCurrentChannel])
 	.factory('ytComputeCssClass', [ytComputeCssClass])
 	.factory('ytScrollTo', ['$location', '$anchorScroll', ytScrollTo])
-	.factory('ytFixedHeader', [ytFixedHeader])
-	.factory('ytDropdown', ytDropdown)
 	.factory('ytCheckScrollBtnStatus', ['$state', ytCheckScrollBtnStatus])
 	.factory('ytCheckScrollY', [ytCheckScrollY])
 	.factory('ytInitMap', [ytInitMap])
@@ -525,82 +523,6 @@
 					return false;
 				}
 			}	
-		}
-	}
-
-	//Makes our menu toggle from static menu to fixed header on appropriate scrollY point.
-	function ytFixedHeader(){
-		return function(){
-			var pageHeader,
-			main,
-			header,
-			credit,
-			content,
-			menu,
-			menuUl = document.getElementById('menu'),
-			menuUlclass = 'nav nav-tabs ng-scope',
-			style,
-			creditMargin,
-			headerHeight,
-			menuHeight,
-			height,
-			pageSelector,
-			body = document.getElementsByTagName('body')[0];
-
-			var services = {
-				init: init
-			}
-
-			return services;
-
-			function setHeaderSize(){
-				pageHeader = document.getElementById('page-header');
-				headerHeight = pageHeader.offsetHeight;
-			}
-
-			function init(showCB, hideCB){
-				window.addEventListener('resize', function(){
-					setHeaderSize();
-				});
-				window.addEventListener('scroll', function(){
-					setHeaderSize();
-					if(window.scrollY > (headerHeight*1.5)){
-						showCB();
-						body.className = 'body-fixed-nav';
-					} else {
-						hideCB();
-						body.className = '';
-					}
-				});
-			}
-		}
-	}
-
-	//Might not be necessary, will most likely be removed.
-	function ytDropdown(){
-		return function(){
-			var open = false;
-			function getStatus(){
-				return open;
-			}
-
-			function init(element, callback){
-				document.addEventListener("click", function(e){
-					if(!element.is(e.target) && element.has(e.target).length === 0){
-						if(document.getElementById("menu-dropdown-content")){
-							open = false;
-							callback();
-						}
-					}
-				});
-			}
-			var services = {
-				init: init,
-				open: open,
-				getStatus: getStatus
-			}
-			return services;
-
 		}
 	}
 

@@ -8,7 +8,7 @@
 		$compileProvider.debugInfoEnabled(false);
 	}])
 
-	.run(['$timeout', 'ytFixedHeader', '$rootScope', function($timeout, ytFixedHeader, $rootScope){
+	.run(['$timeout', '$rootScope', function($timeout, $rootScope){
 		$rootScope.$on('$stateChangeSuccess', function(){
 			window.scrollTo(0,0);
 		});
