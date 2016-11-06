@@ -62,15 +62,6 @@ body #page-header #header-wrapper #credit {
   position: relative;
   transition: 1s ease all; }
 
-body .fixed {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #fbfbfb;
-  z-index: 9999; }
-
 @media screen and (min-width: 768px) {
   body #page-header h1 {
     font-size: 3.8em; } }
@@ -81,6 +72,11 @@ body .fixed {
 
 #header-menu {
   font-size: 0.7em; }
+  #header-menu .navbar-nav > li > a {
+    line-height: 28px; }
+  #header-menu .menu-fixed-no-scroll {
+    background-color: transparent;
+    border: none; }
 
 .nav > li > a {
   padding: 10px 8px; }

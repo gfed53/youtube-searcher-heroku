@@ -1,8 +1,13 @@
 #header-menu {
 	font-size: 0.7em;
-	// #video-tab {
-	// 	display: none;
-	// }
+	.navbar-nav>li>a {
+		line-height: 28px;
+	}
+	.menu-fixed-no-scroll {
+		// background-color: #FBFBFB;
+		background-color: transparent;
+		border: none;
+	}
 }
 
 .nav>li>a {

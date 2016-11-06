@@ -11,6 +11,7 @@
 	.factory('ytFixedHeader', [ytFixedHeader])
 	.factory('ytDropdown', ytDropdown)
 	.factory('ytCheckScrollBtnStatus', ['$state', ytCheckScrollBtnStatus])
+	.factory('ytCheckScrollY', [ytCheckScrollY])
 	.factory('ytInitMap', [ytInitMap])
 	.factory('ytFilters', [ytFilters])
 	.factory('ytSearchSavedModal', ['$q', '$uibModal', ytSearchSavedModal])
@@ -630,6 +631,26 @@
 
 			var services = {
 				check: check
+			}
+
+			return services;
+		}
+	}
+
+	function ytCheckScrollY(){
+		return function(){
+			var services = {
+				init: init
+			};
+
+			function init(callback){
+				window.addEventListener('scroll', function(){
+					if(window.scrollY === 0){
+						callback(true);
+					} else {
+						callback(false);
+					}
+				}); 
 			}
 
 			return services;

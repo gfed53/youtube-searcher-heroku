@@ -1,10 +1,4 @@
-<!-- <ul id="menu" class="nav nav-tabs" ng-if="!menu.showFixed">
-	<li role="presentation"><a ui-sref="about" ui-sref-active="active">About</a></li>
-	<li id="video-tab" ng-if="menu.videoActive" role="presentation"><a ui-sref="video({videoId: menu.videoId})" ui-sref-active="active">Video Player</a></li>
-	<li role="presentation"><a ui-sref="playlist" ui-sref-active="active">My Saved Content</a></li>
-	<li role="presentation"><a ui-sref="search" ui-sref-active="active">Search</a></li>
-</ul> -->
-<nav id="menu-fixed" class="navbar navbar-default navbar-fixed-top">
+<nav id="menu-fixed" class="navbar navbar-default navbar-fixed-top" ng-class="{'menu-fixed-no-scroll': menu.noScroll}">
 	<div class="container-fluid">
 		<div class="navbar-header">
 	      <button type="button" class="navbar-toggle collapsed" id="navbar-btn" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
