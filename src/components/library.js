@@ -17,7 +17,7 @@
 	.service('ytChanFilter', [ytChanFilter])
 	.service('ytSearchParams', [ytSearchParams])
 	.service('ytResults', [ytResults])
-	.service('ytVideoItems', ['$q', 'ytDangerModal', ytVideoItems])
+	.service('ytVideoItems', ['$q', '$state', '$stateParams',  'ytDangerModal', ytVideoItems])
 	.service('ytSearchHistory', ['$q', 'ytSearchSavedModal', 'ytDangerModal', 'ytSearchParams', ytSearchHistory])
 	.service('ytTranslate', ['$http', '$q', ytTranslate])
 	.service('ytSortOrder', [ytSortOrder])
@@ -214,8 +214,8 @@
 	}
 
 	//Used for saving videos to the user's local storage (in the playlist/saved content section)
-	function ytVideoItems($q, ytDangerModal){
-		var currentVideoId;
+	function ytVideoItems($q, $state, $stateParams, ytDangerModal){
+		var currentVideoId = $stateParams.videoId;
 		var items = [];
 
 		this.services = {
