@@ -281,6 +281,7 @@
 		}
 
 		function getVideoId(){
+			//Check url params when loading page in video player state
 			return currentVideoId;
 		}
 
