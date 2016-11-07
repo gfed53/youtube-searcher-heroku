@@ -1,4 +1,4 @@
-html, body {
+html, body, #container-main {
   width: 100%;
   height: 100%;
   margin: 0px;
@@ -94,45 +94,37 @@ body #page-header #header-wrapper #credit {
   #header-menu {
     font-size: 1em; } }
 
-#playlist .playlist-section-header {
-  margin-top: 2em; }
-
-#playlist h2 {
-  display: inline-block;
-  font-size: 1.5em; }
-
-#playlist #playlist-items, #playlist #past-search-items {
-  list-style-type: decimal; }
-  #playlist #playlist-items .playlist-div, #playlist #past-search-items .playlist-div {
+#playlist {
+  padding-bottom: 6em; }
+  #playlist .playlist-section-header {
+    margin-top: 2em; }
+  #playlist h2 {
+    display: inline-block;
+    font-size: 1.5em; }
+  #playlist #playlist-items, #playlist #past-search-items {
+    list-style-type: decimal; }
+    #playlist #playlist-items .playlist-div, #playlist #past-search-items .playlist-div {
+      margin-bottom: 1em; }
+      #playlist #playlist-items .playlist-div p, #playlist #past-search-items .playlist-div p {
+        max-width: 20em; }
+  #playlist .btn-playlist-clear, #playlist .sort-buttons {
+    margin: 2em 0; }
+  #playlist .btn-play-toggle {
+    vertical-align: middle;
+    margin: 0 0 1em 1em; }
+  #playlist .filter-buttons-header {
+    text-align: left; }
+  #playlist .sort-buttons {
+    display: none; }
+  #playlist .sort-buttons-mobile {
+    display: block; }
+  #playlist .btn-toggle-all {
     margin-bottom: 1em; }
-    #playlist #playlist-items .playlist-div p, #playlist #past-search-items .playlist-div p {
-      max-width: 20em; }
-
-#playlist .btn-playlist-clear, #playlist .sort-buttons {
-  margin: 2em 0; }
-
-#playlist .btn-play-toggle {
-  vertical-align: middle;
-  margin: 0 0 1em 1em; }
-
-#playlist .filter-buttons-header {
-  text-align: left; }
-
-#playlist .sort-buttons {
-  display: none; }
-
-#playlist .sort-buttons-mobile {
-  display: block; }
-
-#playlist .btn-toggle-all {
-  margin-bottom: 1em; }
-
-#playlist .filter-inputs {
-  margin: 1em 0;
-  text-align: center; }
-
-#playlist .filt-label {
-  display: block; }
+  #playlist .filter-inputs {
+    margin: 1em 0;
+    text-align: center; }
+  #playlist .filt-label {
+    display: block; }
 
 @media screen and (min-width: 364px) {
   #playlist h2 {
