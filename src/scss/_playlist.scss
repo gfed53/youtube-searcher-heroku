@@ -1,11 +1,15 @@
 #playlist {
 	padding-bottom: 6em;
+	// margin: 0 0.5em;
 	.playlist-section-header {
 		margin-top: 2em;
 	}
 	h2 {
 		display: inline-block;
 		font-size: 1.5em;
+	}
+	h3 {
+		font-size: 1.2em;
 	}
 	#playlist-items, #past-search-items {
 		list-style-type: decimal;
@@ -17,7 +21,7 @@
 		}
 	}
 	//Playlist Buttons
-	.btn-playlist-clear, .sort-buttons {
+	.btn-playlist-clear, .video-sort-buttons, .search-sort-buttons {
 		margin: 2em 0;
 	}
 	.playlist-btn-group {
@@ -52,6 +56,9 @@
 	#playlist {
 		h2 {
 			font-size: 2em;
+		}
+		h3 {
+			font-size: 1.5em;
 		}
 		.filter-inputs {
 			.filter-input-group {

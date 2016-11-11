@@ -1,5 +1,6 @@
 #about {
-	margin: 2.5em 2em 10em 2em;
+	margin-top: 2.5em;
+	margin-bottom: 10em;
 	#about-intro {
 		margin: 2em 0;
 	}
@@ -14,5 +15,6 @@
 @media screen and ($tablet){
 	#about {
 		font-size: 1em;
+		margin: 0 1em;
 	}
 }

@@ -1,9 +1,13 @@
 html,body, #container-main {
     width: 100%;
     height: 100%;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     background-color: #fbfbfb;
+}
+
+#about, #playlist, #search {
+	margin: 0 0.5em;
 }
 
 .body-fixed-nav {

@@ -7,7 +7,7 @@
 		</button>
 	</div>
 	<div id="video-items-container" ng-if="playlist.items.length > 0" uib-collapse="playlist.videosCollapse">
-		<div class="sort-buttons">
+		<div class="video-sort-buttons">
 			<h3 class="sort-buttons-header">Sort By:</h3>
 			<div class="btn-group" role="group" aria-label="...">
 				<button class="btn btn-default" ng-click="playlist.sortVideos('name')">
@@ -111,7 +111,7 @@
 		</button>
 	</div>
 	<div id="past-search-container" ng-if="playlist.pastSearches.length > 0" uib-collapse="playlist.searchesCollapse">
-		<div class="sort-buttons">
+		<div class="search-sort-buttons">
 			<h3>Sort By:</h3>
 			<div class="btn-group btn-group-srt" role="group" aria-label="...">
 				<button class="btn btn-default" ng-click="playlist.sortSearches('name')">
