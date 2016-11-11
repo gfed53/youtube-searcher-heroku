@@ -34,7 +34,7 @@
 	.filter-buttons-header {
 		text-align: left;
 	}
-	.sort-buttons {
+	.video-sort-buttons {
 		display: none;
 	}
 	.sort-buttons-mobile {
@@ -78,7 +78,7 @@
 
 @media screen and ($mobile5){
 	#playlist {
-		.sort-buttons {
+		.video-sort-buttons {
 			display: block;
 		}
 		.sort-buttons-mobile{

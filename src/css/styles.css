@@ -125,7 +125,7 @@ body #page-header #header-wrapper #credit {
     margin: 0 0 1em 1em; }
   #playlist .filter-buttons-header {
     text-align: left; }
-  #playlist .sort-buttons {
+  #playlist .video-sort-buttons {
     display: none; }
   #playlist .sort-buttons-mobile {
     display: block; }
@@ -151,7 +151,7 @@ body #page-header #header-wrapper #credit {
     display: inline-block; } }
 
 @media screen and (min-width: 403px) {
-  #playlist .sort-buttons {
+  #playlist .video-sort-buttons {
     display: block; }
   #playlist .sort-buttons-mobile {
     display: none; } }
@@ -408,7 +408,8 @@ body #page-header #header-wrapper #credit {
     opacity: 1.0; } }
 
 .my-thumbnail {
-  width: 5em; }
+  width: 5em;
+  margin: 1em 0; }
 
 .alert-video-saved {
   text-align: center;
