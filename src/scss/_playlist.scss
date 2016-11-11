@@ -16,10 +16,13 @@
 			}
 		}
 	}
+	//Playlist Buttons
 	.btn-playlist-clear, .sort-buttons {
 		margin: 2em 0;
 	}
-
+	.playlist-btn-group {
+		text-align: right;
+	}
 	.btn-play-toggle {
 		vertical-align: middle;
 		margin: 0 0 1em 1em;
@@ -27,7 +30,6 @@
 	.filter-buttons-header {
 		text-align: left;
 	}
-
 	.sort-buttons {
 		display: none;
 	}

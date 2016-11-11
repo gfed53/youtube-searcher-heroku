@@ -94,8 +94,8 @@
 						<p><span class="bold">CHANNEL:</span> {{ item.content.snippet.channelTitle }}</p><p><span class="bold">ADDED:</span> {{ item.content.dateAdded | date : short }}</p>
 						<p><span class="bold">PUBLISHED:</span> {{ item.content.datePublished || item.content.snippet.publishedAt | date : short }}</p>
 					</div>
-					<div class="col-md-2 playlist-div">
-						<button class="btn btn-danger" ng-click="playlist.clearItem(item)">Remove</button>
+					<div class="col-md-2 playlist-div playlist-btn-group">
+						<button class="btn btn-warning" ng-click="playlist.clearItem(item)">Remove</button>
 					</div>
 				</div>
 			</uib-accordion-group>
@@ -154,9 +154,9 @@
 					<div class="col-md-6">
 						<p><span class="bold">CREATED:</span> {{ search.date | date : short }}</p>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-6 playlist-btn-group">
 						<button ng-click="playlist.grab(search)" class="btn btn-success">Grab!</button>
-						<button ng-click="playlist.clear(search)" class="btn btn-danger">Remove</button>
+						<button ng-click="playlist.clear(search)" class="btn btn-warning">Remove</button>
 					</div>
 				</div>
 			</uib-accordion-group>

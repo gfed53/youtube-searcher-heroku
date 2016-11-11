@@ -110,6 +110,8 @@ body #page-header #header-wrapper #credit {
         max-width: 20em; }
   #playlist .btn-playlist-clear, #playlist .sort-buttons {
     margin: 2em 0; }
+  #playlist .playlist-btn-group {
+    text-align: right; }
   #playlist .btn-play-toggle {
     vertical-align: middle;
     margin: 0 0 1em 1em; }
