@@ -34,6 +34,7 @@
 				vm.params.channelId = vm.channel.id;
 				vm.params.image = vm.channel.snippet.thumbnails.default.url;
 				ytSearchParams.set(vm.params);
+				ytSearchParams.setToAdvanced();
 				$state.go('search');
 			})
 		}

@@ -313,6 +313,7 @@
 			name: undefined,
 			date: undefined
 		},
+		// ('true' would mean it's collapsed - not visible)
 		_type_ = {
 			basic: false,
 			advanced: true
@@ -321,7 +322,8 @@
 		this.get = get;
 		this.set = set;
 		this.getSearchType = getSearchType;
-		this.setSearchType = setSearchType;
+		this.setToBasic = setToBasic;
+		this.setToAdvanced = setToAdvanced;
 
 		function get(){
 			return params;
@@ -337,8 +339,18 @@
 			return _type_;
 		}
 
-		function setSearchType(type){
-			_type_ = type;
+		function setToBasic(){
+			_type_ = {
+				basic: false,
+				advanced: true
+			}
+		}
+
+		function setToAdvanced(){
+			_type_ = {
+				basic: true,
+				advanced: false
+			}
 		}
 	}
 
