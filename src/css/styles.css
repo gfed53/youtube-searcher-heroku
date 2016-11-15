@@ -435,8 +435,7 @@ body #page-header #header-wrapper #credit {
   opacity: 1; }
 
 #animate-view-container {
-  position: relative;
-  height: 100%; }
+  position: relative; }
   #animate-view-container .animate-view {
     transition: 500ms linear all;
     position: absolute;
@@ -482,7 +481,3 @@ body #page-header #header-wrapper #credit {
 
 .scroll-top.ng-leave-active {
   opacity: 0; }
-
-@media screen and (min-width: 1024px) {
-  #animate-view-container {
-    min-height: 100%; } }
