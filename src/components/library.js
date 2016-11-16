@@ -3,9 +3,9 @@
 	.module('myApp')
 	.factory('ytTrustSrc', ['$sce', ytTrustSrc])
 	.factory('ytSearchYouTube', ['$q', '$http', 'ytTranslate', 'ytModalGenerator', ytSearchYouTube])
-	.factory('ytChanSearch', ['$q', '$http', ytChanSearch])
-	.factory('ytCurrentVideo', ['$q', '$http', ytCurrentVideo])
-	.factory('ytCurrentChannel', ['$q', '$http', ytCurrentChannel])
+	.factory('ytChanSearch', ['$q', '$http', 'ytModalGenerator', ytChanSearch])
+	.factory('ytCurrentVideo', ['$q', '$http', 'ytModalGenerator', ytCurrentVideo])
+	.factory('ytCurrentChannel', ['$q', '$http', 'ytModalGenerator', ytCurrentChannel])
 	.factory('ytComputeCssClass', [ytComputeCssClass])
 	.factory('ytScrollTo', ['$location', '$anchorScroll', ytScrollTo])
 	.factory('ytCheckScrollBtnStatus', ['$state', ytCheckScrollBtnStatus])
@@ -54,17 +54,14 @@
 				videoEmbeddable: true,
 			};
 
-			var errorModalObj = {
-				templateUrl: './partials/search/search-partials/modals/error-modal.html',
-				controller: 'ErrorModalController',
-				controllerAs: 'errorModal'
-			};
+			var errorModalObj = ytModalGenerator().getSearchTemp();
 
 			var services = {
 				checkTrans: checkTrans,
 				getResults: getResults,
 				transAndResults: transAndResults
 			};
+
 			return services;
 
 			function getResults(){
@@ -110,7 +107,7 @@
 	};
 
 	//Searches the API for channels based on search query
-	function ytChanSearch($q, $http){
+	function ytChanSearch($q, $http, ytModalGenerator){
 		return function(channel){
 			var url = 'https://www.googleapis.com/youtube/v3/search';
 			var request = {
@@ -121,9 +118,13 @@
 				q: channel,
 				type: 'channel'
 			};
+
+			var errorModalObj = ytModalGenerator().getSearchTemp();
+
 			var services = {
 				getResults: getResults
 			};
+
 			return services;
 
 			function getResults(){
@@ -137,7 +138,7 @@
 					return $q.when(response);
 				},
 				function(response){
-					alert('Sorry, an error occured.');
+					ytModalGenerator().openModal(errorModalObj);
 				});
 			}
 		}
@@ -163,7 +164,7 @@
 	}
 
 	//Used to retrieve necessary data from a particular video (in video player section)
-	function ytCurrentVideo($q, $http){
+	function ytCurrentVideo($q, $http, ytModalGenerator){
 		return function(id){
 			var url = 'https://www.googleapis.com/youtube/v3/videos',
 			request = {
@@ -171,6 +172,8 @@
 				part: 'snippet',
 				id: id
 			},
+			errorModalObj = ytModalGenerator().getVideoTemp(),
+
 			services = {
 				getVideo: getVideo
 			};
@@ -186,13 +189,13 @@
 					return $q.when(response);
 				},
 				function(response){
-					alert('Sorry, an error occured.');
+					ytModalGenerator().openModal(errorModalObj);
 				});	
 			}	
 		}
 	}
 	//Used to get back a video's channel data (which requires a different call from ytCurrentVideo)
-	function ytCurrentChannel($q, $http){
+	function ytCurrentChannel($q, $http, ytModalGenerator){
 		return function(id){
 			var url = "https://www.googleapis.com/youtube/v3/channels",
 			request = {
@@ -200,9 +203,12 @@
 				part: 'snippet',
 				id: id
 			},
+			errorModalObj = ytModalGenerator().getVideoTemp(),
+
 			services = {
 				getChannel: getChannel
 			};
+
 			return services;
 
 			function getChannel(){
@@ -215,7 +221,7 @@
 					return $q.when(response);
 				},
 				function(response){
-					alert('Sorry, an error occured.');
+					ytModalGenerator().openModal(errorModalObj);
 				});	
 			}	
 		}
@@ -924,8 +930,22 @@
 	function ytModalGenerator($q, $uibModal){
 		return function(){
 			var services = {
-				openModal: openModal
+				openModal: openModal,
+				getSearchTemp: getSearchTemp,
+				getVideoTemp: getVideoTemp
 			};
+
+			var searchTemp = {
+				templateUrl: './partials/search/search-partials/modals/error-modal.html',
+				controller: 'ErrorModalController',
+				controllerAs: 'errorModal'
+			};
+
+			var videoTemp = {
+				templateUrl: './partials/video/video-partials/modals/error-modal.html',
+				controller: 'ErrorModalController',
+				controllerAs: 'errorModal'
+			}
 
 			function openModal(modalObj){
 				var deferred = $q.defer();
@@ -943,6 +963,14 @@
 
 					return deferred.promise;
 				}
+
+			function getSearchTemp(){
+				return searchTemp;
+			}
+
+			function getVideoTemp(){
+				return videoTemp;
+			}
 
 			return services;
 		}
