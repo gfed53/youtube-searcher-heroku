@@ -2,7 +2,7 @@
 	angular
 	.module('myApp')
 	.factory('ytTrustSrc', ['$sce', ytTrustSrc])
-	.factory('ytSearchYouTube', ['$q', '$http', 'ytTranslate', ytSearchYouTube])
+	.factory('ytSearchYouTube', ['$q', '$http', 'ytTranslate', 'ytModalGenerator', ytSearchYouTube])
 	.factory('ytChanSearch', ['$q', '$http', ytChanSearch])
 	.factory('ytCurrentVideo', ['$q', '$http', ytCurrentVideo])
 	.factory('ytCurrentChannel', ['$q', '$http', ytCurrentChannel])
@@ -14,6 +14,8 @@
 	.factory('ytFilters', [ytFilters])
 	.factory('ytSearchSavedModal', ['$q', '$uibModal', ytSearchSavedModal])
 	.factory('ytDangerModal', ['$q', '$uibModal', ytDangerModal])
+	.factory('ytErrorModal', ['ytModalGenerator', ytErrorModal])
+	.factory('ytModalGenerator', ['$q', '$uibModal', ytModalGenerator])
 	.service('ytChanFilter', [ytChanFilter])
 	.service('ytSearchParams', [ytSearchParams])
 	.service('ytResults', [ytResults])
@@ -31,7 +33,7 @@
 	}
 
 	//Searches the API for videos based on search params
-	function ytSearchYouTube($q, $http, ytTranslate) {
+	function ytSearchYouTube($q, $http, ytTranslate, ytModalGenerator) {
 		return function(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken, lang){
 
 			var url = 'https://www.googleapis.com/youtube/v3/search';
@@ -52,6 +54,12 @@
 				videoEmbeddable: true,
 			};
 
+			var errorModalObj = {
+				templateUrl: './partials/search/search-partials/modals/error-modal.html',
+				controller: 'ErrorModalController',
+				controllerAs: 'errorModal'
+			};
+
 			var services = {
 				checkTrans: checkTrans,
 				getResults: getResults,
@@ -69,7 +77,7 @@
 					return $q.when(response);
 				},
 				function(response){
-					alert('error');
+					ytModalGenerator().openModal(errorModalObj);
 				});
 			}
 
@@ -883,6 +891,52 @@
 
 				modalInstance.result.then(function(){
 						deferred.resolve();
+					}, function(error){
+						deferred.reject(error);
+					});
+
+					return deferred.promise;
+				}
+
+			return services;
+		}
+	}
+
+	function ytErrorModal($q, ytModalGenerator){
+		return function(){
+			var services = {
+				openModal: openModal
+			},
+			modalObj = {
+				url: './partials/search/search-partials/modals/error-modal.html',
+				ctrl: 'ErrorModalController',
+				ctrlAs: 'errorModal'
+			};
+
+			function openModal(){
+				ytModalGenerator().openModal(modalObj);
+			}
+
+			return services;
+		}
+	}
+
+	function ytModalGenerator($q, $uibModal){
+		return function(){
+			var services = {
+				openModal: openModal
+			};
+
+			function openModal(modalObj){
+				var deferred = $q.defer();
+				var modalInstance = $uibModal.open({
+					templateUrl: modalObj.templateUrl,
+					controller: modalObj.controller,
+					controllerAs: modalObj.controllerAs
+				});
+
+				modalInstance.result.then(function(result){
+						deferred.resolve(result);
 					}, function(error){
 						deferred.reject(error);
 					});

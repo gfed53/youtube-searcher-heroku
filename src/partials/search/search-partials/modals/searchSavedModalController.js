@@ -16,8 +16,4 @@
 			$uibModalInstance.dismiss('cancel');
 		}
 	}
-
-	// function SearchSavedInstanceContoller($uibModalInstance){
-	// 	var vm = this;
-	// }
 })();
