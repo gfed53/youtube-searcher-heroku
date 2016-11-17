@@ -21,7 +21,7 @@
 	.service('ytResults', [ytResults])
 	.service('ytVideoItems', ['$q', '$state', '$stateParams',  'ytDangerModal', ytVideoItems])
 	.service('ytSearchHistory', ['$q', 'ytSearchSavedModal', 'ytDangerModal', 'ytSearchParams', ytSearchHistory])
-	.service('ytTranslate', ['$http', '$q', ytTranslate])
+	.service('ytTranslate', ['$http', '$q', 'ytModalGenerator', ytTranslate])
 	.service('ytSortOrder', [ytSortOrder])
 	.service('ytPlaylistSort', [ytPlaylistSort]);
 
@@ -648,7 +648,7 @@
 	}
 
 	//Handles all of the translation functionality used in the search section
-	function ytTranslate($http, $q){
+	function ytTranslate($http, $q, ytModalGenerator){
 
 		var langs = [{
 			label: 'None',
@@ -679,6 +679,8 @@
 			value: 'es'
 		}];
 
+		var errorModalObj = ytModalGenerator().getTransTemp();
+
 		function translate(text, lang){
 			var url = 'https://translate.yandex.net/api/v1.5/tr.json/translate',
 			request = {
@@ -695,8 +697,8 @@
 			.then(function(response){
 				return $q.when(response);
 			}, function(){
-				alert('Error retrieving translation. Did you select a language? Is the search bar empty?');
-			})
+				ytModalGenerator().openModal(errorModalObj);
+			});
 		}
 
 		function translateAll(tag, list){
@@ -932,7 +934,8 @@
 			var services = {
 				openModal: openModal,
 				getSearchTemp: getSearchTemp,
-				getVideoTemp: getVideoTemp
+				getVideoTemp: getVideoTemp,
+				getTransTemp: getTransTemp
 			};
 
 			var searchTemp = {
@@ -943,6 +946,12 @@
 
 			var videoTemp = {
 				templateUrl: './partials/video/video-partials/modals/error-modal.html',
+				controller: 'ErrorModalController',
+				controllerAs: 'errorModal'
+			};
+
+			var transTemp = {
+				templateUrl: './partials/search/search-partials/modals/translate-error-modal.html',
 				controller: 'ErrorModalController',
 				controllerAs: 'errorModal'
 			}
@@ -970,6 +979,10 @@
 
 			function getVideoTemp(){
 				return videoTemp;
+			}
+
+			function getTransTemp(){
+				return transTemp;
 			}
 
 			return services;
