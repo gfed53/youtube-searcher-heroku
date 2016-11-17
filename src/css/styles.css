@@ -82,10 +82,17 @@ body #page-header #header-wrapper #credit {
     background-color: #BDC3C7;
     font-weight: 600; }
   #header-menu #menu-fixed {
-    transition: 0.25s linear all; }
+    transition: 0.25s linear all;
+    font-size: 1.3em; }
   #header-menu .menu-fixed-no-scroll {
     background-color: #FBFBFB;
     border-color: transparent; }
+  #header-menu .my-nav, #header-menu .my-nav-item {
+    float: none; }
+  #header-menu .my-nav {
+    text-align: center; }
+  #header-menu .my-nav-item {
+    display: inline-block; }
 
 .nav > li > a {
   padding: 10px 8px; }

@@ -3,7 +3,7 @@
 	.module('myApp')
 
 	.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
-		$urlRouterProvider.otherwise('about')
+		$urlRouterProvider.otherwise('search')
 		var myRoot = {
 			name: 'root',
 			url: '/',

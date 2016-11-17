@@ -12,11 +12,24 @@
 
 	#menu-fixed {
 		transition: 0.25s linear all;
+		font-size: 1.3em;
 	}
 
 	.menu-fixed-no-scroll {
 		background-color: #FBFBFB;
 		border-color: transparent;
+	}
+
+	.my-nav, .my-nav-item {
+		float: none;
+	}
+
+	.my-nav {
+		text-align: center;
+	}
+
+	.my-nav-item {
+		display: inline-block;
 	}
 }
 

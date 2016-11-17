@@ -9,11 +9,11 @@
 	      </button>
 	    </div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav nav-bar right">
-				<li data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><a ui-sref="about" ui-sref-active="active">About</a></li>
-				<li data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" id="video-tab" ng-if="menu.videoId"><a ui-sref="video({videoId: menu.videoId})" ui-sref-active="active">Video Player</a></li>
-				<li data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><a ui-sref="playlist" ui-sref-active="active">My Saved Content</a></li>
-				<li data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><a ui-sref="search" ui-sref-active="active">Search</a></li>
+			<ul class="nav navbar-nav nav-bar right my-nav">
+				<li class="my-nav-item" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><a ui-sref="search" ui-sref-active="active">Search</a></li>
+				<li class="my-nav-item" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><a ui-sref="playlist" ui-sref-active="active">My Saved Content</a></li>
+				<li class="my-nav-item" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><a ui-sref="about" ui-sref-active="active">About</a></li>
+				<li class="my-nav-item" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" id="video-tab" ng-if="menu.videoId"><a ui-sref="video({videoId: menu.videoId})" ui-sref-active="active">Video Player</a></li>
 			</ul>
 		</div>
 	</div>
