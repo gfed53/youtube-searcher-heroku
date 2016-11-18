@@ -34,7 +34,7 @@
 
 	//Searches the API for videos based on search params
 	function ytSearchYouTube($q, $http, ytChanSearch, ytTranslate, ytModalGenerator) {
-		return function(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken, lang){
+		return function(keyword, searchType, channelId, order, publishedAfter, publishedBefore, location, locationRadius, pageToken, lang){
 
 			var url = 'https://www.googleapis.com/youtube/v3/search';
 			var request = {
@@ -44,7 +44,6 @@
 				order: order,
 				publishedAfter: publishedAfter,
 				publishedBefore: publishedBefore,
-				safeSearch: safeSearch,
 				location: location,
 				locationRadius: locationRadius,
 				pageToken: pageToken,
@@ -59,7 +58,8 @@
 			var services = {
 				checkTrans: checkTrans,
 				getResults: getResults,
-				transAndResults: transAndResults
+				transAndResults: transAndResults,
+				search: search
 			};
 
 			return services;
@@ -100,16 +100,24 @@
 						deferred.resolve(response);
 					})
 				});
-
 				return deferred.promise;
 			}
 
-			function search(type){
-				if(type === 'video'){
-					transAndResults();
+			function search(){
+				var deferred = $q.defer();
+				console.log(searchType);
+				if(searchType === 'video'){
+					transAndResults()
+					.then(function(response){
+						deferred.resolve(response);
+					});
 				} else {
-					ytChanSearch(keyword).getResults();
+					ytChanSearch(keyword).getResults()
+					.then(function(response){
+						deferred.resolve(response);
+					});
 				}
+				return deferred.promise;
 			}
 		}
 	};
@@ -549,7 +557,7 @@
 			return services;
 
 			function scrollToElement(scrollLocation){
-				$anchorScroll.yOffset = 63;
+				$anchorScroll.yOffset = 65;
 				var element = document.getElementById(scrollLocation);
 				if(element){
 					$location.hash(scrollLocation);

@@ -7,7 +7,7 @@
 	function SearchCtrl($scope, $location, $timeout, $anchorScroll, $uibModal, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus, ytTranslate, ytSortOrder){
 		var vm = this;
 		vm.initMap = initMap;
-		vm.vidSubmit = vidSubmit;
+		vm.submit = submit;
 		vm.setVideoId = setVideoId;	
 		vm.chanSubmit = chanSubmit;
 		vm.chanFilter = chanFilter;
@@ -33,6 +33,7 @@
 		vm.langs = ytTranslate.langs;
 		vm.translate = translate;
 		vm.params.lang = vm.langs[0];
+		vm.params.searchType = 'video';
 		vm.videosReverse = ytSortOrder.videosReverse;
 		vm.sort = sort;
 		// vm.openModal = openModal;
@@ -67,10 +68,10 @@
 			}
 		}
 
-		function vidSubmit(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken, lang){
+		function submit(keyword, searchType, channelId, order, publishedAfter, publishedBefore, location, locationRadius, pageToken, lang){
 			vm.viewVideo = false;
 			vm.params.searchedKeyword = keyword;
-			ytSearchYouTube(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken, lang).transAndResults()
+			ytSearchYouTube(keyword, searchType, channelId, order, publishedAfter, publishedBefore, location, locationRadius, pageToken, lang).search()
 			.then(function(response){
 				//In case we make a translated search, we want to hold onto that query
 				vm.params.advKeyword = response.config.params.q;
