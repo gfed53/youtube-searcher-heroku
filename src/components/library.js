@@ -2,7 +2,7 @@
 	angular
 	.module('myApp')
 	.factory('ytTrustSrc', ['$sce', ytTrustSrc])
-	.factory('ytSearchYouTube', ['$q', '$http', 'ytTranslate', 'ytModalGenerator', ytSearchYouTube])
+	.factory('ytSearchYouTube', ['$q', '$http', 'ytChanSearch', 'ytTranslate', 'ytModalGenerator', ytSearchYouTube])
 	.factory('ytChanSearch', ['$q', '$http', 'ytModalGenerator', ytChanSearch])
 	.factory('ytCurrentVideo', ['$q', '$http', 'ytModalGenerator', ytCurrentVideo])
 	.factory('ytCurrentChannel', ['$q', '$http', 'ytModalGenerator', ytCurrentChannel])
@@ -33,7 +33,7 @@
 	}
 
 	//Searches the API for videos based on search params
-	function ytSearchYouTube($q, $http, ytTranslate, ytModalGenerator) {
+	function ytSearchYouTube($q, $http, ytChanSearch, ytTranslate, ytModalGenerator) {
 		return function(keyword, channelId, order, publishedAfter, publishedBefore, safeSearch, location, locationRadius, pageToken, lang){
 
 			var url = 'https://www.googleapis.com/youtube/v3/search';
@@ -102,6 +102,14 @@
 				});
 
 				return deferred.promise;
+			}
+
+			function search(type){
+				if(type === 'video'){
+					transAndResults();
+				} else {
+					ytChanSearch(keyword).getResults();
+				}
 			}
 		}
 	};
@@ -541,7 +549,7 @@
 			return services;
 
 			function scrollToElement(scrollLocation){
-				$anchorScroll.yOffset = 55;
+				$anchorScroll.yOffset = 63;
 				var element = document.getElementById(scrollLocation);
 				if(element){
 					$location.hash(scrollLocation);

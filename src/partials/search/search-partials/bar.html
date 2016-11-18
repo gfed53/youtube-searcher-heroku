@@ -1,24 +1,26 @@
-<form uib-collapse="search.type.basic" id="form-basic-video-search" class="form-inline" ng-submit="search.vidSubmit(search.params.keyword)">
+<!-- <form uib-collapse="search.type.basic" id="form-basic-video-search" class="form-inline" ng-submit="search.vidSubmit(search.params.keyword)">
 	<div class="input-group">
 		<input type="text" class="form-control" ng-model="search.params.keyword" placeholder="Search Video..">
 		<span class="input-group-btn">
 			<input class="btn btn-default btn-go" type="submit" value="Go!">
 		</span>
 	</div>
-</form>
-<div class="button-wrapper">
+</form> -->
+<!-- <div class="button-wrapper">
 	<input class="btn btn-default" type="button" ng-click="search.toggleAdv()" value="Toggle Advanced">
-</div>
-<div uib-collapse="search.type.advanced" id="advanced-search">
-	<div id="map-wrapper">
-		<div id="map"></div>
-		<div id="map-hud" ng-if="search.params.location">
-			<span>({{ search.params.lat | number: 0 }}, {{ search.params.lng | number: 0}})</span>
-			<input class="btn btn-default btn-clear-select" type="button" ng-click="search.clearSelection()" value="Clear Selection">
-			<span>{{ search.params.radius | number: 0 }}km</span>
-		</div>
-	</div>
+</div> -->
+<div id="advanced-search">
 	<form id="form-advanced-video-search" class="form-inline" ng-submit="search.vidSubmit(search.params.advKeyword, search.params.channelId, search.params.order, search.params.after, search.params.before, search.params.safeSearch, search.params.location, search.params.locationRadius, undefined, search.params.lang.value)">
+		<div id="video-search-wrapper">
+			<div class="input-group input-group-lg">
+				<input autocomplete="on" type="text" class="form-control" id="video-search-bar" ng-model="search.params.advKeyword" placeholder="Search..">
+				<span class="input-group-btn">
+					<button class="btn btn-default btn-lg btn-go" type="submit" class="btn btn-default">Go!</button>
+					<button class="btn btn-default btn-lg btn-go" ng-click="search.chanSubmit(search.params.advKeyword)">Channel</button>
+				</span>
+			</div>
+		</div>
+		<h3>Search By...</h3>
 		<div class="cluster">
 			<div class="sub-cluster row">
 				<div class="col-md-4">
@@ -75,23 +77,24 @@
 				</div>
 			</div>
 		</div>
-		<div id="video-search-wrapper">
-			<div class="input-group input-group-lg">
-				<input autocomplete="on" type="text" class="form-control" ng-model="search.params.advKeyword" placeholder="Search Video..">
-				<span class="input-group-btn">
-					<input class="btn btn-default btn-go" type="submit" class="btn btn-default" value="Go!">
-				</span>
-			</div>
-		</div>
-	</form>
-	<form id="form-channel-search" class="form-inline" ng-submit="search.chanSubmit(search.params.channel)">
+		<!-- 		<form id="form-channel-search" class="form-inline" ng-submit="search.chanSubmit(search.params.channel)">
 		<div class="input-group">
 			<input autocomplete="on" type="text" class="form-control" ng-model="search.params.channel" placeholder="Search Channel..">
 			<span class="input-group-btn">
-				<input class="btn btn-default btn-go" type="submit" value="Go!">
+				<input class="btn btn-default" type="submit" value="Go!">
 			</span>
 		</div>
+	</form> -->
 	</form>
+	
+	<div id="map-wrapper">
+		<div id="map"></div>
+		<div id="map-hud" ng-if="search.params.location">
+			<span>({{ search.params.lat | number: 0 }}, {{ search.params.lng | number: 0}})</span>
+			<input class="btn btn-default btn-clear-select" type="button" ng-click="search.clearSelection()" value="Clear Selection">
+			<span>{{ search.params.radius | number: 0 }}km</span>
+		</div>
+	</div>
 	<div id="save-search-wrapper">
 			<input class="btn btn-primary" ng-click="search.saveSearch(search.params)" type="button" value="Save Search">
 	</div>
