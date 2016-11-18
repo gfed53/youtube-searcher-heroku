@@ -3,9 +3,10 @@ body {
 		#header-wrapper {
 			#mast-header {
 				text-align: center;
+				line-height: 1.4em;
 				font-size: 2.5em;
 				font-weight: bold;
-				font-family: "Helvetica Neue", sans-serif;
+				font-family: "Oswald", sans-serif;
 				padding: 1em;
 				color: #fbfbfb;
 				background-color: #27ae60;
@@ -13,6 +14,19 @@ body {
 				position: relative;
 				transition: 1s ease all;
 			}
+			.header-tube {
+				background-color: #fbfbfb;
+				color: #27ae60;
+				padding: 0 0.12em;
+				margin-left: 0.06em;
+				border-radius: 0.4em;
+			}
+
+			.letter-separator {
+				display: inline-block;
+				width: 0.1em;
+			}
+
 			#credit {
 				text-align: right;
 				margin: 2em;
@@ -25,18 +39,26 @@ body {
 	}
 }
 
-@media screen and ($tablet){
+@media screen and ($tabletfix){
 	body {
-		#page-header h1 {
-			font-size: 3.8em;		
+		#page-header {
+			#header-wrapper {
+				#mast-header {
+					line-height: 1em;
+				}
+			}
 		}
 	}
 }
 
-@media screen and ($desktop){
+@media screen and ($tablet){
 	body {
-		#page-header h1 {
-			font-size: 3em;
+		#page-header {
+			#header-wrapper {
+				#mast-header {
+					font-size: 3em;
+				}
+			}			
 		}
 	}
 }

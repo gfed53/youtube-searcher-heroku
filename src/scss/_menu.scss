@@ -5,8 +5,6 @@
 	}
 
 	.navbar-nav > li .active {
-		color: #FBFBFB;
-		background-color: #BDC3C7;
 		font-weight: 600;
 	}
 
@@ -18,19 +16,7 @@
 	.menu-fixed-no-scroll {
 		background-color: #FBFBFB;
 		border-color: transparent;
-	}
-
-	.my-nav, .my-nav-item {
-		float: none;
-	}
-
-	.my-nav {
-		text-align: center;
-	}
-
-	.my-nav-item {
-		display: inline-block;
-	}
+	}	
 }
 
 .nav>li>a {
@@ -41,9 +27,31 @@
 	padding-left: 15px;
 }
 
+.my-brand {
+	font-weight: bold;
+    font-family: "Oswald";
+    letter-spacing: 0.1em;
+}
+
 @media screen and ($mobile4){
 	#header-menu {
 		font-size: 0.8em;
+	}
+	
+}
+
+@media screen and ($tablet){
+	#header-menu {
+		.my-nav, .my-nav-item {
+			float: none;
+		}
+		.my-nav {
+			text-align: center;
+		}
+
+		.my-nav-item {
+			display: inline-block;
+		}
 	}
 	
 }
