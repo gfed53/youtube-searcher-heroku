@@ -35,6 +35,11 @@
 	font-weight: bold;
     font-family: "Oswald";
     letter-spacing: 0.1em;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    right: 0;
 }
 
 @media screen and ($mobile4){
@@ -50,6 +55,7 @@
 			float: none;
 		}
 		.my-nav {
+			// text-align: right;
 			text-align: center;
 		}
 

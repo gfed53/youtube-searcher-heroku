@@ -110,7 +110,12 @@ body #page-header #header-wrapper #credit {
 .my-brand {
   font-weight: bold;
   font-family: "Oswald";
-  letter-spacing: 0.1em; }
+  letter-spacing: 0.1em;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 10px;
+  right: 0; }
 
 @media screen and (min-width: 364px) {
   #header-menu {
