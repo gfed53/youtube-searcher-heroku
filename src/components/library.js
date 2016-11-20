@@ -71,6 +71,8 @@
 					params: request
 				})
 				.then(function(response){
+					// response.searchType = searchType;
+					// console.log(response);
 					return $q.when(response);
 				},
 				function(response){
@@ -557,7 +559,7 @@
 			return services;
 
 			function scrollToElement(scrollLocation){
-				$anchorScroll.yOffset = 65;
+				$anchorScroll.yOffset = 70;
 				var element = document.getElementById(scrollLocation);
 				if(element){
 					$location.hash(scrollLocation);

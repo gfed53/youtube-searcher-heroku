@@ -219,6 +219,13 @@ body #page-header #header-wrapper #credit {
   #advanced-search #video-search-bar {
     font-size: 1.5em;
     padding: 1em; }
+  #advanced-search .params-container {
+    border: 1px solid #E7E7E7;
+    background-color: #F8F8F8;
+    display: inline-block;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 0.5em; }
   #advanced-search .btn-go {
     font-size: 2rem; }
   #advanced-search #form-advanced-video-search {

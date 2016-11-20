@@ -20,90 +20,85 @@
 			</div>
 		</div>
 		<h3>Search By...</h3>
-		<div class="cluster">
-			<div class="sub-cluster row">
-				<div class="col-md-4">
-					<label for="type"> Type: </label>
+		<div class="params-container">
+			<div class="cluster">
+				<div class="sub-cluster row">
+					<div class="col-md-4">
+						<label for="type"> Type: </label>
+					</div>
+					<div class="col-md-8">
+						<select class="form-control" id="safe-search" name="searchType" ng-model="search.params.searchType">
+							<option value="video">Video</option>
+							<option value="channel">Channel</option>
+						</select>
+					</div>
 				</div>
-				<div class="col-md-8">
-					<select class="form-control" id="safe-search" name="searchType" ng-model="search.params.searchType">
-						<option value="video">Video</option>
-						<option value="channel">Channel</option>
-					</select>
+				<div class="sub-cluster row">
+					<div class="col-md-4">
+						<label for="order"> Order: </label>
+					</div>
+					<div class="col-md-8">
+						<select class="form-control" name="order" ng-model="search.params.order">
+							<option value="relevance">Relevance</option>
+							<option value="date">Date</option>
+							<option value="rating">Rating</option>
+							<option value="title">Title</option>
+							<option value="viewCount">View Count</option>
+						</select>
+					</div>
+				</div>
+
+			</div>
+			<div class="cluster">
+				<div class="sub-cluster row">
+					<div class="col-md-2">
+						<label for="date-after"> From: </label>	
+					</div>
+					<div class="col-md-10">
+						<input class="form-control" ng-model="search.params.after" name="date-after" type="date">
+					</div>
+				</div>
+				<div class="sub-cluster row">
+					<div class="col-md-2">
+						<label for="date-before"> To: </label>
+					</div>
+					<div class="col-md-10">
+						<input class="form-control" ng-model="search.params.before" name="date-before" type="date">
+					</div>
 				</div>
 			</div>
-			<div class="sub-cluster row">
-				<div class="col-md-4">
-					<label for="order"> Order: </label>
-				</div>
-				<div class="col-md-8">
-					<select class="form-control" name="order" ng-model="search.params.order">
-						<option value="relevance">Relevance</option>
-						<option value="date">Date</option>
-						<option value="rating">Rating</option>
-						<option value="title">Title</option>
-						<option value="viewCount">View Count</option>
-					</select>
+			<div id="translate-wrapper" class="cluster">
+				<div class=" sub-cluster row">
+					<div class="col-md-4">
+						<label for="translate">Auto-Translate: </label>
+					</div>
+					<div class="col-md-8">
+						<select name="translate"  class="form-control" id="translate-select" ng-model="search.params.lang" ng-options="item.label for item in search.langs"></select>
+					</div>
 				</div>
 			</div>
-			
+			<div id="map-wrapper">
+				<div id="map"></div>
+				<div id="map-hud" ng-if="search.params.location">
+					<span>({{ search.params.lat | number: 0 }}, {{ search.params.lng | number: 0}})</span>
+					<input class="btn btn-default btn-clear-select" type="button" ng-click="search.clearSelection()" value="Clear Selection">
+					<span>{{ search.params.radius | number: 0 }}km</span>
+				</div>
+			</div>
+			<div id="save-search-wrapper">
+				<input class="btn btn-primary" ng-click="search.saveSearch(search.params)" type="button" value="Save Search">
+			</div>
+			<div class="channel-filter" ng-if="search.params.image">
+				<img src="{{search.params.image}}"></img>
+				<input class="btn btn-default" type="button" ng-click="search.chanClear()" value="Clear Filter">
+			</div>
 		</div>
-		<div class="cluster">
-			<div class="sub-cluster row">
-				<div class="col-md-2">
-					<label for="date-after"> From: </label>	
-				</div>
-				<div class="col-md-10">
-					<input class="form-control" ng-model="search.params.after" name="date-after" type="date">
-				</div>
-			</div>
-			<div class="sub-cluster row">
-				<div class="col-md-2">
-					<label for="date-before"> To: </label>
-				</div>
-				<div class="col-md-10">
-					<input class="form-control" ng-model="search.params.before" name="date-before" type="date">
-				</div>
-			</div>
-		</div>
-		<div id="translate-wrapper" class="cluster">
-			<div class=" sub-cluster row">
-				<div class="col-md-4">
-					<label for="translate">Auto-Translate: </label>
-				</div>
-				<div class="col-md-8">
-					<select name="translate"  class="form-control" id="translate-select" ng-model="search.params.lang" ng-options="item.label for item in search.langs"></select>
-				</div>
-			</div>
-		</div>
-		<!-- 		<form id="form-channel-search" class="form-inline" ng-submit="search.chanSubmit(search.params.channel)">
-		<div class="input-group">
-			<input autocomplete="on" type="text" class="form-control" ng-model="search.params.channel" placeholder="Search Channel..">
-			<span class="input-group-btn">
-				<input class="btn btn-default" type="submit" value="Go!">
-			</span>
-		</div>
-	</form> -->
 	</form>
 	
-	<div id="map-wrapper">
-		<div id="map"></div>
-		<div id="map-hud" ng-if="search.params.location">
-			<span>({{ search.params.lat | number: 0 }}, {{ search.params.lng | number: 0}})</span>
-			<input class="btn btn-default btn-clear-select" type="button" ng-click="search.clearSelection()" value="Clear Selection">
-			<span>{{ search.params.radius | number: 0 }}km</span>
-		</div>
-	</div>
-	<div id="save-search-wrapper">
-			<input class="btn btn-primary" ng-click="search.saveSearch(search.params)" type="button" value="Save Search">
-	</div>
-	<div class="channel-filter" ng-if="search.params.image">
-		<img src="{{search.params.image}}"></img>
-		<input class="btn btn-default" type="button" ng-click="search.chanClear()" value="Clear Filter">
-	</div>
-</div>
-<div class="btn-group-vertical" role="group" aria-label="...">
-	<button type="button" class="btn btn-default" id="btn-videos" ng-if="search.results.length > 0" ng-click="search.status.videosCollapsed = !search.status.videosCollapsed">
+	
+	
+	<!-- <div class="btn-group-vertical" role="group" aria-label="..."> -->
+<!-- 	<button type="button" class="btn btn-default" id="btn-videos" ng-if="search.results.length > 0" ng-click="search.status.videosCollapsed = !search.status.videosCollapsed">
 		<span ng-if="search.status.videosCollapsed">
 			Show Videos
 		</span>
@@ -120,9 +115,10 @@
 		</span>
 	</button>
 	<button type="button" class="btn btn-default" ng-if="search.results.length > 0" ng-click="search.sort()">Video Order
-	<span ng-if="!search.videosReverse" class="glyphicon glyphicon-triangle-top"></span>
-	<span ng-if="search.videosReverse" class="glyphicon glyphicon-triangle-bottom"></span>
-	</button>
+		<span ng-if="!search.videosReverse" class="glyphicon glyphicon-triangle-top"></span>
+		<span ng-if="search.videosReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+	</button> -->
+</div>
 </div>
 
 

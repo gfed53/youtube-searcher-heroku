@@ -74,8 +74,10 @@
 			ytSearchYouTube(keyword, searchType, channelId, order, publishedAfter, publishedBefore, location, locationRadius, pageToken, lang).search()
 			.then(function(response){
 				//In case we make a translated search, we want to hold onto that query
+				console.log(response);
 				vm.params.advKeyword = response.config.params.q;
 				vm.params.searchedKeyword = response.config.params.q;
+				vm.params.searchTypePrev = response.config.params.type;
 				//Also reset auto-translate in case we want to then grab the next page of the translated search (so the translator doesn't unnecessarily try to re-translate an already-translated word)
 				vm.params.lang = vm.langs[0];
 				vm.results = response.data.items;
