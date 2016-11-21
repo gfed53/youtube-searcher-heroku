@@ -2,11 +2,11 @@
 	<div class="playlist-section-header">
 		<h2>Saved Videos</h2>
 		<button class="btn btn-default btn-play-toggle" ng-click="playlist.videosCollapse = !playlist.videosCollapse">
-			<span ng-if="playlist.videosCollapse">Expand</span>
-			<span ng-if="!playlist.videosCollapse">Collapse</span>
+			<span class="fa fa-toggle-down" ng-if="playlist.videosCollapse"></span>
+			<span class="fa fa-toggle-up" ng-if="!playlist.videosCollapse"></span>
 		</button>
 	</div>
-	<div id="video-items-container" ng-if="playlist.items.length > 0" uib-collapse="playlist.videosCollapse">
+	<div class="content-container" id="video-items-container" ng-if="playlist.items.length > 0" uib-collapse="playlist.videosCollapse">
 		<div class="video-sort-buttons">
 			<h3 class="sort-buttons-header">Sort By:</h3>
 			<div class="btn-group" role="group" aria-label="...">
@@ -106,11 +106,11 @@
 	<div class="playlist-section-header">
 		<h2>Saved Searches</h2>
 		<button class="btn btn-default btn-play-toggle" ng-click="playlist.searchesCollapse = !playlist.searchesCollapse">
-			<span ng-if="playlist.searchesCollapse">Expand</span>
-			<span ng-if="!playlist.searchesCollapse">Collapse</span>
+			<span class="fa fa-toggle-down" ng-if="playlist.searchesCollapse"></span>
+			<span class="fa fa-toggle-up" ng-if="!playlist.searchesCollapse"></span>
 		</button>
 	</div>
-	<div id="past-search-container" ng-if="playlist.pastSearches.length > 0" uib-collapse="playlist.searchesCollapse">
+	<div class="content-container" id="past-search-container" ng-if="playlist.pastSearches.length > 0" uib-collapse="playlist.searchesCollapse">
 		<div class="search-sort-buttons">
 			<h3>Sort By:</h3>
 			<div class="btn-group btn-group-srt" role="group" aria-label="...">

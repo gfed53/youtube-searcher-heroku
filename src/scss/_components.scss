@@ -18,6 +18,12 @@
 	margin: 0 auto;
 }
 
+//Bootstrap tweaks
+
+.panel-default>.panel-heading {
+	background-color: #fff;
+}
+
 @media screen and ($mobile5){
 	.search-modal-input {
 		width: 75%;
