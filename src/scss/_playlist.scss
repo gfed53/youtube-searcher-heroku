@@ -50,6 +50,9 @@
 	.filt-label {
 		display: block;
 	}
+	.toggle-all-container {
+		text-align: center;
+	}
 }
 
 @media screen and ($mobile4){
@@ -94,6 +97,9 @@
 			.filter-input-group-keyword {
 				display: inline-block;
 			}
+		}
+		.toggle-all-container {
+			text-align: left;
 		}
 	}
 }

@@ -76,9 +76,11 @@
 				<input class="form-control" ng-model="playlist.videoFilter.addedBefore" type="date">
 			</div>
 		</div>
-		<div class="btn-group" role="group" aria-label="...">
-			<button class="btn btn-default btn-toggle-all" ng-click="playlist.openAll(playlist.items)">Open All</button>
-			<button class="btn btn-default btn-toggle-all" ng-click="playlist.closeAll(playlist.items)">Close All</button>
+		<div class="toggle-all-container">
+			<div class="btn-group" role="group" aria-label="...">
+				<button class="btn btn-default btn-toggle-all" ng-click="playlist.openAll(playlist.items)">Open All</button>
+				<button class="btn btn-default btn-toggle-all" ng-click="playlist.closeAll(playlist.items)">Close All</button>
+			</div>
 		</div>
 		<uib-accordion close-others="false">
 			<uib-accordion-group ng-repeat="item in playlist.items | orderBy:playlist.videosPredicate:playlist.videosReverse | filter:playlist.videoFilter.keyword | filter:playlist.addedAfterVideos | filter:playlist.addedBeforeVideos track by item.name" is-open="item.state">
@@ -141,9 +143,11 @@
 				<input class="form-control" ng-model="playlist.searchesFilter.addedBefore" type="date">
 			</div>
 		</div>
-		<div class="btn-group" role="group" aria-label="...">
-			<button class="btn btn-default btn-toggle-all" ng-click="playlist.openAll(playlist.pastSearches)">Open All</button>
-			<button class="btn btn-default btn-toggle-all" ng-click="playlist.closeAll(playlist.pastSearches)">Close All</button>
+		<div class="toggle-all-container">
+			<div class="btn-group btn-group-toggle-all" role="group" aria-label="...">
+				<button class="btn btn-default btn-toggle-all" ng-click="playlist.openAll(playlist.pastSearches)">Open All</button>
+				<button class="btn btn-default btn-toggle-all" ng-click="playlist.closeAll(playlist.pastSearches)">Close All</button>
+			</div>
 		</div>
 		<uib-accordion close-others="false">
 			<uib-accordion-group ng-repeat="search in playlist.pastSearches | orderBy:playlist.searchesPredicate:playlist.searchesReverse | filter:playlist.searchesFilter.keyword | filter:playlist.addedAfterSearches | filter:playlist.addedBeforeSearches  track by search.name" is-open="search.state">

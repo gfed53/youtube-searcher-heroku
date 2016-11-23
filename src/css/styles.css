@@ -176,6 +176,8 @@ body #page-header #header-wrapper #credit {
     text-align: center; }
   #playlist .filt-label {
     display: block; }
+  #playlist .toggle-all-container {
+    text-align: center; }
 
 @media screen and (min-width: 364px) {
   #playlist h2 {
@@ -200,7 +202,9 @@ body #page-header #header-wrapper #credit {
   #playlist .filter-inputs {
     text-align: left; }
     #playlist .filter-inputs .filter-input-group-keyword {
-      display: inline-block; } }
+      display: inline-block; }
+  #playlist .toggle-all-container {
+    text-align: left; } }
 
 #bar {
   text-align: center;
