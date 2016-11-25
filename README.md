@@ -38,7 +38,7 @@ Map sometimes doesn't expand as it should. Known work-around: Refresh page.
 
 When selecting from saved searches/playlist, sometimes wonky things can occur. Known work-around: Refresh page
 
-The date input still doesn't work in Mozilla Firefox. C'mon Mozilla, work with me here!
+This app works best in Google Chrome. I'm aware of the issues with Mozilla Firefox, and I'm currently working on its compatibility.
 
 
 (This ends the "about" section content)

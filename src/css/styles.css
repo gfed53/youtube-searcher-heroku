@@ -156,6 +156,8 @@ body #page-header #header-wrapper #credit {
       margin-bottom: 1em; }
       #playlist #playlist-items .playlist-div p, #playlist #past-search-items .playlist-div p {
         max-width: 20em; }
+  #playlist .my-toggle-arrow {
+    font-size: 2em; }
   #playlist .btn-playlist-clear, #playlist .video-sort-buttons, #playlist .search-sort-buttons {
     margin: 2em 0; }
   #playlist .playlist-btn-group {
