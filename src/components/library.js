@@ -111,7 +111,6 @@
 
 			function search(){
 				var deferred = $q.defer();
-				console.log(searchType);
 				if(searchType === 'video'){
 					transAndResults()
 					.then(function(response){
