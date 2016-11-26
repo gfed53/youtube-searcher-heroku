@@ -36,7 +36,6 @@
 		vm.params.searchType = 'video';
 		vm.videosReverse = ytSortOrder.videosReverse;
 		vm.sort = sort;
-		// vm.openModal = openModal;
 
 		//If advanced view is active when revisiting state, we need to initMap() on ctrl start
 		$timeout(function(){
@@ -216,6 +215,17 @@
 				//Set a value that will trigger termination of the saving process.
 			});
 		}
+
+		//Date Parser
+		vm.dateFormat = '2014-01-01T05:00:00.000Z';
+
+		// vm.after = moment(search.params.after);
+		vm.sampAfter = moment('01/01/2011', 'M/D/YYYY');
+		console.log(vm.sampAfter._d);
+
+
+
+
 	};
 })();
 

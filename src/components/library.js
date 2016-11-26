@@ -37,13 +37,18 @@
 		return function(keyword, searchType, channelId, order, publishedAfter, publishedBefore, location, locationRadius, pageToken, lang){
 
 			var url = 'https://www.googleapis.com/youtube/v3/search';
+
+			//Moment.js parsing
+			var parsedAfter = moment(publishedAfter, 'M/D/YYYY')._d,
+			parsedBefore = moment(publishedBefore, 'M/D/YYYY')._d;
+
 			var request = {
 				key: 'AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA',
 				part: 'snippet',
 				maxResults: 50,
 				order: order,
-				publishedAfter: publishedAfter,
-				publishedBefore: publishedBefore,
+				publishedAfter: parsedAfter,
+				publishedBefore: parsedBefore,
 				location: location,
 				locationRadius: locationRadius,
 				pageToken: pageToken,
