@@ -1,4 +1,4 @@
-# Ultimate YouTube Searcher
+# The Swiss Army YouTube Searcher
 
 The following is taken from the "about" section of the app:
 

@@ -39,8 +39,9 @@
 			var url = 'https://www.googleapis.com/youtube/v3/search';
 
 			//Moment.js parsing
-			var parsedAfter = moment(publishedAfter, 'M/D/YYYY')._d,
-			parsedBefore = moment(publishedBefore, 'M/D/YYYY')._d;
+
+			var parsedAfter = (publishedAfter ? moment(publishedAfter, 'M/D/YYYY')._d : undefined),
+			parsedBefore = (publishedBefore ? moment(publishedBefore, 'M/D/YYYY')._d : undefined);
 
 			var request = {
 				key: 'AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA',
@@ -76,8 +77,6 @@
 					params: request
 				})
 				.then(function(response){
-					// response.searchType = searchType;
-					// console.log(response);
 					return $q.when(response);
 				},
 				function(response){

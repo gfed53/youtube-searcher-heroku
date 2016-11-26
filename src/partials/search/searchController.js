@@ -73,7 +73,6 @@
 			ytSearchYouTube(keyword, searchType, channelId, order, publishedAfter, publishedBefore, location, locationRadius, pageToken, lang).search()
 			.then(function(response){
 				//In case we make a translated search, we want to hold onto that query
-				console.log(response);
 				vm.params.advKeyword = response.config.params.q;
 				vm.params.searchedKeyword = response.config.params.q;
 				vm.params.searchTypePrev = response.config.params.type;
@@ -163,7 +162,6 @@
 
 		function saveSearch(params){
 			ytSearchHistory.set(params, ytSearchHistory);
-			// openModal();
 		}
 
 		function searchIsSaved(params){
@@ -198,34 +196,6 @@
 			vm.videosReverse = !vm.videosReverse;
 			ytSortOrder.videosReverse = vm.videosReverse;
 		}
-
-		//TODO: Move to service, then use service within ytSearchHistory.set, use the output values of modal service in .set(), if value === 'cancel', abort, else, set it equal to params.name, and continue
-		function openModal(){
-			var modalInstance = $uibModal.open({
-				templateUrl: './partials/search/search-partials/modals/search-saved-modal.html',
-				controller: 'SearchSavedModalController',
-				controllerAs: 'searchModal'
-			});
-
-			modalInstance.result.then(function(result){
-				console.log(result);
-				//Set input equal to params.name
-			}, function(error){
-				console.log(error);
-				//Set a value that will trigger termination of the saving process.
-			});
-		}
-
-		//Date Parser
-		vm.dateFormat = '2014-01-01T05:00:00.000Z';
-
-		// vm.after = moment(search.params.after);
-		vm.sampAfter = moment('01/01/2011', 'M/D/YYYY');
-		console.log(vm.sampAfter._d);
-
-
-
-
 	};
 })();
 
