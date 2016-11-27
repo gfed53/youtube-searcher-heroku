@@ -32,8 +32,11 @@
 		vm.status = ytResults.getStatus();
 		vm.langs = ytTranslate.langs;
 		vm.translate = translate;
+		//Default search settings
 		vm.params.lang = vm.langs[0];
 		vm.params.searchType = 'video';
+		vm.params.order = 'relevance';
+		//
 		vm.videosReverse = ytSortOrder.videosReverse;
 		vm.sort = sort;
 
