@@ -18,8 +18,14 @@
 		vm.videosPredicate = ytPlaylistSort.videos.predicate;
 		vm.searchesReverse = ytPlaylistSort.searches.reverse;
 		vm.searchesPredicate = ytPlaylistSort.searches.predicate;
+		//TODO: Consolidate into object, probably put into service(s) so that conditions are preserved on state changes
 		vm.videosCollapse = true;
 		vm.searchesCollapse = true;
+		vm.videosSortCollapse = true;
+		vm.videosFilterCollapse = true;
+		vm.searchesSortCollapse = true;
+		vm.searchesFilterCollapse = true;
+		//
 		vm.sortVideos = sortVideos;
 		vm.sortSearches = sortSearches;
 		vm.videoTabStatus = false;

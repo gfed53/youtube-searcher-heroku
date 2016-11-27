@@ -21,8 +21,14 @@
 	}
 	
 	//Playlist Buttons
+
 	.btn-playlist-clear, .video-sort-buttons, .search-sort-buttons {
 		margin: 2em 0;
+	}
+
+	.sort-filter-group {
+		padding-bottom: 1em;
+		border-bottom: 1px solid #E7E7E7;
 	}
 	.playlist-btn-group {
 		text-align: right;
@@ -31,10 +37,13 @@
 		vertical-align: middle;
 		margin: 0 0 1em 1em;
 	}
-	.video-sort-buttons, .search-sort-buttons {
+	.my-toggle-arrow-sm {
+		font-size: 0.7em;
+	}
+	.video-sort-buttons, .video-filter-buttons, .search-sort-buttons, .search-filter-buttons {
 		display: none;
 	}
-	.sort-buttons-mobile {
+	.sort-buttons-mobile, .filter-buttons-mobile {
 		display: block;
 		text-align: center;
 	}
@@ -52,7 +61,14 @@
 		display: block;
 	}
 	.toggle-all-container {
+		padding-top: 1em;
 		text-align: center;
+	}
+
+	//Headers
+
+	.sort-filter-header {
+		display: inline-block;
 	}
 }
 
@@ -82,10 +98,10 @@
 
 @media screen and ($mobile5){
 	#playlist {
-		.video-sort-buttons, .search-sort-buttons {
+		.video-sort-buttons, .video-filter-buttons, .search-sort-buttons, .search-filter-buttons {
 			display: block;
 		}
-		.sort-buttons-mobile {
+		.sort-buttons-mobile, .filter-buttons-mobile {
 			display: none;
 		}
 		.filter-buttons-header {
