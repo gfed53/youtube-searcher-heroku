@@ -1,6 +1,5 @@
 #playlist {
 	padding-bottom: 6em;
-	// margin: 0 0.5em;
 	.playlist-section-header {
 		margin-top: 2em;
 	}
@@ -32,14 +31,15 @@
 		vertical-align: middle;
 		margin: 0 0 1em 1em;
 	}
-	.filter-buttons-header {
-		text-align: left;
-	}
-	.video-sort-buttons {
+	.video-sort-buttons, .search-sort-buttons {
 		display: none;
 	}
 	.sort-buttons-mobile {
 		display: block;
+		text-align: center;
+	}
+	.sort-mobile-sub {
+		display: inline-block;
 	}
 	.btn-toggle-all {
 		margin-bottom: 1em;
@@ -82,11 +82,14 @@
 
 @media screen and ($mobile5){
 	#playlist {
-		.video-sort-buttons {
+		.video-sort-buttons, .search-sort-buttons {
 			display: block;
 		}
-		.sort-buttons-mobile{
+		.sort-buttons-mobile {
 			display: none;
+		}
+		.filter-buttons-header {
+			text-align: left;
 		}
 	}
 }

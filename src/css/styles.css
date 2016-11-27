@@ -163,12 +163,13 @@ body #page-header #header-wrapper #credit {
   #playlist .btn-play-toggle {
     vertical-align: middle;
     margin: 0 0 1em 1em; }
-  #playlist .filter-buttons-header {
-    text-align: left; }
-  #playlist .video-sort-buttons {
+  #playlist .video-sort-buttons, #playlist .search-sort-buttons {
     display: none; }
   #playlist .sort-buttons-mobile {
-    display: block; }
+    display: block;
+    text-align: center; }
+  #playlist .sort-mobile-sub {
+    display: inline-block; }
   #playlist .btn-toggle-all {
     margin-bottom: 1em; }
   #playlist .filter-inputs {
@@ -193,10 +194,12 @@ body #page-header #header-wrapper #credit {
     display: inline-block; } }
 
 @media screen and (min-width: 403px) {
-  #playlist .video-sort-buttons {
+  #playlist .video-sort-buttons, #playlist .search-sort-buttons {
     display: block; }
   #playlist .sort-buttons-mobile {
-    display: none; } }
+    display: none; }
+  #playlist .filter-buttons-header {
+    text-align: left; } }
 
 @media screen and (min-width: 768px) {
   #playlist .filter-inputs {
