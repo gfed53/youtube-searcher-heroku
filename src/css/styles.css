@@ -292,6 +292,10 @@ body #page-header #header-wrapper #credit {
     font-size: 1.5em; }
   .results .results-row {
     margin: 1em 0; }
+  .results .result-mobile {
+    display: block; }
+  .results .result-desktop {
+    display: none; }
   .results .inner-result {
     background-color: #ececec;
     box-shadow: 0px 1px 3px 0px;
@@ -307,7 +311,7 @@ body #page-header #header-wrapper #credit {
         border: 1px solid white;
         border-radius: 0.5em; }
       .results .inner-result .tit-descrip-container .playlist-button-wrapper {
-        margin: 1em; }
+        margin: 2em; }
     .results .inner-result p {
       overflow-x: scroll; }
     .results .inner-result h3, .results .inner-result p {
@@ -318,7 +322,7 @@ body #page-header #header-wrapper #credit {
     .results .inner-result img {
       float: none;
       cursor: pointer;
-      margin: 2em 0 7em 0;
+      margin: 2em 0;
       height: 100%;
       width: 50%; }
   .results .last > .inner-result {
@@ -384,6 +388,14 @@ body #page-header #header-wrapper #credit {
     overflow-x: auto; }
   .results .inner-result img {
     margin: 2em 0; } }
+
+@media screen and (min-width: 993px) {
+  .results .inner-result img {
+    width: 65%; }
+  .results .result-mobile {
+    display: none; }
+  .results .result-desktop {
+    display: block; } }
 
 @media screen and (min-width: 1024px) {
   #bar {
