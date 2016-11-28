@@ -34,9 +34,7 @@
 		vm.translate = translate;
 		//Default search settings
 		vm.params.lang = vm.langs[0];
-		vm.params.searchType = 'video';
-		vm.params.order = 'relevance';
-		//
+		vm.params.searchType = (vm.params.searchType || 'video');
 		vm.videosReverse = ytSortOrder.videosReverse;
 		vm.sort = sort;
 
