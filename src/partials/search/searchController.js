@@ -23,6 +23,7 @@
 		vm.computeCssClass = computeCssClass;
 		vm.scrollTo = scrollTo;
 		vm.scrollBtn = false;
+		
 		//Retrieving our saved variables, if any
 		//type refers to the search type, whether the user sees the basic or advanced search in the view
 		vm.type = ytSearchParams.getSearchType();
@@ -32,9 +33,11 @@
 		vm.status = ytResults.getStatus();
 		vm.langs = ytTranslate.langs;
 		vm.translate = translate;
+
 		//Default search settings
 		vm.params.lang = vm.langs[0];
 		vm.params.searchType = (vm.params.searchType || 'video');
+
 		vm.videosReverse = ytSortOrder.videosReverse;
 		vm.sort = sort;
 
@@ -73,9 +76,11 @@
 			vm.params.searchedKeyword = keyword;
 			ytSearchYouTube(keyword, searchType, channelId, order, publishedAfter, publishedBefore, location, locationRadius, pageToken, lang).search()
 			.then(function(response){
-				//In case we make a translated search, we want to hold onto that query
-				vm.params.advKeyword = response.config.params.q;
+
+				//Clear the search bar, but keep a reference to the last keyword searched.
+				vm.params.advKeyword = '';
 				vm.params.searchedKeyword = response.config.params.q;
+
 				vm.params.searchTypePrev = response.config.params.type;
 				//Also reset auto-translate in case we want to then grab the next page of the translated search (so the translator doesn't unnecessarily try to re-translate an already-translated word)
 				vm.params.lang = vm.langs[0];
@@ -113,8 +118,7 @@
 				$timeout(function(){
 					vm.scrollTo('scroll-point');
 					vm.offSet = true;
-				}, 1000);
-				
+				}, 1000);			
 			})
 		}
 
@@ -123,6 +127,9 @@
 			vm.params.image = image;
 			vm.params.channelId = id;
 			vm.filterActive = true;
+
+			//Automatically switch to video search
+			vm.params.searchType = 'video';
 			vm.scrollTo('form-advanced-video-search');
 		}
 
@@ -163,10 +170,6 @@
 
 		function saveSearch(params){
 			ytSearchHistory.set(params, ytSearchHistory);
-		}
-
-		function searchIsSaved(params){
-
 		}
 
 		function addToPlaylist(result){
