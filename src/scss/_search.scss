@@ -111,6 +111,10 @@
 	}
 	.result-mobile {
 		display: block;
+		padding-bottom: 2em;
+		p {
+			text-align: center;
+		}
 	}
 	.result-desktop {
 		display: none;
@@ -132,9 +136,7 @@
 				border-radius: 0.5em;
 			}
 			.playlist-button-wrapper {
-				margin: 2em;
-			}
-			.result-chan-descrip {
+				margin: 1em;
 			}
 		}
 		p {
@@ -263,7 +265,7 @@
 	.results {
 		.inner-result {
 			img {
-				width: 65%;
+				width: 60%;
 			}
 		}
 		.result-mobile {

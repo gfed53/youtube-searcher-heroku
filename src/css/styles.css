@@ -293,7 +293,10 @@ body #page-header #header-wrapper #credit {
   .results .results-row {
     margin: 1em 0; }
   .results .result-mobile {
-    display: block; }
+    display: block;
+    padding-bottom: 2em; }
+    .results .result-mobile p {
+      text-align: center; }
   .results .result-desktop {
     display: none; }
   .results .inner-result {
@@ -311,7 +314,7 @@ body #page-header #header-wrapper #credit {
         border: 1px solid white;
         border-radius: 0.5em; }
       .results .inner-result .tit-descrip-container .playlist-button-wrapper {
-        margin: 2em; }
+        margin: 1em; }
     .results .inner-result p {
       overflow-x: scroll; }
     .results .inner-result h3, .results .inner-result p {
@@ -391,7 +394,7 @@ body #page-header #header-wrapper #credit {
 
 @media screen and (min-width: 993px) {
   .results .inner-result img {
-    width: 65%; }
+    width: 60%; }
   .results .result-mobile {
     display: none; }
   .results .result-desktop {

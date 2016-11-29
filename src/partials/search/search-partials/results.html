@@ -68,13 +68,22 @@
 	<p class="result-dir">Select a channel by clicking on its image. The channel will then be added as a search filter.</p>
 	<div class="row results-row">
 		<div class="result" ng-repeat="result in search.results" ng-class="search.computeCssClass($first, $last)">
-			<div class="row inner-result">
+			<div class="row inner-result result-desktop">
 				<div class="col-md-6 col-sm-6">
 					<h3>{{result.snippet.channelTitle}}</h3>
 					<p>{{result.snippet.description}}</p>
 				</div>
 				<div class="col-md-6 results-img-container">
 					<img ng-click="search.chanFilter(result.id.channelId, result.snippet.thumbnails.default.url)" ng-src="{{result.snippet.thumbnails.default.url}}" alt="image">
+				</div>
+			</div>
+			<div class="row inner-result result-mobile">
+				<h3>{{result.snippet.channelTitle}}</h3>
+				<div class="col-md-6 results-img-container">
+					<img ng-click="search.chanFilter(result.id.channelId, result.snippet.thumbnails.default.url)" ng-src="{{result.snippet.thumbnails.default.url}}" alt="image">
+				</div>
+				<div class="col-md-6">
+					<p>{{result.snippet.description}}</p>
 				</div>
 			</div>
 		</div>
