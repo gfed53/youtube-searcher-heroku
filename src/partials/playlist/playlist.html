@@ -9,7 +9,7 @@
 			<span class="glyphicon glyphicon-triangle-top my-toggle-arrow" ng-if="!playlist.videosCollapse"></span>
 		</button>
 	</div>
-	<div class="content-container" id="video-items-container" ng-if="playlist.items.length > 0" uib-collapse="playlist.videosCollapse">
+	<div class="content-container" id="video-items-container" ng-if="playlist.items.length" uib-collapse="playlist.videosCollapse">
 
 		<!-- For Larger Viewports -->
 	
@@ -153,7 +153,7 @@
 		</uib-accordion>
 		<button ng-click="playlist.clearAllVideos()" class="btn btn-danger btn-playlist-clear">Clear Videos</button>
 	</div>
-	<p ng-if="playlist.items.length === 0">No saved videos present. See the "About" page for more info on how to save video.</p>
+	<p ng-if="!playlist.items.length">No saved videos present. See the "About" page for more info on how to save video.</p>
 
 	<!-- Saved Searches Section -->
 
@@ -164,7 +164,7 @@
 			<span class="glyphicon glyphicon-triangle-top my-toggle-arrow" ng-if="!playlist.searchesCollapse"></span>
 		</button>
 	</div>
-	<div class="content-container" id="past-search-container" ng-if="playlist.pastSearches.length > 0" uib-collapse="playlist.searchesCollapse">
+	<div class="content-container" id="past-search-container" ng-if="playlist.pastSearches.length" uib-collapse="playlist.searchesCollapse">
 
 		<!-- For Larger Viewports -->
 
@@ -282,7 +282,7 @@
 		</uib-accordion>
 		<button ng-click="playlist.clearAllSearches()" class="btn btn-danger btn-playlist-clear">Clear Searches</button>
 	</div>
-	<p ng-if="playlist.pastSearches.length === 0">No saved searches present. See the "About" page for more info on how to save searches.</p>
+	<p ng-if="!playlist.pastSearches.length">No saved searches present. See the "About" page for more info on how to save searches.</p>
 </div>
 
 
