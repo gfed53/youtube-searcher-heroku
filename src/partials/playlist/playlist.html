@@ -4,12 +4,12 @@
 
 	<div class="playlist-section-header">
 		<h2>Saved Videos</h2>
-		<button class="btn btn-default btn-play-toggle" ng-click="playlist.videosCollapse = !playlist.videosCollapse">
-			<span class="glyphicon glyphicon-triangle-bottom my-toggle-arrow" ng-if="playlist.videosCollapse"></span>
-			<span class="glyphicon glyphicon-triangle-top my-toggle-arrow" ng-if="!playlist.videosCollapse"></span>
+		<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.videosCollapsed = !playlist.collapsed.videosCollapsed">
+			<span class="glyphicon glyphicon-triangle-bottom my-toggle-arrow" ng-if="playlist.collapsed.videosCollapsed"></span>
+			<span class="glyphicon glyphicon-triangle-top my-toggle-arrow" ng-if="!playlist.collapsed.videosCollapsed"></span>
 		</button>
 	</div>
-	<div class="content-container" id="video-items-container" ng-if="playlist.items.length" uib-collapse="playlist.videosCollapse">
+	<div class="content-container" id="video-items-container" ng-if="playlist.items.length" uib-collapse="playlist.collapsed.videosCollapsed">
 
 		<!-- For Larger Viewports -->
 	

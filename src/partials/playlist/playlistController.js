@@ -2,9 +2,9 @@
 	angular
 	.module('myApp')
 
-	.controller('PlaylistCtrl', ['$state', '$timeout', 'ytVideoItems', 'ytSearchHistory', 'ytSearchParams', 'ytPlaylistSort', 'ytFilters', PlaylistCtrl])
+	.controller('PlaylistCtrl', ['$state', '$timeout', 'ytVideoItems', 'ytSearchHistory', 'ytSearchParams', 'ytPlaylistSort', 'ytFilters', 'ytPlaylistView', PlaylistCtrl])
 
-	function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchParams, ytPlaylistSort, ytFilters){
+	function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchParams, ytPlaylistSort, ytFilters, ytPlaylistView){
 		var vm = this;
 		vm.items = ytVideoItems.services.getItems();
 		vm.setVideoId = setVideoId;
@@ -19,12 +19,17 @@
 		vm.searchesReverse = ytPlaylistSort.searches.reverse;
 		vm.searchesPredicate = ytPlaylistSort.searches.predicate;
 		//TODO: Consolidate into object, probably put into service(s) so that conditions are preserved on state changes
+		
 		vm.videosCollapse = true;
 		vm.searchesCollapse = true;
 		vm.videosSortCollapse = true;
 		vm.videosFilterCollapse = true;
 		vm.searchesSortCollapse = true;
 		vm.searchesFilterCollapse = true;
+		//
+
+		//New obj
+		vm.collapsed = ytPlaylistView.get();
 		//
 		vm.sortVideos = sortVideos;
 		vm.sortSearches = sortSearches;

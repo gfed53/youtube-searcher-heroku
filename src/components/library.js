@@ -23,6 +23,7 @@
 	.service('ytSearchHistory', ['$q', 'ytSearchSavedModal', 'ytDangerModal', 'ytSearchParams', ytSearchHistory])
 	.service('ytTranslate', ['$http', '$q', 'ytModalGenerator', ytTranslate])
 	.service('ytSortOrder', [ytSortOrder])
+	.service('ytPlaylistView', [ytPlaylistView])
 	.service('ytPlaylistSort', [ytPlaylistSort]);
 
 	//Used to follow security measures with YouTube video links in particular 
@@ -775,6 +776,24 @@
 
 		function get(){
 			return sortObj;
+		}
+	}
+
+	//Keeps track of collapsed/expanded sections in saved/playlist section
+	function ytPlaylistView(){
+		this.obj = {
+			videosCollapsed: true,
+			searchesCollapsed: true,
+			videosSortCollapsed: true,
+			vidoesFilterCollapsed: true,
+			searchesSortCollapsed: true,
+			searchesFilterCollapsed: true
+		};
+
+		this.get = get;
+
+		function get(){
+			return this.obj;
 		}
 	}
 
