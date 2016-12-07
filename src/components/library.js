@@ -785,7 +785,7 @@
 			videosCollapsed: true,
 			searchesCollapsed: true,
 			videosSortCollapsed: true,
-			vidoesFilterCollapsed: true,
+			videosFilterCollapsed: true,
 			searchesSortCollapsed: true,
 			searchesFilterCollapsed: true
 		};
