@@ -16,10 +16,11 @@
 	.factory('ytDangerModal', ['$q', '$uibModal', ytDangerModal])
 	.factory('ytErrorModal', ['ytModalGenerator', ytErrorModal])
 	.factory('ytModalGenerator', ['$q', '$uibModal', ytModalGenerator])
+	.factory('ytUtilities', [ytUtilities])
 	.service('ytChanFilter', [ytChanFilter])
 	.service('ytSearchParams', [ytSearchParams])
 	.service('ytResults', [ytResults])
-	.service('ytVideoItems', ['$q', '$state', '$stateParams',  'ytDangerModal', ytVideoItems])
+	.service('ytVideoItems', ['$q', '$state', '$stateParams',  'ytDangerModal', 'ytUtilities', ytVideoItems])
 	.service('ytSearchHistory', ['$q', 'ytSearchSavedModal', 'ytDangerModal', 'ytSearchParams', ytSearchHistory])
 	.service('ytTranslate', ['$http', '$q', 'ytModalGenerator', ytTranslate])
 	.service('ytSortOrder', [ytSortOrder])
@@ -250,7 +251,7 @@
 	}
 
 	//Used for saving videos to the user's local storage (in the playlist/saved content section)
-	function ytVideoItems($q, $state, $stateParams, ytDangerModal){
+	function ytVideoItems($q, $state, $stateParams, ytDangerModal, ytUtilities){
 		var currentVideoId = $stateParams.videoId;
 		var items = [];
 
@@ -265,20 +266,29 @@
 
 		function getItems(){
 			var newItems = [];
-			if(localStorage.length > 0){
-				for(key in localStorage){
-					if(key.includes('uytp')){
-						var item = {
-							name: key,
-							content: JSON.parse(localStorage[key])
+			// if(!items.length){
+				if(localStorage.length){
+					for(key in localStorage){
+						if(key.includes('uytp')){
+							// var item = {
+							// 	name: key,
+							// 	content: JSON.parse(localStorage[key])
+							// }
+							var obj = JSON.parse(localStorage[key]);
+							// console.log(obj);
+							// if(items.indexOf(obj) === -1){
+							// 	items.push(item);
+							// }
+							delete obj.$$hashKey;
+							if(ytUtilities().getIndexIfObjWithAttr(items, 'snippet.title', obj.snippet.title) === -1){
+								items.push(obj);
+							}			
 						}
-						if(items.indexOf(item) === -1){
-							newItems.push(item);
-						}					
 					}
+					// items = newItems;
 				}
-				items = newItems;
-			}
+			// }
+			
 			return items;
 		}
 
@@ -467,11 +477,12 @@
 					if(key.includes('uyts')){
 						var obj = localStorage.getItem(key);
 						obj = JSON.parse(obj);
+						//Fix for searches with date, correcting format to be used in search. 
 						if(obj.name){
-							if(obj.after != null){
+							if(obj.after !== null){
 								obj.after = new Date(obj.after);
 							}
-							if(obj.before != null){
+							if(obj.before !== null){
 								obj.before = new Date(obj.before);
 							}
 							//This is here to avoid existent objects getting reappended to the array within the session when they shouldn't be
@@ -536,6 +547,26 @@
 			return -1;
 		}
 
+	}
+
+	function ytUtilities(){
+		return function(){
+			var services = {
+				getIndexIfObjWithAttr: getIndexIfObjWithAttr
+			};
+
+			function getIndexIfObjWithAttr(array, attr, value) {
+				for(var i = 0; i < array.length; i++) {
+					if(array[i][attr] === value) {
+						return i;
+					}
+				}
+				return -1;
+			}
+
+			return services;
+
+		}
 	}
 
 	//A style tweak for the outer border of the results div. This will ensure thick borders all around, but in between each result, only thin borders (ngRepeat conflict)
@@ -842,8 +873,8 @@
 			function addedAfterVideos(item, filter){
 				var bool;
 				if(filter && filter.addedAfter){
-					if(item.content.dateAdded){
-						var dateAdded = parseInt(moment(item.content.dateAdded).format('X'), 10),
+					if(item.dateAdded){
+						var dateAdded = parseInt(moment(item.dateAdded).format('X'), 10),
 						after = parseInt(moment(filter.addedAfter).format('X'), 10);
 						bool = (dateAdded >= after);
 					} else {
@@ -858,8 +889,8 @@
 			function addedBeforeVideos(video, videoFilter){
 				var bool;
 				if(videoFilter && videoFilter.addedBefore){
-					if(video.content.dateAdded){
-						var dateAdded = parseInt(moment(video.content.dateAdded).format('X'), 10),
+					if(video.dateAdded){
+						var dateAdded = parseInt(moment(video.dateAdded).format('X'), 10),
 						before = parseInt(moment(videoFilter.addedBefore).format('X'), 10);
 						bool = (dateAdded < before);
 					} else {

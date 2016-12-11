@@ -21,13 +21,22 @@
 		vm.collapsed = ytPlaylistView.get();
 		vm.sortVideos = sortVideos;
 		vm.sortSearches = sortSearches;
-		vm.videoTabStatus = false;
+		// vm.videoTabStatus = false;
 		vm.closeAll = closeAll;
 		vm.openAll = openAll;
 		vm.addedAfterVideos = addedAfterVideos;
 		vm.addedBeforeVideos = addedBeforeVideos;
 		vm.addedAfterSearches = addedAfterSearches;
 		vm.addedBeforeSearches = addedBeforeSearches;
+
+		vm.videosTest = function(){
+			console.log(vm.items);
+		}
+
+		vm.searchesTest = function(){
+			console.log(vm.pastSearches);
+		}
+		
 
 		//Grabs one of our saved searches, then automatically switches to the search state in its advanced search mode.
 		function grab(search){
