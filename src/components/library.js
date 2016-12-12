@@ -266,6 +266,7 @@
 
 		function getItems(){
 			var newItems = [];
+			console.log(items);
 			// if(!items.length){
 				if(localStorage.length){
 					for(key in localStorage){
@@ -280,7 +281,9 @@
 							// 	items.push(item);
 							// }
 							delete obj.$$hashKey;
-							if(ytUtilities().getIndexIfObjWithAttr(items, 'snippet.title', obj.snippet.title) === -1){
+							obj.name = obj.snippet.title;
+							if(ytUtilities().getIndexIfObjWithAttr(items, 'name', obj.name) === -1){
+								console.log(obj.name);
 								items.push(obj);
 							}			
 						}
