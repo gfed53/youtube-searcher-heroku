@@ -266,31 +266,18 @@
 
 		function getItems(){
 			var newItems = [];
-			console.log(items);
-			// if(!items.length){
 				if(localStorage.length){
 					for(key in localStorage){
 						if(key.includes('uytp')){
-							// var item = {
-							// 	name: key,
-							// 	content: JSON.parse(localStorage[key])
-							// }
 							var obj = JSON.parse(localStorage[key]);
-							// console.log(obj);
-							// if(items.indexOf(obj) === -1){
-							// 	items.push(item);
-							// }
 							delete obj.$$hashKey;
 							obj.name = obj.snippet.title;
 							if(ytUtilities().getIndexIfObjWithAttr(items, 'name', obj.name) === -1){
-								console.log(obj.name);
 								items.push(obj);
 							}			
 						}
 					}
-					// items = newItems;
 				}
-			// }
 			
 			return items;
 		}
@@ -329,8 +316,8 @@
 			return deferred.promise;
 		}
 
+		//Check url params when loading page in video player state
 		function getVideoId(){
-			//Check url params when loading page in video player state
 			return currentVideoId;
 		}
 
