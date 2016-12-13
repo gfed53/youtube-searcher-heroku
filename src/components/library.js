@@ -21,7 +21,7 @@
 	.service('ytSearchParams', [ytSearchParams])
 	.service('ytResults', [ytResults])
 	.service('ytVideoItems', ['$q', '$state', '$stateParams',  'ytDangerModal', 'ytUtilities', ytVideoItems])
-	.service('ytSearchHistory', ['$q', 'ytSearchSavedModal', 'ytDangerModal', 'ytSearchParams', ytSearchHistory])
+	.service('ytSearchHistory', ['$q', 'ytSearchSavedModal', 'ytDangerModal', 'ytSearchParams', 'ytUtilities', ytSearchHistory])
 	.service('ytTranslate', ['$http', '$q', 'ytModalGenerator', ytTranslate])
 	.service('ytSortOrder', [ytSortOrder])
 	.service('ytPlaylistView', [ytPlaylistView])
@@ -454,7 +454,7 @@
 	}
 
 	//Used for saving past searches to the user's local storage (in the playlist/saved content section)
-	function ytSearchHistory($q, ytSearchSavedModal, ytDangerModal, ytSearchParams){
+	function ytSearchHistory($q, ytSearchSavedModal, ytDangerModal, ytSearchParams, ytUtilities){
 		var pastSearches = [];
 		this.get = get;
 		this.set = set;
@@ -476,7 +476,7 @@
 								obj.before = new Date(obj.before);
 							}
 							//This is here to avoid existent objects getting reappended to the array within the session when they shouldn't be
-							if(getIndexIfObjWithAttr(pastSearches, 'name', obj.name) === -1){
+							if(ytUtilities().getIndexIfObjWithAttr(pastSearches, 'name', obj.name) === -1){
 								pastSearches.push(obj);
 							}
 						}
@@ -527,16 +527,6 @@
 			})
 			return deferred.promise;
 		}
-
-		function getIndexIfObjWithAttr(array, attr, value) {
-			for(var i = 0; i < array.length; i++) {
-				if(array[i][attr] === value) {
-					return i;
-				}
-			}
-			return -1;
-		}
-
 	}
 
 	function ytUtilities(){
