@@ -126,13 +126,13 @@
 		<!--  -->
 		<!-- Videos Collection -->
 
-		<div class="toggle-all-container">
+		<!-- <div class="toggle-all-container">
 			<div class="btn-group" role="group" aria-label="...">
 				<button class="btn btn-default btn-toggle-all" ng-click="playlist.openAll(playlist.items)">Open All</button>
 				<button class="btn btn-default btn-toggle-all" ng-click="playlist.closeAll(playlist.items)">Close All</button>
 			</div>
-		</div>
-		<uib-accordion close-others="false">
+		</div> -->
+		<!-- <uib-accordion close-others="false">
 			<uib-accordion-group ng-repeat="item in playlist.items | orderBy:playlist.videosPredicate:playlist.videosReverse | filter:playlist.videoFilter.keyword | filter:playlist.addedAfterVideos | filter:playlist.addedBeforeVideos track by $index" is-open="item.state">
 				<uib-accordion-heading>
 					{{ item.snippet.title }}
@@ -151,7 +151,25 @@
 					</div>
 				</div>
 			</uib-accordion-group>
-		</uib-accordion>
+		</uib-accordion> -->
+		<div class="saved-content-container">
+			<div ng-repeat="item in playlist.items | orderBy:playlist.videosPredicate:playlist.videosReverse | filter:playlist.videoFilter.keyword | filter:playlist.addedAfterVideos | filter:playlist.addedBeforeVideos track by $index" class="saved-content-inner">
+				<!-- <h3>{{ item.snippet.title }}</h3> -->
+				<div class="row">
+					<div class="col-md-2 playlist-div">
+						<a ng-click="playlist.setVideoId(item.id.videoId || item.id)" ui-sref="video({videoId: (item.id.videoId || item.id)})"><img class="my-thumbnail" ng-src="{{ item.snippet.thumbnails.default.url}}" alt="image"></a>
+					</div>
+					<div class="col-md-8 playlist-div">
+						<p class="emph">{{ item.name || item.snippet.title || item.name }}</p>
+						<p><span class="bold">CHANNEL:</span> {{ item.snippet.channelTitle }}</p><p><span class="bold">ADDED:</span> {{ item.dateAdded | date : short }}</p>
+						<p><span class="bold">PUBLISHED:</span> {{ item.datePublished || item.snippet.publishedAt | date : short }}</p>
+					</div>
+					<div class="col-md-2 playlist-div playlist-btn-group">
+						<button class="btn btn-warning" ng-click="playlist.clearItem(item)">Remove</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<button ng-click="playlist.clearAllVideos()" class="btn btn-danger btn-playlist-clear">Clear Videos</button>
 	</div>
 	<p ng-if="!playlist.items.length">No saved videos present. See the "About" page for more info on how to save video.</p>
@@ -263,7 +281,7 @@
 				<button class="btn btn-default btn-toggle-all" ng-click="playlist.closeAll(playlist.pastSearches)">Close All</button>
 			</div>
 		</div>
-		<uib-accordion close-others="false">
+		<!-- <uib-accordion close-others="false">
 			<uib-accordion-group ng-repeat="search in playlist.pastSearches | orderBy:playlist.searchesPredicate:playlist.searchesReverse | filter:playlist.searchesFilter.keyword | filter:playlist.addedAfterSearches | filter:playlist.addedBeforeSearches track by search.name" is-open="search.state">
 				<uib-accordion-heading>
 					{{ search.nameShrt || search.name }}
@@ -278,7 +296,21 @@
 					</div>
 				</div>
 			</uib-accordion-group>
-		</uib-accordion>
+		</uib-accordion> -->
+		<div class="saved-content-container">
+			<div ng-repeat="search in playlist.pastSearches | orderBy:playlist.searchesPredicate:playlist.searchesReverse | filter:playlist.searchesFilter.keyword | filter:playlist.addedAfterSearches | filter:playlist.addedBeforeSearches track by search.name" class="saved-content-inner">
+				<p class="emph">{{ search.nameShrt || search.name }}</p>
+				<div class="row">
+					<div class="col-md-6">
+						<p><span class="bold">CREATED:</span> {{ search.date | date : short }}</p>
+					</div>
+					<div class="col-md-6 playlist-btn-group">
+						<button ng-click="playlist.grab(search)" class="btn btn-success">Grab!</button>
+						<button ng-click="playlist.clear(search)" class="btn btn-warning">Remove</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<button ng-click="playlist.clearAllSearches()" class="btn btn-danger btn-playlist-clear">Clear Searches</button>
 	</div>
 	<p ng-if="!playlist.pastSearches.length">No saved searches present. See the "About" page for more info on how to save searches.</p>

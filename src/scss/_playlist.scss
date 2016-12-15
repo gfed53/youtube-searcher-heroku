@@ -70,6 +70,11 @@
 	.sort-filter-header {
 		display: inline-block;
 	}
+
+	.saved-content-inner {
+		padding: 1em;
+		border-bottom: 1px solid #E7E7E7;
+	}
 }
 
 @media screen and ($mobile4){
