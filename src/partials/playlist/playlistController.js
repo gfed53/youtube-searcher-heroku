@@ -21,7 +21,6 @@
 		vm.collapsed = ytPlaylistView.get();
 		vm.sortVideos = sortVideos;
 		vm.sortSearches = sortSearches;
-		// vm.videoTabStatus = false;
 		vm.closeAll = closeAll;
 		vm.openAll = openAll;
 		vm.addedAfterVideos = addedAfterVideos;
