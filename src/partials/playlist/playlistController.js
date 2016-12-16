@@ -61,7 +61,7 @@
 		function clearItem(item){
 			var itemIndex = vm.items.indexOf(item);
 			vm.items.splice(itemIndex, 1);
-			ytVideoItems.services.clearItem(item.name);
+			ytVideoItems.services.clearItem(item.codeName);
 		}
 
 		//TODO: improve logic

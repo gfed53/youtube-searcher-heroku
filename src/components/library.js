@@ -272,6 +272,7 @@
 							var obj = JSON.parse(localStorage[key]);
 							delete obj.$$hashKey;
 							obj.name = obj.snippet.title;
+							obj.codeName = key;
 							if(ytUtilities().getIndexIfObjWithAttr(items, 'name', obj.name) === -1){
 								items.push(obj);
 							}			
@@ -286,14 +287,15 @@
 			var itemName = result.snippet.title+'-uytp',
 			dateAdded = Date.now(),
 			content = result;
+			
 			content.dateAdded = dateAdded;
 			content = JSON.stringify(content);
 
 			localStorage.setItem(itemName, content);
 		}
 
-		function clearItem(name){
-			localStorage.removeItem(name);
+		function clearItem(codeName){
+			localStorage.removeItem(codeName);
 		}
 
 		//TODO: improve logic
