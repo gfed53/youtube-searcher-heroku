@@ -34,30 +34,34 @@
 		}
 	}
 
+	// function(keyword, searchType, channelId, order, publishedAfter, publishedBefore, location, locationRadius, pageToken, lang)
+
 	//Searches the API for videos based on search params
 	function ytSearchYouTube($q, $http, ytChanSearch, ytTranslate, ytModalGenerator) {
-		return function(keyword, searchType, channelId, order, publishedAfter, publishedBefore, location, locationRadius, pageToken, lang){
+		return function(params, pageToken){
 
+			console.log(params);
+			var query = (pageToken ? params.searchedKeyword : params.keyword);
 			var url = 'https://www.googleapis.com/youtube/v3/search';
 
 			//Moment.js parsing
 
-			var parsedAfter = (publishedAfter ? moment(publishedAfter, 'M/D/YYYY')._d : undefined),
-			parsedBefore = (publishedBefore ? moment(publishedBefore, 'M/D/YYYY')._d : undefined);
+			var parsedAfter = (params.after ? moment(params.after, 'M/D/YYYY')._d : undefined),
+			parsedBefore = (params.before ? moment(params.before, 'M/D/YYYY')._d : undefined);
 
 			var request = {
 				key: 'AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA',
 				part: 'snippet',
 				maxResults: 50,
-				order: order,
+				order: params.order,
 				publishedAfter: parsedAfter,
 				publishedBefore: parsedBefore,
-				location: location,
-				locationRadius: locationRadius,
+				location: params.location,
+				locationRadius: params.locationRadius,
 				pageToken: pageToken,
-				q: keyword,
+				q: query,
 				type: 'video',
-				channelId: channelId,
+				channelId: params.channelId,
 				videoEmbeddable: true,
 			};
 
@@ -102,7 +106,7 @@
 			//Translates query if necessary, then runs search
 			function transAndResults(){
 				var deferred = $q.defer();
-				checkTrans(keyword, lang).then(function(response){
+				checkTrans(query, params.lang.value).then(function(response){
 					request.q = response;
 					getResults().then(function(response){
 						deferred.resolve(response);
@@ -113,13 +117,13 @@
 
 			function search(){
 				var deferred = $q.defer();
-				if(searchType === 'video'){
+				if(params.searchType === 'video'){
 					transAndResults()
 					.then(function(response){
 						deferred.resolve(response);
 					});
 				} else {
-					ytChanSearch(keyword).getResults()
+					ytChanSearch(query).getResults()
 					.then(function(response){
 						deferred.resolve(response);
 					});

@@ -71,15 +71,18 @@
 			}
 		}
 
-		function submit(keyword, searchType, channelId, order, publishedAfter, publishedBefore, location, locationRadius, pageToken, lang){
+		function submit(params, pageToken){
 			vm.viewVideo = false;
-			vm.params.searchedKeyword = keyword;
-			ytSearchYouTube(keyword, searchType, channelId, order, publishedAfter, publishedBefore, location, locationRadius, pageToken, lang).search()
+			// vm.params.searchedKeyword = params.keyword;
+			ytSearchYouTube(params, pageToken).search()
 			.then(function(response){
+				console.log(response);
 
 				//Clear the search bar, but keep a reference to the last keyword searched.
-				vm.params.advKeyword = '';
+				vm.params.keyword = '';
 				vm.params.searchedKeyword = response.config.params.q;
+
+				console.log(vm.params.searchedKeyword);
 
 				vm.params.searchTypePrev = response.config.params.type;
 				//Also reset auto-translate in case we want to then grab the next page of the translated search (so the translator doesn't unnecessarily try to re-translate an already-translated word)
