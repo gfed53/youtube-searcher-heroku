@@ -6,12 +6,12 @@
 		<form id="page-selector">
 			<div class="row">
 				<div id="prev-page-section" class="col-xs-6">
-					<button class="btn btn-default" id="prev-page" ng-click="search.submit(search.params, search.params.prevPageToken)"><span class="glyphicon glyphicon-chevron-left"></span></button>
+					<button class="btn btn-default" id="prev-page" ng-click="search.submit(search.params, search.params.prevPageToken, 'prev')"><span class="glyphicon glyphicon-chevron-left"></span></button>
 					<label id="label-prev">Previous</label>
 				</div>
 				<div id="next-page-section" class="col-xs-6">
 					<label id="label-next">Next</label>
-					<button class="btn btn-default" id="next-page" ng-click="search.submit(search.params, search.params.nextPageToken)"><span class="glyphicon glyphicon-chevron-right"></span></button>
+					<button class="btn btn-default" id="next-page" ng-click="search.submit(search.params, search.params.nextPageToken, 'next')"><span class="glyphicon glyphicon-chevron-right"></span></button>
 				</div>
 			</div>
 		</form>

@@ -38,9 +38,11 @@
 
 	//Searches the API for videos based on search params
 	function ytSearchYouTube($q, $http, ytChanSearch, ytTranslate, ytModalGenerator) {
-		return function(params, pageToken){
+		return function(params, pageToken, direction){
 
-			console.log(params);
+			// console.log(params);
+			console.log(direction);
+			// Ensures that we take the previously searched keyword during page navigation.
 			var query = (pageToken ? params.searchedKeyword : params.keyword);
 			var url = 'https://www.googleapis.com/youtube/v3/search';
 
@@ -58,12 +60,17 @@
 				publishedBefore: parsedBefore,
 				location: params.location,
 				locationRadius: params.locationRadius,
-				pageToken: pageToken,
+				// pageToken: pageToken,
 				q: query,
 				type: 'video',
 				channelId: params.channelId,
 				videoEmbeddable: true,
 			};
+
+			if(pageToken){
+				request.pageToken = pageToken;
+				// var pageDirection = pageObj.pageDirection;
+			}
 
 			var errorModalObj = ytModalGenerator().getSearchTemp();
 
@@ -91,15 +98,15 @@
 			}
 
 			//Checks to see if a language to which the query should be translated is selected
-			function checkTrans(keyword, lang){
+			function checkTrans(_keyword_, _lang_){
 				var deferred = $q.defer();
-				if(lang){
-					ytTranslate.translate(keyword, lang)
+				if(_lang_){
+					ytTranslate.translate(_keyword_, _lang_)
 					.then(function(response){
 						deferred.resolve(response.data.text[0]);
 					});
 				} else {
-					deferred.resolve(keyword)
+					deferred.resolve(_keyword_)
 				}
 				return deferred.promise;
 			}
@@ -120,6 +127,17 @@
 				if(params.searchType === 'video'){
 					transAndResults()
 					.then(function(response){
+						// Value created to display page number in view
+						// if(pageObj.nextPageToken){
+						// 	response.pageDirection = 'next';
+						// } else if(params.prevPageToken){
+						// 	response.pageDirection = 'prev';
+						// }
+						console.log(direction);
+						// if(direction){
+							response.pageDirection = direction;
+						// }
+
 						deferred.resolve(response);
 					});
 				} else {
@@ -351,6 +369,7 @@
 			lat: undefined,
 			lng: undefined,
 			radius: undefined,
+			currentPage: undefined,
 			prevPageToken: undefined,
 			nextPageToken: undefined,
 			name: undefined,
@@ -368,6 +387,7 @@
 		this.setSearchType = setSearchType;
 		this.setToBasic = setToBasic;
 		this.setToAdvanced = setToAdvanced;
+		this.getCurrentPage = getCurrentPage;
 
 		function get(){
 			return params;
@@ -402,6 +422,18 @@
 				basic: true,
 				advanced: false
 			}
+		}
+
+		function getCurrentPage(step, val){
+			if(step === 'next'){
+				val++;
+			} else if(step === 'prev'){
+				val--;
+			} else {
+				val = 1;
+			}
+			return val;
+			console.log(val);
 		}
 	}
 

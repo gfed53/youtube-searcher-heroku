@@ -71,10 +71,10 @@
 			}
 		}
 
-		function submit(params, pageToken){
+		function submit(params, pageToken, direction){
 			vm.viewVideo = false;
 			// vm.params.searchedKeyword = params.keyword;
-			ytSearchYouTube(params, pageToken).search()
+			ytSearchYouTube(params, pageToken, direction).search()
 			.then(function(response){
 				console.log(response);
 
@@ -82,7 +82,10 @@
 				vm.params.keyword = '';
 				vm.params.searchedKeyword = response.config.params.q;
 
-				console.log(vm.params.searchedKeyword);
+				vm.params.currentPage = ytSearchParams.getCurrentPage(response.pageDirection, vm.params.currentPage);
+				console.log(vm.params.currentPage);
+
+				// console.log(vm.params.searchedKeyword);
 
 				vm.params.searchTypePrev = response.config.params.type;
 				//Also reset auto-translate in case we want to then grab the next page of the translated search (so the translator doesn't unnecessarily try to re-translate an already-translated word)
