@@ -41,7 +41,7 @@
 		return function(params, pageToken, direction){
 
 			// console.log(params);
-			console.log(direction);
+			// console.log(direction);
 			// Ensures that we take the previously searched keyword during page navigation.
 			var query = (pageToken ? params.searchedKeyword : params.keyword);
 			var url = 'https://www.googleapis.com/youtube/v3/search';
@@ -133,7 +133,7 @@
 						// } else if(params.prevPageToken){
 						// 	response.pageDirection = 'prev';
 						// }
-						console.log(direction);
+						// console.log(direction);
 						// if(direction){
 							response.pageDirection = direction;
 						// }
@@ -354,7 +354,7 @@
 	function ytSearchParams(){
 		var params = {
 			keyword: undefined,
-			advKeyword: undefined,
+			// advKeyword: undefined,
 			searchedKeyword: undefined,
 			searchType: 'video',
 			channel: undefined,
@@ -396,7 +396,12 @@
 		function set(newParams){
 			for(var item in params){
 				params[item] = newParams[item];
+				if(newParams[item] === 'Invalid Date'){
+					newParams[item] = null;
+				}
 			}
+			params.keyword = newParams.searchedKeyword;
+
 		}
 
 		function getSearchType(){
@@ -507,10 +512,10 @@
 						obj = JSON.parse(obj);
 						//Fix for searches with date, correcting format to be used in search. 
 						if(obj.name){
-							if(obj.after !== null){
+							if(obj.after && obj.after !== null){
 								obj.after = new Date(obj.after);
 							}
-							if(obj.before !== null){
+							if(obj.before && obj.before !== null){
 								obj.before = new Date(obj.before);
 							}
 							//This is here to avoid existent objects getting reappended to the array within the session when they shouldn't be

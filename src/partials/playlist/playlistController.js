@@ -35,6 +35,10 @@
 		vm.searchesTest = function(){
 			console.log(vm.pastSearches);
 		}
+
+		// console.log(localStorage);
+		// console.log(vm.items);
+		// console.log(vm.pastSearches);
 		
 
 		//Grabs one of our saved searches, then automatically switches to the search state in its advanced search mode.

@@ -30,6 +30,9 @@
 		vm.results = ytResults.getResults();
 		vm.chanResults = ytResults.getChanResults();
 		vm.params = ytSearchParams.get();
+
+		// console.log(vm.params);
+		
 		vm.status = ytResults.getStatus();
 		vm.langs = ytTranslate.langs;
 		vm.translate = translate;
