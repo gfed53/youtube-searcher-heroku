@@ -34,14 +34,10 @@
 		}
 	}
 
-	// function(keyword, searchType, channelId, order, publishedAfter, publishedBefore, location, locationRadius, pageToken, lang)
-
 	//Searches the API for videos based on search params
 	function ytSearchYouTube($q, $http, ytChanSearch, ytTranslate, ytModalGenerator) {
 		return function(params, pageToken, direction){
 
-			// console.log(params);
-			// console.log(direction);
 			// Ensures that we take the previously searched keyword during page navigation.
 			var query = (pageToken ? params.searchedKeyword : params.keyword);
 			var url = 'https://www.googleapis.com/youtube/v3/search';
@@ -60,7 +56,6 @@
 				publishedBefore: parsedBefore,
 				location: params.location,
 				locationRadius: params.locationRadius,
-				// pageToken: pageToken,
 				q: query,
 				type: 'video',
 				channelId: params.channelId,
@@ -69,7 +64,6 @@
 
 			if(pageToken){
 				request.pageToken = pageToken;
-				// var pageDirection = pageObj.pageDirection;
 			}
 
 			var errorModalObj = ytModalGenerator().getSearchTemp();
@@ -117,7 +111,7 @@
 					request.q = response;
 					getResults().then(function(response){
 						deferred.resolve(response);
-					})
+					});
 				});
 				return deferred.promise;
 			}
@@ -128,15 +122,7 @@
 					transAndResults()
 					.then(function(response){
 						// Value created to display page number in view
-						// if(pageObj.nextPageToken){
-						// 	response.pageDirection = 'next';
-						// } else if(params.prevPageToken){
-						// 	response.pageDirection = 'prev';
-						// }
-						// console.log(direction);
-						// if(direction){
 							response.pageDirection = direction;
-						// }
 
 						deferred.resolve(response);
 					});
@@ -352,9 +338,9 @@
 
 	//Where saved search params are stored (so while switching views/controllers, changes in search params will be kept)
 	function ytSearchParams(){
+		// TODO: Make DRYer. implement loop in object construction
 		var params = {
 			keyword: undefined,
-			// advKeyword: undefined,
 			searchedKeyword: undefined,
 			searchType: 'video',
 			channel: undefined,
@@ -437,8 +423,8 @@
 			} else {
 				val = 1;
 			}
-			return val;
 			console.log(val);
+			return val;
 		}
 	}
 
@@ -818,7 +804,7 @@
 			reverse: false
 		};
 
-		this.videoReverse = false;
+		this.videosReverse = false;
 		this.order = order;
 		this.get = get;
 

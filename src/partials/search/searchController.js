@@ -30,9 +30,6 @@
 		vm.results = ytResults.getResults();
 		vm.chanResults = ytResults.getChanResults();
 		vm.params = ytSearchParams.get();
-
-		// console.log(vm.params);
-		
 		vm.status = ytResults.getStatus();
 		vm.langs = ytTranslate.langs;
 		vm.translate = translate;
@@ -43,6 +40,8 @@
 
 		vm.videosReverse = ytSortOrder.videosReverse;
 		vm.sort = sort;
+
+		console.log(vm.videosReverse);
 
 		//If advanced view is active when revisiting state, we need to initMap() on ctrl start
 		$timeout(function(){
@@ -76,7 +75,6 @@
 
 		function submit(params, pageToken, direction){
 			vm.viewVideo = false;
-			// vm.params.searchedKeyword = params.keyword;
 			ytSearchYouTube(params, pageToken, direction).search()
 			.then(function(response){
 				console.log(response);
@@ -85,15 +83,13 @@
 				vm.params.keyword = '';
 				vm.params.searchedKeyword = response.config.params.q;
 
-				vm.params.currentPage = ytSearchParams.getCurrentPage(response.pageDirection, vm.params.currentPage);
-				console.log(vm.params.currentPage);
-
-				// console.log(vm.params.searchedKeyword);
+				// vm.params.currentPage = ytSearchParams.getCurrentPage(response.pageDirection, vm.params.currentPage);
 
 				vm.params.searchTypePrev = response.config.params.type;
 				//Also reset auto-translate in case we want to then grab the next page of the translated search (so the translator doesn't unnecessarily try to re-translate an already-translated word)
 				vm.params.lang = vm.langs[0];
 				vm.results = response.data.items;
+				console.log(vm.results);
 				vm.params.nextPageToken = response.data.nextPageToken;
 				vm.params.prevPageToken = response.data.prevPageToken;
 				vm.status.channelsCollapsed = true;
@@ -160,6 +156,7 @@
 
 		function clearSelection(){
 			//Clears location/locationRadius params
+			//TODO: make DRYer
 			vm.params.lat = undefined;
 			vm.params.lng = undefined;
 			vm.params.radius = undefined;
