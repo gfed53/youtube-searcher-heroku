@@ -336,6 +336,12 @@ body #page-header #header-wrapper #credit {
   .results .first > .inner-result {
     border-top-width: 2px; }
 
+.search-order-arrow-container {
+  text-align: center;
+  font-size: 1.5em; }
+  .search-order-arrow-container span {
+    cursor: pointer; }
+
 .page-selector-container {
   position: relative; }
   .page-selector-container #page-selector {
@@ -393,7 +399,10 @@ body #page-header #header-wrapper #credit {
   .results .inner-result p {
     overflow-x: auto; }
   .results .inner-result img {
-    margin: 2em 0; } }
+    margin: 2em 0; }
+  .search-order-arrow-container {
+    text-align: right;
+    margin-right: 1em; } }
 
 @media screen and (min-width: 993px) {
   .results .inner-result img {
@@ -497,7 +506,6 @@ body #page-header #header-wrapper #credit {
 
 .alert-video-saved {
   text-align: center;
-  width: 50%;
   margin-top: 1em; }
 
 .modal-body {
@@ -512,6 +520,10 @@ body #page-header #header-wrapper #credit {
 @media screen and (min-width: 403px) {
   .search-modal-input {
     width: 75%; } }
+
+@media screen and (min-width: 768px) {
+  .alert-video-saved {
+    width: 50%; } }
 
 #results.ng-enter,
 #results.ng-leave.ng-leave-active {

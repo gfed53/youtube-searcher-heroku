@@ -28,19 +28,6 @@
 		vm.addedAfterSearches = addedAfterSearches;
 		vm.addedBeforeSearches = addedBeforeSearches;
 
-		vm.videosTest = function(){
-			console.log(vm.items);
-		}
-
-		vm.searchesTest = function(){
-			console.log(vm.pastSearches);
-		}
-
-		// console.log(localStorage);
-		// console.log(vm.items);
-		// console.log(vm.pastSearches);
-		
-
 		//Grabs one of our saved searches, then automatically switches to the search state in its advanced search mode.
 		function grab(search){
 			ytSearchParams.set(search);

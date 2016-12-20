@@ -2,6 +2,10 @@
 	<h2>Video Results</h2>
 	<h2 ng-if="search.params.searchedKeyword">We found {{ search.results.length }} results for "{{ search.params.searchedKeyword }}".</h2>
 	<h2 ng-if="!search.params.searchedKeyword">We found {{ search.results.length }} results.</h2>
+	<div class="search-order-arrow-container" ng-click="search.videosReverse = !search.videosReverse">
+		<span class="glyphicon glyphicon-triangle-bottom my-arrow" ng-if="search.videosReverse"></span>
+		<span class="glyphicon glyphicon-triangle-top my-arrow" ng-if="!search.videosReverse"></span>
+	</div>
 	<div class="page-selector-container">
 		<form id="page-selector">
 			<div class="row">
@@ -17,7 +21,6 @@
 		</form>
 	</div>
 	<div class="row results-row">
-	 	<!-- | orderBy:'$$hashKey':search.videosReverse -->
 		<div class="result" ng-repeat="result in search.results | orderBy:'result.$$hashKey':search.videosReverse" ng-class="search.computeCssClass($first, $last)">
 			<div class="row inner-result result-desktop">
 				<div class="col-md-6 tit-descrip-container">

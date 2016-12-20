@@ -166,6 +166,14 @@
 	transition: 1s linear all;
 }
 
+.search-order-arrow-container {
+	text-align: center;
+    font-size: 1.5em;
+    span {
+    	cursor: pointer;
+    }
+}
+
 .page-selector-container {
 	position: relative;
 	#page-selector {
@@ -258,6 +266,10 @@
 				margin: 2em 0;
 			}
 		}
+	}
+	.search-order-arrow-container {
+		text-align: right;
+    	margin-right: 1em;
 	}
 }
 

@@ -361,18 +361,9 @@
 			name: undefined,
 			date: undefined
 		};
-		// ('true' would mean it's collapsed - not visible)
-		// _type_ = {
-		// 	basic: false,
-		// 	advanced: true
-		// };
 
 		this.get = get;
 		this.set = set;
-		// this.getSearchType = getSearchType;
-		// this.setSearchType = setSearchType;
-		// this.setToBasic = setToBasic;
-		// this.setToAdvanced = setToAdvanced;
 		this.getCurrentPage = getCurrentPage;
 
 		function get(){
@@ -389,31 +380,6 @@
 			params.keyword = newParams.searchedKeyword;
 
 		}
-
-		// function getSearchType(){
-		// 	return _type_;
-		// }
-
-		// //Change based on ctrl/view status 
-		// function setSearchType(type){
-		// 	_type_ = type;
-		// }
-
-		// //Explicit change
-		// function setToBasic(){
-		// 	_type_ = {
-		// 		basic: false,
-		// 		advanced: true
-		// 	}
-		// }
-
-		// //Explicit change
-		// function setToAdvanced(){
-		// 	_type_ = {
-		// 		basic: true,
-		// 		advanced: false
-		// 	}
-		// }
 
 		function getCurrentPage(step, val){
 			if(step === 'next'){

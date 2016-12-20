@@ -14,7 +14,6 @@
 		vm.chanClear = chanClear;
 		vm.viewVideo = false;
 		vm.filterActive = false;
-		// vm.toggleAdv = toggleAdv;
 		vm.clearSelection = clearSelection;
 		vm.searchAndChanFilter = searchAndChanFilter;
 		vm.saveSearch = saveSearch;
@@ -141,15 +140,6 @@
 			vm.params.channelId = undefined;
 			vm.filterActive = false;
 		}
-
-		// function toggleAdv(){
-		// 	vm.type.basic = !vm.type.basic;
-		// 	vm.type.advanced = !vm.type.advanced;
-		// 	ytSearchParams.setSearchType(vm.type);
-		// 	$timeout(function(){
-		// 		vm.initMap();
-		// 	});
-		// }
 
 		function clearSelection(){
 			//Clears location/locationRadius params
