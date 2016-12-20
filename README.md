@@ -34,9 +34,9 @@ You can also click the "Save Search" button to save and store the current search
 
 ## Known Bugs/Issues
 
-Map sometimes doesn't expand as it should. Known work-around: Refresh page.
+Map sometimes doesn't expand as it should. Simply refreshing the page should solve this.
 
-When selecting from saved searches/playlist, sometimes wonky things can occur. Known work-around: Refresh page
+Sometimes issues occur when fetching saved searches/videos, and you may not see any of your saved content. Simply refreshing the page should solve this.
 
 This app works best in Google Chrome. I'm aware of the issues with Mozilla Firefox, and I'm currently working on its compatibility.
 

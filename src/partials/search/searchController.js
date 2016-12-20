@@ -14,7 +14,7 @@
 		vm.chanClear = chanClear;
 		vm.viewVideo = false;
 		vm.filterActive = false;
-		vm.toggleAdv = toggleAdv;
+		// vm.toggleAdv = toggleAdv;
 		vm.clearSelection = clearSelection;
 		vm.searchAndChanFilter = searchAndChanFilter;
 		vm.saveSearch = saveSearch;
@@ -26,7 +26,7 @@
 		
 		//Retrieving our saved variables, if any
 		//type refers to the search type, whether the user sees the basic or advanced search in the view
-		vm.type = ytSearchParams.getSearchType();
+		// vm.type = ytSearchParams.getSearchType();
 		vm.results = ytResults.getResults();
 		vm.chanResults = ytResults.getChanResults();
 		vm.params = ytSearchParams.get();
@@ -40,8 +40,6 @@
 
 		vm.videosReverse = ytSortOrder.videosReverse;
 		vm.sort = sort;
-
-		console.log(vm.videosReverse);
 
 		//If advanced view is active when revisiting state, we need to initMap() on ctrl start
 		$timeout(function(){
@@ -77,19 +75,18 @@
 			vm.viewVideo = false;
 			ytSearchYouTube(params, pageToken, direction).search()
 			.then(function(response){
-				console.log(response);
 
 				//Clear the search bar, but keep a reference to the last keyword searched.
 				vm.params.keyword = '';
 				vm.params.searchedKeyword = response.config.params.q;
 
-				// vm.params.currentPage = ytSearchParams.getCurrentPage(response.pageDirection, vm.params.currentPage);
+				vm.params.currentPage = ytSearchParams.getCurrentPage(response.pageDirection, vm.params.currentPage);
 
 				vm.params.searchTypePrev = response.config.params.type;
 				//Also reset auto-translate in case we want to then grab the next page of the translated search (so the translator doesn't unnecessarily try to re-translate an already-translated word)
 				vm.params.lang = vm.langs[0];
 				vm.results = response.data.items;
-				console.log(vm.results);
+
 				vm.params.nextPageToken = response.data.nextPageToken;
 				vm.params.prevPageToken = response.data.prevPageToken;
 				vm.status.channelsCollapsed = true;
@@ -145,14 +142,14 @@
 			vm.filterActive = false;
 		}
 
-		function toggleAdv(){
-			vm.type.basic = !vm.type.basic;
-			vm.type.advanced = !vm.type.advanced;
-			ytSearchParams.setSearchType(vm.type);
-			$timeout(function(){
-				vm.initMap();
-			});
-		}
+		// function toggleAdv(){
+		// 	vm.type.basic = !vm.type.basic;
+		// 	vm.type.advanced = !vm.type.advanced;
+		// 	ytSearchParams.setSearchType(vm.type);
+		// 	$timeout(function(){
+		// 		vm.initMap();
+		// 	});
+		// }
 
 		function clearSelection(){
 			//Clears location/locationRadius params

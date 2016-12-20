@@ -19,7 +19,7 @@
 			<h3 class="sort-buttons-header">Sort By:</h3>
 			<div class="btn-group" role="group" aria-label="...">
 				<button class="btn btn-default btn-sort-orig" ng-click="playlist.sortVideos('snippet.title')">
-					Video
+					Name
 					<span ng-if="!playlist.videosReverse && playlist.videosPredicate === 'snippet.title'" class="glyphicon glyphicon-triangle-top my-arrow-sm"></span>
 					<span ng-if="playlist.videosReverse && playlist.videosPredicate === 'snippet.title'" class="glyphicon glyphicon-triangle-bottom my-arrow-sm"></span>
 				</button>
@@ -248,12 +248,6 @@
 
 		<!-- Searches Collection -->
 
-		<!-- <div class="toggle-all-container">
-			<div class="btn-group btn-group-toggle-all" role="group" aria-label="...">
-				<button class="btn btn-default btn-toggle-all" ng-click="playlist.openAll(playlist.pastSearches)">Open All</button>
-				<button class="btn btn-default btn-toggle-all" ng-click="playlist.closeAll(playlist.pastSearches)">Close All</button>
-			</div>
-		</div> -->
 		<div class="saved-content-container">
 			<div ng-repeat="search in playlist.pastSearches | orderBy:playlist.searchesPredicate:playlist.searchesReverse | filter:playlist.searchesFilter.keyword | filter:playlist.addedAfterSearches | filter:playlist.addedBeforeSearches track by search.name" class="saved-content-inner">
 				<p class="emph">{{ search.nameShrt || search.name }}</p>

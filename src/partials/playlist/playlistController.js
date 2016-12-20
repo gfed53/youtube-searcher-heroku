@@ -44,7 +44,7 @@
 		//Grabs one of our saved searches, then automatically switches to the search state in its advanced search mode.
 		function grab(search){
 			ytSearchParams.set(search);
-			ytSearchParams.setToAdvanced();
+			// ytSearchParams.setToAdvanced();
 			$state.go('search');
 		}
 
