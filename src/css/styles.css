@@ -458,6 +458,10 @@ body #page-header #header-wrapper #credit {
   margin: 1em;
   font-weight: bold; }
 
+#video .remove-video-container {
+  margin: 1em;
+  text-align: center; }
+
 #video .channel-info {
   text-align: center; }
 

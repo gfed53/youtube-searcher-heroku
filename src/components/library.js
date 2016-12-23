@@ -122,7 +122,7 @@
 					transAndResults()
 					.then(function(response){
 						// Value created to display page number in view
-							response.pageDirection = direction;
+						response.pageDirection = direction;
 
 						deferred.resolve(response);
 					});
@@ -217,6 +217,7 @@
 					params: request
 				})
 				.then(function(response){
+					console.log(response);
 					return $q.when(response);
 				},
 				function(response){
@@ -269,24 +270,25 @@
 			clearItem: clearItem,
 			clearAllItems: clearAllItems,
 			getVideoId: getVideoId,
-			setVideoId: setVideoId
+			setVideoId: setVideoId,
+			isSaved: isSaved
 		};
 
 		function getItems(){
 			var newItems = [];
-				if(localStorage.length){
-					for(key in localStorage){
-						if(key.includes('uytp')){
-							var obj = JSON.parse(localStorage[key]);
-							delete obj.$$hashKey;
-							obj.name = obj.snippet.title;
-							obj.codeName = key;
-							if(ytUtilities().getIndexIfObjWithAttr(items, 'name', obj.name) === -1){
-								items.push(obj);
-							}			
-						}
+			if(localStorage.length){
+				for(key in localStorage){
+					if(key.includes('uytp')){
+						var obj = JSON.parse(localStorage[key]);
+						delete obj.$$hashKey;
+						obj.name = obj.snippet.title;
+						obj.codeName = key;
+						if(ytUtilities().getIndexIfObjWithAttr(items, 'name', obj.name) === -1){
+							items.push(obj);
+						}			
 					}
 				}
+			}
 			
 			return items;
 		}
@@ -302,8 +304,27 @@
 			localStorage.setItem(itemName, content);
 		}
 
-		function clearItem(codeName){
-			localStorage.removeItem(codeName);
+		function clearItem(codeName, item){
+			console.log(codeName);
+			console.log(item);
+			if(codeName){
+				localStorage.removeItem(codeName);
+			} else if(item) {
+				items.forEach(function(_item_){
+					if(_item_.id.videoId === item.id){
+						console.log('match');
+						var current = _item_;
+						console.log(current);
+						localStorage.removeItem(current.codeName);
+						var currentIndex = items.indexOf(current);
+						items.splice(currentIndex, 1);
+					};
+				});
+				// console.log(current);
+				
+
+			}
+			
 		}
 
 		//TODO: improve logic
@@ -334,6 +355,25 @@
 		function setVideoId(videoId){
 			currentVideoId = videoId;
 		}
+
+		//Check if video item is saved()
+		function isSaved(id){
+			var bool;
+			if(items.length){
+				items.forEach(function(_item_){
+					// console.log(_item_.id.videoId);
+					// console.log(id);
+					if(_item_.id.videoId === id){
+						bool = true;
+					};
+				});
+			}
+
+			return bool;
+
+			// console.log("this");
+		}
+
 	};
 
 	//Where saved search params are stored (so while switching views/controllers, changes in search params will be kept)
@@ -944,13 +984,13 @@
 				});
 
 				modalInstance.result.then(function(){
-						deferred.resolve();
-					}, function(error){
-						deferred.reject(error);
-					});
+					deferred.resolve();
+				}, function(error){
+					deferred.reject(error);
+				});
 
-					return deferred.promise;
-				}
+				return deferred.promise;
+			}
 
 			return services;
 		}
@@ -1011,13 +1051,13 @@
 				});
 
 				modalInstance.result.then(function(result){
-						deferred.resolve(result);
-					}, function(error){
-						deferred.reject(error);
-					});
+					deferred.resolve(result);
+				}, function(error){
+					deferred.reject(error);
+				});
 
-					return deferred.promise;
-				}
+				return deferred.promise;
+			}
 
 			function getSearchTemp(){
 				return searchTemp;

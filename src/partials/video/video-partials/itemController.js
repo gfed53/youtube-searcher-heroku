@@ -11,20 +11,33 @@
 		vm.url = 'http://www.youtube.com/embed/'+vm.videoId;
 		vm.trustedUrl = vm.trustSrc(vm.url);
 		vm.getVideoItem = getVideoItem;
+		vm.clearItem = clearItem;
 		vm.getChannel = getChannel;
 		vm.item;
 		vm.params = ytSearchParams.get();
 
 		vm.getVideoItem(vm.videoId);
 		
+		
+		
 		//In case of page refresh, we need to automatically save the videoId, or else, on state change, the video player tab will still exist with nowhere to go.
 		ytVideoItems.services.setVideoId(vm.videoId);
 
+		//We retrieve the video from the API in order to get  
 		function getVideoItem(id){
 			ytCurrentVideo(id).getVideo()
 			.then(function(response){
 				vm.item = response.data.items[0];
-			})
+				console.log(vm.item);
+				vm.isSaved = ytVideoItems.services.isSaved(vm.item.id);
+				console.log(vm.isSaved);
+				// ytVideoItems.services.isSaved(vm.item.id);
+			});
+		}
+
+		//Removes selected video item from history/localStorage (permanently)
+		function clearItem(item){
+			ytVideoItems.services.clearItem(undefined, item);
 		}
 
 		function getChannel(videoId){
