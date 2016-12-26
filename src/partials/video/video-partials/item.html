@@ -1,8 +1,9 @@
 <h3 class="video-title">{{ video.item.snippet.title }}</h3>
 <my-video></my-video>
 <div class="remove-video-container" ng-if="video.isSaved">
-<p>Remove saved video?</p>
-<button class="btn btn-default" ng-click="video.clearItem(video.item)">Remove</button>
+<p>Finished the video? Clear it from your watch list.</p>
+<button class="btn btn-default" ng-click="video.clearItem(video.item)" ng-if="!video.cleared">Clear</button>
+<button class="btn btn-default" disabled="disabled" ng-if="video.cleared">Cleared</button>
 </div>
 <p class="video-desc">{{ video.item.snippet.description }}</p>
 <p>Published: <span class="emph">{{ video.item.snippet.publishedAt | date: mm/dd/yyyy }}</span></p>

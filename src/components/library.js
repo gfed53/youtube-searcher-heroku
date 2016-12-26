@@ -307,14 +307,16 @@
 		function clearItem(codeName, item){
 			console.log(codeName);
 			console.log(item);
-			if(codeName){
+
+			if(codeName){ //This would take place in the playlist section
 				localStorage.removeItem(codeName);
-			} else if(item) {
+			} else if(item) { //This would take place in the video section.
 				items.forEach(function(_item_){
 					if(_item_.id.videoId === item.id){
-						console.log('match');
+						// console.log('match');
 						var current = _item_;
-						console.log(current);
+						// console.log(current);
+						//Remove both from localStorage and items array within this service. In playlist section, this is done implicitly.
 						localStorage.removeItem(current.codeName);
 						var currentIndex = items.indexOf(current);
 						items.splice(currentIndex, 1);

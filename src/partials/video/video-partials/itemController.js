@@ -14,6 +14,7 @@
 		vm.clearItem = clearItem;
 		vm.getChannel = getChannel;
 		vm.item;
+		vm.cleared;
 		vm.params = ytSearchParams.get();
 
 		vm.getVideoItem(vm.videoId);
@@ -38,6 +39,7 @@
 		//Removes selected video item from history/localStorage (permanently)
 		function clearItem(item){
 			ytVideoItems.services.clearItem(undefined, item);
+			vm.cleared = true;
 		}
 
 		function getChannel(videoId){
@@ -47,7 +49,6 @@
 				vm.params.channelId = vm.channel.id;
 				vm.params.image = vm.channel.snippet.thumbnails.default.url;
 				ytSearchParams.set(vm.params);
-				ytSearchParams.setToAdvanced();
 				$state.go('search');
 			})
 		}
