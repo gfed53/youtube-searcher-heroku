@@ -74,7 +74,7 @@
 			vm.viewVideo = false;
 			ytSearchYouTube(params, pageToken, direction).search()
 			.then(function(response){
-
+				console.log(response);
 				//Clear the search bar, but keep a reference to the last keyword searched.
 				vm.params.keyword = '';
 				vm.params.searchedKeyword = response.config.params.q;

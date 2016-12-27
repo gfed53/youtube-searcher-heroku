@@ -19,7 +19,9 @@
 
 		vm.getVideoItem(vm.videoId);
 		
-		
+		//Init list of saved video items to compare current video against (if loading page in video view)
+		ytVideoItems.services.init();
+
 		
 		//In case of page refresh, we need to automatically save the videoId, or else, on state change, the video player tab will still exist with nowhere to go.
 		ytVideoItems.services.setVideoId(vm.videoId);

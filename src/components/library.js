@@ -200,7 +200,8 @@
 			var url = 'https://www.googleapis.com/youtube/v3/videos',
 			request = {
 				key: 'AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA',
-				part: 'snippet',
+				part: 'snippet, contentDetails',
+				//contentDetails contains the duration property.
 				id: id
 			},
 			errorModalObj = ytModalGenerator().getVideoTemp(),
@@ -226,6 +227,7 @@
 			}	
 		}
 	}
+
 	//Used to get back a video's channel data (which requires a different call from ytCurrentVideo)
 	function ytCurrentChannel($q, $http, ytModalGenerator){
 		return function(id){
@@ -265,6 +267,7 @@
 		var items = [];
 
 		this.services = {
+			init: init,
 			getItems: getItems,
 			setItem: setItem,
 			clearItem: clearItem,
@@ -274,8 +277,26 @@
 			isSaved: isSaved
 		};
 
-		function getItems(){
-			var newItems = [];
+		// function getItems(){
+		// 	var newItems = [];
+		// 	if(localStorage.length){
+		// 		for(key in localStorage){
+		// 			if(key.includes('uytp')){
+		// 				var obj = JSON.parse(localStorage[key]);
+		// 				delete obj.$$hashKey;
+		// 				obj.name = obj.snippet.title;
+		// 				obj.codeName = key;
+		// 				if(ytUtilities().getIndexIfObjWithAttr(items, 'name', obj.name) === -1){
+		// 					items.push(obj);
+		// 				}			
+		// 			}
+		// 		}
+		// 	}
+			
+		// 	return items;
+		// }
+
+		function init(){
 			if(localStorage.length){
 				for(key in localStorage){
 					if(key.includes('uytp')){
@@ -289,7 +310,12 @@
 					}
 				}
 			}
-			
+		}
+
+		function getItems(){
+			if(!items.length){
+				init();
+			}
 			return items;
 		}
 
@@ -299,9 +325,14 @@
 			content = result;
 			
 			content.dateAdded = dateAdded;
+			content.codeName = itemName;
+
+			items.push(content);
+
 			content = JSON.stringify(content);
 
 			localStorage.setItem(itemName, content);
+
 		}
 
 		function clearItem(codeName, item){
@@ -313,9 +344,7 @@
 			} else if(item) { //This would take place in the video section.
 				items.forEach(function(_item_){
 					if(_item_.id.videoId === item.id){
-						// console.log('match');
 						var current = _item_;
-						// console.log(current);
 						//Remove both from localStorage and items array within this service. In playlist section, this is done implicitly.
 						localStorage.removeItem(current.codeName);
 						var currentIndex = items.indexOf(current);
