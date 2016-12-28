@@ -31,10 +31,7 @@
 			ytCurrentVideo(id).getVideo()
 			.then(function(response){
 				vm.item = response.data.items[0];
-				console.log(vm.item);
 				vm.isSaved = ytVideoItems.services.isSaved(vm.item.id);
-				console.log(vm.isSaved);
-				// ytVideoItems.services.isSaved(vm.item.id);
 			});
 		}
 

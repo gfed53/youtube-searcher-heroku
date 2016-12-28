@@ -218,7 +218,6 @@
 					params: request
 				})
 				.then(function(response){
-					console.log(response);
 					return $q.when(response);
 				},
 				function(response){
@@ -277,25 +276,6 @@
 			isSaved: isSaved
 		};
 
-		// function getItems(){
-		// 	var newItems = [];
-		// 	if(localStorage.length){
-		// 		for(key in localStorage){
-		// 			if(key.includes('uytp')){
-		// 				var obj = JSON.parse(localStorage[key]);
-		// 				delete obj.$$hashKey;
-		// 				obj.name = obj.snippet.title;
-		// 				obj.codeName = key;
-		// 				if(ytUtilities().getIndexIfObjWithAttr(items, 'name', obj.name) === -1){
-		// 					items.push(obj);
-		// 				}			
-		// 			}
-		// 		}
-		// 	}
-			
-		// 	return items;
-		// }
-
 		function init(){
 			if(localStorage.length){
 				for(key in localStorage){
@@ -336,8 +316,6 @@
 		}
 
 		function clearItem(codeName, item){
-			console.log(codeName);
-			console.log(item);
 
 			if(codeName){ //This would take place in the playlist section
 				localStorage.removeItem(codeName);
@@ -351,7 +329,6 @@
 						items.splice(currentIndex, 1);
 					};
 				});
-				// console.log(current);
 				
 
 			}
@@ -392,8 +369,6 @@
 			var bool;
 			if(items.length){
 				items.forEach(function(_item_){
-					// console.log(_item_.id.videoId);
-					// console.log(id);
 					if(_item_.id.videoId === id){
 						bool = true;
 					};
@@ -401,8 +376,6 @@
 			}
 
 			return bool;
-
-			// console.log("this");
 		}
 
 	};
