@@ -9,12 +9,12 @@
 	transition: all 0.5s ease-in-out;
 }
 
-.scroll-top {
+.scroll-top, .page-change-button {
 	transition: all 0.5s ease-in-out;
 }
 
 @media screen and ($desktop){
-	.scroll-top:hover {
+	.scroll-top:hover, .page-change-button:hover {
 		color: #888888;
 		cursor: pointer;
 		opacity: 1.0;

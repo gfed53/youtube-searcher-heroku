@@ -358,7 +358,7 @@ body #page-header #header-wrapper #credit {
     justify-content: center; }
     .page-selector-container #page-selector #prev-page, .page-selector-container #page-selector #next-page {
       font-size: 1em;
-      cursor: pointer; }
+      padding: 0.2em; }
     .page-selector-container #page-selector #prev-page-section, .page-selector-container #page-selector #next-page-section {
       display: inline-block; }
     .page-selector-container #page-selector #next-page-section {
@@ -499,11 +499,11 @@ body #page-header #header-wrapper #credit {
   -o-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out; }
 
-.scroll-top {
+.scroll-top, .page-change-button {
   transition: all 0.5s ease-in-out; }
 
 @media screen and (min-width: 1024px) {
-  .scroll-top:hover {
+  .scroll-top:hover, .page-change-button:hover {
     color: #888888;
     cursor: pointer;
     opacity: 1.0; } }
