@@ -40,7 +40,7 @@
 		vm.videosReverse = ytSortOrder.videosReverse;
 		vm.sort = sort;
 
-		//If advanced view is active when revisiting state, we need to initMap() on ctrl start
+		//When revisiting state, we need to initMap() on ctrl load
 		$timeout(function(){
 			vm.initMap();
 		});
@@ -74,11 +74,13 @@
 			vm.viewVideo = false;
 			ytSearchYouTube(params, pageToken, direction).search()
 			.then(function(response){
+				console.log(response);
 				//Clear the search bar, but keep a reference to the last keyword searched.
 				vm.params.keyword = '';
 				vm.params.searchedKeyword = response.config.params.q;
 
 				vm.params.currentPage = ytSearchParams.getCurrentPage(response.pageDirection, vm.params.currentPage);
+				console.log(vm.params.currentPage);
 
 				vm.params.searchTypePrev = response.config.params.type;
 				//Also reset auto-translate in case we want to then grab the next page of the translated search (so the translator doesn't unnecessarily try to re-translate an already-translated word)
@@ -87,6 +89,8 @@
 
 				vm.params.nextPageToken = response.data.nextPageToken;
 				vm.params.prevPageToken = response.data.prevPageToken;
+				console.log('prev', vm.params.prevPageToken);
+				console.log('next', vm.params.nextPageToken);
 				vm.status.channelsCollapsed = true;
 				vm.status.videosCollapsed = false;
 				ytResults.setStatus(vm.status);

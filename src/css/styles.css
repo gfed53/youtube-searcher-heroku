@@ -337,9 +337,11 @@ body #page-header #header-wrapper #credit {
     border-top-width: 2px; }
 
 .search-order-arrow-container {
-  text-align: center;
-  font-size: 1.5em; }
+  text-align: center; }
   .search-order-arrow-container span {
+    margin: 0 0.25em; }
+  .search-order-arrow-container .my-arrow {
+    font-size: 1.5em;
     cursor: pointer; }
 
 .page-selector-container {
@@ -360,7 +362,9 @@ body #page-header #header-wrapper #credit {
       font-size: 1em;
       padding: 0.2em; }
     .page-selector-container #page-selector #prev-page-section, .page-selector-container #page-selector #next-page-section {
-      display: inline-block; }
+      display: flex;
+      flex-direction: column;
+      justify-content: center; }
     .page-selector-container #page-selector #next-page-section {
       text-align: right; }
       .page-selector-container #page-selector #next-page-section #label-next {

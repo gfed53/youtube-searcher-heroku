@@ -168,8 +168,11 @@
 
 .search-order-arrow-container {
 	text-align: center;
-    font-size: 1.5em;
     span {
+    	margin: 0 0.25em;
+    }
+    .my-arrow {
+    	font-size: 1.5em;
     	cursor: pointer;
     }
 }
@@ -193,7 +196,9 @@
 			padding: 0.2em;
 		}
 		#prev-page-section, #next-page-section {
-			display: inline-block;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
 		}
 		#next-page-section, {
 			text-align: right;
