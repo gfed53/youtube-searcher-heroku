@@ -168,13 +168,13 @@
 
 .search-order-arrow-container {
 	text-align: center;
-    span {
-    	margin: 0 0.25em;
-    }
-    .my-arrow {
-    	font-size: 1.5em;
-    	cursor: pointer;
-    }
+	span {
+		margin: 0 0.25em;
+	}
+	.my-arrow {
+		font-size: 1.5em;
+		cursor: pointer;
+	}
 }
 
 .page-selector-container {
@@ -251,6 +251,24 @@
 	}
 }
 
+@media screen and ($search-params-tweakpoint){
+	#advanced-search {
+		#form-advanced-video-search {
+			.cluster {
+				.btn-reset-container {
+					margin-top: -1em;
+				}
+			}
+		}
+
+		.my-btn-reset {
+			margin-left: 6em;
+		}
+
+
+	}
+}
+
 @media screen and ($tablet){
 	.results {
 		.result {
@@ -277,7 +295,7 @@
 	}
 	.search-order-arrow-container {
 		text-align: right;
-    	margin-right: 1em;
+		margin-right: 1em;
 	}
 }
 

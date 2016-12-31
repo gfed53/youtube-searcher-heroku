@@ -38,6 +38,8 @@
 	function ytSearchYouTube($q, $http, ytChanSearch, ytTranslate, ytModalGenerator) {
 		return function(params, pageToken, direction){
 
+			console.log(params);
+
 			// Ensures that we take the previously searched keyword during page navigation.
 			var query = (pageToken ? params.searchedKeyword : params.keyword);
 			var url = 'https://www.googleapis.com/youtube/v3/search';
@@ -382,7 +384,7 @@
 
 	//Where saved search params are stored (so while switching views/controllers, changes in search params will be kept)
 	function ytSearchParams(){
-		// TODO: Make DRYer. implement loop in object construction
+		// TODO: Make DRYer. Maybe implement loop in object construction
 		var params = {
 			keyword: undefined,
 			searchedKeyword: undefined,
@@ -406,8 +408,11 @@
 			date: undefined
 		};
 
+		var original = Object.assign({}, params);
+
 		this.get = get;
 		this.set = set;
+		this.reset = reset;
 		this.getCurrentPage = getCurrentPage;
 
 		function get(){
@@ -423,6 +428,11 @@
 			}
 			params.keyword = newParams.searchedKeyword;
 
+		}
+
+		function reset(){
+			params = original;
+			console.log(params);
 		}
 
 		function getCurrentPage(step, val){

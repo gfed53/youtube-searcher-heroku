@@ -21,6 +21,7 @@
 		vm.videoIsSaved = videoIsSaved;
 		vm.computeCssClass = computeCssClass;
 		vm.scrollTo = scrollTo;
+		vm.reset = reset;
 		vm.scrollBtn = false;
 		
 		//Retrieving our saved variables, if any
@@ -195,6 +196,12 @@
 		function sort(){
 			vm.videosReverse = !vm.videosReverse;
 			ytSortOrder.videosReverse = vm.videosReverse;
+		}
+
+		function reset(){
+			ytSearchParams.reset();
+			vm.params = ytSearchParams.get();
+			vm.params.lang = vm.langs[0];
 		}
 	};
 })();

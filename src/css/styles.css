@@ -397,6 +397,12 @@ body #page-header #header-wrapper #credit {
     #advanced-search #form-advanced-video-search #translate-wrapper #translate-select {
       max-width: 100%; } }
 
+@media screen and (min-width: 602px) {
+  #advanced-search #form-advanced-video-search .cluster .btn-reset-container {
+    margin-top: -1em; }
+  #advanced-search .my-btn-reset {
+    margin-left: 6em; } }
+
 @media screen and (min-width: 768px) {
   .results .result h2 {
     font-size: 2em; }
