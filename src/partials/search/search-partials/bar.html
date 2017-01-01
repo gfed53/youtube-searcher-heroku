@@ -65,11 +65,6 @@
 						<select name="translate"  class="form-control" id="translate-select" ng-model="search.params.lang" ng-options="item.label for item in search.langs"></select>
 					</div>
 				</div>
-				<div class="sub-cluster row btn-reset-container">
-					<div class="col-md-12">
-						<input class="btn btn-default my-btn-reset" type="button" ng-click="search.reset()" value="Reset All">
-					</div>
-				</div>
 			</div>
 			<div id="map-wrapper">
 				<div id="map"></div>
@@ -81,6 +76,11 @@
 			</div>
 			<div id="save-search-wrapper">
 				<input class="btn btn-primary" ng-click="search.saveSearch(search.params)" type="button" value="Save Search">
+			</div>
+			<div class="row btn-reset-container">
+				<div class="col-md-12">
+					<input class="btn btn-default my-btn-reset" type="button" ng-click="search.reset()" value="Reset All">
+				</div>
 			</div>
 			<div class="channel-filter" ng-if="search.params.image">
 				<img src="{{search.params.image}}"></img>

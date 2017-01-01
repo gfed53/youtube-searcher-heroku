@@ -18,7 +18,7 @@
 	.factory('ytModalGenerator', ['$q', '$uibModal', ytModalGenerator])
 	.factory('ytUtilities', [ytUtilities])
 	.service('ytChanFilter', [ytChanFilter])
-	.service('ytSearchParams', [ytSearchParams])
+	.service('ytSearchParams', ['ytTranslate', ytSearchParams])
 	.service('ytResults', [ytResults])
 	.service('ytVideoItems', ['$q', '$state', '$stateParams',  'ytDangerModal', 'ytUtilities', ytVideoItems])
 	.service('ytSearchHistory', ['$q', 'ytSearchSavedModal', 'ytDangerModal', 'ytSearchParams', 'ytUtilities', ytSearchHistory])
@@ -383,11 +383,11 @@
 	};
 
 	//Where saved search params are stored (so while switching views/controllers, changes in search params will be kept)
-	function ytSearchParams(){
+	function ytSearchParams(ytTranslate){
 		// TODO: Make DRYer. Maybe implement loop in object construction
 		var params = {
 			keyword: undefined,
-			searchedKeyword: undefined,
+			// searchedKeyword: undefined,
 			searchType: 'video',
 			channel: undefined,
 			channelId: undefined,
@@ -401,14 +401,24 @@
 			lat: undefined,
 			lng: undefined,
 			radius: undefined,
-			currentPage: undefined,
-			prevPageToken: undefined,
-			nextPageToken: undefined,
-			name: undefined,
-			date: undefined
+			// currentPage: undefined,
+			// prevPageToken: undefined,
+			// nextPageToken: undefined,
+			// name: undefined,
+			// date: undefined,
+			lang: ytTranslate.langs[0]
 		};
 
 		var original = Object.assign({}, params);
+
+		console.log(original);
+
+		params.searchedKeyword = undefined;
+		params.currentPage = undefined;
+		params.prevPageToken = undefined;
+		params.nextPageToken = undefined;
+		params.name = undefined;
+		params.date = undefined;
 
 		this.get = get;
 		this.set = set;
@@ -430,8 +440,13 @@
 
 		}
 
+		//Work on this
 		function reset(){
-			params = original;
+			for(key in params){
+				if(key in original){
+					params[key] = original[key];
+				}
+			}
 			console.log(params);
 		}
 

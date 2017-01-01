@@ -29,13 +29,15 @@
 		// vm.type = ytSearchParams.getSearchType();
 		vm.results = ytResults.getResults();
 		vm.chanResults = ytResults.getChanResults();
+		vm.langs = ytTranslate.langs;
 		vm.params = ytSearchParams.get();
 		vm.status = ytResults.getStatus();
-		vm.langs = ytTranslate.langs;
 		vm.translate = translate;
 
+		console.log(vm.params);
+
 		//Default search settings
-		vm.params.lang = vm.langs[0];
+		// vm.params.lang = vm.langs[0];
 		vm.params.searchType = (vm.params.searchType || 'video');
 
 		vm.videosReverse = ytSortOrder.videosReverse;
@@ -201,7 +203,7 @@
 		function reset(){
 			ytSearchParams.reset();
 			vm.params = ytSearchParams.get();
-			vm.params.lang = vm.langs[0];
+			// vm.params.lang = vm.langs[0];
 		}
 	};
 })();
