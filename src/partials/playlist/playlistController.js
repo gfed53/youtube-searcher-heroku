@@ -30,7 +30,6 @@
 
 		//Grabs one of our saved searches, then automatically switches to the search state in its advanced search mode.
 		function grab(search){
-			//TODO: Require functionality to switch 'searchedKeyword' to just 'keyword'. Conflicts with traversing pages, which relies on searchKeyword param, which gets overwritten.
 			ytSearchParams.set(search);
 			$state.go('search');
 		}

@@ -31,10 +31,14 @@
 		vm.chanResults = ytResults.getChanResults();
 		vm.langs = ytTranslate.langs;
 		vm.params = ytSearchParams.get();
+		vm.paramsPrev = ytSearchParams.getPrev();
+		vm.searchTypePrev = ytSearchParams.getSTP();
+		vm.currentPage = ytSearchParams.getCurrentPage();
 		vm.status = ytResults.getStatus();
 		vm.translate = translate;
 
 		console.log(vm.params);
+		console.log(vm.paramsPrev);
 
 		//Default search settings
 		// vm.params.lang = vm.langs[0];
@@ -78,14 +82,19 @@
 			ytSearchYouTube(params, pageToken, direction).search()
 			.then(function(response){
 				console.log(response);
+
+				// vm.paramsPrev = vm.params;
+				
 				//Clear the search bar, but keep a reference to the last keyword searched.
 				vm.params.keyword = '';
 				vm.params.searchedKeyword = response.config.params.q;
 
-				vm.params.currentPage = ytSearchParams.getCurrentPage(response.pageDirection, vm.params.currentPage);
-				console.log(vm.params.currentPage);
+				ytSearchParams.updateCurrentPage(response.pageDirection);
+				vm.currentPage = ytSearchParams.getCurrentPage();
+				console.log(vm.currentPage);
 
-				vm.params.searchTypePrev = response.config.params.type;
+				vm.searchTypePrev = response.config.params.type;
+				ytSearchParams.setSTP(vm.searchTypePrev);
 				//Also reset auto-translate in case we want to then grab the next page of the translated search (so the translator doesn't unnecessarily try to re-translate an already-translated word)
 				vm.params.lang = vm.langs[0];
 				vm.results = response.data.items;
@@ -96,6 +105,12 @@
 				console.log('next', vm.params.nextPageToken);
 				vm.status.channelsCollapsed = true;
 				vm.status.videosCollapsed = false;
+
+				ytSearchParams.setPrev(vm.params);
+				vm.paramsPrev = vm.params;
+
+				console.log(vm.paramsPrev);
+
 				ytResults.setStatus(vm.status);
 				//Saving the results to our service
 				ytResults.setResults(vm.results);

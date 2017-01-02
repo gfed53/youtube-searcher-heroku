@@ -387,7 +387,7 @@
 		// TODO: Make DRYer. Maybe implement loop in object construction
 		var params = {
 			keyword: undefined,
-			// searchedKeyword: undefined,
+			searchedKeyword: undefined,
 			searchType: 'video',
 			channel: undefined,
 			channelId: undefined,
@@ -401,64 +401,109 @@
 			lat: undefined,
 			lng: undefined,
 			radius: undefined,
-			// currentPage: undefined,
-			// prevPageToken: undefined,
-			// nextPageToken: undefined,
-			// name: undefined,
-			// date: undefined,
+			currentPage: undefined,
+			prevPageToken: undefined,
+			nextPageToken: undefined,
+			name: undefined,
+			date: undefined,
 			lang: ytTranslate.langs[0]
 		};
 
+		var searchTypePrev = 'video';
+
+		//This is used for page traversal. We store the previous search params. That way, we can adjust/update the queries all we want, and grab new page tokens from the last search all we want.
+		var paramsPrev = {};
+
 		var original = Object.assign({}, params);
 
-		console.log(original);
+		var currentPage = 1;
 
-		params.searchedKeyword = undefined;
-		params.currentPage = undefined;
-		params.prevPageToken = undefined;
-		params.nextPageToken = undefined;
-		params.name = undefined;
-		params.date = undefined;
+		// console.log(original);
+
+		// params.searchedKeyword = undefined;
+		// params.currentPage = undefined;
+		// params.prevPageToken = undefined;
+		// params.nextPageToken = undefined;
+		// params.name = undefined;
+		// params.date = undefined;
 
 		this.get = get;
+		this.getPrev = getPrev;
 		this.set = set;
+		this.setPrev = setPrev;
+		this.getSTP = getSTP;
+		this.setSTP = setSTP;
 		this.reset = reset;
+		this.updateCurrentPage = updateCurrentPage;
 		this.getCurrentPage = getCurrentPage;
 
 		function get(){
 			return params;
 		}
 
+		function getPrev(){
+			return paramsPrev;
+		}
+
 		function set(newParams){
 			for(var item in params){
-				params[item] = newParams[item];
-				if(newParams[item] === 'Invalid Date'){
-					newParams[item] = null;
-				}
+				//To avoid conflict with page traversal of prev search after retrieving a new search
+				// if(item === 'searchedKeyword'){
+				// 	console.log('should skip');
+				// } else {
+					params[item] = newParams[item];
+
+					if(newParams[item] === 'Invalid Date'){
+						newParams[item] = null;
+					}
+				// }
+				//To avoid conflict with page traversal of prev search after retrieving a new search
+				// params['keyword'] = newParams['searchedKeyword'];
+				
 			}
 			params.keyword = newParams.searchedKeyword;
 
 		}
 
-		//Work on this
-		function reset(){
-			for(key in params){
-				if(key in original){
-					params[key] = original[key];
-				}
+		function setPrev(_params_){
+			// paramsPrev = _params_;
+			for(key in _params_){
+				paramsPrev[key] = _params_[key];
 			}
-			console.log(params);
 		}
 
-		function getCurrentPage(step, val){
+		// STP: searchTypePrev
+		function getSTP(){
+			return searchTypePrev;
+		}
+
+		function setSTP(_val_){
+			searchTypePrev = _val_;
+		}
+
+		//Work on this
+		function reset(){
+			// for(key in params){
+			// 	if(key in original){
+			// 		params[key] = original[key];
+			// 	}
+			// }
+			// console.log(params);
+			params = original;
+		}
+
+		function updateCurrentPage(step){
 			if(step === 'next'){
-				val++;
+				currentPage++;
 			} else if(step === 'prev'){
-				val--;
+				currentPage--;
 			} else {
-				val = 1;
+				currentPage = 1;
 			}
-			return val;
+		}
+
+		function getCurrentPage(){
+			return currentPage;
 		}
 	}
 
