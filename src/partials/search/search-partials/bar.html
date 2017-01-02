@@ -36,7 +36,6 @@
 						</select>
 					</div>
 				</div>
-
 			</div>
 			<div class="cluster">
 				<div class="sub-cluster row">
@@ -68,11 +67,21 @@
 			</div>
 			<div id="map-wrapper">
 				<div id="map"></div>
-				<div id="map-hud" ng-if="search.params.location">
-					<span>({{ search.params.lat | number: 0 }}, {{ search.params.lng | number: 0}})</span>
-					<input class="btn btn-default btn-clear-select" type="button" ng-click="search.clearSelection()" value="Clear Selection">
-					<span>{{ search.params.radius | number: 0 }}km</span>
+				<div id="map-hud" class="row" ng-if="search.params.location">
+					<div class="col-xs-4">
+						<span>({{ search.params.lat | number: 0 }}, {{ search.params.lng | number: 0}})</span>
+					</div>
+					<div class="col-xs-4">
+						<input class="btn btn-default btn-clear-select" type="button" ng-click="search.clearSelection()" value="Clear">
+					</div>
+					<div class="col-xs-4">
+						<span>{{ search.params.radius | number: 0 }}km</span>
+					</div>
 				</div>
+			</div>
+			<div class="channel-filter" ng-if="search.params.image">
+				<img src="{{search.params.image}}"></img>
+				<input class="btn btn-default" type="button" ng-click="search.chanClear()" value="Clear">
 			</div>
 			<div id="save-search-wrapper">
 				<input class="btn btn-primary" ng-click="search.saveSearch(search.params)" type="button" value="Save Search">
@@ -82,13 +91,8 @@
 					<input class="btn btn-default my-btn-reset" type="button" ng-click="search.reset()" value="Reset All">
 				</div>
 			</div>
-			<div class="channel-filter" ng-if="search.params.image">
-				<img src="{{search.params.image}}"></img>
-				<input class="btn btn-default" type="button" ng-click="search.chanClear()" value="Clear Filter">
-			</div>
 		</div>
 	</form>
-</div>
 </div>
 
 

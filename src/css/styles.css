@@ -238,6 +238,12 @@ body #page-header #header-wrapper #credit {
   height: 15em;
   display: block; }
 
+#map-hud div {
+  text-align: center; }
+
+#map-hud span {
+  font-size: 0.7em; }
+
 .hidden {
   display: none; }
 
@@ -388,6 +394,8 @@ body #page-header #header-wrapper #credit {
   margin: 0 auto; }
 
 @media screen and (min-width: 350px) {
+  #map-hud span {
+    font-size: 1em; }
   .results #page-selector #prev-page, .results #page-selector #next-page {
     font-size: 1.5em; } }
 
@@ -457,8 +465,10 @@ body #page-header #header-wrapper #credit {
     #advanced-search #form-channel-search {
       display: inline-block;
       margin-top: 0; }
-  .channel-filter img {
-    width: 5em; }
+  .channel-filter {
+    margin: 1em 0; }
+    .channel-filter img {
+      width: 5em; }
   .results {
     margin: 2em 0;
     transition: 1s linear all; }

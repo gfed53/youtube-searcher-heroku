@@ -23,6 +23,15 @@
 	display: block;
 }
 
+#map-hud {
+	div {
+		text-align: center;
+	}
+	span {
+		font-size: 0.7em;
+	}
+}
+
 .hidden {
 	display: none;
 }
@@ -229,6 +238,11 @@
 }
 
 @media screen and ($mobile3){
+	#map-hud {
+		span {
+			font-size: 1em;
+		}
+	}
 	.results {
 		#page-selector {
 			#prev-page, #next-page {
@@ -382,6 +396,7 @@
 	}
 
 	.channel-filter {
+		margin: 1em 0;
 		img {
 			width: 5em;
 		}
