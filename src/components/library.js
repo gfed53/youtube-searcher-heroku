@@ -448,18 +448,15 @@
 		function set(newParams){
 			for(var item in params){
 				//To avoid conflict with page traversal of prev search after retrieving a new search
-				// if(item === 'searchedKeyword'){
-				// 	console.log('should skip');
-				// } else {
+				if(item === 'searchedKeyword'){
+					console.log('should skip');
+				} else {
 					params[item] = newParams[item];
 
 					if(newParams[item] === 'Invalid Date'){
 						newParams[item] = null;
 					}
-				// }
-				//To avoid conflict with page traversal of prev search after retrieving a new search
-				// params['keyword'] = newParams['searchedKeyword'];
-				
+				}
 			}
 			params.keyword = newParams.searchedKeyword;
 

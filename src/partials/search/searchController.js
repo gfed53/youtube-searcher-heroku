@@ -86,7 +86,8 @@
 				// vm.paramsPrev = vm.params;
 				
 				//Clear the search bar, but keep a reference to the last keyword searched.
-				vm.params.keyword = '';
+				// vm.params.keyword = '';
+				vm.params.keyword = (direction) ? vm.params.keyword : '';
 				vm.params.searchedKeyword = response.config.params.q;
 
 				ytSearchParams.updateCurrentPage(response.pageDirection);

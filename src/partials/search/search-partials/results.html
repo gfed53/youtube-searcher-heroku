@@ -13,7 +13,7 @@
 			<div class="row page-selector-inner">
 				<div id="prev-page-section" class="col-xs-6">
 					<span>
-						<span id="prev-page" ng-click="search.submit(search.paramsPrev, search.params.prevPageToken, 'prev')" ng-if="search.params.prevPageToken" class="glyphicon glyphicon-chevron-left page-change-button"></span>
+						<span id="prev-page" ng-click="search.submit(search.paramsPrev, search.params.prevPageToken, 'prev')" ng-if="search.paramsPrev.prevPageToken" class="glyphicon glyphicon-chevron-left page-change-button"></span>
 						<!-- <span ng-if="search.params.prevPageToken">{{ search.params.currentPage - 1 }}</span> -->
 					</span>
 				</div>
@@ -22,7 +22,7 @@
 					<!-- <span id="next-page" ng-click="search.submit(search.params, search.params.nextPageToken, 'next')" ng-if="search.params.nextPageToken" class="glyphicon glyphicon-chevron-right page-change-button"></span> -->
 					<span ng-if="search.params.nextPageToken">
 						<!-- <span ng-if="search.params.nextPageToken">{{ search.params.currentPage + 1 }}</span> -->
-						<span id="next-page" ng-click="search.submit(search.paramsPrev, search.params.nextPageToken, 'next')" ng-if="search.params.nextPageToken" class="glyphicon glyphicon-chevron-right page-change-button"></span>
+						<span id="next-page" ng-click="search.submit(search.paramsPrev, search.params.nextPageToken, 'next')" ng-if="search.paramsPrev.nextPageToken" class="glyphicon glyphicon-chevron-right page-change-button"></span>
 					</span>
 				</div>
 			</div>
