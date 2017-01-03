@@ -37,8 +37,8 @@
 		vm.status = ytResults.getStatus();
 		vm.translate = translate;
 
-		console.log(vm.params);
-		console.log(vm.paramsPrev);
+		console.log('params:', vm.params);
+		console.log('paramsPrev:', vm.paramsPrev);
 
 		//Default search settings
 		// vm.params.lang = vm.langs[0];
@@ -107,10 +107,11 @@
 				vm.status.channelsCollapsed = true;
 				vm.status.videosCollapsed = false;
 
-				ytSearchParams.setPrev(vm.params);
-				vm.paramsPrev = vm.params;
+				//This should not occur when making a new page search?
+				ytSearchParams.setPrev(vm.params, direction);
+				vm.paramsPrev = ytSearchParams.getPrev();
 
-				console.log(vm.paramsPrev);
+				console.log('params prev:', vm.paramsPrev);
 
 				ytResults.setStatus(vm.status);
 				//Saving the results to our service
@@ -219,7 +220,7 @@
 		function reset(){
 			ytSearchParams.reset();
 			vm.params = ytSearchParams.get();
-			// vm.params.lang = vm.langs[0];
+			console.log(vm.paramsPrev);
 		}
 	};
 })();

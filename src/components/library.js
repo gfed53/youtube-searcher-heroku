@@ -384,7 +384,6 @@
 
 	//Where saved search params are stored (so while switching views/controllers, changes in search params will be kept)
 	function ytSearchParams(ytTranslate){
-		// TODO: Make DRYer. Maybe implement loop in object construction
 		var params = {
 			keyword: undefined,
 			searchedKeyword: undefined,
@@ -462,10 +461,16 @@
 
 		}
 
-		function setPrev(_params_){
-			// paramsPrev = _params_;
-			for(key in _params_){
-				paramsPrev[key] = _params_[key];
+		function setPrev(_params_, direction){
+			//This will not execute if it's page traversal..
+			if(!direction){
+				for(key in _params_){
+					paramsPrev[key] = _params_[key];
+				}
+			} else {
+				//..But the new page tokens are required
+				paramsPrev['prevPageToken'] = _params_['prevPageToken'];
+				paramsPrev['nextPageToken'] = _params_['nextPageToken'];
 			}
 		}
 
@@ -480,13 +485,15 @@
 
 		//Work on this
 		function reset(){
-			// for(key in params){
-			// 	if(key in original){
-			// 		params[key] = original[key];
-			// 	}
-			// }
-			// console.log(params);
-			params = original;
+			console.log('current params:', params);
+			console.log('original:', original);
+			for(key in params){
+				if(key in original){
+					params[key] = original[key];
+				}
+			}
+			console.log('paramsPrev:', paramsPrev);
+			// params = original;
 		}
 
 		function updateCurrentPage(step){
