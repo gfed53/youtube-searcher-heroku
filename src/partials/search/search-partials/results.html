@@ -13,14 +13,10 @@
 				<div id="prev-page-section" class="col-xs-6">
 					<span>
 						<span id="prev-page" ng-click="search.submit(search.paramsPrev, search.paramsPrev.prevPageToken, 'prev')" ng-if="search.paramsPrev.prevPageToken" class="glyphicon glyphicon-chevron-left page-change-button"></span>
-						<!-- <span ng-if="search.params.prevPageToken">{{ search.params.currentPage - 1 }}</span> -->
 					</span>
 				</div>
 				<div id="next-page-section" class="col-xs-6">
-					<!-- <span ng-if="search.params.nextPageToken">{{ search.params.currentPage + 1 }}</span> -->
-					<!-- <span id="next-page" ng-click="search.submit(search.params, search.params.nextPageToken, 'next')" ng-if="search.params.nextPageToken" class="glyphicon glyphicon-chevron-right page-change-button"></span> -->
 					<span>
-						<!-- <span ng-if="search.params.nextPageToken">{{ search.params.currentPage + 1 }}</span> -->
 						<span id="next-page" ng-click="search.submit(search.paramsPrev, search.paramsPrev.nextPageToken, 'next')" ng-if="search.paramsPrev.nextPageToken" class="glyphicon glyphicon-chevron-right page-change-button"></span>
 					</span>
 				</div>
@@ -73,7 +69,6 @@
 	</div>
 </div>
 <div ng-if="search.searchTypePrev === 'channel'" id="channel-results" class="results">
-	<!-- <h2>Channel Results</h2> -->
 	<h2>We found {{ search.results.length }} results.</h2>
 	<p class="result-dir">Select a channel by clicking on its image. The channel will then be added as a search filter.</p>
 	<div class="row results-row">

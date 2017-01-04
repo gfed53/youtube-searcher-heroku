@@ -26,7 +26,6 @@
 		
 		//Retrieving our saved variables, if any
 		//type refers to the search type, whether the user sees the basic or advanced search in the view
-		// vm.type = ytSearchParams.getSearchType();
 		vm.results = ytResults.getResults();
 		vm.chanResults = ytResults.getChanResults();
 		vm.langs = ytTranslate.langs;
@@ -37,11 +36,7 @@
 		vm.status = ytResults.getStatus();
 		vm.translate = translate;
 
-		console.log('params:', vm.params);
-		console.log('paramsPrev:', vm.paramsPrev);
-
 		//Default search settings
-		// vm.params.lang = vm.langs[0];
 		vm.params.searchType = (vm.params.searchType || 'video');
 
 		vm.videosReverse = ytSortOrder.videosReverse;
@@ -81,39 +76,25 @@
 			vm.viewVideo = false;
 			ytSearchYouTube(params, pageToken, direction).search()
 			.then(function(response){
-				console.log(response);
-
-				// vm.paramsPrev = vm.params;
-				
 				//Clear the search bar, but keep a reference to the last keyword searched.
-				// vm.params.keyword = '';
 				vm.params.keyword = (direction) ? vm.params.keyword : '';
 				vm.params.searchedKeyword = response.config.params.q;
-
 				ytSearchParams.updateCurrentPage(response.pageDirection);
 				vm.currentPage = ytSearchParams.getCurrentPage();
-				console.log(vm.currentPage);
-
 				vm.searchTypePrev = response.config.params.type;
 				ytSearchParams.setSTP(vm.searchTypePrev);
+
 				//Also reset auto-translate in case we want to then grab the next page of the translated search (so the translator doesn't unnecessarily try to re-translate an already-translated word)
 				vm.params.lang = vm.langs[0];
 				vm.results = response.data.items;
-
 				vm.params.nextPageToken = response.data.nextPageToken;
 				vm.params.prevPageToken = response.data.prevPageToken;
-				console.log('prev', vm.params.prevPageToken);
-				console.log('next', vm.params.nextPageToken);
 				vm.status.channelsCollapsed = true;
 				vm.status.videosCollapsed = false;
-
-				//This should not occur when making a new page search?
 				ytSearchParams.setPrev(vm.params, direction);
 				vm.paramsPrev = ytSearchParams.getPrev();
-
-				console.log('params prev:', vm.paramsPrev);
-
 				ytResults.setStatus(vm.status);
+
 				//Saving the results to our service
 				ytResults.setResults(vm.results);
 
@@ -121,8 +102,7 @@
 				$timeout(function(){
 					vm.scrollTo('scroll-point');
 					vm.offSet = true;
-				}, 1000);
-				
+				}, 1000);	
 			})
 		}
 
@@ -220,7 +200,6 @@
 		function reset(){
 			ytSearchParams.reset();
 			vm.params = ytSearchParams.get();
-			console.log(vm.paramsPrev);
 		}
 	};
 })();

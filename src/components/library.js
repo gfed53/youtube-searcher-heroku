@@ -37,15 +37,12 @@
 	//Searches the API for videos based on search params
 	function ytSearchYouTube($q, $http, ytChanSearch, ytTranslate, ytModalGenerator) {
 		return function(params, pageToken, direction){
-
-			console.log(params);
-
+			
 			// Ensures that we take the previously searched keyword during page navigation.
 			var query = (pageToken ? params.searchedKeyword : params.keyword);
 			var url = 'https://www.googleapis.com/youtube/v3/search';
 
 			//Moment.js parsing
-
 			var parsedAfter = (params.after ? moment(params.after, 'M/D/YYYY')._d : undefined),
 			parsedBefore = (params.before ? moment(params.before, 'M/D/YYYY')._d : undefined);
 
@@ -417,15 +414,6 @@
 
 		var currentPage = 1;
 
-		// console.log(original);
-
-		// params.searchedKeyword = undefined;
-		// params.currentPage = undefined;
-		// params.prevPageToken = undefined;
-		// params.nextPageToken = undefined;
-		// params.name = undefined;
-		// params.date = undefined;
-
 		this.get = get;
 		this.getPrev = getPrev;
 		this.set = set;
@@ -448,7 +436,6 @@
 			for(var item in params){
 				//To avoid conflict with page traversal of prev search after retrieving a new search
 				if(item === 'searchedKeyword'){
-					console.log('should skip');
 				} else {
 					params[item] = newParams[item];
 
@@ -483,17 +470,12 @@
 			searchTypePrev = _val_;
 		}
 
-		//Work on this
 		function reset(){
-			console.log('current params:', params);
-			console.log('original:', original);
 			for(key in params){
 				if(key in original){
 					params[key] = original[key];
 				}
 			}
-			console.log('paramsPrev:', paramsPrev);
-			// params = original;
 		}
 
 		function updateCurrentPage(step){
