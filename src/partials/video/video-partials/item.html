@@ -5,10 +5,11 @@
 <button class="btn btn-default" ng-click="video.clearItem(video.item)" ng-if="!video.cleared">Clear</button>
 <button class="btn btn-default" disabled="disabled" ng-if="video.cleared">Cleared</button>
 </div>
-<p class="video-desc">{{ video.item.snippet.description }}</p>
 <p>Published: <span class="emph">{{ video.item.snippet.publishedAt | date: mm/dd/yyyy }}</span></p>
 <div class="channel-info">
 	<p class="channel-title">Channel: <span class="emph"> {{ video.item.snippet.channelTitle }}</span></p>
 	<button class="btn btn-default" ng-click="video.getChannel(video.item.snippet.channelId)">Filter</button>
 </div>
+<p class="video-desc">{{ video.item.snippet.description }}</p>
+
 

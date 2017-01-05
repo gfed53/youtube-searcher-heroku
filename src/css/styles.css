@@ -498,7 +498,8 @@ body #page-header #header-wrapper #credit {
   text-align: center; }
 
 #video .channel-info {
-  text-align: center; }
+  text-align: center;
+  margin: 0.5em; }
 
 #video .channel-title {
   display: inline-block;
@@ -532,6 +533,9 @@ body #page-header #header-wrapper #credit {
 
 .scroll-top, .page-change-button {
   transition: all 0.5s ease-in-out; }
+
+.btn[disabled], .btn.disabled {
+  cursor: auto; }
 
 @media screen and (min-width: 1024px) {
   .scroll-top:hover, .page-change-button:hover {

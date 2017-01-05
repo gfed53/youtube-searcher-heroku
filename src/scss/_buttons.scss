@@ -13,6 +13,10 @@
 	transition: all 0.5s ease-in-out;
 }
 
+.btn[disabled], .btn.disabled {
+	cursor: auto;
+}
+
 @media screen and ($desktop){
 	.scroll-top:hover, .page-change-button:hover {
 		color: #888888;
