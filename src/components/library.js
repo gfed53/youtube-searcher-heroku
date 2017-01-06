@@ -2,7 +2,7 @@
 	angular
 	.module('myApp')
 	.factory('ytTrustSrc', ['$sce', ytTrustSrc])
-	.factory('ytSearchYouTube', ['$q', '$http', 'ytChanSearch', 'ytTranslate', 'ytModalGenerator', ytSearchYouTube])
+	.factory('ytSearchYouTube', ['$q', '$http', 'ytChanSearch', 'ytTranslate', 'ytModalGenerator', 'ytDateHandler', ytSearchYouTube])
 	.factory('ytChanSearch', ['$q', '$http', 'ytModalGenerator', ytChanSearch])
 	.factory('ytCurrentVideo', ['$q', '$http', 'ytModalGenerator', ytCurrentVideo])
 	.factory('ytCurrentChannel', ['$q', '$http', 'ytModalGenerator', ytCurrentChannel])
@@ -16,6 +16,7 @@
 	.factory('ytDangerModal', ['$q', '$uibModal', ytDangerModal])
 	.factory('ytErrorModal', ['ytModalGenerator', ytErrorModal])
 	.factory('ytModalGenerator', ['$q', '$uibModal', ytModalGenerator])
+	.factory('ytDateHandler', [ytDateHandler])
 	.factory('ytUtilities', [ytUtilities])
 	.service('ytChanFilter', [ytChanFilter])
 	.service('ytSearchParams', ['ytTranslate', ytSearchParams])
@@ -35,7 +36,7 @@
 	}
 
 	//Searches the API for videos based on search params
-	function ytSearchYouTube($q, $http, ytChanSearch, ytTranslate, ytModalGenerator) {
+	function ytSearchYouTube($q, $http, ytChanSearch, ytTranslate, ytModalGenerator, ytDateHandler) {
 		return function(params, pageToken, direction){
 			
 			// Ensures that we take the previously searched keyword during page navigation.
@@ -43,8 +44,8 @@
 			var url = 'https://www.googleapis.com/youtube/v3/search';
 
 			//Moment.js parsing
-			var parsedAfter = (params.after ? moment(params.after, 'M/D/YYYY')._d : undefined),
-			parsedBefore = (params.before ? moment(params.before, 'M/D/YYYY')._d : undefined);
+			var parsedAfter = (params.after ? ytDateHandler().getDate(params.after) : undefined),
+			parsedBefore = (params.before ? ytDateHandler().getDate(params.before) : undefined);
 
 			var request = {
 				key: 'AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA',
@@ -1129,6 +1130,33 @@
 
 			function getTransTemp(){
 				return transTemp;
+			}
+
+			return services;
+		}
+	}
+
+	//For cross-browser compatibility, this will convert a stringified date into a date object. Date inputs don't exist in certain browsers such as Firefox, so we use Moment.js to create our own object to be used.
+	function ytDateHandler(){
+		return function(){
+
+			var services = {
+				getDate: getDate
+			}
+
+			function getDate(date){
+				console.log('get date running');
+				// var obj;
+
+				// if(typeof date === 'string'){
+				// 	obj = moment(date, 'M/D/YYYY')._d;
+				// } else {
+				// 	obj = date;
+				// }
+
+				// return obj;
+
+				return (typeof date === 'string') ? moment(date, 'M/D/YYYY')._d : date;
 			}
 
 			return services;
