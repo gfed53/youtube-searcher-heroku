@@ -43,7 +43,8 @@
 						<label for="date-after"> From: </label>	
 					</div>
 					<div class="col-md-10">
-						<input class="form-control" ng-model="search.params.after" name="date-after" type="text" placeholder="(m)m/(d)d/(yy)yy">
+						<input class="form-control" ng-model="search.params.after" ng-if="search.isDateTypeComp" name="date-after" type="date">
+						<input class="form-control" ng-model="search.params.after" ng-if="!search.isDateTypeComp" name="date-after" type="text" placeholder="(m)m/(d)d/(yy)yy">
 					</div>
 				</div>
 				<div class="sub-cluster row">
@@ -51,7 +52,8 @@
 						<label for="date-before"> To: </label>
 					</div>
 					<div class="col-md-10">
-						<input class="form-control" ng-model="search.params.before" name="date-before" type="text" placeholder="eg. 7/1/16">
+						<input class="form-control" ng-model="search.params.before" ng-if="search.isDateTypeComp" name="date-before" type="date">
+						<input class="form-control" ng-model="search.params.before" ng-if="!search.isDateTypeComp" name="date-before" type="text" placeholder="eg. 7/1/16">
 					</div>
 				</div>
 			</div>

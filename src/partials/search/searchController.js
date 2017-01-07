@@ -2,9 +2,9 @@
 	angular
 	.module('myApp')
 
-	.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$anchorScroll', '$uibModal', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', 'ytCheckScrollBtnStatus', 'ytTranslate', 'ytSortOrder', SearchCtrl])
+	.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$anchorScroll', '$uibModal', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', 'ytCheckScrollBtnStatus', 'ytTranslate', 'ytSortOrder', 'ytDateHandler', SearchCtrl])
 
-	function SearchCtrl($scope, $location, $timeout, $anchorScroll, $uibModal, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus, ytTranslate, ytSortOrder){
+	function SearchCtrl($scope, $location, $timeout, $anchorScroll, $uibModal, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus, ytTranslate, ytSortOrder, ytDateHandler){
 		var vm = this;
 		vm.initMap = initMap;
 		vm.submit = submit;
@@ -23,6 +23,7 @@
 		vm.scrollTo = scrollTo;
 		vm.reset = reset;
 		vm.scrollBtn = false;
+		vm.isDateTypeComp = ytDateHandler().check();
 		
 		//Retrieving our saved variables, if any
 		//type refers to the search type, whether the user sees the basic or advanced search in the view

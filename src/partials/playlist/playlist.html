@@ -91,11 +91,13 @@
 			</div>
 			<div class="filter-input-group">
 				<label class="filt-label" for="">Added After:</label>
-				<input class="form-control" ng-model="playlist.videoFilter.addedAfter" type="date">
+				<input class="form-control" ng-model="playlist.videoFilter.addedAfter" ng-if="playlist.isDateTypeComp" type="date">
+				<input class="form-control" ng-model="playlist.videoFilter.addedAfter" ng-if="!playlist.isDateTypeComp" type="text">
 			</div>
 			<div class="filter-input-group">
 				<label class="filt-label" for="">Added Before:</label>
-				<input class="form-control" ng-model="playlist.videoFilter.addedBefore" type="date">
+				<input class="form-control" ng-model="playlist.videoFilter.addedBefore" ng-if="playlist.isDateTypeComp" type="date">
+				<input class="form-control" ng-model="playlist.videoFilter.addedBefore" ng-if="!playlist.isDateTypeComp" type="text">
 			</div>
 		</div>
 
@@ -114,11 +116,13 @@
 				</div>
 				<div class="filter-input-group">
 					<label class="filt-label" for="">Added After:</label>
-					<input class="form-control" ng-model="playlist.videoFilter.addedAfter" type="date">
+					<input class="form-control" ng-model="playlist.videoFilter.addedAfter" ng-if="playlist.isDateTypeComp" type="date">
+					<input class="form-control" ng-model="playlist.videoFilter.addedAfter" ng-if="!playlist.isDateTypeComp" type="text">
 				</div>
 				<div class="filter-input-group">
 					<label class="filt-label" for="">Added Before:</label>
-					<input class="form-control" ng-model="playlist.videoFilter.addedBefore" type="date">
+					<input class="form-control" ng-model="playlist.videoFilter.addedBefore" ng-if="playlist.isDateTypeComp" type="date">
+					<input class="form-control" ng-model="playlist.videoFilter.addedBefore" ng-if="!playlist.isDateTypeComp" type="text">
 				</div>
 			</div>
 		</div>
@@ -214,11 +218,13 @@
 			</div>
 			<div class="filter-input-group">
 				<label class="filt-label" for="">Added After:</label>
-				<input class="form-control" ng-model="playlist.searchesFilter.addedAfter" type="date">
+				<input class="form-control" ng-model="playlist.searchesFilter.addedAfter" ng-if="playlist.isDateTypeComp" type="date">
+				<input class="form-control" ng-model="playlist.searchesFilter.addedAfter" ng-if="!playlist.isDateTypeComp" type="text">
 			</div>
 			<div class="filter-input-group">
 				<label class="filt-label" for="">Added Before:</label>
-				<input class="form-control" ng-model="playlist.searchesFilter.addedBefore" type="date">
+				<input class="form-control" ng-model="playlist.searchesFilter.addedBefore" ng-if="playlist.isDateTypeComp" type="date">
+				<input class="form-control" ng-model="playlist.searchesFilter.addedBefore" ng-if="!playlist.isDateTypeComp" type="text">
 			</div>
 		</div>
 
@@ -237,11 +243,13 @@
 				</div>
 				<div class="filter-input-group">
 					<label class="filt-label" for="">Added After:</label>
-					<input class="form-control" ng-model="playlist.searchesFilter.addedAfter" type="date">
+					<input class="form-control" ng-model="playlist.searchesFilter.addedAfter" ng-if="playlist.isDateTypeComp" type="date">
+					<input class="form-control" ng-model="playlist.searchesFilter.addedAfter" ng-if="!playlist.isDateTypeComp" type="text">
 				</div>
 				<div class="filter-input-group">
 					<label class="filt-label" for="">Added Before:</label>
-					<input class="form-control" ng-model="playlist.searchesFilter.addedBefore" type="date">
+					<input class="form-control" ng-model="playlist.searchesFilter.addedBefore" ng-if="playlist.isDateTypeComp" type="date">
+					<input class="form-control" ng-model="playlist.searchesFilter.addedBefore" ng-if="!playlist.isDateTypeComp" type="text">
 				</div>
 			</div>
 		</div>

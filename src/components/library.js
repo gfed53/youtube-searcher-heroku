@@ -11,7 +11,7 @@
 	.factory('ytCheckScrollBtnStatus', ['$state', ytCheckScrollBtnStatus])
 	.factory('ytCheckScrollY', [ytCheckScrollY])
 	.factory('ytInitMap', [ytInitMap])
-	.factory('ytFilters', [ytFilters])
+	.factory('ytFilters', ['ytDateHandler', ytFilters])
 	.factory('ytSearchSavedModal', ['$q', '$uibModal', ytSearchSavedModal])
 	.factory('ytDangerModal', ['$q', '$uibModal', ytDangerModal])
 	.factory('ytErrorModal', ['ytModalGenerator', ytErrorModal])
@@ -44,8 +44,8 @@
 			var url = 'https://www.googleapis.com/youtube/v3/search';
 
 			//Moment.js parsing
-			var parsedAfter = (params.after ? ytDateHandler().getDate(params.after) : undefined),
-			parsedBefore = (params.before ? ytDateHandler().getDate(params.before) : undefined);
+			var parsedAfter = (params.after ? ytDateHandler().getDate(params.after, 'M/D/YYYY') : undefined),
+			parsedBefore = (params.before ? ytDateHandler().getDate(params.before, 'M/D/YYYY') : undefined);
 
 			var request = {
 				key: 'AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA',
@@ -934,7 +934,7 @@
 	}
 
 	//Handles the filtering functionality of the saved content in the saved content section
-	function ytFilters(){
+	function ytFilters(ytDateHandler){
 		return function(){
 			var services = {
 				addedAfterVideos: addedAfterVideos,
@@ -949,8 +949,8 @@
 				var bool;
 				if(filter && filter.addedAfter){
 					if(item.dateAdded){
-						var dateAdded = parseInt(moment(item.dateAdded).format('X'), 10),
-						after = parseInt(moment(filter.addedAfter).format('X'), 10);
+						var dateAdded = parseInt(moment(ytDateHandler().getDate(item.dateAdded, 'M/D/YYYY')).format('X'), 10),
+						after = parseInt(moment(ytDateHandler().getDate(filter.addedAfter, 'M/D/YYYY')).format('X'), 10);
 						bool = (dateAdded >= after);
 					} else {
 						bool = false;
@@ -965,8 +965,8 @@
 				var bool;
 				if(videoFilter && videoFilter.addedBefore){
 					if(video.dateAdded){
-						var dateAdded = parseInt(moment(video.dateAdded).format('X'), 10),
-						before = parseInt(moment(videoFilter.addedBefore).format('X'), 10);
+						var dateAdded = parseInt(moment(ytDateHandler().getDate(video.dateAdded, 'M/D/YYYY')).format('X'), 10),
+						before = parseInt(moment(ytDateHandler().getDate(videoFilter.addedBefore, 'M/D/YYYY')).format('X'), 10);
 						bool = (dateAdded < before);
 					} else {
 						bool = false;
@@ -980,8 +980,8 @@
 			function addedAfterSearches(item, filter){
 				var bool;
 				if(filter && filter.addedAfter){
-					var dateAdded = parseInt(moment(item.date).format('X'), 10),
-					after = parseInt(moment(filter.addedAfter).format('X'), 10);
+					var dateAdded = parseInt(moment(ytDateHandler().getDate(item.date, 'M/D/YYYY')).format('X'), 10),
+					after = parseInt(moment(ytDateHandler().getDate(filter.addedAfter, 'M/D/YYYY')).format('X'), 10);
 					bool = (dateAdded >= after);
 				} else {
 					bool = true;
@@ -992,8 +992,8 @@
 			function addedBeforeSearches(item, filter){
 				var bool;
 				if(filter && filter.addedBefore){
-					var dateAdded = parseInt(moment(item.date).format('X'), 10),
-					before = parseInt(moment(filter.addedBefore).format('X'), 10);
+					var dateAdded = parseInt(moment(ytDateHandler().getDate(item.date, 'M/D/YYYY')).format('X'), 10),
+					before = parseInt(moment(ytDateHandler().getDate(filter.addedBefore, 'M/D/YYYY')).format('X'), 10);
 					bool = (dateAdded < before);
 				} else {
 					bool = true;
@@ -1141,22 +1141,25 @@
 		return function(){
 
 			var services = {
+				check: check,
 				getDate: getDate
 			}
 
-			function getDate(date){
-				console.log('get date running');
-				// var obj;
+			function getDate(date, format){
+				return (typeof date === 'string') ? moment(date, format)._d : date;
+			}
 
-				// if(typeof date === 'string'){
-				// 	obj = moment(date, 'M/D/YYYY')._d;
-				// } else {
-				// 	obj = date;
-				// }
+			function check(){
+				var supported = {date: false, number: false, time: false, month: false, week: false},
+				tester = document.createElement('input');
 
-				// return obj;
+				tester.type = 'date';
 
-				return (typeof date === 'string') ? moment(date, 'M/D/YYYY')._d : date;
+				if(tester.type === 'date'){
+					return true;
+				} else {
+					return false;
+				}
 			}
 
 			return services;
