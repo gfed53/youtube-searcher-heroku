@@ -5,7 +5,8 @@
 
 .alert-video-saved {
 	text-align: center;
-	margin-top: 1em;
+	width: 14em;
+	margin: 1em auto;
 }
 
 //Search-saved-modal
@@ -31,6 +32,7 @@
 
 @media screen and ($tablet){
 	.alert-video-saved {
-		width: 50%;
+    	display: inline-block;
+    	margin-left: 1em;
 	}
 }

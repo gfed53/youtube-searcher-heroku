@@ -270,7 +270,6 @@
 	#advanced-search {
 		#form-advanced-video-search{
 			#translate-wrapper {
-				// display: inline-block;
 				#translate-select {
 					max-width: 100%;
 				}
@@ -298,12 +297,6 @@
 				}
 			}
 		}
-
-		.my-btn-reset {
-			// margin-left: 6em;
-		}
-
-
 	}
 }
 
@@ -315,14 +308,7 @@
 			}
 		}
 		.inner-result {
-			.tit-descrip-container {
-				.playlist-button-wrapper, .outer-wrapper {
-					text-align: left;
-				}
-				.result-chan-descrip {
-					display: inline-block;
-				}
-			}
+			
 			p {
 				overflow-x: auto;
 			}
@@ -354,6 +340,14 @@
 		.inner-result {
 			img {
 				width: 60%;
+			}
+			.tit-descrip-container {
+				.playlist-button-wrapper, .outer-wrapper {
+					text-align: left;
+				}
+				.result-chan-descrip {
+					display: inline-block;
+				}
 			}
 		}
 		.result-mobile {

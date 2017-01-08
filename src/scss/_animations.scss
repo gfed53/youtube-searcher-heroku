@@ -1,11 +1,16 @@
-//Results
-#results.ng-enter,
-#results.ng-leave.ng-leave-active {
+//Video Saved Alert
+
+.alert-video-saved {
+	transition:500ms linear all;
+}
+
+.alert-video-saved.ng-enter,
+.alert-video-saved.ng-leave.ng-leave-active {
 	opacity: 0;
 }
 
-#results.ng-leave,
-#results.ng-enter.ng-enter-active {
+.alert-video-saved.ng-leave,
+.alert-video-saved.ng-enter.ng-enter-active {
 	opacity: 1;
 }
 
