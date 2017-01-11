@@ -399,12 +399,13 @@ body #page-header #header-wrapper #credit {
   .results #page-selector #prev-page, .results #page-selector #next-page {
     font-size: 1.5em; } }
 
-@media screen and (min-width: 446px) {
+@media screen and (min-width: 462px) {
   #advanced-search #form-advanced-video-search #translate-wrapper {
     text-align: left; }
     #advanced-search #form-advanced-video-search #translate-wrapper .sub-cluster {
       display: inline-block;
-      margin-left: 0.5em; } }
+      margin-left: 0.5em;
+      text-align: center; } }
 
 @media screen and (min-width: 525px) {
   #advanced-search #form-advanced-video-search #translate-wrapper #translate-select {

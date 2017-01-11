@@ -251,8 +251,7 @@
 		}
 	}
 }
-
-@media screen and ('min-width: 446px'){
+@media screen and ('min-width: 462px'){
 	#advanced-search {
 		#form-advanced-video-search{
 			#translate-wrapper {
@@ -260,6 +259,7 @@
 				.sub-cluster {
 					display: inline-block;
 					margin-left: 0.5em;
+					text-align: center;
 				}	
 			}
 		}
