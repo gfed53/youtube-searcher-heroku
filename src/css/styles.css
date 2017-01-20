@@ -163,7 +163,13 @@ body #page-header #header-wrapper #credit {
     margin: 2em 0; }
   #playlist .sort-filter-group {
     padding-bottom: 1em;
-    border-bottom: 1px solid #E7E7E7; }
+    border-bottom: 1px solid #E7E7E7;
+    margin-top: 1em; }
+    #playlist .sort-filter-group .row {
+      margin-bottom: 1em; }
+    #playlist .sort-filter-group h3 {
+      margin: 0;
+      margin-bottom: 0.4em; }
   #playlist .playlist-btn-group {
     text-align: right; }
   #playlist .my-arrow-sm {

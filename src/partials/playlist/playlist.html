@@ -48,11 +48,17 @@
 		<!-- For Smaller Viewports -->
 
 		<div class="sort-filter-group sort-buttons-mobile">
-			<h3 class="sort-filter-header sort-buttons-header">Sort By:</h3>
-			<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.videosSortCollapsed = !playlist.collapsed.videosSortCollapsed">
-				<span class="glyphicon glyphicon-triangle-bottom my-arrow-sm" ng-if="playlist.collapsed.videosSortCollapsed"></span>
-				<span class="glyphicon glyphicon-triangle-top my-arrow-sm" ng-if="!playlist.collapsed.videosSortCollapsed"></span>
-			</button>
+			<div class="row">
+				<div class="col-xs-8">
+					<h3 class="sort-filter-header sort-buttons-header">Sort By:</h3>
+				</div>
+				<div class="col-xs-4">
+					<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.videosSortCollapsed = !playlist.collapsed.videosSortCollapsed">
+						<span class="glyphicon glyphicon-triangle-bottom my-arrow-sm" ng-if="playlist.collapsed.videosSortCollapsed"></span>
+						<span class="glyphicon glyphicon-triangle-top my-arrow-sm" ng-if="!playlist.collapsed.videosSortCollapsed"></span>
+					</button>
+				</div>
+			</div>
 			<div class="buttons-mobile-container" uib-collapse="playlist.collapsed.videosSortCollapsed">
 				<div class="btn-group" role="group" aria-label="...">
 					<div class="sort-mobile-sub">
@@ -108,11 +114,17 @@
 		<!-- For Smaller Viewports -->
 
 		<div class="sort-filter-group filter-buttons-mobile">
-			<h3 class="sort-filter-header filter-buttons-header">Filter By:</h3>
-			<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.videosFilterCollapsed = !playlist.collapsed.videosFilterCollapsed">
-				<span class="glyphicon glyphicon-triangle-bottom my-arrow-sm" ng-if="playlist.collapsed.videosFilterCollapsed"></span>
-				<span class="glyphicon glyphicon-triangle-top my-arrow-sm" ng-if="!playlist.collapsed.videosFilterCollapsed"></span>
-			</button>
+			<div class="row">
+				<div class="col-xs-8">
+					<h3 class="sort-filter-header filter-buttons-header">Filter By:</h3>
+				</div>
+				<div class="col-xs-4">
+					<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.videosFilterCollapsed = !playlist.collapsed.videosFilterCollapsed">
+					<span class="glyphicon glyphicon-triangle-bottom my-arrow-sm" ng-if="playlist.collapsed.videosFilterCollapsed"></span>
+					<span class="glyphicon glyphicon-triangle-top my-arrow-sm" ng-if="!playlist.collapsed.videosFilterCollapsed"></span>
+				</button>
+				</div>
+			</div>
 			<div class="buttons-mobile-container" uib-collapse="playlist.collapsed.videosFilterCollapsed">
 				<div class="filter-input-group filter-input-group-keyword">
 					<label class="filt-label">Keyword:</label>
@@ -193,11 +205,17 @@
 		<!-- For Smaller Viewports -->
 
 		<div class="sort-filter-group sort-buttons-mobile">
-			<h3 class="sort-filter-header">Sort By:</h3>
-			<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.searchesSortCollapsed = !playlist.collapsed.searchesSortCollapsed">
-				<span class="glyphicon glyphicon-triangle-bottom my-arrow-sm" ng-if="playlist.collapsed.searchesSortCollapsed"></span>
-				<span class="glyphicon glyphicon-triangle-top my-arrow-sm" ng-if="!playlist.collapsed.searchesSortCollapsed"></span>
-			</button>
+			<div class="row">
+				<div class="col-xs-8">
+					<h3 class="sort-filter-header">Sort By:</h3>
+				</div>
+				<div class="col-xs-4">
+					<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.searchesSortCollapsed = !playlist.collapsed.searchesSortCollapsed">
+					<span class="glyphicon glyphicon-triangle-bottom my-arrow-sm" ng-if="playlist.collapsed.searchesSortCollapsed"></span>
+					<span class="glyphicon glyphicon-triangle-top my-arrow-sm" ng-if="!playlist.collapsed.searchesSortCollapsed"></span>
+				</button>
+				</div>
+			</div>
 			<div class="buttons-mobile-container" uib-collapse="playlist.collapsed.searchesSortCollapsed">
 				<div class="btn-group btn-group-srt" role="group" aria-label="...">
 					<button class="btn btn-default btn-block" ng-click="playlist.sortSearches('name')">
@@ -239,11 +257,17 @@
 		<!-- For Smaller Viewports -->
 		
 		<div class="sort-filter-group filter-buttons-mobile">
-			<h3 class="sort-filter-header filter-buttons-header">Filter By:</h3>
-			<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.searchesFilterCollapsed = !playlist.collapsed.searchesFilterCollapsed">
-				<span class="glyphicon glyphicon-triangle-bottom my-arrow-sm" ng-if="playlist.collapsed.searchesFilterCollapsed"></span>
-				<span class="glyphicon glyphicon-triangle-top my-arrow-sm" ng-if="!playlist.collapsed.searchesFilterCollapsed"></span>
-			</button>
+			<div class="row">
+				<div class="col-xs-8">
+					<h3 class="sort-filter-header filter-buttons-header">Filter By:</h3>
+				</div>
+				<div class="col-xs-4">
+					<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.searchesFilterCollapsed = !playlist.collapsed.searchesFilterCollapsed">
+					<span class="glyphicon glyphicon-triangle-bottom my-arrow-sm" ng-if="playlist.collapsed.searchesFilterCollapsed"></span>
+					<span class="glyphicon glyphicon-triangle-top my-arrow-sm" ng-if="!playlist.collapsed.searchesFilterCollapsed"></span>
+				</button>
+				</div>
+			</div>
 			<div class="buttons-mobile-container" uib-collapse="playlist.collapsed.searchesFilterCollapsed">
 				<div class="filter-input-group filter-input-group-keyword">
 					<label class="filt-label" for="">Keyword:</label>

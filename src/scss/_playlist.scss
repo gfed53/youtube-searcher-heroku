@@ -33,6 +33,14 @@
 	.sort-filter-group {
 		padding-bottom: 1em;
 		border-bottom: 1px solid #E7E7E7;
+		margin-top: 1em;
+		.row {
+			margin-bottom: 1em;
+		}
+		h3 {
+			margin: 0;
+			margin-bottom: 0.4em;
+		}
 	}
 	.playlist-btn-group {
 		text-align: right;
