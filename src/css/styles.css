@@ -144,7 +144,10 @@ body #page-header #header-wrapper #credit {
 #playlist {
   padding-bottom: 6em; }
   #playlist .playlist-section-header {
-    margin-top: 2em; }
+    margin-bottom: 3em;
+    max-width: 30em; }
+    #playlist .playlist-section-header h2 {
+      margin: 0; }
   #playlist h2 {
     display: inline-block;
     font-size: 1.5em; }
@@ -163,9 +166,6 @@ body #page-header #header-wrapper #credit {
     border-bottom: 1px solid #E7E7E7; }
   #playlist .playlist-btn-group {
     text-align: right; }
-  #playlist .btn-play-toggle {
-    vertical-align: middle;
-    margin: 0 0 1em 1em; }
   #playlist .my-arrow-sm {
     font-size: 0.7em; }
   #playlist .video-sort-buttons, #playlist .video-filter-buttons, #playlist .search-sort-buttons, #playlist .search-filter-buttons {

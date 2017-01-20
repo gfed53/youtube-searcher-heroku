@@ -2,12 +2,16 @@
 
 	<!-- Saved Videos Section -->
 
-	<div class="playlist-section-header">
-		<h2 ng-click="playlist.videosTest()">Saved Videos</h2>
-		<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.videosCollapsed = !playlist.collapsed.videosCollapsed">
+	<div class="row playlist-section-header">
+		<div class="col-xs-8">
+			<h2 ng-click="playlist.videosTest()">Saved Videos</h2>
+		</div>
+		<div class="col-xs-4">
+			<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.videosCollapsed = !playlist.collapsed.videosCollapsed">
 			<span class="glyphicon glyphicon-triangle-bottom my-arrow" ng-if="playlist.collapsed.videosCollapsed"></span>
 			<span class="glyphicon glyphicon-triangle-top my-arrow" ng-if="!playlist.collapsed.videosCollapsed"></span>
 		</button>
+		</div>
 	</div>
 	<div class="content-container" id="video-items-container" ng-if="playlist.items.length" uib-collapse="playlist.collapsed.videosCollapsed">
 		
@@ -153,12 +157,16 @@
 
 	<!-- Saved Searches Section -->
 
-	<div class="playlist-section-header">
-		<h2 ng-click="playlist.searchesTest()">Saved Searches</h2>
-		<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.searchesCollapsed = !playlist.collapsed.searchesCollapsed">
+	<div class="row playlist-section-header">
+		<div class="col-xs-8">
+			<h2 ng-click="playlist.searchesTest()">Saved Searches</h2>
+		</div>
+		<div class="col-xs-4">
+			<button class="btn btn-default btn-play-toggle" ng-click="playlist.collapsed.searchesCollapsed = !playlist.collapsed.searchesCollapsed">
 			<span class="glyphicon glyphicon-triangle-bottom my-arrow" ng-if="playlist.collapsed.searchesCollapsed"></span>
 			<span class="glyphicon glyphicon-triangle-top my-arrow" ng-if="!playlist.collapsed.searchesCollapsed"></span>
 		</button>
+		</div>
 	</div>
 	<div class="content-container" id="past-search-container" ng-if="playlist.pastSearches.length" uib-collapse="playlist.collapsed.searchesCollapsed">
 		

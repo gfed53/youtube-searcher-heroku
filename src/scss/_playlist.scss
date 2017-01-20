@@ -1,7 +1,11 @@
 #playlist {
 	padding-bottom: 6em;
 	.playlist-section-header {
-		margin-top: 2em;
+		margin-bottom: 3em;
+		max-width: 30em;
+		h2 {
+			margin: 0;
+		}
 	}
 	h2 {
 		display: inline-block;
@@ -32,10 +36,6 @@
 	}
 	.playlist-btn-group {
 		text-align: right;
-	}
-	.btn-play-toggle {
-		vertical-align: middle;
-		margin: 0 0 1em 1em;
 	}
 	.my-arrow-sm {
 		font-size: 0.7em;
