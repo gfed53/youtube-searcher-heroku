@@ -172,6 +172,7 @@
 		function addToPlaylist(result){
 			ytVideoItems.services.setItem(result);
 			vm.savedVideo = result;
+			$timeout(()=> {vm.savedVideo = null}, 1000);
 		}
 
 		function videoIsSaved(result){

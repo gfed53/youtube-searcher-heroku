@@ -575,7 +575,10 @@ body #page-header #header-wrapper #credit {
 @media screen and (min-width: 768px) {
   .alert-video-saved {
     display: inline-block;
-    margin-left: 1em; } }
+    margin: 0;
+    margin-left: 1em;
+    padding: 0.35em;
+    width: 10em; } }
 
 .alert-video-saved {
   transition: 500ms linear all; }
