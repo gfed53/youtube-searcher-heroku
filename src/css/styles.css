@@ -322,7 +322,8 @@ body #page-header #header-wrapper #credit {
     .results .inner-result .tit-descrip-container {
       z-index: 1; }
       .results .inner-result .tit-descrip-container .playlist-button-wrapper, .results .inner-result .tit-descrip-container .outer-wrapper {
-        text-align: center; }
+        text-align: center;
+        position: relative; }
       .results .inner-result .tit-descrip-container .result-chan-wrapper {
         display: inline-block;
         padding: 1em;
@@ -555,9 +556,11 @@ body #page-header #header-wrapper #credit {
   margin: 1em 0; }
 
 .alert-video-saved {
-  text-align: center;
-  width: 14em;
-  margin: 1em auto; }
+  display: inline-block;
+  margin: 0;
+  padding: 0.5em 1em;
+  position: absolute;
+  right: 10em; }
 
 .modal-body {
   text-align: center; }
@@ -574,11 +577,7 @@ body #page-header #header-wrapper #credit {
 
 @media screen and (min-width: 768px) {
   .alert-video-saved {
-    display: inline-block;
-    margin: 0;
-    margin-left: 1em;
-    padding: 0.35em;
-    width: 10em; } }
+    right: 25em; } }
 
 .alert-video-saved {
   transition: 500ms linear all; }

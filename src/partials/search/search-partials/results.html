@@ -25,6 +25,7 @@
 	</div>
 	<div class="row results-row">
 		<div class="result" ng-repeat="result in search.results | orderBy:'result.$$hashKey':search.videosReverse" ng-class="search.computeCssClass($first, $last)">
+		<!-- Larger Viewports -->
 			<div class="row inner-result result-desktop">
 				<div class="col-md-6 tit-descrip-container">
 					<h3>{{result.snippet.title}}</h3>
@@ -38,13 +39,14 @@
 					</div>
 					<div class="playlist-button-wrapper">
 						<input class="btn btn-default" type="button" value="Add to Playlist" ng-click="search.addToPlaylist(result)">
-						<div ng-if="search.videoIsSaved(result)" class="alert alert-success alert-video-saved" role="alert">Video Saved!</div>
+						<div ng-if="search.videoIsSaved(result)" class="alert alert-success alert-video-saved" role="alert"><i class="fa fa-check"></i></div>
 					</div>
 				</div>
 				<div class="col-md-6 results-img-container">
 					<a ng-click="search.setVideoId(result.id.videoId)" ui-sref="video({videoId: result.id.videoId} )"><img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image"></a>
 				</div>
 			</div>
+			<!-- Smaller Viewports -->
 			<div class="row inner-result result-mobile">
 				<h3>{{result.snippet.title}}</h3>
 				<div class="col-md-6 results-img-container">
@@ -61,7 +63,7 @@
 					</div>
 					<div class="playlist-button-wrapper">
 						<input class="btn btn-default" type="button" value="Add to Playlist" ng-click="search.addToPlaylist(result)">
-						<div ng-if="search.videoIsSaved(result)" class="alert alert-success alert-video-saved" role="alert">Video Saved!</div>
+						<div ng-if="search.videoIsSaved(result)" class="alert alert-success alert-video-saved" role="alert"><i class="fa fa-check"></i></div>
 					</div>
 				</div>
 			</div>

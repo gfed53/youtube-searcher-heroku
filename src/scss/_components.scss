@@ -4,9 +4,11 @@
 }
 
 .alert-video-saved {
-	text-align: center;
-	width: 14em;
-	margin: 1em auto;
+	display: inline-block;
+	margin: 0;
+    padding: 0.5em 1em;
+    position: absolute;
+    right: 10em;
 }
 
 //Search-saved-modal
@@ -32,10 +34,6 @@
 
 @media screen and ($tablet){
 	.alert-video-saved {
-    	display: inline-block;
-    	margin: 0;
-    	margin-left: 1em;
-    	padding: 0.35em;
-    	width: 10em;
+		right: 25em;
 	}
 }
