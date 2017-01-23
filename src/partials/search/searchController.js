@@ -2,9 +2,9 @@
 	angular
 	.module('myApp')
 
-	.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$anchorScroll', '$uibModal', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', 'ytCheckScrollBtnStatus', 'ytTranslate', 'ytSortOrder', 'ytDateHandler', SearchCtrl])
+	.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$interval', '$anchorScroll', '$uibModal', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', 'ytCheckScrollBtnStatus', 'ytTranslate', 'ytSortOrder', 'ytDateHandler', SearchCtrl])
 
-	function SearchCtrl($scope, $location, $timeout, $anchorScroll, $uibModal, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus, ytTranslate, ytSortOrder, ytDateHandler){
+	function SearchCtrl($scope, $location, $timeout, $interval, $anchorScroll, $uibModal, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus, ytTranslate, ytSortOrder, ytDateHandler){
 		var vm = this;
 		vm.initMap = initMap;
 		vm.submit = submit;
@@ -36,6 +36,8 @@
 		vm.currentPage = ytSearchParams.getCurrentPage();
 		vm.status = ytResults.getStatus();
 		vm.translate = translate;
+		//Keep a log of searched videos that were moved to playlist
+		vm.savedVideos = [];
 
 		//Default search settings
 		vm.params.searchType = (vm.params.searchType || 'video');
@@ -47,6 +49,9 @@
 		$timeout(function(){
 			vm.initMap();
 		});
+
+		//TEST, REMOVE
+		// testAdd();
 
 		$location.url('/search');
 
@@ -103,7 +108,7 @@
 				$timeout(function(){
 					vm.scrollTo('scroll-point');
 					vm.offSet = true;
-				}, 1000);	
+				}, 1000);
 			})
 		}
 
@@ -171,12 +176,11 @@
 
 		function addToPlaylist(result){
 			ytVideoItems.services.setItem(result);
-			vm.savedVideo = result;
-			$timeout(()=> {vm.savedVideo = null}, 1000);
+			vm.savedVideos.push(result);
 		}
 
 		function videoIsSaved(result){
-			return (vm.savedVideo === result);
+			return (vm.savedVideos.indexOf(result) !== -1);
 		}
 
 		function computeCssClass(first, last){

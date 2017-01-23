@@ -555,6 +555,17 @@ body #page-header #header-wrapper #credit {
   width: 5em;
   margin: 1em 0; }
 
+.alert-saved-wrapper {
+  display: inline-block;
+  width: auto; }
+
+.alert-saved-contents {
+  white-space: nowrap;
+  margin-left: 2em; }
+  .alert-saved-contents i {
+    overflow: hidden;
+    transition: 500ms linear all; }
+
 .alert-video-saved {
   display: inline-block;
   margin: 0;
@@ -578,17 +589,6 @@ body #page-header #header-wrapper #credit {
 @media screen and (min-width: 768px) {
   .alert-video-saved {
     right: 25em; } }
-
-.alert-video-saved {
-  transition: 500ms linear all; }
-
-.alert-video-saved.ng-enter,
-.alert-video-saved.ng-leave.ng-leave-active {
-  opacity: 0; }
-
-.alert-video-saved.ng-leave,
-.alert-video-saved.ng-enter.ng-enter-active {
-  opacity: 1; }
 
 #animate-view-container {
   position: relative; }

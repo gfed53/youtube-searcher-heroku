@@ -38,8 +38,8 @@
 						</div>
 					</div>
 					<div class="playlist-button-wrapper">
-						<input class="btn btn-default" type="button" value="Add to Playlist" ng-click="search.addToPlaylist(result)">
-						<div ng-if="search.videoIsSaved(result)" class="alert alert-success alert-video-saved" role="alert"><i class="fa fa-check"></i></div>
+						<input ng-if="!search.videoIsSaved(result)" class="btn btn-default" type="button" value="Add to Playlist" ng-click="search.addToPlaylist(result)">
+						<input ng-if="search.videoIsSaved(result)"  class="btn btn-default disabled" type="button" value="Video Added" disabled="disabled">
 					</div>
 				</div>
 				<div class="col-md-6 results-img-container">
@@ -62,8 +62,8 @@
 						</div>
 					</div>
 					<div class="playlist-button-wrapper">
-						<input class="btn btn-default" type="button" value="Add to Playlist" ng-click="search.addToPlaylist(result)">
-						<div ng-if="search.videoIsSaved(result)" class="alert alert-success alert-video-saved" role="alert"><i class="fa fa-check"></i></div>
+						<input ng-if="!search.videoIsSaved(result)" class="btn btn-default" type="button" value="Add to Playlist" ng-click="search.addToPlaylist(result)">
+						<input ng-if="search.videoIsSaved(result)"  class="btn btn-default disabled" type="button" value="Video Added" disabled="disabled">
 					</div>
 				</div>
 			</div>

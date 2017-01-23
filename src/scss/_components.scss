@@ -3,6 +3,20 @@
 	margin: 1em 0;
 }
 
+.alert-saved-wrapper {
+	display: inline-block;
+	width: auto;
+}
+
+.alert-saved-contents {
+	white-space: nowrap;
+	margin-left: 2em;
+	i {
+		overflow: hidden;
+		transition:500ms linear all;
+	}
+}
+
 .alert-video-saved {
 	display: inline-block;
 	margin: 0;
