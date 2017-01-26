@@ -49,10 +49,7 @@
 		$timeout(function(){
 			vm.initMap();
 		});
-
-		//TEST, REMOVE
-		// testAdd();
-
+		
 		$location.url('/search');
 
 		window.addEventListener('scroll', function(){
