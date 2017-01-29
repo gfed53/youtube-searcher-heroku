@@ -8,10 +8,15 @@
 		$compileProvider.debugInfoEnabled(false);
 	}])
 
-	.run(['$timeout', '$rootScope', function($timeout, $rootScope){
+	.run(['$timeout', '$rootScope', 'ytInitAPIs', function($timeout, $rootScope, ytInitAPIs){
 		$rootScope.$on('$stateChangeSuccess', function(){
 			window.scrollTo(0,0);
 		});
+		ytInitAPIs.check()
+		.then(() => {
+			//Do Nothing
+		});
+		
 	}]);
 })();
 

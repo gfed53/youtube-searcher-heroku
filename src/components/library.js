@@ -2,7 +2,7 @@
 	angular
 	.module('myApp')
 	.factory('ytTrustSrc', ['$sce', ytTrustSrc])
-	.factory('ytSearchYouTube', ['$q', '$http', 'ytChanSearch', 'ytTranslate', 'ytModalGenerator', 'ytDateHandler', ytSearchYouTube])
+	.factory('ytSearchYouTube', ['$q', '$http', 'ytChanSearch', 'ytTranslate', 'ytModalGenerator', 'ytDateHandler', 'ytInitAPIs', ytSearchYouTube])
 	.factory('ytChanSearch', ['$q', '$http', 'ytModalGenerator', ytChanSearch])
 	.factory('ytCurrentVideo', ['$q', '$http', 'ytModalGenerator', ytCurrentVideo])
 	.factory('ytCurrentChannel', ['$q', '$http', 'ytModalGenerator', ytCurrentChannel])
@@ -23,10 +23,11 @@
 	.service('ytResults', [ytResults])
 	.service('ytVideoItems', ['$q', '$state', '$stateParams',  'ytDangerModal', 'ytUtilities', ytVideoItems])
 	.service('ytSearchHistory', ['$q', 'ytSearchSavedModal', 'ytDangerModal', 'ytSearchParams', 'ytUtilities', ytSearchHistory])
-	.service('ytTranslate', ['$http', '$q', 'ytModalGenerator', ytTranslate])
+	.service('ytTranslate', ['$http', '$q', 'ytModalGenerator', 'ytInitAPIs', ytTranslate])
 	.service('ytSortOrder', [ytSortOrder])
 	.service('ytPlaylistView', [ytPlaylistView])
-	.service('ytPlaylistSort', [ytPlaylistSort]);
+	.service('ytPlaylistSort', [ytPlaylistSort])
+	.service('ytInitAPIs', ['$q', 'ytModalGenerator', ytInitAPIs]);
 
 	//Used to follow security measures with YouTube video links in particular 
 	function ytTrustSrc($sce){
@@ -36,19 +37,22 @@
 	}
 
 	//Searches the API for videos based on search params
-	function ytSearchYouTube($q, $http, ytChanSearch, ytTranslate, ytModalGenerator, ytDateHandler) {
+	function ytSearchYouTube($q, $http, ytChanSearch, ytTranslate, ytModalGenerator, ytDateHandler, ytInitAPIs) {
 		return function(params, pageToken, direction){
 			
 			// Ensures that we take the previously searched keyword during page navigation.
 			var query = (pageToken ? params.searchedKeyword : params.keyword);
 			var url = 'https://www.googleapis.com/youtube/v3/search';
+			var apisObj = ytInitAPIs.apisObj;
+			console.log(apisObj);
 
 			//Moment.js parsing
 			var parsedAfter = (params.after ? ytDateHandler().getDate(params.after, 'M/D/YYYY') : undefined),
 			parsedBefore = (params.before ? ytDateHandler().getDate(params.before, 'M/D/YYYY') : undefined);
 
 			var request = {
-				key: 'AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA',
+				// key: 'AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA',
+				key: apisObj.youTubeKey,
 				part: 'snippet',
 				maxResults: 50,
 				order: params.order,
@@ -777,7 +781,7 @@
 	}
 
 	//Handles all of the translation functionality used in the search section
-	function ytTranslate($http, $q, ytModalGenerator){
+	function ytTranslate($http, $q, ytModalGenerator, ytInitAPIs){
 
 		var langs = [{
 			label: 'None',
@@ -809,11 +813,15 @@
 		}];
 
 		var errorModalObj = ytModalGenerator().getTransTemp();
+		
 
 		function translate(text, lang){
+			var apisObj = ytInitAPIs.apisObj;
+			console.log('in translate service', apisObj);
 			var url = 'https://translate.yandex.net/api/v1.5/tr.json/translate',
 			request = {
-				key: 'trnsl.1.1.20160728T161850Z.60e012cb689f9dfd.6f8cd99e32d858950d047eaffecf930701d73a38',
+				key: apisObj.translateKey,
+				// key: 'trnsl.1.1.20160728T161850Z.60e012cb689f9dfd.6f8cd99e32d858950d047eaffecf930701d73a38',
 				text: text,
 				lang: 'en-'+lang
 			};
@@ -823,9 +831,9 @@
 				url: url,
 				params: request
 			})
-			.then(function(response){
+			.then((response) => {
 				return $q.when(response);
-			}, function(){
+			}, () => {
 				ytModalGenerator().openModal(errorModalObj);
 			});
 		}
@@ -1165,6 +1173,95 @@
 			return services;
 		}
 	}
+
+	function ytInitAPIs($q, ytModalGenerator){
+		//TODO: When user creates or updates their log info, the app probably should refresh so that the GMaps script can be loaded only once. Upon checking 
+		var initTemp = {
+				templateUrl: './partials/search/search-partials/modals/init-modal.html',
+				controller: 'InitModalController',
+				controllerAs: 'initModal'
+		};
+
+		this.check = check;
+		this.updateMapsScript = updateMapsScript;
+
+		function check(){
+			var deferred = $q.defer();
+			//Checking localStorage to see if user has an id with saved API keys
+			if(localStorage['uyts-log-info']){
+				var obj = JSON.parse(localStorage['uyts-log-info']);
+				console.log(obj);
+				this.apisObj = obj;
+				//Updating the DOM (for the Google Maps API)
+				updateDOM(this.apisObj.mapsKey);
+				// updateMapsScript(this.apisObj.mapsKey);
+				deferred.resolve(this.apisObj);
+			} else {
+				ytModalGenerator().openModal(initTemp)
+				.then((result)=>{
+					if(result === 'cancel'){
+						//Do nothing
+					} else {
+						console.log(result);
+						localStorage.setItem('uyts-log-info', JSON.stringify(result));
+						this.apisObj = localStorage['uyts-log-info'];
+						updateDOM(this.apisObj.mapsKey);
+						// deferred.resolve(this.apisObj);
+
+						//Refresh page to enable g maps to work
+						location.reload();
+					}
+				});
+			}
+			return deferred.promise;
+			
+
+		}
+
+		function updateDOM(key){
+			if(key){
+				updateMaps(key);
+			} else {
+				updateMaps('');
+			}
+		}
+
+		//Construct url with saved Google Maps API key, then run loadScript()
+		function updateMaps(key){
+			var src = 'https://maps.googleapis.com/maps/api/js?key='+key;
+			loadScript(src)
+			.then(() => {
+				console.log('Appended google maps script tag');
+			}, ()=> {
+				console.log('An error occured appending google maps script tag');
+			});
+
+		}
+
+		//Appends a script tag
+		function loadScript(src) {
+		    return new Promise((resolve, reject) => {
+		        var s;
+		        // var t;
+		        s = document.createElement('script');
+		        
+		        s.src = src;
+		        s.async = "async";
+		        s.onload = resolve;
+		        s.onerror = reject;
+		        document.body.appendChild(s);
+		    });
+		}
+
+		function updateMapsScript(key) {
+			var t = document.getElementsByTagName('script')[0];
+			console.log(t);
+			t.src = 'https://maps.googleapis.com/maps/api/js?key='+key;
+			console.log(t);
+		}
+	}
+
+
 
 
 })();

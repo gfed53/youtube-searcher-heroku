@@ -1,16 +1,26 @@
-<form ng-submit="">
+<form ng-submit="initModal.ok(initModal.apisObj)">
 	<div class="modal-body">
 		<h1>Hello new user..</h1>
 	    <p>Before using this app, create an ID and submit the necessary API keys to get the search engine running.</p>
-	    <a href="https://en.wikipedia.org/wiki/Application_programming_interface_key">What is an API key?</a>
-	    <label for="">My ID:</label>
-	    <input type="text" ng-model="initModal.id" placeholder="John Do'h">
-	    <label for=""><a href="https://developers.google.com/youtube/v3/getting-started">Get one here!</a></label>
-	    <input type="text" ng-model="initModal.youtubeKey" placeholder="YouTube Data">
-	 	<label for=""><a href="https://developers.google.com/maps/documentation/javascript/">Get one here!</a></label>
-	    <input type="text" ng-model="initModal.mapsKey" placeholder="Google Maps">
-	    <label for=""><a href="https://tech.yandex.com/translate/">Get one here!</a></label>
-	    <input type="text" ng-model="initModal.translateKey" placeholder="Yandex Translator">
+	    <div>
+	    	<a target="_blank" href="https://en.wikipedia.org/wiki/Application_programming_interface_key">What is an API key?</a>
+	    </div>
+	    <div>
+		    <label for="">My ID:</label>
+		    <input type="text" ng-model="initModal.apisObj.id" placeholder="John Do'h">
+	    </div>
+	    <div>
+		    <input type="text" ng-model="initModal.apisObj.youTubeKey" placeholder="YouTube Data">
+		    <label for=""><a target="_blank" href="https://developers.google.com/youtube/v3/getting-started">Get one here!</a></label>
+	    </div>
+	    <div>
+		    <input type="text" ng-model="initModal.apisObj.mapsKey" placeholder="Google Maps">
+		    <label for=""><a target="_blank" href="https://developers.google.com/maps/documentation/javascript/">Get one here!</a></label>
+	    </div>
+	    <div>
+		    <input type="text" ng-model="initModal.apisObj.translateKey" placeholder="Yandex Translator">
+		    <label for=""><a target="_blank" href="https://tech.yandex.com/translate/">Get one here!</a></label>
+	    </div>
 	</div>
 	<div class="modal-footer">
 	    <button autofocus class="btn btn-primary" type="submit">Submit</button>
