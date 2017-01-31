@@ -573,11 +573,17 @@ body #page-header #header-wrapper #credit {
   position: absolute;
   right: 10em; }
 
-.modal-body {
+.modal-header {
+  text-align: center; }
+
+.modal-body-saved-search {
   text-align: center; }
 
 .search-modal-input {
   margin: 0 auto; }
+
+.modal-body .row {
+  margin-bottom: 1em; }
 
 .panel-default > .panel-heading {
   background-color: #fff; }

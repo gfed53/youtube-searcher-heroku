@@ -25,13 +25,23 @@
     right: 10em;
 }
 
+//Modals
+
+.modal-header {
+	text-align: center;
+}
+
 //Search-saved-modal
-.modal-body {
+.modal-body-saved-search {
 	text-align: center;
 }
 
 .search-modal-input {
 	margin: 0 auto;
+}
+
+.modal-body .row {
+	margin-bottom: 1em;
 }
 
 //Bootstrap tweaks

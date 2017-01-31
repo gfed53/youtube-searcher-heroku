@@ -3,9 +3,9 @@
 	.module('myApp')
 	.factory('ytTrustSrc', ['$sce', ytTrustSrc])
 	.factory('ytSearchYouTube', ['$q', '$http', 'ytChanSearch', 'ytTranslate', 'ytModalGenerator', 'ytDateHandler', 'ytInitAPIs', ytSearchYouTube])
-	.factory('ytChanSearch', ['$q', '$http', 'ytModalGenerator', ytChanSearch])
-	.factory('ytCurrentVideo', ['$q', '$http', 'ytModalGenerator', ytCurrentVideo])
-	.factory('ytCurrentChannel', ['$q', '$http', 'ytModalGenerator', ytCurrentChannel])
+	.factory('ytChanSearch', ['$q', '$http', 'ytModalGenerator', 'ytInitAPIs', ytChanSearch])
+	.factory('ytCurrentVideo', ['$q', '$http', 'ytModalGenerator', 'ytInitAPIs', ytCurrentVideo])
+	.factory('ytCurrentChannel', ['$q', '$http', 'ytModalGenerator', 'ytInitAPIs', ytCurrentChannel])
 	.factory('ytComputeCssClass', [ytComputeCssClass])
 	.factory('ytScrollTo', ['$location', '$anchorScroll', ytScrollTo])
 	.factory('ytCheckScrollBtnStatus', ['$state', ytCheckScrollBtnStatus])
@@ -51,7 +51,6 @@
 			parsedBefore = (params.before ? ytDateHandler().getDate(params.before, 'M/D/YYYY') : undefined);
 
 			var request = {
-				// key: 'AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA',
 				key: apisObj.youTubeKey,
 				part: 'snippet',
 				maxResults: 50,
@@ -142,11 +141,11 @@
 	};
 
 	//Searches the API for channels based on search query
-	function ytChanSearch($q, $http, ytModalGenerator){
+	function ytChanSearch($q, $http, ytModalGenerator, ytInitAPIs){
 		return function(channel){
 			var url = 'https://www.googleapis.com/youtube/v3/search';
 			var request = {
-				key: 'AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA',
+				key: ytInitAPIs.apisObj.youTubeKey,
 				part: 'snippet',
 				maxResults: 50,
 				order: 'relevance',
@@ -199,11 +198,11 @@
 	}
 
 	//Used to retrieve necessary data from a particular video (in video player section)
-	function ytCurrentVideo($q, $http, ytModalGenerator){
+	function ytCurrentVideo($q, $http, ytModalGenerator, ytInitAPIs){
 		return function(id){
 			var url = 'https://www.googleapis.com/youtube/v3/videos',
 			request = {
-				key: 'AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA',
+				key: ytInitAPIs.apisObj.youTubeKey,
 				part: 'snippet, contentDetails',
 				//contentDetails contains the duration property.
 				id: id
@@ -232,11 +231,11 @@
 	}
 
 	//Used to get back a video's channel data (which requires a different call from ytCurrentVideo)
-	function ytCurrentChannel($q, $http, ytModalGenerator){
+	function ytCurrentChannel($q, $http, ytModalGenerator, ytInitAPIs){
 		return function(id){
 			var url = "https://www.googleapis.com/youtube/v3/channels",
 			request = {
-				key: 'AIzaSyDKNIGyWP6_5Wm9n_qksK6kLSUGY_kSAkA',
+				key: ytInitAPIs.apisObj.youTubeKey,
 				part: 'snippet',
 				id: id
 			},
@@ -1194,7 +1193,6 @@
 				this.apisObj = obj;
 				//Updating the DOM (for the Google Maps API)
 				updateDOM(this.apisObj.mapsKey);
-				// updateMapsScript(this.apisObj.mapsKey);
 				deferred.resolve(this.apisObj);
 			} else {
 				ytModalGenerator().openModal(initTemp)
