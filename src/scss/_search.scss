@@ -1,7 +1,20 @@
 //Search
 
-#bar {
+#bar, .greeting-container {
 	text-align: center;
+}
+
+.greeting-container {
+	padding-bottom: 2em;
+    border-bottom: 1px solid #E7E7E7;
+	h3 {
+		display: inline-block;
+		margin: 0 0.5em;
+		margin-left: 4.5em;
+	}
+}
+
+#bar {
 	margin: 3em 0;
 }
 

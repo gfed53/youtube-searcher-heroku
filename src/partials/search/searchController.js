@@ -45,6 +45,10 @@
 		vm.videosReverse = ytSortOrder.videosReverse;
 		vm.sort = sort;
 
+		//User authentication
+		vm.userName = ytInitAPIs.apisObj.id;
+		vm.updateAPIInfo = ytInitAPIs.update;
+
 		$timeout(() => {
 				vm.initMap();
 			}, 1000);

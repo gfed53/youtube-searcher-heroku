@@ -1,10 +1,7 @@
-<form ng-submit="initModal.ok(initModal.apisObj)">
+<form ng-submit="updateModal.ok(updateModal.apisObj)">
 	<div class="modal-header">
-		<h1>Hello new user..</h1>
-		<p>Before using this app, create an ID and submit the necessary API keys to get the search engine running.</p>
-		<div>
-			<a target="_blank" href="https://en.wikipedia.org/wiki/Application_programming_interface_key">What is an API key?</a>
-		</div>
+		<h1>Hello {{ updateModal.currentUserName }}.</h1>
+		<p>You can update your ID and API keys here.</p>
 	</div>
 	<div class="modal-body">
 		<div>
@@ -13,7 +10,7 @@
 					<label for="">My ID:</label>
 				</div>
 				<div class="col-xs-8">
-					<input class="form-control" type="text" ng-model="initModal.apisObj.id" placeholder="John Do'h" required>
+					<input class="form-control" type="text" ng-model="updateModal.apisObj.id" placeholder="John Do'h" required>
 				</div>
 			</div>
 		</div>
@@ -25,7 +22,7 @@
 				<div class="col-xs-8">
 					<div class="row">
 						<div class="col-xs-6">
-							<input class="form-control" type="password" ng-model="initModal.apisObj.youTubeKey" placeholder="XXXXXX">
+							<input class="form-control" type="password" ng-model="updateModal.apisObj.youTubeKey" placeholder="XXXXXX">
 						</div>
 						<div class="col-xs-6">
 							<a target="_blank" href="https://developers.google.com/youtube/v3/getting-started">Get one here!</a>
@@ -42,7 +39,7 @@
 				<div class="col-xs-8">
 					<div class="row">
 						<div class="col-xs-6">
-							<input class="form-control" type="password" ng-model="initModal.apisObj.mapsKey" placeholder="XXXXXX">
+							<input class="form-control" type="password" ng-model="updateModal.apisObj.mapsKey" placeholder="XXXXXX">
 						</div>
 						<div class="col-xs-6">
 							<a target="_blank" href="https://developers.google.com/maps/documentation/javascript/">Get one here!</a>
@@ -59,7 +56,7 @@
 				<div class="col-xs-8">
 					<div class="row">
 						<div class="col-xs-6">
-							<input class="form-control" type="password" ng-model="initModal.apisObj.translateKey" placeholder="XXXXXX">
+							<input class="form-control" type="password" ng-model="updateModal.apisObj.translateKey" placeholder="XXXXXX">
 						</div>
 						<div class="col-xs-6">
 							<a target="_blank" href="https://tech.yandex.com/translate/">Get one here!</a>
@@ -71,5 +68,6 @@
 	</div>
 	<div class="modal-footer">
 		<button autofocus class="btn btn-primary" type="submit">Submit</button>
+		<button class="btn btn-warning" type="button" ng-click="updateModal.cancel()">Cancel</button>
 	</div>
 </form>

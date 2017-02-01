@@ -1174,14 +1174,24 @@
 	}
 
 	function ytInitAPIs($q, ytModalGenerator){
-		//TODO: When user creates or updates their log info, the app probably should refresh so that the GMaps script can be loaded only once. Upon checking 
 		var initTemp = {
 				templateUrl: './partials/search/search-partials/modals/init-modal.html',
 				controller: 'InitModalController',
 				controllerAs: 'initModal'
 		};
 
+		var updateTemp = {
+				templateUrl: './partials/search/search-partials/modals/update-modal.html',
+				controller: 'UpdateModalController',
+				controllerAs: 'updateModal'
+		};
+
+		this.apisObj = {
+			id: 'New User'
+		};
+
 		this.check = check;
+		this.update = update;
 		this.updateMapsScript = updateMapsScript;
 
 		function check(){
@@ -1204,13 +1214,28 @@
 						updateDOM(this.apisObj.mapsKey);
 
 						//Refresh page to enable g maps to work
+						//If I add a separate success modal, we will move this to that callback.
 						location.reload();
 					}
 				});
 			}
 			return deferred.promise;
-			
+		}
 
+		function update(){
+			ytModalGenerator().openModal(updateTemp)
+			.then((result)=>{
+				if(result === 'cancel'){
+					//Do nothing
+				} else {
+					localStorage.setItem('uyts-log-info', JSON.stringify(result));
+					this.apisObj = localStorage['uyts-log-info'];
+					updateDOM(this.apisObj.mapsKey);
+
+					//Refresh page to enable g maps to work
+					location.reload();
+				}
+			});
 		}
 
 		function updateDOM(key){
