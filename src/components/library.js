@@ -1189,7 +1189,6 @@
 			//Checking localStorage to see if user has an id with saved API keys
 			if(localStorage['uyts-log-info']){
 				var obj = JSON.parse(localStorage['uyts-log-info']);
-				console.log(obj);
 				this.apisObj = obj;
 				//Updating the DOM (for the Google Maps API)
 				updateDOM(this.apisObj.mapsKey);
@@ -1200,11 +1199,9 @@
 					if(result === 'cancel'){
 						//Do nothing
 					} else {
-						console.log(result);
 						localStorage.setItem('uyts-log-info', JSON.stringify(result));
 						this.apisObj = localStorage['uyts-log-info'];
 						updateDOM(this.apisObj.mapsKey);
-						// deferred.resolve(this.apisObj);
 
 						//Refresh page to enable g maps to work
 						location.reload();
@@ -1229,9 +1226,9 @@
 			var src = 'https://maps.googleapis.com/maps/api/js?key='+key;
 			loadScript(src)
 			.then(() => {
-				console.log('Appended google maps script tag');
+				//Success
 			}, ()=> {
-				console.log('An error occured appending google maps script tag');
+				//Error
 			});
 
 		}
@@ -1253,9 +1250,7 @@
 
 		function updateMapsScript(key) {
 			var t = document.getElementsByTagName('script')[0];
-			console.log(t);
 			t.src = 'https://maps.googleapis.com/maps/api/js?key='+key;
-			console.log(t);
 		}
 	}
 
