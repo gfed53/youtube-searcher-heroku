@@ -44,7 +44,6 @@
 			var query = (pageToken ? params.searchedKeyword : params.keyword);
 			var url = 'https://www.googleapis.com/youtube/v3/search';
 			var apisObj = ytInitAPIs.apisObj;
-			console.log(apisObj);
 
 			//Moment.js parsing
 			var parsedAfter = (params.after ? ytDateHandler().getDate(params.after, 'M/D/YYYY') : undefined),
@@ -816,7 +815,6 @@
 
 		function translate(text, lang){
 			var apisObj = ytInitAPIs.apisObj;
-			console.log('in translate service', apisObj);
 			var url = 'https://translate.yandex.net/api/v1.5/tr.json/translate',
 			request = {
 				key: apisObj.translateKey,
@@ -1262,7 +1260,6 @@
 		function loadScript(src) {
 		    return new Promise((resolve, reject) => {
 		        var s;
-		        // var t;
 		        s = document.createElement('script');
 		        
 		        s.src = src;
