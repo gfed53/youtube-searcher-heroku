@@ -31,6 +31,10 @@
 		margin: 2em 0;
 	}
 
+	.btn-playlist-clear {
+		margin-right: 15px;
+	}
+
 	.sort-filter-group {
 		padding-bottom: 1em;
 		border-bottom: 1px solid #E7E7E7;
@@ -72,6 +76,10 @@
 	.toggle-all-container {
 		padding-top: 1em;
 		text-align: center;
+	}
+
+	.clear-items-container {
+		text-align: right;
 	}
 
 	//Headers

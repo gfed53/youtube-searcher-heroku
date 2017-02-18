@@ -162,6 +162,8 @@ body #page-header #header-wrapper #credit {
         max-width: 20em; }
   #playlist .btn-playlist-clear, #playlist .video-sort-buttons, #playlist .search-sort-buttons {
     margin: 2em 0; }
+  #playlist .btn-playlist-clear {
+    margin-right: 15px; }
   #playlist .sort-filter-group {
     padding-bottom: 1em;
     border-bottom: 1px solid #E7E7E7;
@@ -192,6 +194,8 @@ body #page-header #header-wrapper #credit {
   #playlist .toggle-all-container {
     padding-top: 1em;
     text-align: center; }
+  #playlist .clear-items-container {
+    text-align: right; }
   #playlist .sort-filter-header {
     display: inline-block; }
   #playlist .saved-content-inner {

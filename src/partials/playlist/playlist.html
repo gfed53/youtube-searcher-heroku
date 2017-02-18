@@ -163,7 +163,9 @@
 				</div>
 			</div>
 		</div>
-		<button ng-click="playlist.clearAllVideos()" class="btn btn-danger btn-playlist-clear">Clear Videos</button>
+		<div class="clear-items-container">
+			<button ng-click="playlist.clearAllVideos()" class="btn btn-danger btn-playlist-clear">Clear Videos</button>
+		</div>
 	</div>
 	<p ng-if="!playlist.items.length">No saved videos present. See the "About" page for more info on how to save videos.</p>
 
@@ -302,7 +304,9 @@
 				</div>
 			</div>
 		</div>
-		<button ng-click="playlist.clearAllSearches()" class="btn btn-danger btn-playlist-clear">Clear Searches</button>
+		<div class="clear-items-container">
+			<button ng-click="playlist.clearAllSearches()" class="btn btn-danger btn-playlist-clear">Clear Searches</button>
+		</div>
 	</div>
 	<p ng-if="!playlist.pastSearches.length">No saved searches present. See the "About" page for more info on how to save searches.</p>
 </div>
