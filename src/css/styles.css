@@ -144,7 +144,8 @@ body #page-header #header-wrapper #credit {
 #playlist {
   padding-bottom: 6em; }
   #playlist .playlist-section-header {
-    margin-bottom: 3em;
+    margin-top: 4em;
+    margin-bottom: 2em;
     max-width: 30em; }
     #playlist .playlist-section-header h2 {
       margin: 0; }
