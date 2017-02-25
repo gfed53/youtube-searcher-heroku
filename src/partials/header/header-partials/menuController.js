@@ -1,10 +1,10 @@
 angular
 .module('myApp')
 
-.controller('MenuCtrl', ['$scope', '$rootScope', '$timeout', 'ytVideoItems', 'ytCheckScrollY', MenuCtrl])
+.controller('MenuCtrl', ['$scope', '$rootScope', '$timeout', 'ytVideoItems', 'ytCheckScrollY', MenuCtrl]);
 
 function MenuCtrl($scope, $rootScope, $timeout, ytVideoItems, ytCheckScrollY){
-	var vm = this;
+	let vm = this;
 	vm.videoId = ytVideoItems.services.getVideoId();
 	vm.showFixed = false;
 	vm.update = update;
@@ -16,7 +16,7 @@ function MenuCtrl($scope, $rootScope, $timeout, ytVideoItems, ytCheckScrollY){
 
 
 	function update(bool){
-		$scope.$apply(function(){
+		$scope.$apply(() => {
 			vm.noScroll = bool;
 		});		
 	}
@@ -27,7 +27,7 @@ function MenuCtrl($scope, $rootScope, $timeout, ytVideoItems, ytCheckScrollY){
 	}
 
 	//Once we switch to the video state (by clicking on a video to watch), the video tab will now be visible from now on, so we have access to it for the duration of the session
-	$rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+	$rootScope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) => {
 		if(toState.name === 'video'){
 			vm.videoId = ytVideoItems.services.getVideoId();
 		}

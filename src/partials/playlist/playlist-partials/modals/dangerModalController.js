@@ -4,7 +4,7 @@
 	.controller('DangerModalController', ['$uibModalInstance', DangerModalController])
 
 	function DangerModalController($uibModalInstance){
-		var vm = this;
+		let vm = this;
 		vm.ok = ok;
 		vm.cancel = cancel;
 

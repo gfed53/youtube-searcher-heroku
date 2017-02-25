@@ -4,7 +4,7 @@
 	.controller('InitModalController', ['$uibModalInstance', InitModalController])
 
 	function InitModalController($uibModalInstance){
-		var vm = this;
+		let vm = this;
 		vm.ok = ok;
 		vm.cancel = cancel;
 

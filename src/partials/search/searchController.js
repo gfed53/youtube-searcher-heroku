@@ -2,10 +2,10 @@
 	angular
 	.module('myApp')
 
-	.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$interval', '$anchorScroll', '$uibModal', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', 'ytCheckScrollBtnStatus', 'ytTranslate', 'ytSortOrder', 'ytDateHandler', 'ytInitAPIs', SearchCtrl])
+	.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$interval', '$anchorScroll', '$uibModal', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', 'ytCheckScrollBtnStatus', 'ytTranslate', 'ytSortOrder', 'ytDateHandler', 'ytInitAPIs', SearchCtrl]);
 
 	function SearchCtrl($scope, $location, $timeout, $interval, $anchorScroll, $uibModal, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus, ytTranslate, ytSortOrder, ytDateHandler, ytInitAPIs){
-		var vm = this;
+		let vm = this;
 		vm.initMap = initMap;
 		vm.submit = submit;
 		vm.setVideoId = setVideoId;	
@@ -55,7 +55,7 @@
 		
 		$location.url('/search');
 
-		window.addEventListener('scroll', function(){
+		window.addEventListener('scroll', () => {
 			$scope.$apply(vm.scrollBtn = ytCheckScrollBtnStatus().check(vm.results, vm.chanResults));
 		});
 
@@ -81,7 +81,7 @@
 		function submit(params, pageToken, direction){
 			vm.viewVideo = false;
 			ytSearchYouTube(params, pageToken, direction).search()
-			.then(function(response){
+			.then((response) => {
 				//Clear the search bar, but keep a reference to the last keyword searched.
 				vm.params.keyword = (direction) ? vm.params.keyword : '';
 				vm.params.searchedKeyword = response.config.params.q;
@@ -105,11 +105,11 @@
 				ytResults.setResults(vm.results);
 
 				// Autoscroll up
-				$timeout(function(){
+				$timeout(() => {
 					vm.scrollTo('scroll-point');
 					vm.offSet = true;
 				}, 1000);
-			})
+			});
 		}
 
 		function setVideoId(videoId){
@@ -119,13 +119,13 @@
 		function chanSubmit(channel){
 			vm.searchedChannel = channel;
 			ytChanSearch(channel).getResults()
-			.then(function(response){
+			.then((response) => {
 				vm.chanResults = response.data.items;
 				vm.status.channelsCollapsed = false;
 				vm.status.videosCollapsed = true;
 				ytResults.setStatus(vm.status);
 				ytResults.setChanResults(vm.chanResults);
-				$timeout(function(){
+				$timeout(() => {
 					vm.scrollTo('scroll-point');
 					vm.offSet = true;
 				}, 1000);			
@@ -163,7 +163,7 @@
 		function searchAndChanFilter(channel){
 			vm.searchedChannel = channel;
 			ytChanSearch(channel).getResults()
-			.then(function(response){
+			.then((response) => {
 				vm.firstChanResult = response.data.items[0];
 				vm.chanFilter(vm.firstChanResult.id.channelId, vm.firstChanResult.snippet.thumbnails.default.url);
 				
@@ -193,7 +193,7 @@
 
 		function translate(keyword, lang){
 			ytTranslate.translate(keyword, lang)
-			.then(function(response){
+			.then((response) => {
 				vm.params.advKeyword = response.data.text[0];
 			});
 		}
@@ -207,6 +207,6 @@
 			ytSearchParams.reset();
 			vm.params = ytSearchParams.get();
 		}
-	};
+	}
 })();
 

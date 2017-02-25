@@ -5,7 +5,7 @@
 	.controller('PlaylistCtrl', ['$state', '$timeout', 'ytVideoItems', 'ytSearchHistory', 'ytSearchParams', 'ytPlaylistSort', 'ytFilters', 'ytPlaylistView', 'ytDateHandler', PlaylistCtrl])
 
 	function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchParams, ytPlaylistSort, ytFilters, ytPlaylistView, ytDateHandler){
-		var vm = this;
+		let vm = this;
 		vm.items = ytVideoItems.services.getItems();
 		vm.setVideoId = setVideoId;
 		vm.pastSearches = ytSearchHistory.get();
@@ -43,14 +43,14 @@
 		//Removes ALL searches from history/localStorage (permanently!)
 		function clearAllSearches(){
 			ytSearchHistory.clearAll()
-			.then(function(searches){
+			.then((searches) => {
 				vm.pastSearches = searches;
 			});
 		}
 
 		//Removes selected video item from history/localStorage (permanently)
 		function clearItem(item){
-			var itemIndex = vm.items.indexOf(item);
+			let itemIndex = vm.items.indexOf(item);
 			vm.items.splice(itemIndex, 1);
 			ytVideoItems.services.clearItem(item.codeName);
 		}
@@ -58,7 +58,7 @@
 		//TODO: improve logic
 		function clearAllVideos(){
 			ytVideoItems.services.clearAllItems()
-			.then(function(items){
+			.then((items) => {
 				vm.items = items;
 			});
 			
@@ -69,25 +69,25 @@
 		}
 
 		function sortVideos(predicate){
-			var sortObj = ytPlaylistSort.order(vm.videosPredicate, predicate, ytPlaylistSort.videos);
+			let sortObj = ytPlaylistSort.order(vm.videosPredicate, predicate, ytPlaylistSort.videos);
 			vm.videosReverse = sortObj.reverse;
 			vm.videosPredicate = sortObj.predicate;
 		}
 
 		function sortSearches(predicate){
-			var sortObj = ytPlaylistSort.order(vm.searchesPredicate, predicate, ytPlaylistSort.searches);
+			let sortObj = ytPlaylistSort.order(vm.searchesPredicate, predicate, ytPlaylistSort.searches);
 			vm.searchesReverse = sortObj.reverse;
 			vm.searchesPredicate = sortObj.predicate;
 		}
 
 		function closeAll(group){
-			group.forEach(function(e){
+			group.forEach((e) => {
 				e.state = false;
 			});
 		}
 
 		function openAll(group){
-			group.forEach(function(e){
+			group.forEach((e) => {
 				e.state = true;
 			});
 		}

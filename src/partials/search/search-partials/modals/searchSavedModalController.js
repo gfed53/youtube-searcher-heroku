@@ -1,10 +1,10 @@
 (function(){
 	angular
 	.module('myApp')
-	.controller('SearchSavedModalController', ['$uibModalInstance', SearchSavedModalController])
+	.controller('SearchSavedModalController', ['$uibModalInstance', SearchSavedModalController]);
 
 	function SearchSavedModalController($uibModalInstance){
-		var vm = this;
+		let vm = this;
 		vm.ok = ok;
 		vm.cancel = cancel;
 

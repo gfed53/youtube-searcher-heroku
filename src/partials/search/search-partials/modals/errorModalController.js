@@ -4,7 +4,7 @@
 	.controller('ErrorModalController', ['$uibModalInstance', ErrorModalController])
 
 	function ErrorModalController($uibModalInstance){
-		var vm = this;
+		let vm = this;
 		vm.ok = ok;
 		vm.cancel = cancel;
 

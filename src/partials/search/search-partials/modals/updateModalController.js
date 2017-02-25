@@ -1,10 +1,10 @@
 (function(){
 	angular
 	.module('myApp')
-	.controller('UpdateModalController', ['ytInitAPIs', '$uibModalInstance', UpdateModalController])
+	.controller('UpdateModalController', ['ytInitAPIs', '$uibModalInstance', UpdateModalController]);
 
 	function UpdateModalController(ytInitAPIs, $uibModalInstance){
-		var vm = this;
+		let vm = this;
 		vm.ok = ok;
 		vm.cancel = cancel;
 
