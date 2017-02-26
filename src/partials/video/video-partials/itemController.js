@@ -2,10 +2,10 @@
 	angular
 	.module('myApp')
 
-	.controller('ItemCtrl', ['$state', '$stateParams', 'ytCurrentVideo', 'ytCurrentChannel', 'ytResults', 'ytVideoItems', 'ytSearchParams', 'ytTrustSrc', ItemCtrl])
+	.controller('ItemCtrl', ['$state', '$stateParams', 'ytCurrentVideo', 'ytCurrentChannel', 'ytResults', 'ytVideoItems', 'ytSearchParams', 'ytTrustSrc', ItemCtrl]);
 
 	function ItemCtrl($state, $stateParams, ytCurrentVideo, ytCurrentChannel, ytResults, ytVideoItems, ytSearchParams, ytTrustSrc){
-		var vm = this;
+		let vm = this;
 		vm.trustSrc = ytTrustSrc;
 		vm.videoId = $stateParams.videoId;
 		vm.url = 'http://www.youtube.com/embed/'+vm.videoId;
@@ -29,7 +29,7 @@
 		//We retrieve the video from the API in order to get  
 		function getVideoItem(id){
 			ytCurrentVideo(id).getVideo()
-			.then(function(response){
+			.then((response) => {
 				vm.item = response.data.items[0];
 				vm.isSaved = ytVideoItems.services.isSaved(vm.item.id);
 			});
@@ -43,13 +43,13 @@
 
 		function getChannel(videoId){
 			ytCurrentChannel(videoId).getChannel()
-			.then(function(response){
+			.then((response) => {
 				vm.channel = response.data.items[0];
 				vm.params.channelId = vm.channel.id;
 				vm.params.image = vm.channel.snippet.thumbnails.default.url;
 				ytSearchParams.set(vm.params);
 				$state.go('search');
-			})
+			});
 		}
-	};
+	}
 })();

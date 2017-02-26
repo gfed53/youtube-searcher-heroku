@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 (function(){
 	angular
 	.module('myApp')
@@ -31,25 +33,25 @@
 
 	//Used to follow security measures with YouTube video links in particular 
 	function ytTrustSrc($sce){
-		return function(src){
+		return (src) => {
 			return $sce.trustAsResourceUrl(src);
-		}
+		};
 	}
 
 	//Searches the API for videos based on search params
 	function ytSearchYouTube($q, $http, ytChanSearch, ytTranslate, ytModalGenerator, ytDateHandler, ytInitAPIs) {
-		return function(params, pageToken, direction){
+		return (params, pageToken, direction) => {
 			
 			// Ensures that we take the previously searched keyword during page navigation.
-			var query = (pageToken ? params.searchedKeyword : params.keyword);
-			var url = 'https://www.googleapis.com/youtube/v3/search';
-			var apisObj = ytInitAPIs.apisObj;
+			let query = (pageToken ? params.searchedKeyword : params.keyword);
+			let url = 'https://www.googleapis.com/youtube/v3/search';
+			let apisObj = ytInitAPIs.apisObj;
 
 			//Moment.js parsing
-			var parsedAfter = (params.after ? ytDateHandler().getDate(params.after, 'M/D/YYYY') : undefined),
+			let parsedAfter = (params.after ? ytDateHandler().getDate(params.after, 'M/D/YYYY') : undefined),
 			parsedBefore = (params.before ? ytDateHandler().getDate(params.before, 'M/D/YYYY') : undefined);
 
-			var request = {
+			let request = {
 				key: apisObj.youTubeKey,
 				part: 'snippet',
 				maxResults: 50,
@@ -68,9 +70,9 @@
 				request.pageToken = pageToken;
 			}
 
-			var errorModalObj = ytModalGenerator().getSearchTemp();
+			let errorModalObj = ytModalGenerator().getSearchTemp();
 
-			var services = {
+			let services = {
 				checkTrans: checkTrans,
 				getResults: getResults,
 				transAndResults: transAndResults,
@@ -85,33 +87,33 @@
 					url: url,
 					params: request
 				})
-				.then(function(response){
+				.then((response) => {
 					return $q.when(response);
 				},
-				function(response){
+				(response) => {
 					ytModalGenerator().openModal(errorModalObj);
 				});
 			}
 
 			//Checks to see if a language to which the query should be translated is selected
 			function checkTrans(_keyword_, _lang_){
-				var deferred = $q.defer();
+				let deferred = $q.defer();
 				if(_lang_){
 					ytTranslate.translate(_keyword_, _lang_)
-					.then(function(response){
+					.then((response) => {
 						deferred.resolve(response.data.text[0]);
 					});
 				} else {
-					deferred.resolve(_keyword_)
+					deferred.resolve(_keyword_);
 				}
 				return deferred.promise;
 			}
 			//Translates query if necessary, then runs search
 			function transAndResults(){
-				var deferred = $q.defer();
-				checkTrans(query, params.lang.value).then(function(response){
+				let deferred = $q.defer();
+				checkTrans(query, params.lang.value).then((response) => {
 					request.q = response;
-					getResults().then(function(response){
+					getResults().then((response) => {
 						deferred.resolve(response);
 					});
 				});
@@ -119,10 +121,10 @@
 			}
 
 			function search(){
-				var deferred = $q.defer();
+				let deferred = $q.defer();
 				if(params.searchType === 'video'){
 					transAndResults()
-					.then(function(response){
+					.then((response) => {
 						// Value created to display page number in view
 						response.pageDirection = direction;
 
@@ -130,20 +132,20 @@
 					});
 				} else {
 					ytChanSearch(query).getResults()
-					.then(function(response){
+					.then((response) => {
 						deferred.resolve(response);
 					});
 				}
 				return deferred.promise;
 			}
-		}
-	};
+		};
+	}
 
 	//Searches the API for channels based on search query
 	function ytChanSearch($q, $http, ytModalGenerator, ytInitAPIs){
-		return function(channel){
-			var url = 'https://www.googleapis.com/youtube/v3/search';
-			var request = {
+		return (channel) => {
+			let url = 'https://www.googleapis.com/youtube/v3/search';
+			let request = {
 				key: ytInitAPIs.apisObj.youTubeKey,
 				part: 'snippet',
 				maxResults: 50,
@@ -152,9 +154,9 @@
 				type: 'channel'
 			};
 
-			var errorModalObj = ytModalGenerator().getSearchTemp();
+			let errorModalObj = ytModalGenerator().getSearchTemp();
 
-			var services = {
+			let services = {
 				getResults: getResults
 			};
 
@@ -166,15 +168,15 @@
 					url: url,
 					params: request
 				})
-				.then(function(response){
-					var results = response;
+				.then((response) => {
+					let results = response;
 					return $q.when(response);
 				},
-				function(response){
+				(response) => {
 					ytModalGenerator().openModal(errorModalObj);
 				});
 			}
-		}
+		};
 	}
 
 	//Filters a video search by channel
@@ -198,8 +200,8 @@
 
 	//Used to retrieve necessary data from a particular video (in video player section)
 	function ytCurrentVideo($q, $http, ytModalGenerator, ytInitAPIs){
-		return function(id){
-			var url = 'https://www.googleapis.com/youtube/v3/videos',
+		return (id) => {
+			let url = 'https://www.googleapis.com/youtube/v3/videos',
 			request = {
 				key: ytInitAPIs.apisObj.youTubeKey,
 				part: 'snippet, contentDetails',
@@ -219,20 +221,20 @@
 					url: url,
 					params: request
 				})
-				.then(function(response){
+				.then((response) => {
 					return $q.when(response);
 				},
-				function(response){
+				(response) => {
 					ytModalGenerator().openModal(errorModalObj);
 				});	
 			}	
-		}
+		};
 	}
 
 	//Used to get back a video's channel data (which requires a different call from ytCurrentVideo)
 	function ytCurrentChannel($q, $http, ytModalGenerator, ytInitAPIs){
-		return function(id){
-			var url = "https://www.googleapis.com/youtube/v3/channels",
+		return (id) => {
+			let url = "https://www.googleapis.com/youtube/v3/channels",
 			request = {
 				key: ytInitAPIs.apisObj.youTubeKey,
 				part: 'snippet',
@@ -252,20 +254,20 @@
 					url: url,
 					params: request
 				})
-				.then(function(response){
+				.then((response) => {
 					return $q.when(response);
 				},
-				function(response){
+				(response) => {
 					ytModalGenerator().openModal(errorModalObj);
 				});	
 			}	
-		}
+		};
 	}
 
 	//Used for saving videos to the user's local storage (in the playlist/saved content section)
 	function ytVideoItems($q, $state, $stateParams, ytDangerModal, ytUtilities){
-		var currentVideoId = $stateParams.videoId;
-		var items = [];
+		let currentVideoId = $stateParams.videoId;
+		let items = [];
 
 		this.services = {
 			init: init,
@@ -280,9 +282,9 @@
 
 		function init(){
 			if(localStorage.length){
-				for(key in localStorage){
+				for(let key in localStorage){
 					if(key.includes('uytp')){
-						var obj = JSON.parse(localStorage[key]);
+						let obj = JSON.parse(localStorage[key]);
 						delete obj.$$hashKey;
 						obj.name = obj.snippet.title;
 						obj.codeName = key;
@@ -302,7 +304,7 @@
 		}
 
 		function setItem(result){
-			var itemName = result.snippet.title+'-uytp',
+			let itemName = result.snippet.title+'-uytp',
 			dateAdded = Date.now(),
 			content = result;
 			
@@ -322,14 +324,14 @@
 			if(codeName){ //This would take place in the playlist section
 				localStorage.removeItem(codeName);
 			} else if(item) { //This would take place in the video section.
-				items.forEach(function(_item_){
+				items.forEach((_item_) => {
 					if(_item_.id.videoId === item.id){
-						var current = _item_;
+						let current = _item_;
 						//Remove both from localStorage and items array within this service. In playlist section, this is done implicitly.
 						localStorage.removeItem(current.codeName);
-						var currentIndex = items.indexOf(current);
+						let currentIndex = items.indexOf(current);
 						items.splice(currentIndex, 1);
-					};
+					}
 				});
 				
 
@@ -339,18 +341,18 @@
 
 		//TODO: improve logic
 		function clearAllItems(){
-			var deferred = $q.defer();
+			let deferred = $q.defer();
 			ytDangerModal().openModal()
-			.then(function(){
+			.then(() => {
 				items = [];
-				for(key in localStorage){
+				for(let key in localStorage){
 					if(key.includes('uytp')){
 						localStorage.removeItem(key);
 					}
 				}
 
 				deferred.resolve(items);
-			}, function(){
+			}, () => {
 				deferred.reject();
 			});
 
@@ -368,23 +370,23 @@
 
 		//Check if video item is saved()
 		function isSaved(id){
-			var bool;
+			let bool;
 			if(items.length){
-				items.forEach(function(_item_){
+				items.forEach((_item_) => {
 					if(_item_.id.videoId === id){
 						bool = true;
-					};
+					}
 				});
 			}
 
 			return bool;
 		}
 
-	};
+	}
 
 	//Where saved search params are stored (so while switching views/controllers, changes in search params will be kept)
 	function ytSearchParams(ytTranslate){
-		var params = {
+		let params = {
 			keyword: undefined,
 			searchedKeyword: undefined,
 			searchType: 'video',
@@ -408,14 +410,14 @@
 			lang: ytTranslate.langs[0]
 		};
 
-		var searchTypePrev = 'video';
+		let searchTypePrev = 'video';
 
 		//This is used for page traversal. We store the previous search params. That way, we can adjust/update the queries all we want, and grab new page tokens from the last search all we want.
-		var paramsPrev = {};
+		let paramsPrev = {};
 
-		var original = Object.assign({}, params);
+		let original = Object.assign({}, params);
 
-		var currentPage = 1;
+		let currentPage = 1;
 
 		this.get = get;
 		this.getPrev = getPrev;
@@ -436,7 +438,7 @@
 		}
 
 		function set(newParams){
-			for(var item in params){
+			for(let item in params){
 				//To avoid conflict with page traversal of prev search after retrieving a new search
 				if(item === 'searchedKeyword'){
 				} else {
@@ -454,7 +456,7 @@
 		function setPrev(_params_, direction){
 			//This will not execute if it's page traversal..
 			if(!direction){
-				for(key in _params_){
+				for(let key in _params_){
 					paramsPrev[key] = _params_[key];
 				}
 			} else {
@@ -474,7 +476,7 @@
 		}
 
 		function reset(){
-			for(key in params){
+			for(let key in params){
 				if(key in original){
 					params[key] = original[key];
 				}
@@ -506,7 +508,7 @@
 			channelsCollapsed: true,
 			videoButtonValue: '',
 			channelButtonValue: ''
-		}
+		};
 		this.getResults = getResults;
 		this.getChanResults = getChanResults;
 		this.setResults = setResults;
