@@ -554,7 +554,7 @@
 
 	//Used for saving past searches to the user's local storage (in the playlist/saved content section)
 	function ytSearchHistory($q, ytSearchSavedModal, ytDangerModal, ytSearchParams, ytUtilities){
-		var pastSearches = [];
+		let pastSearches = [];
 		this.get = get;
 		this.set = set;
 		this.clearItem = clearItem;
@@ -562,9 +562,9 @@
 
 		function get(){
 			if(localStorage.length > 0){
-				for(key in localStorage){
+				for(let key in localStorage){
 					if(key.includes('uyts')){
-						var obj = localStorage.getItem(key);
+						let obj = localStorage.getItem(key);
 						obj = JSON.parse(obj);
 						//Fix for searches with date, correcting format to be used in search. 
 						if(obj.name){
@@ -587,7 +587,7 @@
 
 		function set(params, service){
 			ytSearchSavedModal().openModal()
-			.then(function(name){
+			.then((name) => {
 				params.name = name;
 				if(params.name === 'cancel'){
 					//Aborted
@@ -604,38 +604,38 @@
 		}
 
 		function clearItem(search){
-			var searchIndex = pastSearches.indexOf(search);
+			let searchIndex = pastSearches.indexOf(search);
 			pastSearches.splice(searchIndex, 1);
 			localStorage.removeItem(search.name);
 		}
 
 		function clearAll(){
 			//Clears all past searches
-			var deferred = $q.defer();
+			let deferred = $q.defer();
 			ytDangerModal().openModal()
-			.then(function(){
+			.then(() => {
 				pastSearches = [];
-				for(key in localStorage){
+				for(let key in localStorage){
 					if(key.includes('uyts')){
 						localStorage.removeItem(key);
 					}
 				}
 				deferred.resolve(pastSearches);
-			}, function(){
+			}, () => {
 				deferred.reject();
-			})
+			});
 			return deferred.promise;
 		}
 	}
 
 	function ytUtilities(){
-		return function(){
-			var services = {
+		return () => {
+			let services = {
 				getIndexIfObjWithAttr: getIndexIfObjWithAttr
 			};
 
 			function getIndexIfObjWithAttr(array, attr, value) {
-				for(var i = 0; i < array.length; i++) {
+				for(let i = 0; i < array.length; i++) {
 					if(array[i][attr] === value) {
 						return i;
 					}
@@ -645,13 +645,13 @@
 
 			return services;
 
-		}
+		};
 	}
 
 	//A style tweak for the outer border of the results div. This will ensure thick borders all around, but in between each result, only thin borders (ngRepeat conflict)
 	function ytComputeCssClass(){
-		return function(first, last){
-			var val;
+		return (first, last) => {
+			let val;
 			if(first){
 				val = 'first';
 			} else if(last){
@@ -660,22 +660,22 @@
 				val = null;
 			}
 			return val;
-		}
+		};
 	}
 
 	//Used on the bottom scroll button to scroll to the top of the results div
 	function ytScrollTo($location, $anchorScroll){
-		return function(scrollLocation){
-			var services = {
+		return (scrollLocation) => {
+			let services = {
 				scrollToElement: scrollToElement,
 				checkScrollBtnStatus: checkScrollBtnStatus
-			}
+			};
 
 			return services;
 
 			function scrollToElement(scrollLocation){
 				$anchorScroll.yOffset = 70;
-				var element = document.getElementById(scrollLocation);
+				let element = document.getElementById(scrollLocation);
 				if(element){
 					$location.hash(scrollLocation);
 					$anchorScroll();
@@ -691,23 +691,23 @@
 					return false;
 				}
 			}	
-		}
+		};
 	}
 
 	function ytCheckScrollBtnStatus($state){
 		
 		return function(){
 			function checkVisible(elm) {
-				var rect = elm.getBoundingClientRect();
-				var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+				let rect = elm.getBoundingClientRect();
+				let viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
 				return !(rect.bottom < 0 || rect.top - viewHeight >= -500);
 			}
 
 			function check(videos, channels){
 				if($state.current.name === 'search'){
 					if(videos.length > 0 || channels.length > 0){
-						var elem = document.getElementById('results-container');
-						var scrollTop = document.getElementsByClassName('scroll-top');
+						let elem = document.getElementById('results-container');
+						let scrollTop = document.getElementsByClassName('scroll-top');
 						if(checkVisible(elem)){
 							return true;
 						} else {
@@ -719,22 +719,22 @@
 				}
 			}
 
-			var services = {
+			let services = {
 				check: check
-			}
+			};
 
 			return services;
-		}
+		};
 	}
 
 	function ytCheckScrollY(){
-		return function(){
-			var services = {
+		return () => {
+			let services = {
 				init: init
 			};
 
 			function init(callback){
-				window.addEventListener('scroll', function(){
+				window.addEventListener('scroll', () => {
 					if(window.scrollY === 0){
 						callback(true);
 					} else {
@@ -744,18 +744,18 @@
 			}
 
 			return services;
-		}
+		};
 	}
 
 	//Initializes the map used in the search section
 	function ytInitMap(){
-		return function(callback){
-			var map = new google.maps.Map(document.getElementById('map'), {
+		return (callback) => {
+			let map = new google.maps.Map(document.getElementById('map'), {
 				center: {lat: 39, lng: -99},
 				zoom: 4
 			});
 
-			var circle = new google.maps.Circle({
+			let circle = new google.maps.Circle({
 				center: {lat: 39, lng: -99},
 				radius: 100000,
 				editable: true,
@@ -763,27 +763,27 @@
 			});
 
 			circle.setMap(map);
-			circle.addListener('center_changed', function(){
+			circle.addListener('center_changed', () => {
 				callback();
 			});
 
-			circle.addListener('radius_changed', function(){
+			circle.addListener('radius_changed', () => {
 				callback();
 			});
 
-			var services = {
+			let services = {
 				map: map,
 				circle: circle
-			}
+			};
 
 			return services;
-		}
+		};
 	}
 
 	//Handles all of the translation functionality used in the search section
 	function ytTranslate($http, $q, ytModalGenerator, ytInitAPIs){
 
-		var langs = [{
+		let langs = [{
 			label: 'None',
 			value: ''
 		}, {
@@ -812,12 +812,12 @@
 			value: 'es'
 		}];
 
-		var errorModalObj = ytModalGenerator().getTransTemp();
+		let errorModalObj = ytModalGenerator().getTransTemp();
 		
 
 		function translate(text, lang){
-			var apisObj = ytInitAPIs.apisObj;
-			var url = 'https://translate.yandex.net/api/v1.5/tr.json/translate',
+			let apisObj = ytInitAPIs.apisObj;
+			let url = 'https://translate.yandex.net/api/v1.5/tr.json/translate',
 			request = {
 				key: apisObj.translateKey,
 				// key: 'trnsl.1.1.20160728T161850Z.60e012cb689f9dfd.6f8cd99e32d858950d047eaffecf930701d73a38',
@@ -838,22 +838,22 @@
 		}
 
 		function translateAll(tag, list){
-			var deferred = $q.defer();
-			var tagList = tag;
-			var langArray = [];
-			for(lang in list){
+			let deferred = $q.defer();
+			let tagList = tag;
+			let langArray = [];
+			for(let lang in list){
 				if(list[lang] != 'en' && list[lang]){
 					langArray.push(list[lang]);
 				}
 			}
-			var counter = langArray.length;
+			let counter = langArray.length;
 
 			if(langArray.length === 0){
 				deferred.reject('No translations were necessary.');
 			}
 
-			for(var i = 0; i<langArray.length; i++){
-				translate(tag, langArray[i]).then(function(response){
+			for(let i = 0; i<langArray.length; i++){
+				translate(tag, langArray[i]).then((response) => {
 					tagList += ', '+response.data.text[0]+', ';
 					counter--;
 					if(counter <= 0){
@@ -872,7 +872,7 @@
 
 	//Handles the result sorting in the search section
 	function ytSortOrder(){
-		var sortObj = {
+		let sortObj = {
 			predicate: undefined,
 			reverse: false
 		};
@@ -928,10 +928,10 @@
 		function order(current, _predicate, type) {
 			type.reverse = (_predicate === current) ? !type.reverse : false;
 			type.predicate = _predicate;
-			var sortObj = {
+			let sortObj = {
 				reverse: type.reverse,
 				predicate: type.predicate
-			}
+			};
 			return sortObj;
 		}
 
@@ -942,8 +942,8 @@
 
 	//Handles the filtering functionality of the saved content in the saved content section
 	function ytFilters(ytDateHandler){
-		return function(){
-			var services = {
+		return () => {
+			let services = {
 				addedAfterVideos: addedAfterVideos,
 				addedBeforeVideos: addedBeforeVideos,
 				addedAfterSearches: addedAfterSearches,
@@ -953,10 +953,10 @@
 			return services;
 
 			function addedAfterVideos(item, filter){
-				var bool;
+				let bool;
 				if(filter && filter.addedAfter){
 					if(item.dateAdded){
-						var dateAdded = parseInt(moment(ytDateHandler().getDate(item.dateAdded, 'M/D/YYYY')).format('X'), 10),
+						let dateAdded = parseInt(moment(ytDateHandler().getDate(item.dateAdded, 'M/D/YYYY')).format('X'), 10),
 						after = parseInt(moment(ytDateHandler().getDate(filter.addedAfter, 'M/D/YYYY')).format('X'), 10);
 						bool = (dateAdded >= after);
 					} else {
@@ -969,10 +969,10 @@
 			}
 
 			function addedBeforeVideos(video, videoFilter){
-				var bool;
+				let bool;
 				if(videoFilter && videoFilter.addedBefore){
 					if(video.dateAdded){
-						var dateAdded = parseInt(moment(ytDateHandler().getDate(video.dateAdded, 'M/D/YYYY')).format('X'), 10),
+						let dateAdded = parseInt(moment(ytDateHandler().getDate(video.dateAdded, 'M/D/YYYY')).format('X'), 10),
 						before = parseInt(moment(ytDateHandler().getDate(videoFilter.addedBefore, 'M/D/YYYY')).format('X'), 10);
 						bool = (dateAdded < before);
 					} else {
@@ -985,9 +985,9 @@
 			}
 
 			function addedAfterSearches(item, filter){
-				var bool;
+				let bool;
 				if(filter && filter.addedAfter){
-					var dateAdded = parseInt(moment(ytDateHandler().getDate(item.date, 'M/D/YYYY')).format('X'), 10),
+					let dateAdded = parseInt(moment(ytDateHandler().getDate(item.date, 'M/D/YYYY')).format('X'), 10),
 					after = parseInt(moment(ytDateHandler().getDate(filter.addedAfter, 'M/D/YYYY')).format('X'), 10);
 					bool = (dateAdded >= after);
 				} else {
@@ -997,9 +997,9 @@
 			}
 
 			function addedBeforeSearches(item, filter){
-				var bool;
+				let bool;
 				if(filter && filter.addedBefore){
-					var dateAdded = parseInt(moment(ytDateHandler().getDate(item.date, 'M/D/YYYY')).format('X'), 10),
+					let dateAdded = parseInt(moment(ytDateHandler().getDate(item.date, 'M/D/YYYY')).format('X'), 10),
 					before = parseInt(moment(ytDateHandler().getDate(filter.addedBefore, 'M/D/YYYY')).format('X'), 10);
 					bool = (dateAdded < before);
 				} else {
@@ -1007,26 +1007,26 @@
 				}
 				return bool;
 			}
-		}
+		};
 	}
 
 	function ytSearchSavedModal($q, $uibModal){
-		return function(){
-			var services = {
+		return () => {
+			let services = {
 				openModal: openModal
 			};
 
 			function openModal(){
-				var deferred = $q.defer();
-				var modalInstance = $uibModal.open({
+				let deferred = $q.defer();
+				let modalInstance = $uibModal.open({
 					templateUrl: './partials/search/search-partials/modals/search-saved-modal.html',
 					controller: 'SearchSavedModalController',
 					controllerAs: 'searchModal'
 				});
 
-				modalInstance.result.then(function(result){
+				modalInstance.result.then((result) => {
 					deferred.resolve(result);
-				}, function(error){
+				}, (error) => {
 					deferred.resolve(error);
 				});
 
@@ -1034,26 +1034,26 @@
 			}
 
 			return services;
-		}
+		};
 	}
 
 	function ytDangerModal($q, $uibModal){
-		return function(){
-			var services = {
+		return () => {
+			let services = {
 				openModal: openModal
 			};
 
 			function openModal(){
-				var deferred = $q.defer();
-				var modalInstance = $uibModal.open({
+				let deferred = $q.defer();
+				let modalInstance = $uibModal.open({
 					templateUrl: './partials/playlist/playlist-partials/modals/danger-modal.html',
 					controller: 'DangerModalController',
 					controllerAs: 'dangerModal'
 				});
 
-				modalInstance.result.then(function(){
+				modalInstance.result.then(() =>{
 					deferred.resolve();
-				}, function(error){
+				}, (error) => {
 					deferred.reject(error);
 				});
 
@@ -1061,12 +1061,12 @@
 			}
 
 			return services;
-		}
+		};
 	}
 
 	function ytErrorModal($q, ytModalGenerator){
-		return function(){
-			var services = {
+		return () => {
+			let services = {
 				openModal: openModal
 			},
 			modalObj = {
@@ -1080,47 +1080,47 @@
 			}
 
 			return services;
-		}
+		};
 	}
 
 	function ytModalGenerator($q, $uibModal){
-		return function(){
-			var services = {
+		return () => {
+			let services = {
 				openModal: openModal,
 				getSearchTemp: getSearchTemp,
 				getVideoTemp: getVideoTemp,
 				getTransTemp: getTransTemp
 			};
 
-			var searchTemp = {
+			let searchTemp = {
 				templateUrl: './partials/search/search-partials/modals/error-modal.html',
 				controller: 'ErrorModalController',
 				controllerAs: 'errorModal'
 			};
 
-			var videoTemp = {
+			let videoTemp = {
 				templateUrl: './partials/video/video-partials/modals/error-modal.html',
 				controller: 'ErrorModalController',
 				controllerAs: 'errorModal'
 			};
 
-			var transTemp = {
+			let transTemp = {
 				templateUrl: './partials/search/search-partials/modals/translate-error-modal.html',
 				controller: 'ErrorModalController',
 				controllerAs: 'errorModal'
-			}
+			};
 
 			function openModal(modalObj){
-				var deferred = $q.defer();
-				var modalInstance = $uibModal.open({
+				let deferred = $q.defer();
+				let modalInstance = $uibModal.open({
 					templateUrl: modalObj.templateUrl,
 					controller: modalObj.controller,
 					controllerAs: modalObj.controllerAs
 				});
 
-				modalInstance.result.then(function(result){
+				modalInstance.result.then((result) => {
 					deferred.resolve(result);
-				}, function(error){
+				}, (error) => {
 					deferred.reject(error);
 				});
 
@@ -1140,24 +1140,24 @@
 			}
 
 			return services;
-		}
+		};
 	}
 
 	//For cross-browser compatibility, this will convert a stringified date into a date object. Date inputs don't exist in certain browsers such as Firefox, so we use Moment.js to create our own object to be used.
 	function ytDateHandler(){
 		return function(){
 
-			var services = {
+			let services = {
 				check: check,
 				getDate: getDate
-			}
+			};
 
 			function getDate(date, format){
 				return (typeof date === 'string') ? moment(date, format)._d : date;
 			}
 
 			function check(){
-				var supported = {date: false, number: false, time: false, month: false, week: false},
+				let supported = {date: false, number: false, time: false, month: false, week: false},
 				tester = document.createElement('input');
 
 				tester.type = 'date';
@@ -1170,17 +1170,17 @@
 			}
 
 			return services;
-		}
+		};
 	}
 
 	function ytInitAPIs($q, ytModalGenerator){
-		var initTemp = {
+		let initTemp = {
 				templateUrl: './partials/search/search-partials/modals/init-modal.html',
 				controller: 'InitModalController',
 				controllerAs: 'initModal'
 		};
 
-		var updateTemp = {
+		let updateTemp = {
 				templateUrl: './partials/search/search-partials/modals/update-modal.html',
 				controller: 'UpdateModalController',
 				controllerAs: 'updateModal'
@@ -1195,10 +1195,10 @@
 		this.updateMapsScript = updateMapsScript;
 
 		function check(){
-			var deferred = $q.defer();
+			let deferred = $q.defer();
 			//Checking localStorage to see if user has an id with saved API keys
 			if(localStorage['uyts-log-info']){
-				var obj = JSON.parse(localStorage['uyts-log-info']);
+				let obj = JSON.parse(localStorage['uyts-log-info']);
 				this.apisObj = obj;
 				//Updating the DOM (for the Google Maps API)
 				updateDOM(this.apisObj.mapsKey);
@@ -1248,7 +1248,7 @@
 
 		//Construct url with saved Google Maps API key, then run loadScript()
 		function updateMaps(key){
-			var src = 'https://maps.googleapis.com/maps/api/js?key='+key;
+			let src = 'https://maps.googleapis.com/maps/api/js?key='+key;
 			loadScript(src)
 			.then(() => {
 				//Success
@@ -1261,7 +1261,7 @@
 		//Appends a script tag
 		function loadScript(src) {
 		    return new Promise((resolve, reject) => {
-		        var s;
+		        let s;
 		        s = document.createElement('script');
 		        
 		        s.src = src;
@@ -1273,7 +1273,7 @@
 		}
 
 		function updateMapsScript(key) {
-			var t = document.getElementsByTagName('script')[0];
+			let t = document.getElementsByTagName('script')[0];
 			t.src = 'https://maps.googleapis.com/maps/api/js?key='+key;
 		}
 	}
