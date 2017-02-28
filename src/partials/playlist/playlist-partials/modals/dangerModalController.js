@@ -1,7 +1,9 @@
+/*jshint esversion: 6 */
+
 (function(){
 	angular
 	.module('myApp')
-	.controller('DangerModalController', ['$uibModalInstance', DangerModalController])
+	.controller('DangerModalController', ['$uibModalInstance', DangerModalController]);
 
 	function DangerModalController($uibModalInstance){
 		let vm = this;

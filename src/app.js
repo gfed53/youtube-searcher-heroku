@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 (function(){
 	angular
 	.module('myApp', ['ui.router', 'ui.bootstrap', 'ngAnimate'])

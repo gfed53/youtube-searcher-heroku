@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 (function(){
 	angular
 	.module('myApp')
@@ -129,7 +131,7 @@
 					vm.scrollTo('scroll-point');
 					vm.offSet = true;
 				}, 1000);			
-			})
+			});
 		}
 
 		function chanFilter(id, image){
@@ -167,7 +169,7 @@
 				vm.firstChanResult = response.data.items[0];
 				vm.chanFilter(vm.firstChanResult.id.channelId, vm.firstChanResult.snippet.thumbnails.default.url);
 				
-			})
+			});
 		}
 
 		function saveSearch(params){

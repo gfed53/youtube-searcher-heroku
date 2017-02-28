@@ -1145,7 +1145,7 @@
 
 	//For cross-browser compatibility, this will convert a stringified date into a date object. Date inputs don't exist in certain browsers such as Firefox, so we use Moment.js to create our own object to be used.
 	function ytDateHandler(){
-		return function(){
+		return () => {
 
 			let services = {
 				check: check,

@@ -1,8 +1,10 @@
+/*jshint esversion: 6 */
+
 (function(){
 	angular
 	.module('myApp')
 
-	.controller('PlaylistCtrl', ['$state', '$timeout', 'ytVideoItems', 'ytSearchHistory', 'ytSearchParams', 'ytPlaylistSort', 'ytFilters', 'ytPlaylistView', 'ytDateHandler', PlaylistCtrl])
+	.controller('PlaylistCtrl', ['$state', '$timeout', 'ytVideoItems', 'ytSearchHistory', 'ytSearchParams', 'ytPlaylistSort', 'ytFilters', 'ytPlaylistView', 'ytDateHandler', PlaylistCtrl]);
 
 	function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchParams, ytPlaylistSort, ytFilters, ytPlaylistView, ytDateHandler){
 		let vm = this;
@@ -107,7 +109,7 @@
 		function addedBeforeSearches(search){
 			return ytFilters().addedBeforeSearches(search, vm.searchesFilter);
 		}
-	};
+	}
 })();
 
 

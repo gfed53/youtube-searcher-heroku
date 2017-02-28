@@ -1,10 +1,12 @@
+/*jshint esversion: 6 */
+
 (function(){
 	angular
 	.module('myApp')
 
 	.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
-		$urlRouterProvider.otherwise('search')
-		var myRoot = {
+		$urlRouterProvider.otherwise('search');
+		let myRoot = {
 			name: 'root',
 			url: '/',
 			views: {
@@ -77,13 +79,13 @@
 					templateUrl: './partials/search/search-partials/results.html'
 				}
 			}
-		}
+		};
 
 		$stateProvider
 		.state(myRoot)
 		.state(video)
 		.state(playlist)
 		.state(about)
-		.state(search)
-	}])
+		.state(search);
+	}]);
 })();

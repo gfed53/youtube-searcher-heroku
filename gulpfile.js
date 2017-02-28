@@ -63,7 +63,7 @@ gulp.task('usemin', [ 'htmlmin' ], function(){
 			css: [ minifyCss(), 'concat' ],
 			js: [ ngmin(), uglify() ]
 		}))
-		.pipe(gulp.dest( paths.build ))
+		.pipe(gulp.dest( paths.build ));
 });
 
 gulp.task('indexmin', [ 'usemin' ], function(){

@@ -1,7 +1,9 @@
+/*jshint esversion: 6 */
+
 (function(){
 	angular
 	.module('myApp')
-	.controller('ErrorModalController', ['$uibModalInstance', ErrorModalController])
+	.controller('ErrorModalController', ['$uibModalInstance', ErrorModalController]);
 
 	function ErrorModalController($uibModalInstance){
 		let vm = this;

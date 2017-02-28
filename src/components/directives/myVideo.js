@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 (function(){
 	angular
 	.module('myApp')
@@ -13,13 +15,13 @@
 			controller: MyVideoCtrl,
 			controllerAs: 'myVideo',
 			bindToController: true
-		}
-	};
+		};
+	}
 
 	MyVideoCtrl.$inject = ['$scope', '$element'];
 
 	function MyVideoCtrl($scope, $element) {
 		var vm = this;
 		vm.videoPlayer = $element.find('iframe')[0];
-	};
+	}
 })();
