@@ -280,17 +280,23 @@
 			isSaved: isSaved
 		};
 
+		//Automatically grabs items from localStorage and saves them to variable 'items'
 		function init(){
+			//bug: for videos that were just added, getIndex... doesn't find them, and they get pushed twice?
 			if(localStorage.length){
 				for(let key in localStorage){
 					if(key.includes('uytp')){
 						let obj = JSON.parse(localStorage[key]);
-						delete obj.$$hashKey;
+						//Legacy fallback?
+						if(obj.$$hashKey){
+							delete obj.$$hashKey;
+						}
 						obj.name = obj.snippet.title;
 						obj.codeName = key;
 						if(ytUtilities().getIndexIfObjWithAttr(items, 'name', obj.name) === -1){
 							items.push(obj);
-						}			
+							console.log('Not found, so push:', obj);
+						}
 					}
 				}
 			}
@@ -305,10 +311,13 @@
 
 		function setItem(result){
 			let itemName = result.snippet.title+'-uytp',
-			dateAdded = Date.now(),
-			content = result;
-			
+				dateAdded = Date.now(),
+				content = result;
+			delete content.$$hashKey;
+			console.log('content:',content);
+
 			content.dateAdded = dateAdded;
+			content.name = content.snippet.title;
 			content.codeName = itemName;
 
 			items.push(content);
@@ -316,6 +325,8 @@
 			content = JSON.stringify(content);
 
 			localStorage.setItem(itemName, content);
+
+			console.log(items);
 
 		}
 
