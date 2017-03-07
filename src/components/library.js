@@ -295,7 +295,6 @@
 						obj.codeName = key;
 						if(ytUtilities().getIndexIfObjWithAttr(items, 'name', obj.name) === -1){
 							items.push(obj);
-							console.log('Not found, so push:', obj);
 						}
 					}
 				}
@@ -314,7 +313,6 @@
 				dateAdded = Date.now(),
 				content = result;
 			delete content.$$hashKey;
-			console.log('content:',content);
 
 			content.dateAdded = dateAdded;
 			content.name = content.snippet.title;
@@ -325,8 +323,6 @@
 			content = JSON.stringify(content);
 
 			localStorage.setItem(itemName, content);
-
-			console.log(items);
 
 		}
 

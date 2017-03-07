@@ -31,8 +31,6 @@
 		vm.addedBeforeSearches = addedBeforeSearches;
 		vm.isDateTypeComp = ytDateHandler().check();
 
-		console.log('items', vm.items);
-
 		//Grabs one of our saved searches, then automatically switches to the search state in its advanced search mode.
 		function grab(search){
 			ytSearchParams.set(search);
