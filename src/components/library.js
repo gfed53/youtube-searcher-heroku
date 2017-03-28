@@ -701,9 +701,10 @@
 		};
 	}
 
+	// Displays the scroll button (in results section) depending on appropriate conditions
 	function ytCheckScrollBtnStatus($state){
 		
-		return function(){
+		return () => {
 			function checkVisible(elm) {
 				let rect = elm.getBoundingClientRect();
 				let viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
@@ -734,6 +735,8 @@
 		};
 	}
 
+
+	//Checks to see if user scrolled down from top, so navbar style can change appropriately
 	function ytCheckScrollY(){
 		return () => {
 			let services = {

@@ -125,6 +125,9 @@ body #page-header #header-wrapper #credit {
   right: 0;
   z-index: -1; }
 
+.hide-nav-button-container {
+  display: none; }
+
 @media screen and (min-width: 364px) {
   #header-menu {
     font-size: 0.8em; } }
@@ -139,7 +142,15 @@ body #page-header #header-wrapper #credit {
 
 @media screen and (min-width: 1024px) {
   #header-menu {
-    font-size: 1em; } }
+    font-size: 1em; }
+    #header-menu .hide-nav-button-container {
+      display: block;
+      position: fixed;
+      top: 1em;
+      right: 2em;
+      z-index: 9999; }
+      #header-menu .hide-nav-button-container .hide-nav-inner {
+        text-align: center; } }
 
 #playlist {
   padding-bottom: 6em; }
