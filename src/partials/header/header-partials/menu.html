@@ -1,4 +1,4 @@
-<nav id="menu-fixed" class="navbar navbar-default navbar-fixed-top" ng-class="{'menu-fixed-no-scroll': (menu.noScroll && menu.collapsed)}">
+<nav ng-if="menu.showNav" id="menu-fixed" class="navbar navbar-default navbar-fixed-top" ng-class="{'menu-fixed-no-scroll': (menu.noScroll && menu.collapsed)}">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" id="navbar-btn" ng-click="menu.updateOnClick()" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -21,9 +21,9 @@
 		</div>
 	</div>
 </nav>
-<div ng-if="!menu.noScroll" class="hide-nav-button-container">
+<div class="hide-nav-button-container">
 	<div class="hide-nav-inner">
-		<i class="fa fa-chevron-up hide-nav-button"></i>
+		<i ng-click="menu.toggleNav()" class="fa hide-nav-button" ng-class="{'fa-chevron-up icon-expanded': menu.showNav, 'fa-chevron-down icon-collapsed': !menu.showNav}"></i>
 	</div>
 </div>
 
