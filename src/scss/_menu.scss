@@ -66,6 +66,25 @@
 		.my-nav-item {
 			display: inline-block;
 		}
+		.hide-nav-button-container {
+			display: block;
+			position: fixed;
+			top: 2.5em;
+			left: 0;
+			right: 0;
+    		z-index: 9999;
+			.hide-nav-inner {
+				text-align: center;
+				i {
+					cursor: pointer;
+					color: $buttontext;
+					font-size: 1.3em;
+				}
+				i:hover {
+					color: $hoveredtext;
+				}
+			}
+		}
 	}
 	
 }
@@ -73,16 +92,5 @@
 @media screen and ($desktop){
 	#header-menu {
 		font-size: 1em;
-		.hide-nav-button-container {
-			display: block;
-			position: fixed;
-			top: 1em;
-			right: 2em;
-    		// left: 44em;
-    		z-index: 9999;
-			.hide-nav-inner {
-				text-align: center;
-			}
-		}
 	}
 }
