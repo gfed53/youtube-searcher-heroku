@@ -11,6 +11,7 @@
 	.factory('ytComputeCssClass', [ytComputeCssClass])
 	.factory('ytScrollTo', ['$location', '$anchorScroll', ytScrollTo])
 	.factory('ytCheckScrollBtnStatus', ['$state', ytCheckScrollBtnStatus])
+	.factory('ytCheckScrollDir', [ytCheckScrollDir])
 	.factory('ytCheckScrollY', [ytCheckScrollY])
 	.factory('ytInitMap', [ytInitMap])
 	.factory('ytFilters', ['ytDateHandler', ytFilters])
@@ -730,6 +731,30 @@
 			let services = {
 				check: check
 			};
+
+			return services;
+		};
+	}
+
+	function ytCheckScrollDir(){
+		return () => {
+			let services = {
+				init: init
+			};
+
+			function init(scrollUpCB, scrollDownCB){
+				var scroll = window.scrollY;
+				window.addEventListener('scroll', () => {
+					if(window.scrollY > scroll){
+						console.log('scrolling down');
+						scrollDownCB();
+					} else {
+						console.log('scrolling up');
+						scrollUpCB();
+					}
+					scroll = window.scrollY;
+				});
+			}
 
 			return services;
 		};

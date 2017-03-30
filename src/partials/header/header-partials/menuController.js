@@ -3,9 +3,9 @@
 angular
 .module('myApp')
 
-.controller('MenuCtrl', ['$scope', '$rootScope', '$timeout', 'ytVideoItems', 'ytCheckScrollY', MenuCtrl]);
+.controller('MenuCtrl', ['$scope', '$rootScope', '$timeout', 'ytVideoItems', 'ytCheckScrollY', 'ytCheckScrollDir', MenuCtrl]);
 
-function MenuCtrl($scope, $rootScope, $timeout, ytVideoItems, ytCheckScrollY){
+function MenuCtrl($scope, $rootScope, $timeout, ytVideoItems, ytCheckScrollY, ytCheckScrollDir){
 	let vm = this;
 	vm.videoId = ytVideoItems.services.getVideoId();
 	vm.showNav = true;
@@ -17,6 +17,12 @@ function MenuCtrl($scope, $rootScope, $timeout, ytVideoItems, ytCheckScrollY){
 	vm.collapsed = true;
 
 	ytCheckScrollY().init(vm.update);
+
+	ytCheckScrollDir().init(()=>{
+		vm.showNav = true;
+	}, ()=> {
+		vm.showNav = false;
+	});
 
 
 	function update(bool){
