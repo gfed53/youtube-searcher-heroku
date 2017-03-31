@@ -99,7 +99,7 @@ body #page-header #header-wrapper #credit {
   #header-menu .navbar-nav > li .active {
     font-weight: 600; }
   #header-menu #menu-fixed {
-    transition: 0.25s linear all;
+    transition: 125ms linear all;
     font-size: 1.3em; }
   #header-menu .menu-fixed-no-scroll {
     background-color: #FBFBFB;
@@ -133,32 +133,16 @@ body #page-header #header-wrapper #credit {
     font-size: 0.8em; } }
 
 @media screen and (min-width: 768px) {
+  #header-menu #menu-fixed {
+    top: -3em; }
   #header-menu .my-nav, #header-menu .my-nav-item {
     float: none; }
   #header-menu .my-nav {
     text-align: center; }
   #header-menu .my-nav-item {
     display: inline-block; }
-  #header-menu .hide-nav-button-container {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9999; }
-    #header-menu .hide-nav-button-container .hide-nav-inner {
-      text-align: center; }
-      #header-menu .hide-nav-button-container .hide-nav-inner i {
-        position: absolute;
-        cursor: pointer;
-        color: #777;
-        font-size: 1.3em; }
-      #header-menu .hide-nav-button-container .hide-nav-inner i:hover {
-        color: #333; }
-      #header-menu .hide-nav-button-container .hide-nav-inner .icon-expanded {
-        top: 1.8em; }
-      #header-menu .hide-nav-button-container .hide-nav-inner .icon-collapsed {
-        top: 0; } }
+  #header-menu nav.vis {
+    transform: translateY(3em); } }
 
 @media screen and (min-width: 1024px) {
   #header-menu {

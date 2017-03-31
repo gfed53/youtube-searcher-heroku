@@ -9,7 +9,7 @@
 	}
 
 	#menu-fixed {
-		transition: 0.25s linear all;
+		transition: 125ms linear all;
 		font-size: 1.3em;
 	}
 
@@ -56,6 +56,9 @@
 
 @media screen and ($tablet){
 	#header-menu {
+		#menu-fixed {
+			top: -3em;
+		}
 		.my-nav, .my-nav-item {
 			float: none;
 		}
@@ -66,34 +69,10 @@
 		.my-nav-item {
 			display: inline-block;
 		}
-		.hide-nav-button-container {
-			display: block;
-			position: fixed;
-			top: 0;
-			left: 0;
-			right: 0;
-    		z-index: 9999;
-			.hide-nav-inner {
-				text-align: center;
-				i {
-					position: absolute;
-					cursor: pointer;
-					color: $buttontext;
-					font-size: 1.3em;
-				}
-				i:hover {
-					color: $hoveredtext;
-				}
-				.icon-expanded {
-					top: 1.8em;
-				}
-				.icon-collapsed {
-					top: 0
-				}
-			}
+		
+		nav.vis {
+			transform: translateY(3em);
 		}
-
-		// .hide-nav-button
 	}
 	
 }
