@@ -8,20 +8,21 @@ angular
 function MenuCtrl($scope, $rootScope, $timeout, ytVideoItems, ytCheckScrollY, ytCheckScrollDir){
 	let vm = this;
 	vm.videoId = ytVideoItems.services.getVideoId();
-	vm.showNav = true;
+	vm.showNav = false;
 	vm.showFixed = false;
 	vm.update = update;
 	vm.updateOnClick = updateOnClick;
-	vm.toggleNav = toggleNav;
 	vm.noScroll = true;
 	vm.collapsed = true;
 
 	ytCheckScrollY().init(vm.update);
 
-	ytCheckScrollDir().init(()=>{
-		vm.showNav = true;
-	}, ()=> {
+	ytCheckScrollDir().check(()=>{
+		// console.log('ehh');
 		vm.showNav = false;
+		
+	}, ()=> {
+		vm.showNav = true;
 	});
 
 
@@ -34,10 +35,6 @@ function MenuCtrl($scope, $rootScope, $timeout, ytVideoItems, ytCheckScrollY, yt
 	//Seperate function since digest is already in progress when clicked
 	function updateOnClick(){
 		vm.collapsed = !vm.collapsed;
-	}
-
-	function toggleNav(){
-		vm.showNav = !vm.showNav;
 	}
 
 	//Once we switch to the video state (by clicking on a video to watch), the video tab will now be visible from now on, so we have access to it for the duration of the session

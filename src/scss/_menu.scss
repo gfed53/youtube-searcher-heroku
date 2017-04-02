@@ -57,7 +57,7 @@
 @media screen and ($tablet){
 	#header-menu {
 		#menu-fixed {
-			top: -3em;
+			top: 0;
 		}
 		.my-nav, .my-nav-item {
 			float: none;
@@ -70,8 +70,8 @@
 			display: inline-block;
 		}
 		
-		nav.vis {
-			transform: translateY(3em);
+		nav.nav-hidden {
+			transform: translateY(-3em);
 		}
 	}
 	

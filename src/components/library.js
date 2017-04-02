@@ -1,5 +1,9 @@
 /*jshint esversion: 6 */
 
+/* TODO for all factories: adjust objects returned that have reptition.
+i.e. {get: get } can be {get} (I think..) 
+*/
+
 (function(){
 	angular
 	.module('myApp')
@@ -11,7 +15,7 @@
 	.factory('ytComputeCssClass', [ytComputeCssClass])
 	.factory('ytScrollTo', ['$location', '$anchorScroll', ytScrollTo])
 	.factory('ytCheckScrollBtnStatus', ['$state', ytCheckScrollBtnStatus])
-	.factory('ytCheckScrollDir', [ytCheckScrollDir])
+	.factory('ytCheckScrollDir', ['$timeout', ytCheckScrollDir])
 	.factory('ytCheckScrollY', [ytCheckScrollY])
 	.factory('ytInitMap', [ytInitMap])
 	.factory('ytFilters', ['ytDateHandler', ytFilters])
@@ -311,8 +315,8 @@
 
 		function setItem(result){
 			let itemName = result.snippet.title+'-uytp',
-				dateAdded = Date.now(),
-				content = result;
+			dateAdded = Date.now(),
+			content = result;
 			delete content.$$hashKey;
 
 			content.dateAdded = dateAdded;
@@ -736,22 +740,42 @@
 		};
 	}
 
-	function ytCheckScrollDir(){
+	//TODO: Refactor this to use ytCheckScrollY. Make ytCheckScrollY looser so it can be used in both situations
+	function ytCheckScrollDir($timeout){
 		return () => {
 			let services = {
-				init: init
+				init: init,
+				check: check
 			};
 
-			function init(scrollUpCB, scrollDownCB){
-				var scroll = window.scrollY;
-				window.addEventListener('scroll', () => {
-					if(window.scrollY > scroll){
-						scrollDownCB();
+			//Match cb's that will be used in each situation. Navbar will be hidden if user scrolls down OR if page loads in middle of screen.
+			function check(scrollDownCB, scrollUpCB){
+				// $timeout(()=>{
+					window.addEventListener('load', ()=>{
+						var scroll = init(scrollDownCB, scrollUpCB);
+
+						window.addEventListener('scroll', () => {
+							if(window.scrollY > scroll){
+								scrollDownCB();
+							} else {
+								scrollUpCB();
+							}
+							scroll = window.scrollY;
+						});
+					});
+
+				}
+
+				function init(scrolledCB, atTopCB){
+					var scroll = window.scrollY;
+					console.log('scroll is:', scroll);
+					// console.log(window.scrollY);
+					if(scroll > 0){
+						scrolledCB();
 					} else {
-						scrollUpCB();
+						atTopCB();
 					}
-					scroll = window.scrollY;
-				});
+					return scroll;
 			}
 
 			return services;
@@ -1208,15 +1232,15 @@
 
 	function ytInitAPIs($q, ytModalGenerator){
 		let initTemp = {
-				templateUrl: './partials/search/search-partials/modals/init-modal.html',
-				controller: 'InitModalController',
-				controllerAs: 'initModal'
+			templateUrl: './partials/search/search-partials/modals/init-modal.html',
+			controller: 'InitModalController',
+			controllerAs: 'initModal'
 		};
 
 		let updateTemp = {
-				templateUrl: './partials/search/search-partials/modals/update-modal.html',
-				controller: 'UpdateModalController',
-				controllerAs: 'updateModal'
+			templateUrl: './partials/search/search-partials/modals/update-modal.html',
+			controller: 'UpdateModalController',
+			controllerAs: 'updateModal'
 		};
 
 		this.apisObj = {
@@ -1293,16 +1317,16 @@
 
 		//Appends a script tag
 		function loadScript(src) {
-		    return new Promise((resolve, reject) => {
-		        let s;
-		        s = document.createElement('script');
-		        
-		        s.src = src;
-		        s.async = "async";
-		        s.onload = resolve;
-		        s.onerror = reject;
-		        document.body.appendChild(s);
-		    });
+			return new Promise((resolve, reject) => {
+				let s;
+				s = document.createElement('script');
+
+				s.src = src;
+				s.async = "async";
+				s.onload = resolve;
+				s.onerror = reject;
+				document.body.appendChild(s);
+			});
 		}
 
 		function updateMapsScript(key) {
