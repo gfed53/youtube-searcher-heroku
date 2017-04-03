@@ -18,7 +18,6 @@ function MenuCtrl($scope, $rootScope, $timeout, ytVideoItems, ytCheckScrollY, yt
 	ytCheckScrollY().init(vm.update);
 
 	ytCheckScrollDir().check(()=>{
-		// console.log('ehh');
 		vm.showNav = false;
 		
 	}, ()=> {

@@ -142,7 +142,7 @@ body #page-header #header-wrapper #credit {
   #header-menu .my-nav-item {
     display: inline-block; }
   #header-menu nav.nav-hidden {
-    transform: translateY(-3em); } }
+    transform: translateY(-4em); } }
 
 @media screen and (min-width: 1024px) {
   #header-menu {

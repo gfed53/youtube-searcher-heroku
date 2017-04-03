@@ -15,7 +15,7 @@ i.e. {get: get } can be {get} (I think..)
 	.factory('ytComputeCssClass', [ytComputeCssClass])
 	.factory('ytScrollTo', ['$location', '$anchorScroll', ytScrollTo])
 	.factory('ytCheckScrollBtnStatus', ['$state', ytCheckScrollBtnStatus])
-	.factory('ytCheckScrollDir', ['$timeout', ytCheckScrollDir])
+	.factory('ytCheckScrollDir', [ytCheckScrollDir])
 	.factory('ytCheckScrollY', [ytCheckScrollY])
 	.factory('ytInitMap', [ytInitMap])
 	.factory('ytFilters', ['ytDateHandler', ytFilters])
@@ -741,7 +741,7 @@ i.e. {get: get } can be {get} (I think..)
 	}
 
 	//TODO: Refactor this to use ytCheckScrollY. Make ytCheckScrollY looser so it can be used in both situations
-	function ytCheckScrollDir($timeout){
+	function ytCheckScrollDir(){
 		return () => {
 			let services = {
 				init: init,
@@ -750,26 +750,23 @@ i.e. {get: get } can be {get} (I think..)
 
 			//Match cb's that will be used in each situation. Navbar will be hidden if user scrolls down OR if page loads in middle of screen.
 			function check(scrollDownCB, scrollUpCB){
-				// $timeout(()=>{
-					window.addEventListener('load', ()=>{
-						var scroll = init(scrollDownCB, scrollUpCB);
+				window.addEventListener('load', ()=>{
+					let scroll = init(scrollDownCB, scrollUpCB);
 
-						window.addEventListener('scroll', () => {
-							if(window.scrollY > scroll){
-								scrollDownCB();
-							} else {
-								scrollUpCB();
-							}
-							scroll = window.scrollY;
-						});
+					window.addEventListener('scroll', () => {
+						if(window.scrollY > scroll){
+							scrollDownCB();
+						} else {
+							scrollUpCB();
+						}
+						scroll = window.scrollY;
 					});
+				});
 
 				}
 
 				function init(scrolledCB, atTopCB){
-					var scroll = window.scrollY;
-					console.log('scroll is:', scroll);
-					// console.log(window.scrollY);
+					let scroll = window.scrollY;
 					if(scroll > 0){
 						scrolledCB();
 					} else {
