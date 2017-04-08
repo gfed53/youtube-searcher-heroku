@@ -21,7 +21,6 @@ i.e. {get: get } can be {get} (I think..)
 	.factory('ytFilters', ['ytDateHandler', ytFilters])
 	.factory('ytSearchSavedModal', ['$q', '$uibModal', ytSearchSavedModal])
 	.factory('ytDangerModal', ['$q', '$uibModal', ytDangerModal])
-	.factory('ytErrorModal', ['ytModalGenerator', ytErrorModal])
 	.factory('ytModalGenerator', ['$q', '$uibModal', ytModalGenerator])
 	.factory('ytDateHandler', [ytDateHandler])
 	.factory('ytUtilities', [ytUtilities])
@@ -1118,32 +1117,15 @@ i.e. {get: get } can be {get} (I think..)
 		};
 	}
 
-	function ytErrorModal($q, ytModalGenerator){
-		return () => {
-			let services = {
-				openModal: openModal
-			},
-			modalObj = {
-				url: './partials/search/search-partials/modals/error-modal.html',
-				ctrl: 'ErrorModalController',
-				ctrlAs: 'errorModal'
-			};
-
-			function openModal(){
-				ytModalGenerator().openModal(modalObj);
-			}
-
-			return services;
-		};
-	}
-
 	function ytModalGenerator($q, $uibModal){
 		return () => {
 			let services = {
 				openModal: openModal,
 				getSearchTemp: getSearchTemp,
 				getVideoTemp: getVideoTemp,
-				getTransTemp: getTransTemp
+				getTransTemp: getTransTemp,
+				getWarnTemp: getWarnTemp,
+				getDangerTemp: getDangerTemp
 			};
 
 			let searchTemp = {
@@ -1162,6 +1144,18 @@ i.e. {get: get } can be {get} (I think..)
 				templateUrl: './partials/search/search-partials/modals/translate-error-modal.html',
 				controller: 'ErrorModalController',
 				controllerAs: 'errorModal'
+			};
+
+			let warnTemp = {
+				templateUrl: './partials/playlist/playlist-partials/modals/warn-modal.html',
+				controller: 'DangerModalController',
+				controllerAs: 'dangerModal'
+			};
+
+			let dangerTemp = {
+				templateUrl: './partials/playlist/playlist-partials/modals/danger-modal.html',
+				controller: 'dangerModalController',
+				controllerAs: 'dangerModal'
 			};
 
 			function openModal(modalObj){
@@ -1191,6 +1185,14 @@ i.e. {get: get } can be {get} (I think..)
 
 			function getTransTemp(){
 				return transTemp;
+			}
+
+			function getWarnTemp(){
+				return warnTemp;
+			}
+
+			function getDangerTemp(){
+				return dangerTemp;
 			}
 
 			return services;
