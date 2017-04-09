@@ -27,8 +27,8 @@ i.e. {get: get } can be {get} (I think..)
 	.service('ytChanFilter', [ytChanFilter])
 	.service('ytSearchParams', ['ytTranslate', ytSearchParams])
 	.service('ytResults', [ytResults])
-	.service('ytVideoItems', ['$q', '$state', '$stateParams',  'ytDangerModal', 'ytUtilities', ytVideoItems])
-	.service('ytSearchHistory', ['$q', 'ytSearchSavedModal', 'ytDangerModal', 'ytSearchParams', 'ytUtilities', ytSearchHistory])
+	.service('ytVideoItems', ['$q', '$state', '$stateParams', 'ytModalGenerator', 'ytDangerModal', 'ytUtilities', ytVideoItems])
+	.service('ytSearchHistory', ['$q', 'ytSearchSavedModal', 'ytDangerModal', 'ytModalGenerator', 'ytSearchParams', 'ytUtilities', ytSearchHistory])
 	.service('ytTranslate', ['$http', '$q', 'ytModalGenerator', 'ytInitAPIs', ytTranslate])
 	.service('ytSortOrder', [ytSortOrder])
 	.service('ytPlaylistView', [ytPlaylistView])
@@ -269,7 +269,7 @@ i.e. {get: get } can be {get} (I think..)
 	}
 
 	//Used for saving videos to the user's local storage (in the playlist/saved content section)
-	function ytVideoItems($q, $state, $stateParams, ytDangerModal, ytUtilities){
+	function ytVideoItems($q, $state, $stateParams, ytModalGenerator, ytDangerModal, ytUtilities){
 		let currentVideoId = $stateParams.videoId;
 		let items = [];
 
@@ -330,10 +330,22 @@ i.e. {get: get } can be {get} (I think..)
 
 		}
 
-		function clearItem(codeName, item){
-
+		function clearItem(codeName, item, isWarnActive){
+			let warnTemp = ytModalGenerator().getWarnTemp(),
+				deferred = $q.defer();
 			if(codeName){ //This would take place in the playlist section
-				localStorage.removeItem(codeName);
+				if(isWarnActive){
+					ytModalGenerator().openModal(warnTemp)
+					.then(()=> {
+						localStorage.removeItem(codeName);
+						deferred.resolve();
+					});
+				} else {
+					console.log('no warning');
+					localStorage.removeItem(codeName);
+					deferred.resolve();
+				}
+				
 			} else if(item) { //This would take place in the video section.
 				items.forEach((_item_) => {
 					if(_item_.id.videoId === item.id){
@@ -342,12 +354,13 @@ i.e. {get: get } can be {get} (I think..)
 						localStorage.removeItem(current.codeName);
 						let currentIndex = items.indexOf(current);
 						items.splice(currentIndex, 1);
+						deferred.resolve();
 					}
 				});
 				
 
 			}
-			
+			return deferred.promise;
 		}
 
 		//TODO: improve logic
@@ -564,7 +577,7 @@ i.e. {get: get } can be {get} (I think..)
 	}
 
 	//Used for saving past searches to the user's local storage (in the playlist/saved content section)
-	function ytSearchHistory($q, ytSearchSavedModal, ytDangerModal, ytSearchParams, ytUtilities){
+	function ytSearchHistory($q, ytSearchSavedModal, ytDangerModal, ytModalGenerator, ytSearchParams, ytUtilities){
 		let pastSearches = [];
 		this.get = get;
 		this.set = set;
@@ -614,10 +627,21 @@ i.e. {get: get } can be {get} (I think..)
 			});
 		}
 
-		function clearItem(search){
-			let searchIndex = pastSearches.indexOf(search);
-			pastSearches.splice(searchIndex, 1);
-			localStorage.removeItem(search.name);
+		function clearItem(search, isWarnActive){
+			let warnTemp = ytModalGenerator().getWarnTemp();
+			function init(){
+				let searchIndex = pastSearches.indexOf(search);
+				pastSearches.splice(searchIndex, 1);
+				localStorage.removeItem(search.name);
+			}
+			if(isWarnActive){
+				ytModalGenerator().openModal(warnTemp)
+				.then(()=> {
+					init();
+				});
+			} else {
+				console.log('no warning');
+			}
 		}
 
 		function clearAll(){
@@ -762,16 +786,16 @@ i.e. {get: get } can be {get} (I think..)
 					});
 				});
 
-				}
+			}
 
-				function init(scrolledCB, atTopCB){
-					let scroll = window.scrollY;
-					if(scroll > 0){
-						scrolledCB();
-					} else {
-						atTopCB();
-					}
-					return scroll;
+			function init(scrolledCB, atTopCB){
+				let scroll = window.scrollY;
+				if(scroll > 0){
+					scrolledCB();
+				} else {
+					atTopCB();
+				}
+				return scroll;
 			}
 
 			return services;

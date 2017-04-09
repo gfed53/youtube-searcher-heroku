@@ -39,7 +39,7 @@
 
 		//Removes selected search from history/localStorage (permanently)
 		function clear(search){
-			ytSearchHistory.clearItem(search);
+			ytSearchHistory.clearItem(search, true);
 		}
 
 		//Removes ALL searches from history/localStorage (permanently!)
@@ -53,8 +53,10 @@
 		//Removes selected video item from history/localStorage (permanently)
 		function clearItem(item){
 			let itemIndex = vm.items.indexOf(item);
-			vm.items.splice(itemIndex, 1);
-			ytVideoItems.services.clearItem(item.codeName);
+			ytVideoItems.services.clearItem(item.codeName, null, true)
+			.then(()=>{
+				vm.items.splice(itemIndex, 1);
+			});
 		}
 
 		//TODO: improve logic
