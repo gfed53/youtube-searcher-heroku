@@ -12,7 +12,7 @@
 		vm.setVideoId = setVideoId;
 		vm.pastSearches = ytSearchHistory.get();
 		vm.grab = grab;
-		vm.clear = clear;
+		vm.clearSearch = clearSearch;
 		vm.clearItem = clearItem;
 		vm.clearAllVideos = clearAllVideos;
 		vm.clearAllSearches = clearAllSearches;
@@ -38,7 +38,7 @@
 		}
 
 		//Removes selected search from history/localStorage (permanently)
-		function clear(search){
+		function clearSearch(search){
 			ytSearchHistory.clearItem(search, true);
 		}
 
@@ -52,10 +52,10 @@
 
 		//Removes selected video item from history/localStorage (permanently)
 		function clearItem(item){
-			let itemIndex = vm.items.indexOf(item);
+			// let itemIndex = vm.items.indexOf(item);
 			ytVideoItems.services.clearItem(item.codeName, null, true)
 			.then(()=>{
-				vm.items.splice(itemIndex, 1);
+				// vm.items.splice(itemIndex, 1);
 			});
 		}
 

@@ -333,16 +333,23 @@ i.e. {get: get } can be {get} (I think..)
 		function clearItem(codeName, item, isWarnActive){
 			let warnTemp = ytModalGenerator().getWarnTemp(),
 				deferred = $q.defer();
+			function initClear(){
+				var index = items.indexOf(index);
+				items.splice(index, 1);
+				localStorage.removeItem(codeName);
+			}
 			if(codeName){ //This would take place in the playlist section
 				if(isWarnActive){
 					ytModalGenerator().openModal(warnTemp)
 					.then(()=> {
-						localStorage.removeItem(codeName);
+						// localStorage.removeItem(codeName);
+						initClear();
 						deferred.resolve();
 					});
 				} else {
 					console.log('no warning');
-					localStorage.removeItem(codeName);
+					initClear();
+					// localStorage.removeItem(codeName);
 					deferred.resolve();
 				}
 				
@@ -350,7 +357,7 @@ i.e. {get: get } can be {get} (I think..)
 				items.forEach((_item_) => {
 					if(_item_.id.videoId === item.id){
 						let current = _item_;
-						//Remove both from localStorage and items array within this service. In playlist section, this is done implicitly.
+						//Remove both from localStorage and items array within this service.
 						localStorage.removeItem(current.codeName);
 						let currentIndex = items.indexOf(current);
 						items.splice(currentIndex, 1);
@@ -366,7 +373,8 @@ i.e. {get: get } can be {get} (I think..)
 		//TODO: improve logic
 		function clearAllItems(){
 			let deferred = $q.defer();
-			ytDangerModal().openModal()
+			let dangerTemp = ytModalGenerator().getDangerTemp();
+			ytModalGenerator().openModal(dangerTemp)
 			.then(() => {
 				items = [];
 				for(let key in localStorage){
@@ -629,7 +637,7 @@ i.e. {get: get } can be {get} (I think..)
 
 		function clearItem(search, isWarnActive){
 			let warnTemp = ytModalGenerator().getWarnTemp();
-			function init(){
+			function initClear(){
 				let searchIndex = pastSearches.indexOf(search);
 				pastSearches.splice(searchIndex, 1);
 				localStorage.removeItem(search.name);
@@ -637,7 +645,7 @@ i.e. {get: get } can be {get} (I think..)
 			if(isWarnActive){
 				ytModalGenerator().openModal(warnTemp)
 				.then(()=> {
-					init();
+					initClear();
 				});
 			} else {
 				console.log('no warning');
@@ -647,7 +655,8 @@ i.e. {get: get } can be {get} (I think..)
 		function clearAll(){
 			//Clears all past searches
 			let deferred = $q.defer();
-			ytDangerModal().openModal()
+			let dangerTemp = ytModalGenerator().getDangerTemp();
+			ytModalGenerator().openModal(dangerTemp)
 			.then(() => {
 				pastSearches = [];
 				for(let key in localStorage){
@@ -1178,7 +1187,7 @@ i.e. {get: get } can be {get} (I think..)
 
 			let dangerTemp = {
 				templateUrl: './partials/playlist/playlist-partials/modals/danger-modal.html',
-				controller: 'dangerModalController',
+				controller: 'DangerModalController',
 				controllerAs: 'dangerModal'
 			};
 
