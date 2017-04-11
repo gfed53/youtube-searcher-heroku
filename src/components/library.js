@@ -19,16 +19,14 @@ i.e. {get: get } can be {get} (I think..)
 	.factory('ytCheckScrollY', [ytCheckScrollY])
 	.factory('ytInitMap', [ytInitMap])
 	.factory('ytFilters', ['ytDateHandler', ytFilters])
-	.factory('ytSearchSavedModal', ['$q', '$uibModal', ytSearchSavedModal])
-	.factory('ytDangerModal', ['$q', '$uibModal', ytDangerModal])
 	.factory('ytModalGenerator', ['$q', '$uibModal', ytModalGenerator])
 	.factory('ytDateHandler', [ytDateHandler])
 	.factory('ytUtilities', [ytUtilities])
 	.service('ytChanFilter', [ytChanFilter])
 	.service('ytSearchParams', ['ytTranslate', ytSearchParams])
 	.service('ytResults', [ytResults])
-	.service('ytVideoItems', ['$q', '$state', '$stateParams', 'ytModalGenerator', 'ytDangerModal', 'ytUtilities', ytVideoItems])
-	.service('ytSearchHistory', ['$q', 'ytSearchSavedModal', 'ytDangerModal', 'ytModalGenerator', 'ytSearchParams', 'ytUtilities', ytSearchHistory])
+	.service('ytVideoItems', ['$q', '$state', '$stateParams', 'ytModalGenerator', 'ytUtilities', ytVideoItems])
+	.service('ytSearchHistory', ['$q', 'ytModalGenerator', 'ytSearchParams', 'ytUtilities', ytSearchHistory])
 	.service('ytTranslate', ['$http', '$q', 'ytModalGenerator', 'ytInitAPIs', ytTranslate])
 	.service('ytSortOrder', [ytSortOrder])
 	.service('ytPlaylistView', [ytPlaylistView])
@@ -269,7 +267,7 @@ i.e. {get: get } can be {get} (I think..)
 	}
 
 	//Used for saving videos to the user's local storage (in the playlist/saved content section)
-	function ytVideoItems($q, $state, $stateParams, ytModalGenerator, ytDangerModal, ytUtilities){
+	function ytVideoItems($q, $state, $stateParams, ytModalGenerator, ytUtilities){
 		let currentVideoId = $stateParams.videoId;
 		let items = [];
 
@@ -332,7 +330,7 @@ i.e. {get: get } can be {get} (I think..)
 
 		function clearItem(codeName, item, isWarnActive){
 			let warnTemp = ytModalGenerator().getWarnTemp(),
-				deferred = $q.defer();
+			deferred = $q.defer();
 			function initClear(){
 				var index = items.indexOf(index);
 				items.splice(index, 1);
@@ -585,7 +583,7 @@ i.e. {get: get } can be {get} (I think..)
 	}
 
 	//Used for saving past searches to the user's local storage (in the playlist/saved content section)
-	function ytSearchHistory($q, ytSearchSavedModal, ytDangerModal, ytModalGenerator, ytSearchParams, ytUtilities){
+	function ytSearchHistory($q, ytModalGenerator, ytSearchParams, ytUtilities){
 		let pastSearches = [];
 		this.get = get;
 		this.set = set;
@@ -618,7 +616,8 @@ i.e. {get: get } can be {get} (I think..)
 		}
 
 		function set(params, service){
-			ytSearchSavedModal().openModal()
+			let searchSavedTemp = ytModalGenerator().getSearchSavedTemp();
+			ytModalGenerator().openModal(searchSavedTemp)
 			.then((name) => {
 				params.name = name;
 				if(params.name === 'cancel'){
@@ -1096,65 +1095,12 @@ i.e. {get: get } can be {get} (I think..)
 		};
 	}
 
-	function ytSearchSavedModal($q, $uibModal){
-		return () => {
-			let services = {
-				openModal: openModal
-			};
-
-			function openModal(){
-				let deferred = $q.defer();
-				let modalInstance = $uibModal.open({
-					templateUrl: './partials/search/search-partials/modals/search-saved-modal.html',
-					controller: 'SearchSavedModalController',
-					controllerAs: 'searchModal'
-				});
-
-				modalInstance.result.then((result) => {
-					deferred.resolve(result);
-				}, (error) => {
-					deferred.resolve(error);
-				});
-
-				return deferred.promise;
-			}
-
-			return services;
-		};
-	}
-
-	function ytDangerModal($q, $uibModal){
-		return () => {
-			let services = {
-				openModal: openModal
-			};
-
-			function openModal(){
-				let deferred = $q.defer();
-				let modalInstance = $uibModal.open({
-					templateUrl: './partials/playlist/playlist-partials/modals/danger-modal.html',
-					controller: 'DangerModalController',
-					controllerAs: 'dangerModal'
-				});
-
-				modalInstance.result.then(() =>{
-					deferred.resolve();
-				}, (error) => {
-					deferred.reject(error);
-				});
-
-				return deferred.promise;
-			}
-
-			return services;
-		};
-	}
-
 	function ytModalGenerator($q, $uibModal){
 		return () => {
 			let services = {
 				openModal: openModal,
 				getSearchTemp: getSearchTemp,
+				getSearchSavedTemp: getSearchSavedTemp,
 				getVideoTemp: getVideoTemp,
 				getTransTemp: getTransTemp,
 				getWarnTemp: getWarnTemp,
@@ -1165,6 +1111,12 @@ i.e. {get: get } can be {get} (I think..)
 				templateUrl: './partials/search/search-partials/modals/error-modal.html',
 				controller: 'ErrorModalController',
 				controllerAs: 'errorModal'
+			};
+
+			let searchSavedTemp = {
+				templateUrl: './partials/search/search-partials/modals/search-saved-modal.html',
+				controller: 'SearchSavedModalController',
+				controllerAs: 'searchModal'
 			};
 
 			let videoTemp = {
@@ -1210,6 +1162,10 @@ i.e. {get: get } can be {get} (I think..)
 
 			function getSearchTemp(){
 				return searchTemp;
+			}
+
+			function getSearchSavedTemp(){
+				return searchSavedTemp;
 			}
 
 			function getVideoTemp(){
