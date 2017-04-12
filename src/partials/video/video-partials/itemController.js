@@ -39,7 +39,7 @@
 
 		//Removes selected video item from history/localStorage (permanently)
 		function clearItem(item){
-			ytVideoItems.services.clearItem(undefined, item);
+			ytVideoItems.services.clearItem(item);
 			vm.cleared = true;
 		}
 

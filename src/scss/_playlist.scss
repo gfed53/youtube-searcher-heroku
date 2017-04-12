@@ -134,6 +134,9 @@
 
 @media screen and ($tablet){
 	#playlist {
+		.playlist-section-options {
+			text-align: right;
+		}
 		.filter-inputs {
 			text-align: left;
 			.filter-input-group-keyword {

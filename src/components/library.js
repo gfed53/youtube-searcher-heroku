@@ -328,26 +328,30 @@ i.e. {get: get } can be {get} (I think..)
 
 		}
 
-		function clearItem(codeName, item, isWarnActive){
+		function clearItem(item, isWarnActive){
+			console.log('codename: ', item.codeName);
 			let warnTemp = ytModalGenerator().getWarnTemp(),
-			deferred = $q.defer();
+				itemRemovedTemp = ytModalGenerator().getItemRemovedTemp(),
+				deferred = $q.defer();
 			function initClear(){
-				var index = items.indexOf(index);
+				var index = items.indexOf(item);
+				console.log('index:', index);
 				items.splice(index, 1);
-				localStorage.removeItem(codeName);
+				console.log(items.length);
+				localStorage.removeItem(item.codeName);
 			}
-			if(codeName){ //This would take place in the playlist section
+			if(item.codeName){ //This would take place in the playlist section
 				if(isWarnActive){
 					ytModalGenerator().openModal(warnTemp)
 					.then(()=> {
-						// localStorage.removeItem(codeName);
 						initClear();
+						ytModalGenerator().openModal(itemRemovedTemp);
 						deferred.resolve();
 					});
 				} else {
 					console.log('no warning');
 					initClear();
-					// localStorage.removeItem(codeName);
+					ytModalGenerator().openModal(itemRemovedTemp);
 					deferred.resolve();
 				}
 				
@@ -635,19 +639,25 @@ i.e. {get: get } can be {get} (I think..)
 		}
 
 		function clearItem(search, isWarnActive){
-			let warnTemp = ytModalGenerator().getWarnTemp();
+			let removedTemp = ytModalGenerator().getItemRemovedTemp();
+
 			function initClear(){
 				let searchIndex = pastSearches.indexOf(search);
 				pastSearches.splice(searchIndex, 1);
 				localStorage.removeItem(search.name);
 			}
+
 			if(isWarnActive){
+				let warnTemp = ytModalGenerator().getWarnTemp();
 				ytModalGenerator().openModal(warnTemp)
 				.then(()=> {
 					initClear();
+					ytModalGenerator().openModal(removedTemp);
 				});
 			} else {
 				console.log('no warning');
+				initClear();
+				ytModalGenerator().openModal(removedTemp);
 			}
 		}
 
@@ -1104,6 +1114,7 @@ i.e. {get: get } can be {get} (I think..)
 				getVideoTemp: getVideoTemp,
 				getTransTemp: getTransTemp,
 				getWarnTemp: getWarnTemp,
+				getItemRemovedTemp: getItemRemovedTemp,
 				getDangerTemp: getDangerTemp
 			};
 
@@ -1135,6 +1146,12 @@ i.e. {get: get } can be {get} (I think..)
 				templateUrl: './partials/playlist/playlist-partials/modals/warn-modal.html',
 				controller: 'DangerModalController',
 				controllerAs: 'dangerModal'
+			};
+
+			let itemRemovedTemp = {
+				templateUrl: './partials/playlist/playlist-partials/modals/item-removed-modal.html',
+				controller: 'ItemRemovedModalController',
+				controllerAs: 'removedModal'
 			};
 
 			let dangerTemp = {
@@ -1178,6 +1195,10 @@ i.e. {get: get } can be {get} (I think..)
 
 			function getWarnTemp(){
 				return warnTemp;
+			}
+
+			function getItemRemovedTemp(){
+				return itemRemovedTemp;
 			}
 
 			function getDangerTemp(){

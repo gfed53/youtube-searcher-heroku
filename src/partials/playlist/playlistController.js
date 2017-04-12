@@ -30,6 +30,7 @@
 		vm.addedAfterSearches = addedAfterSearches;
 		vm.addedBeforeSearches = addedBeforeSearches;
 		vm.isDateTypeComp = ytDateHandler().check();
+		vm.warnActive = true;
 
 		//Grabs one of our saved searches, then automatically switches to the search state in its advanced search mode.
 		function grab(search){
@@ -39,7 +40,7 @@
 
 		//Removes selected search from history/localStorage (permanently)
 		function clearSearch(search){
-			ytSearchHistory.clearItem(search, true);
+			ytSearchHistory.clearItem(search, vm.warnActive);
 		}
 
 		//Removes ALL searches from history/localStorage (permanently!)
@@ -53,9 +54,11 @@
 		//Removes selected video item from history/localStorage (permanently)
 		function clearItem(item){
 			// let itemIndex = vm.items.indexOf(item);
-			ytVideoItems.services.clearItem(item.codeName, null, true)
+			console.log('item: ', item);
+			ytVideoItems.services.clearItem(item, vm.warnActive)
 			.then(()=>{
 				// vm.items.splice(itemIndex, 1);
+				console.log(vm.items.length);
 			});
 		}
 

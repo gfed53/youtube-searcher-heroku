@@ -231,6 +231,8 @@ body #page-header #header-wrapper #credit {
     text-align: left; } }
 
 @media screen and (min-width: 768px) {
+  #playlist .playlist-section-options {
+    text-align: right; }
   #playlist .filter-inputs {
     text-align: left; }
     #playlist .filter-inputs .filter-input-group-keyword {
@@ -595,7 +597,7 @@ body #page-header #header-wrapper #credit {
   position: absolute;
   right: 10em; }
 
-.modal-header {
+.modal-header, .modal-body {
   text-align: center; }
 
 .modal-body-saved-search {
