@@ -329,15 +329,12 @@ i.e. {get: get } can be {get} (I think..)
 		}
 
 		function clearItem(item, isWarnActive){
-			console.log('codename: ', item.codeName);
 			let warnTemp = ytModalGenerator().getWarnTemp(),
 				itemRemovedTemp = ytModalGenerator().getItemRemovedTemp(),
 				deferred = $q.defer();
 			function initClear(){
 				var index = items.indexOf(item);
-				console.log('index:', index);
 				items.splice(index, 1);
-				console.log(items.length);
 				localStorage.removeItem(item.codeName);
 			}
 			if(item.codeName){ //This would take place in the playlist section
@@ -349,7 +346,6 @@ i.e. {get: get } can be {get} (I think..)
 						deferred.resolve();
 					});
 				} else {
-					console.log('no warning');
 					initClear();
 					ytModalGenerator().openModal(itemRemovedTemp);
 					deferred.resolve();
@@ -655,7 +651,6 @@ i.e. {get: get } can be {get} (I think..)
 					ytModalGenerator().openModal(removedTemp);
 				});
 			} else {
-				console.log('no warning');
 				initClear();
 				ytModalGenerator().openModal(removedTemp);
 			}

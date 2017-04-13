@@ -53,13 +53,7 @@
 
 		//Removes selected video item from history/localStorage (permanently)
 		function clearItem(item){
-			// let itemIndex = vm.items.indexOf(item);
-			console.log('item: ', item);
-			ytVideoItems.services.clearItem(item, vm.warnActive)
-			.then(()=>{
-				// vm.items.splice(itemIndex, 1);
-				console.log(vm.items.length);
-			});
+			ytVideoItems.services.clearItem(item, vm.warnActive);
 		}
 
 		//TODO: improve logic
