@@ -1347,16 +1347,13 @@ i.e. {get: get } can be {get} (I think..)
 
 		function getWarn(){
 			if(localStorage['uyts-warn']){
-				console.log('we should retrieve');
 				return JSON.parse(localStorage['uyts-warn']);
 			} else {
-				console.log('we only have default');
 				return true;
 			}
 		}
 
 		function setWarn(val){
-			console.log('updating in service. val passed should be', val);
 			localStorage.setItem('uyts-warn', JSON.stringify(val));
 		}
 	}

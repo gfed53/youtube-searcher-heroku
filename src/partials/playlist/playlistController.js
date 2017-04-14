@@ -111,7 +111,6 @@
 		}
 
 		function updateWarn(){
-			console.log('updating');
 			ytSettings.setWarn(vm.warnActive);
 		}
 	}
