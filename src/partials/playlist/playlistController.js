@@ -4,9 +4,9 @@
 	angular
 	.module('myApp')
 
-	.controller('PlaylistCtrl', ['$state', '$timeout', 'ytVideoItems', 'ytSearchHistory', 'ytSearchParams', 'ytPlaylistSort', 'ytFilters', 'ytPlaylistView', 'ytDateHandler', PlaylistCtrl]);
+	.controller('PlaylistCtrl', ['$state', '$timeout', 'ytVideoItems', 'ytSearchHistory', 'ytSearchParams', 'ytPlaylistSort', 'ytFilters', 'ytPlaylistView', 'ytDateHandler', 'ytSettings', PlaylistCtrl]);
 
-	function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchParams, ytPlaylistSort, ytFilters, ytPlaylistView, ytDateHandler){
+	function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchParams, ytPlaylistSort, ytFilters, ytPlaylistView, ytDateHandler, ytSettings){
 		let vm = this;
 		vm.items = ytVideoItems.services.getItems();
 		vm.setVideoId = setVideoId;
@@ -30,7 +30,8 @@
 		vm.addedAfterSearches = addedAfterSearches;
 		vm.addedBeforeSearches = addedBeforeSearches;
 		vm.isDateTypeComp = ytDateHandler().check();
-		vm.warnActive = true;
+		vm.warnActive = ytSettings.getWarn();
+		vm.updateWarn = updateWarn;
 
 		//Grabs one of our saved searches, then automatically switches to the search state in its advanced search mode.
 		function grab(search){
@@ -107,6 +108,11 @@
 
 		function addedBeforeSearches(search){
 			return ytFilters().addedBeforeSearches(search, vm.searchesFilter);
+		}
+
+		function updateWarn(){
+			console.log('updating');
+			ytSettings.setWarn(vm.warnActive);
 		}
 	}
 })();

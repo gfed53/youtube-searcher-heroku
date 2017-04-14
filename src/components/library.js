@@ -31,7 +31,8 @@ i.e. {get: get } can be {get} (I think..)
 	.service('ytSortOrder', [ytSortOrder])
 	.service('ytPlaylistView', [ytPlaylistView])
 	.service('ytPlaylistSort', [ytPlaylistSort])
-	.service('ytInitAPIs', ['$q', 'ytModalGenerator', ytInitAPIs]);
+	.service('ytInitAPIs', ['$q', 'ytModalGenerator', ytInitAPIs])
+	.service('ytSettings', [ytSettings]);
 
 	//Used to follow security measures with YouTube video links in particular 
 	function ytTrustSrc($sce){
@@ -1336,6 +1337,27 @@ i.e. {get: get } can be {get} (I think..)
 		function updateMapsScript(key) {
 			let t = document.getElementsByTagName('script')[0];
 			t.src = 'https://maps.googleapis.com/maps/api/js?key='+key;
+		}
+	}
+
+	function ytSettings(){
+
+		this.getWarn = getWarn;
+		this.setWarn = setWarn;
+
+		function getWarn(){
+			if(localStorage['uyts-warn']){
+				console.log('we should retrieve');
+				return JSON.parse(localStorage['uyts-warn']);
+			} else {
+				console.log('we only have default');
+				return true;
+			}
+		}
+
+		function setWarn(val){
+			console.log('updating in service. val passed should be', val);
+			localStorage.setItem('uyts-warn', JSON.stringify(val));
 		}
 	}
 
