@@ -73,7 +73,7 @@ i.e. {get: get } can be {get} (I think..)
 				request.pageToken = pageToken;
 			}
 
-			let errorModalObj = ytModalGenerator().getSearchTemp();
+			let errorModalObj = ytModalGenerator().getTemp('searchTemp');
 
 			let services = {
 				checkTrans: checkTrans,
@@ -157,7 +157,7 @@ i.e. {get: get } can be {get} (I think..)
 				type: 'channel'
 			};
 
-			let errorModalObj = ytModalGenerator().getSearchTemp();
+			let errorModalObj = ytModalGenerator().getTemp('searchTemp');
 
 			let services = {
 				getResults: getResults
@@ -211,7 +211,7 @@ i.e. {get: get } can be {get} (I think..)
 				//contentDetails contains the duration property.
 				id: id
 			},
-			errorModalObj = ytModalGenerator().getVideoTemp(),
+			errorModalObj = ytModalGenerator().getTemp('videoTemp'),
 
 			services = {
 				getVideo: getVideo
@@ -243,8 +243,7 @@ i.e. {get: get } can be {get} (I think..)
 				part: 'snippet',
 				id: id
 			},
-			errorModalObj = ytModalGenerator().getVideoTemp(),
-
+			errorModalObj = ytModalGenerator().getTemp('videoTemp'),
 			services = {
 				getChannel: getChannel
 			};
@@ -330,8 +329,8 @@ i.e. {get: get } can be {get} (I think..)
 		}
 
 		function clearItem(item, isWarnActive){
-			let warnTemp = ytModalGenerator().getWarnTemp(),
-				itemRemovedTemp = ytModalGenerator().getItemRemovedTemp(),
+			let warnTemp = ytModalGenerator().getTemp('warnTemp'),
+				itemRemovedTemp = ytModalGenerator().getTemp('itemRemovedTemp'),
 				deferred = $q.defer();
 			function initClear(){
 				var index = items.indexOf(item);
@@ -372,7 +371,7 @@ i.e. {get: get } can be {get} (I think..)
 		//TODO: improve logic
 		function clearAllItems(){
 			let deferred = $q.defer();
-			let dangerTemp = ytModalGenerator().getDangerTemp();
+			let dangerTemp = ytModalGenerator().getTemp('dangerTemp');
 			ytModalGenerator().openModal(dangerTemp)
 			.then(() => {
 				items = [];
@@ -617,7 +616,7 @@ i.e. {get: get } can be {get} (I think..)
 		}
 
 		function set(params, service){
-			let searchSavedTemp = ytModalGenerator().getSearchSavedTemp();
+			let searchSavedTemp = ytModalGenerator().getTemp('searchSavedTemp');
 			ytModalGenerator().openModal(searchSavedTemp)
 			.then((name) => {
 				params.name = name;
@@ -636,7 +635,7 @@ i.e. {get: get } can be {get} (I think..)
 		}
 
 		function clearItem(search, isWarnActive){
-			let removedTemp = ytModalGenerator().getItemRemovedTemp();
+			let removedTemp = ytModalGenerator().getTemp('itemRemovedTemp');
 
 			function initClear(){
 				let searchIndex = pastSearches.indexOf(search);
@@ -645,7 +644,7 @@ i.e. {get: get } can be {get} (I think..)
 			}
 
 			if(isWarnActive){
-				let warnTemp = ytModalGenerator().getWarnTemp();
+				let warnTemp = ytModalGenerator().getTemp('warnTemp');
 				ytModalGenerator().openModal(warnTemp)
 				.then(()=> {
 					initClear();
@@ -660,7 +659,7 @@ i.e. {get: get } can be {get} (I think..)
 		function clearAll(){
 			//Clears all past searches
 			let deferred = $q.defer();
-			let dangerTemp = ytModalGenerator().getDangerTemp();
+			let dangerTemp = ytModalGenerator().getTemp('dangerTemp');
 			ytModalGenerator().openModal(dangerTemp)
 			.then(() => {
 				pastSearches = [];
@@ -903,7 +902,7 @@ i.e. {get: get } can be {get} (I think..)
 			value: 'es'
 		}];
 
-		let errorModalObj = ytModalGenerator().getTransTemp();
+		let errorModalObj = ytModalGenerator().getTemp('transTemp');
 		
 
 		function translate(text, lang){
@@ -1105,13 +1104,7 @@ i.e. {get: get } can be {get} (I think..)
 		return () => {
 			let services = {
 				openModal: openModal,
-				getSearchTemp: getSearchTemp,
-				getSearchSavedTemp: getSearchSavedTemp,
-				getVideoTemp: getVideoTemp,
-				getTransTemp: getTransTemp,
-				getWarnTemp: getWarnTemp,
-				getItemRemovedTemp: getItemRemovedTemp,
-				getDangerTemp: getDangerTemp
+				getTemp: getTemp
 			};
 
 			let searchTemp = {
@@ -1156,6 +1149,30 @@ i.e. {get: get } can be {get} (I think..)
 				controllerAs: 'dangerModal'
 			};
 
+			let initTemp = {
+				templateUrl: './partials/search/search-partials/modals/init-modal.html',
+				controller: 'InitModalController',
+				controllerAs: 'initModal'
+			};
+
+			let updateTemp = {
+				templateUrl: './partials/search/search-partials/modals/update-modal.html',
+				controller: 'UpdateModalController',
+				controllerAs: 'updateModal'
+			};
+
+			let temps = {
+				searchTemp: searchTemp,
+				searchSavedTemp: searchSavedTemp,
+				videoTemp: videoTemp,
+				transTemp: transTemp,
+				warnTemp: warnTemp,
+				itemRemovedTemp: itemRemovedTemp,
+				dangerTemp: dangerTemp,
+				initTemp: initTemp,
+				updateTemp: updateTemp
+			};
+
 			function openModal(modalObj){
 				let deferred = $q.defer();
 				let modalInstance = $uibModal.open({
@@ -1173,32 +1190,8 @@ i.e. {get: get } can be {get} (I think..)
 				return deferred.promise;
 			}
 
-			function getSearchTemp(){
-				return searchTemp;
-			}
-
-			function getSearchSavedTemp(){
-				return searchSavedTemp;
-			}
-
-			function getVideoTemp(){
-				return videoTemp;
-			}
-
-			function getTransTemp(){
-				return transTemp;
-			}
-
-			function getWarnTemp(){
-				return warnTemp;
-			}
-
-			function getItemRemovedTemp(){
-				return itemRemovedTemp;
-			}
-
-			function getDangerTemp(){
-				return dangerTemp;
+			function getTemp(temp){
+				return temps[temp];
 			}
 
 			return services;
@@ -1236,17 +1229,8 @@ i.e. {get: get } can be {get} (I think..)
 	}
 
 	function ytInitAPIs($q, ytModalGenerator){
-		let initTemp = {
-			templateUrl: './partials/search/search-partials/modals/init-modal.html',
-			controller: 'InitModalController',
-			controllerAs: 'initModal'
-		};
-
-		let updateTemp = {
-			templateUrl: './partials/search/search-partials/modals/update-modal.html',
-			controller: 'UpdateModalController',
-			controllerAs: 'updateModal'
-		};
+		let initTemp = ytModalGenerator().getTemp('initTemp'),
+			updateTemp = ytModalGenerator().getTemp('updateTemp');
 
 		this.apisObj = {
 			id: 'New User'

@@ -597,7 +597,14 @@ body #page-header #header-wrapper #credit {
   position: absolute;
   right: 10em; }
 
-.modal-header, .modal-body {
+.modal-open {
+  overflow-y: scroll;
+  padding-right: 0 !important; }
+
+.modal {
+  margin-left: 17px; }
+
+.modal-header {
   text-align: center; }
 
 .modal-body-saved-search {

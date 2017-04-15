@@ -23,14 +23,24 @@
 .alert-video-saved {
 	display: inline-block;
 	margin: 0;
-    padding: 0.5em 1em;
-    position: absolute;
-    right: 10em;
+	padding: 0.5em 1em;
+	position: absolute;
+	right: 10em;
 }
 
 //Modals
 
-.modal-header, .modal-body {
+//Fix for navbar shift issue
+.modal-open {
+	overflow-y: scroll;
+	padding-right: 0 !important;
+}
+
+.modal {
+	margin-left: 17px;
+}
+
+.modal-header {
 	text-align: center;
 }
 
