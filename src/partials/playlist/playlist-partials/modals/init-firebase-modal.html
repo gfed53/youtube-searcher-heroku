@@ -1,10 +1,10 @@
 <form ng-submit="initFirebaseModal.ok(initFirebaseModal.key)">
     <div class="modal-body modal-body-saved-search">
         <p>Please enter a valid API key.</p>
-        <input autofocus ng-model="initFirebaseModal.key" type="text" class="form-control search-modal-input" placeholder="Google API key">
+        <input autofocus ng-model="initFirebaseModal.key" type="password" class="form-control search-modal-input" placeholder="Google API key">
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" type="submit">OK</button>
-        <button class="btn btn-warning" type="button" ng-click="searchModal.cancel()">Cancel</button>
+        <button class="btn btn-warning" type="button" ng-click="initFirebaseModal.cancel()">Cancel</button>
     </div>
 </form>

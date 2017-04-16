@@ -5,7 +5,8 @@
 		<label for="warnActive">Warn me before permanently removing items:</label>
 		<input name="warnActive" ng-model="playlist.warnActive" ng-change="playlist.updateWarn()" type="checkbox">
 		<p>You will be notified before removing ALL videos or searches either way.</p>
-		<button class="btn btn-default">Manage Storage Settings</button>
+		<button class="btn btn-default" ng-click="playlist.manageStorage()">Manage Storage Settings</button>
+		{{ playlist.fbData }}
 	</div>
 	<div class="row playlist-section-header">
 		<div class="col-xs-8">

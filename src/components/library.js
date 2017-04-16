@@ -22,6 +22,7 @@ i.e. {get: get } can be {get} (I think..)
 	.factory('ytModalGenerator', ['$q', '$uibModal', ytModalGenerator])
 	.factory('ytDateHandler', [ytDateHandler])
 	.factory('ytUtilities', [ytUtilities])
+	.factory('ytFirebaseReference', [ytFirebaseReference])
 	.factory('ytFirebase', ['ytModalGenerator', ytFirebase])
 	.service('ytChanFilter', [ytChanFilter])
 	.service('ytSearchParams', ['ytTranslate', ytSearchParams])
@@ -1177,7 +1178,8 @@ i.e. {get: get } can be {get} (I think..)
 				itemRemovedTemp: itemRemovedTemp,
 				dangerTemp: dangerTemp,
 				initTemp: initTemp,
-				updateTemp: updateTemp
+				updateTemp: updateTemp,
+				initFirebaseTemp
 			};
 
 			function openModal(modalObj){
@@ -1333,6 +1335,12 @@ i.e. {get: get } can be {get} (I think..)
 	}
 
 	//Firebase services/factories
+
+	function ytFirebaseReference(){
+		return new firebase.database().ref();
+	}
+	
+
 	function ytFirebase(ytModalGenerator){
 		return () => {
 			var services = {
@@ -1344,15 +1352,15 @@ i.e. {get: get } can be {get} (I think..)
 				let initFirebaseTemp = ytModalGenerator().getTemp('initFirebaseTemp');
 				ytModalGenerator().openModal(initFirebaseTemp)
 				.then((key) => {
-					console.log(key);
-					localStorage.setItem('uyts-firebase-key', key);
+					localStorage.setItem('uyt-firebase-key', key);
 					location.reload();
 				});
 			}
 
 			function check(){
-				if(localStorage['uyts-firebase-key']){
-					let key = localStorage['uyts-firebase-key'];
+				if(localStorage['uyt-firebase-key']){
+					let key = localStorage['uyt-firebase-key'];
+					console.log(key);
 					let config = {
 						apiKey: key,
 						authDomain: 'burning-torch-898.firebaseapp.com',
@@ -1377,15 +1385,15 @@ i.e. {get: get } can be {get} (I think..)
 		this.setWarn = setWarn;
 
 		function getWarn(){
-			if(localStorage['uyts-warn']){
-				return JSON.parse(localStorage['uyts-warn']);
+			if(localStorage['uyt-warn']){
+				return JSON.parse(localStorage['uyt-warn']);
 			} else {
 				return true;
 			}
 		}
 
 		function setWarn(val){
-			localStorage.setItem('uyts-warn', JSON.stringify(val));
+			localStorage.setItem('uyt-warn', JSON.stringify(val));
 		}
 	}
 

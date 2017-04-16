@@ -2,7 +2,7 @@
 
 (function(){
 	angular
-	.module('myApp', ['ui.router', 'ui.bootstrap', 'ngAnimate'])
+	.module('myApp', ['ui.router', 'ui.bootstrap', 'firebase', 'ngAnimate'])
 
 	.config(['$httpProvider', '$compileProvider', ($httpProvider, $compileProvider) => {
 		$httpProvider.defaults.useXDomain = true;

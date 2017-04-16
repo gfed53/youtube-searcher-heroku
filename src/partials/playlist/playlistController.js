@@ -4,9 +4,9 @@
 	angular
 	.module('myApp')
 
-	.controller('PlaylistCtrl', ['$state', '$timeout', 'ytVideoItems', 'ytSearchHistory', 'ytSearchParams', 'ytPlaylistSort', 'ytFilters', 'ytPlaylistView', 'ytDateHandler', 'ytSettings', PlaylistCtrl]);
+	.controller('PlaylistCtrl', ['$state', '$timeout', 'ytVideoItems', 'ytSearchHistory', 'ytSearchParams', 'ytPlaylistSort', 'ytFilters', 'ytPlaylistView', 'ytDateHandler', 'ytSettings', '$firebaseObject', 'ytFirebaseReference', 'ytFirebase', PlaylistCtrl]);
 
-	function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchParams, ytPlaylistSort, ytFilters, ytPlaylistView, ytDateHandler, ytSettings){
+	function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchParams, ytPlaylistSort, ytFilters, ytPlaylistView, ytDateHandler, ytSettings, $firebaseObject, ytFirebaseReference, ytFirebase){
 		let vm = this;
 		vm.items = ytVideoItems.services.getItems();
 		vm.setVideoId = setVideoId;
@@ -32,6 +32,14 @@
 		vm.isDateTypeComp = ytDateHandler().check();
 		vm.warnActive = ytSettings.getWarn();
 		vm.updateWarn = updateWarn;
+		//Will probably add additional options within modal
+		vm.manageStorage = ytFirebase().init;
+
+		//Testing
+		var ref = ytFirebaseReference;
+		// download the data into a local object
+		vm.fbData = $firebaseObject(ref);
+		//
 
 		//Grabs one of our saved searches, then automatically switches to the search state in its advanced search mode.
 		function grab(search){
