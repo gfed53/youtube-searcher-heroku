@@ -22,6 +22,7 @@ i.e. {get: get } can be {get} (I think..)
 	.factory('ytModalGenerator', ['$q', '$uibModal', ytModalGenerator])
 	.factory('ytDateHandler', [ytDateHandler])
 	.factory('ytUtilities', [ytUtilities])
+	.factory('ytFirebase', ['ytModalGenerator', ytFirebase])
 	.service('ytChanFilter', [ytChanFilter])
 	.service('ytSearchParams', ['ytTranslate', ytSearchParams])
 	.service('ytResults', [ytResults])
@@ -330,8 +331,8 @@ i.e. {get: get } can be {get} (I think..)
 
 		function clearItem(item, isWarnActive){
 			let warnTemp = ytModalGenerator().getTemp('warnTemp'),
-				itemRemovedTemp = ytModalGenerator().getTemp('itemRemovedTemp'),
-				deferred = $q.defer();
+			itemRemovedTemp = ytModalGenerator().getTemp('itemRemovedTemp'),
+			deferred = $q.defer();
 			function initClear(){
 				var index = items.indexOf(item);
 				items.splice(index, 1);
@@ -1161,6 +1162,12 @@ i.e. {get: get } can be {get} (I think..)
 				controllerAs: 'updateModal'
 			};
 
+			let initFirebaseTemp = {
+				templateUrl: './partials/playlist/playlist-partials/modals/init-firebase-modal.html',
+				controller: 'InitFirebaseModalController',
+				controllerAs: 'initFirebaseModal'
+			};
+
 			let temps = {
 				searchTemp: searchTemp,
 				searchSavedTemp: searchSavedTemp,
@@ -1230,7 +1237,7 @@ i.e. {get: get } can be {get} (I think..)
 
 	function ytInitAPIs($q, ytModalGenerator){
 		let initTemp = ytModalGenerator().getTemp('initTemp'),
-			updateTemp = ytModalGenerator().getTemp('updateTemp');
+		updateTemp = ytModalGenerator().getTemp('updateTemp');
 
 		this.apisObj = {
 			id: 'New User'
@@ -1245,6 +1252,7 @@ i.e. {get: get } can be {get} (I think..)
 			//Checking localStorage to see if user has an id with saved API keys
 			if(localStorage['uyts-log-info']){
 				let obj = JSON.parse(localStorage['uyts-log-info']);
+				console.log('apis obj is:', obj);
 				this.apisObj = obj;
 				//Updating the DOM (for the Google Maps API)
 				updateDOM(this.apisObj.mapsKey);
@@ -1322,6 +1330,45 @@ i.e. {get: get } can be {get} (I think..)
 			let t = document.getElementsByTagName('script')[0];
 			t.src = 'https://maps.googleapis.com/maps/api/js?key='+key;
 		}
+	}
+
+	//Firebase services/factories
+	function ytFirebase(ytModalGenerator){
+		return () => {
+			var services = {
+				init: init,
+				check: check
+			};
+
+			function init(){
+				let initFirebaseTemp = ytModalGenerator().getTemp('initFirebaseTemp');
+				ytModalGenerator().openModal(initFirebaseTemp)
+				.then((key) => {
+					console.log(key);
+					localStorage.setItem('uyts-firebase-key', key);
+					location.reload();
+				});
+			}
+
+			function check(){
+				if(localStorage['uyts-firebase-key']){
+					let key = localStorage['uyts-firebase-key'];
+					let config = {
+						apiKey: key,
+						authDomain: 'burning-torch-898.firebaseapp.com',
+						databaseURL: 'https://burning-torch-898.firebaseio.com/',
+						storageBucket: 'burning-torch-898.appspot.com'
+					};
+					firebase.initializeApp(config);
+				} else {
+					console.log('bypass');
+				}
+				//
+			}
+
+			return services;
+		};
+
 	}
 
 	function ytSettings(){

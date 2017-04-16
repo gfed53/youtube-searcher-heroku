@@ -10,14 +10,16 @@
 		$compileProvider.debugInfoEnabled(false);
 	}])
 
-	.run(['$timeout', '$rootScope', 'ytInitAPIs', ($timeout, $rootScope, ytInitAPIs) => {
+	.run(['$timeout', '$rootScope', 'ytInitAPIs', 'ytFirebase', ($timeout, $rootScope, ytInitAPIs, ytFirebase) => {
 		$rootScope.$on('$stateChangeSuccess', () => {
 			window.scrollTo(0,0);
 		});
+		//Check API keys stored in localStorage
 		ytInitAPIs.check()
 		.then(() => {
 			//Do Nothing
 		});
+		ytFirebase().check();
 		
 	}]);
 })();
