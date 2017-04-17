@@ -1,7 +1,10 @@
-<form ng-submit="initFirebaseModal.ok(initFirebaseModal.key)">
+<form ng-submit="initFirebaseModal.ok(initFirebaseModal.obj)">
     <div class="modal-body modal-body-saved-search">
         <p>Please enter a valid API key.</p>
-        <input autofocus ng-model="initFirebaseModal.key" type="password" class="form-control search-modal-input" placeholder="Google API key">
+        <input autofocus ng-model="initFirebaseModal.obj.key" type="password" class="form-control search-modal-input" placeholder="Google API key">
+        <p>Enter a username and password to sync with the database.</p>
+        <input ng-model="initFirebaseModal.obj.username" type="text" class="form-control search-modal-input" placeholder="John Doe">
+        <input ng-model="initFirebaseModal.obj.password" type="password" class="form-control search-modal-input">
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" type="submit">OK</button>

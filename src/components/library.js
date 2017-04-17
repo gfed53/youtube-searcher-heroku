@@ -22,7 +22,7 @@ i.e. {get: get } can be {get} (I think..)
 	.factory('ytModalGenerator', ['$q', '$uibModal', ytModalGenerator])
 	.factory('ytDateHandler', [ytDateHandler])
 	.factory('ytUtilities', [ytUtilities])
-	.factory('ytFirebaseReference', [ytFirebaseReference])
+	// .factory('ytFirebaseReference', [ytFirebaseReference])
 	.factory('ytFirebase', ['ytModalGenerator', ytFirebase])
 	.service('ytChanFilter', [ytChanFilter])
 	.service('ytSearchParams', ['ytTranslate', ytSearchParams])
@@ -1337,7 +1337,10 @@ i.e. {get: get } can be {get} (I think..)
 	//Firebase services/factories
 
 	function ytFirebaseReference(){
-		return new firebase.database().ref();
+		console.log('trying?');
+		// if(firebase){
+			return new firebase.database().ref();
+		// }
 	}
 	
 
@@ -1345,33 +1348,42 @@ i.e. {get: get } can be {get} (I think..)
 		return () => {
 			var services = {
 				init: init,
-				check: check
+				check: check,
+				getReference: getReference
 			};
 
 			function init(){
 				let initFirebaseTemp = ytModalGenerator().getTemp('initFirebaseTemp');
 				ytModalGenerator().openModal(initFirebaseTemp)
-				.then((key) => {
-					localStorage.setItem('uyt-firebase-key', key);
+				.then((obj) => {
+					var string = JSON.stringify(obj);
+					localStorage.setItem('uyt-firebase', string);
 					location.reload();
 				});
 			}
 
 			function check(){
-				if(localStorage['uyt-firebase-key']){
-					let key = localStorage['uyt-firebase-key'];
-					console.log(key);
+				if(localStorage['uyt-firebase']){
+					console.log(localStorage['uyt-firebase']);
+					let obj = JSON.parse(localStorage['uyt-firebase']);
+					console.log(obj);
 					let config = {
-						apiKey: key,
+						apiKey: obj.key,
 						authDomain: 'burning-torch-898.firebaseapp.com',
 						databaseURL: 'https://burning-torch-898.firebaseio.com/',
 						storageBucket: 'burning-torch-898.appspot.com'
 					};
 					firebase.initializeApp(config);
+					return this.getReference();
 				} else {
 					console.log('bypass');
+					return null;
 				}
 				//
+			}
+
+			function getReference(){
+				return new firebase.database().ref();
 			}
 
 			return services;

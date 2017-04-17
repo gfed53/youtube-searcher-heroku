@@ -10,8 +10,8 @@
 		vm.ok = ok;
 		vm.cancel = cancel;
 
-		function ok(key){
-			$uibModalInstance.close(key);
+		function ok(obj){
+			$uibModalInstance.close(obj);
 		}
 
 		function cancel(){
