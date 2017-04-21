@@ -19,7 +19,7 @@
 		.then(() => {
 			//Do Nothing
 		});
-		// ytFirebase().check();
+		ytFirebase.services.check();
 		
 	}]);
 })();

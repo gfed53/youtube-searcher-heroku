@@ -23,7 +23,7 @@ i.e. {get: get } can be {get} (I think..)
 	.factory('ytDateHandler', [ytDateHandler])
 	.factory('ytUtilities', [ytUtilities])
 	// .factory('ytFirebaseReference', [ytFirebaseReference])
-	.factory('ytFirebase', ['ytModalGenerator', ytFirebase])
+	// .factory('ytFirebase', ['ytModalGenerator', ytFirebase])
 	.service('ytChanFilter', [ytChanFilter])
 	.service('ytSearchParams', ['ytTranslate', ytSearchParams])
 	.service('ytResults', [ytResults])
@@ -34,7 +34,8 @@ i.e. {get: get } can be {get} (I think..)
 	.service('ytPlaylistView', [ytPlaylistView])
 	.service('ytPlaylistSort', [ytPlaylistSort])
 	.service('ytInitAPIs', ['$q', 'ytModalGenerator', ytInitAPIs])
-	.service('ytSettings', [ytSettings]);
+	.service('ytSettings', [ytSettings])
+	.service('ytFirebase', ['ytModalGenerator', '$firebaseArray', '$firebaseObject', ytFirebase]);
 
 	//Used to follow security measures with YouTube video links in particular 
 	function ytTrustSrc($sce){
@@ -416,6 +417,154 @@ i.e. {get: get } can be {get} (I think..)
 
 	}
 
+	//Firebase Version
+	function ytVideoItemsFB($q, $state, $stateParams, ytModalGenerator, ytUtilities){
+		let currentVideoId = $stateParams.videoId;
+		let items = [];
+
+		this.services = {
+			init: init,
+			getItems: getItems,
+			setItem: setItem,
+			clearItem: clearItem,
+			clearAllItems: clearAllItems,
+			getVideoId: getVideoId,
+			setVideoId: setVideoId,
+			isSaved: isSaved
+		};
+
+		//Automatically grabs items from localStorage and saves them to variable 'items'
+		function init(){
+			//bug: for videos that were just added, getIndex... doesn't find them, and they get pushed twice?
+			if(localStorage.length){
+				for(let key in localStorage){
+					if(key.includes('uytp')){
+						let obj = JSON.parse(localStorage[key]);
+						//Legacy fallback?
+						if(obj.$$hashKey){
+							delete obj.$$hashKey;
+						}
+						obj.name = obj.snippet.title;
+						obj.codeName = key;
+						if(ytUtilities().getIndexIfObjWithAttr(items, 'name', obj.name) === -1){
+							items.push(obj);
+						}
+					}
+				}
+			}
+		}
+
+		function getItems(){
+			if(!items.length){
+				init();
+			}
+			return items;
+		}
+
+		function setItem(result){
+			let itemName = result.snippet.title+'-uytp',
+			dateAdded = Date.now(),
+			content = result;
+			delete content.$$hashKey;
+
+			content.dateAdded = dateAdded;
+			content.name = content.snippet.title;
+			content.codeName = itemName;
+
+			items.push(content);
+
+			content = JSON.stringify(content);
+
+			localStorage.setItem(itemName, content);
+
+		}
+
+		function clearItem(item, isWarnActive){
+			let warnTemp = ytModalGenerator().getTemp('warnTemp'),
+			itemRemovedTemp = ytModalGenerator().getTemp('itemRemovedTemp'),
+			deferred = $q.defer();
+			function initClear(){
+				var index = items.indexOf(item);
+				items.splice(index, 1);
+				localStorage.removeItem(item.codeName);
+			}
+			if(item.codeName){ //This would take place in the playlist section
+				if(isWarnActive){
+					ytModalGenerator().openModal(warnTemp)
+					.then(()=> {
+						initClear();
+						ytModalGenerator().openModal(itemRemovedTemp);
+						deferred.resolve();
+					});
+				} else {
+					initClear();
+					ytModalGenerator().openModal(itemRemovedTemp);
+					deferred.resolve();
+				}
+				
+			} else if(item) { //This would take place in the video section.
+				items.forEach((_item_) => {
+					if(_item_.id.videoId === item.id){
+						let current = _item_;
+						//Remove both from localStorage and items array within this service.
+						localStorage.removeItem(current.codeName);
+						let currentIndex = items.indexOf(current);
+						items.splice(currentIndex, 1);
+						deferred.resolve();
+					}
+				});
+				
+
+			}
+			return deferred.promise;
+		}
+
+		//TODO: improve logic
+		function clearAllItems(){
+			let deferred = $q.defer();
+			let dangerTemp = ytModalGenerator().getTemp('dangerTemp');
+			ytModalGenerator().openModal(dangerTemp)
+			.then(() => {
+				items = [];
+				for(let key in localStorage){
+					if(key.includes('uytp')){
+						localStorage.removeItem(key);
+					}
+				}
+
+				deferred.resolve(items);
+			}, () => {
+				deferred.reject();
+			});
+
+			return deferred.promise;
+		}
+
+		//Check url params when loading page in video player state
+		function getVideoId(){
+			return currentVideoId;
+		}
+
+		function setVideoId(videoId){
+			currentVideoId = videoId;
+		}
+
+		//Check if video item is saved()
+		function isSaved(id){
+			let bool;
+			if(items.length){
+				items.forEach((_item_) => {
+					if(_item_.id.videoId === id){
+						bool = true;
+					}
+				});
+			}
+
+			return bool;
+		}
+
+	}
+
 	//Where saved search params are stored (so while switching views/controllers, changes in search params will be kept)
 	function ytSearchParams(ytTranslate){
 		let params = {
@@ -586,6 +735,100 @@ i.e. {get: get } can be {get} (I think..)
 
 	//Used for saving past searches to the user's local storage (in the playlist/saved content section)
 	function ytSearchHistory($q, ytModalGenerator, ytSearchParams, ytUtilities){
+		let pastSearches = [];
+		this.get = get;
+		this.set = set;
+		this.clearItem = clearItem;
+		this.clearAll = clearAll;
+
+		function get(){
+			if(localStorage.length > 0){
+				for(let key in localStorage){
+					if(key.includes('uyts')){
+						let obj = localStorage.getItem(key);
+						obj = JSON.parse(obj);
+						//Fix for searches with date, correcting format to be used in search. 
+						if(obj.name){
+							if(obj.after && obj.after !== null){
+								obj.after = new Date(obj.after);
+							}
+							if(obj.before && obj.before !== null){
+								obj.before = new Date(obj.before);
+							}
+							//This is here to avoid existent objects getting reappended to the array within the session when they shouldn't be
+							if(ytUtilities().getIndexIfObjWithAttr(pastSearches, 'name', obj.name) === -1){
+								pastSearches.push(obj);
+							}
+						}
+					}
+				}
+			}
+			return pastSearches;
+		}
+
+		function set(params, service){
+			let searchSavedTemp = ytModalGenerator().getTemp('searchSavedTemp');
+			ytModalGenerator().openModal(searchSavedTemp)
+			.then((name) => {
+				params.name = name;
+				if(params.name === 'cancel'){
+					//Aborted
+				} else if(params.name){
+					params.nameShrt = params.name;
+					params.name = params.name+'-uyts';
+					params.date = Date.now();
+					pastSearches.push(params);
+					localStorage.setItem(params.name, JSON.stringify(params));
+				} else {
+					service.set(params, service);
+				}
+			});
+		}
+
+		function clearItem(search, isWarnActive){
+			let removedTemp = ytModalGenerator().getTemp('itemRemovedTemp');
+
+			function initClear(){
+				let searchIndex = pastSearches.indexOf(search);
+				pastSearches.splice(searchIndex, 1);
+				localStorage.removeItem(search.name);
+			}
+
+			if(isWarnActive){
+				let warnTemp = ytModalGenerator().getTemp('warnTemp');
+				ytModalGenerator().openModal(warnTemp)
+				.then(()=> {
+					initClear();
+					ytModalGenerator().openModal(removedTemp);
+				});
+			} else {
+				initClear();
+				ytModalGenerator().openModal(removedTemp);
+			}
+		}
+
+		function clearAll(){
+			//Clears all past searches
+			let deferred = $q.defer();
+			let dangerTemp = ytModalGenerator().getTemp('dangerTemp');
+			ytModalGenerator().openModal(dangerTemp)
+			.then(() => {
+				pastSearches = [];
+				for(let key in localStorage){
+					if(key.includes('uyts')){
+						localStorage.removeItem(key);
+					}
+				}
+				deferred.resolve(pastSearches);
+			}, () => {
+				deferred.reject();
+			});
+			return deferred.promise;
+		}
+	}
+
+	//Firebase Version
+	function ytSearchHistoryFB($q, ytModalGenerator, ytSearchParams, ytUtilities){
 		let pastSearches = [];
 		this.get = get;
 		this.set = set;
@@ -1343,51 +1586,80 @@ i.e. {get: get } can be {get} (I think..)
 		// }
 	}
 	
-
-	function ytFirebase(ytModalGenerator){
-		return () => {
-			var services = {
-				init: init,
-				check: check,
-				getReference: getReference
-			};
-
-			function init(){
-				let initFirebaseTemp = ytModalGenerator().getTemp('initFirebaseTemp');
-				ytModalGenerator().openModal(initFirebaseTemp)
-				.then((obj) => {
-					var string = JSON.stringify(obj);
-					localStorage.setItem('uyt-firebase', string);
-					location.reload();
-				});
-			}
-
-			function check(){
-				if(localStorage['uyt-firebase']){
-					console.log(localStorage['uyt-firebase']);
-					let obj = JSON.parse(localStorage['uyt-firebase']);
-					console.log(obj);
-					let config = {
-						apiKey: obj.key,
-						authDomain: 'burning-torch-898.firebaseapp.com',
-						databaseURL: 'https://burning-torch-898.firebaseio.com/',
-						storageBucket: 'burning-torch-898.appspot.com'
-					};
-					firebase.initializeApp(config);
-					return this.getReference();
-				} else {
-					console.log('bypass');
-					return null;
-				}
-				//
-			}
-
-			function getReference(){
-				return new firebase.database().ref();
-			}
-
-			return services;
+	//The API key for the Firebase database **itself** will be stored in the user's local storage. 
+	function ytFirebase(ytModalGenerator, $firebaseArray, $firebaseObject){
+		let services = {
+			init: init,
+			check: check,
+			getReference: getReference,
+			getCurrent: getCurrent
 		};
+
+		let list = null,
+			current = null;
+
+		function init(){
+			let initFirebaseTemp = ytModalGenerator().getTemp('initFirebaseTemp');
+			ytModalGenerator().openModal(initFirebaseTemp)
+			.then((obj) => {
+				var string = JSON.stringify(obj);
+				localStorage.setItem('uyt-firebase', string);
+				location.reload();
+			});
+		}
+
+		//Check to see if client has necessary API key to use Firebase
+		function check(){
+			if(localStorage['uyt-firebase']){
+				console.log(localStorage['uyt-firebase']);
+				let obj = JSON.parse(localStorage['uyt-firebase']);
+				console.log(obj);
+				let config = {
+					apiKey: obj.key,
+					authDomain: 'burning-torch-898.firebaseapp.com',
+					databaseURL: 'https://burning-torch-898.firebaseio.com/',
+					storageBucket: 'burning-torch-898.appspot.com'
+				};
+				firebase.initializeApp(config);
+				current = getRefObj(obj.username);
+			} else {
+				console.log('bypass');
+				return null;
+			}
+			//
+		}
+
+		function getReference(child){
+			return new firebase.database().ref(child);
+		}
+
+		/*User's main object will be named by either username or specially-coded name, and will contain:
+		{
+			'username': 'name',
+			'password': '*****',
+			'savedVideos': {...},
+			'savedSearches': {...}
+		}
+		*/
+		function getRefObj(child) {
+			var ref = getReference(child);
+			return $firebaseObject(ref);
+		}
+
+		//We will convert our lists (savedVideos, savedSearches) into arrays
+		//We may just use 'current' since that is our saved user object that we'll only be interacting with anyways
+		function getRefArray(child) {
+			var ref = getReference(child);
+			return $firebaseArray(ref);
+		}
+
+		//On app load, we will have a reference to the user's Firebase partition, stored in 'current'
+		//We can use 
+		function getCurrent() {
+			return current;
+		}
+
+		this.services = services;
 
 	}
 
