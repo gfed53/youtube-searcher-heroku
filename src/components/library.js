@@ -28,6 +28,7 @@ i.e. {get: get } can be {get} (I think..)
 	.service('ytSearchParams', ['ytTranslate', ytSearchParams])
 	.service('ytResults', [ytResults])
 	.service('ytVideoItems', ['$q', '$state', '$stateParams', 'ytModalGenerator', 'ytUtilities', ytVideoItems])
+	.service('ytVideoItemsFB', ['$q', '$state', '$stateParams', 'ytModalGenerator', 'ytUtilities', 'ytFirebase', ytVideoItemsFB])
 	.service('ytSearchHistory', ['$q', 'ytModalGenerator', 'ytSearchParams', 'ytUtilities', ytSearchHistory])
 	.service('ytTranslate', ['$http', '$q', 'ytModalGenerator', 'ytInitAPIs', ytTranslate])
 	.service('ytSortOrder', [ytSortOrder])
@@ -418,9 +419,9 @@ i.e. {get: get } can be {get} (I think..)
 	}
 
 	//Firebase Version
-	function ytVideoItemsFB($q, $state, $stateParams, ytModalGenerator, ytUtilities){
+	function ytVideoItemsFB($q, $state, $stateParams, ytModalGenerator, ytUtilities, ytFirebase){
 		let currentVideoId = $stateParams.videoId;
-		let items = [];
+		var items = [];
 
 		this.services = {
 			init: init,
@@ -433,28 +434,28 @@ i.e. {get: get } can be {get} (I think..)
 			isSaved: isSaved
 		};
 
-		//Automatically grabs items from localStorage and saves them to variable 'items'
+		//Automatically syncs to FB and saves them to variable 'items'
 		function init(){
-			//bug: for videos that were just added, getIndex... doesn't find them, and they get pushed twice?
-			if(localStorage.length){
-				for(let key in localStorage){
-					if(key.includes('uytp')){
-						let obj = JSON.parse(localStorage[key]);
-						//Legacy fallback?
-						if(obj.$$hashKey){
-							delete obj.$$hashKey;
-						}
-						obj.name = obj.snippet.title;
-						obj.codeName = key;
-						if(ytUtilities().getIndexIfObjWithAttr(items, 'name', obj.name) === -1){
-							items.push(obj);
-						}
+			
+			if(ytFirebase.services.getCurrent()){
+				var ref = ytFirebase.services.getCurrent();
+				items = ytFirebase.services.getRefArray('savedVideos');
+				// console.log(items);
+						// let obj = JSON.parse(localStorage[key]);
+						// //Legacy fallback?
+						// if(obj.$$hashKey){
+						// 	delete obj.$$hashKey;
+						// }
+						// obj.name = obj.snippet.title;
+						// obj.codeName = key;
+						// if(ytUtilities().getIndexIfObjWithAttr(items, 'name', obj.name) === -1){
+						// 	items.push(obj);
+						// }
 					}
-				}
-			}
 		}
 
 		function getItems(){
+			// console.log(items);
 			if(!items.length){
 				init();
 			}
@@ -471,11 +472,15 @@ i.e. {get: get } can be {get} (I think..)
 			content.name = content.snippet.title;
 			content.codeName = itemName;
 
-			items.push(content);
+			items.$add(content)
+			.then((ref) => {
+				// items.$save(content);
+				ytFirebase.services.hotSave();
+				console.log("item added: " + ref);
+			});
 
-			content = JSON.stringify(content);
 
-			localStorage.setItem(itemName, content);
+			// content = JSON.stringify(content);
 
 		}
 
@@ -484,9 +489,13 @@ i.e. {get: get } can be {get} (I think..)
 			itemRemovedTemp = ytModalGenerator().getTemp('itemRemovedTemp'),
 			deferred = $q.defer();
 			function initClear(){
-				var index = items.indexOf(item);
-				items.splice(index, 1);
-				localStorage.removeItem(item.codeName);
+				// var index = items.indexOf(item);
+				// items.splice(index, 1);
+				items.$remove(item)
+				.then((ref) => {
+					console.log('item removed:', ref);
+					ytFirebase.services.hotSave();
+				});
 			}
 			if(item.codeName){ //This would take place in the playlist section
 				if(isWarnActive){
@@ -828,7 +837,7 @@ i.e. {get: get } can be {get} (I think..)
 	}
 
 	//Firebase Version
-	function ytSearchHistoryFB($q, ytModalGenerator, ytSearchParams, ytUtilities){
+	function ytSearchHistoryFB($q, ytModalGenerator, ytSearchParams, ytUtilities, ytFirebase){
 		let pastSearches = [];
 		this.get = get;
 		this.set = set;
@@ -1589,31 +1598,36 @@ i.e. {get: get } can be {get} (I think..)
 	//The API key for the Firebase database **itself** will be stored in the user's local storage. 
 	function ytFirebase(ytModalGenerator, $firebaseArray, $firebaseObject){
 		let services = {
+			save: save,
 			init: init,
-			check: check,
 			getReference: getReference,
-			getCurrent: getCurrent
+			getCurrent: getCurrent,
+			getRefObj: getRefObj,
+			getRefArray: getRefArray,
+			hotSave: hotSave
 		};
 
 		let list = null,
-			current = null;
+			current = null,
+			currentObj = null;
 
-		function init(){
+		function save(){
 			let initFirebaseTemp = ytModalGenerator().getTemp('initFirebaseTemp');
 			ytModalGenerator().openModal(initFirebaseTemp)
 			.then((obj) => {
 				var string = JSON.stringify(obj);
 				localStorage.setItem('uyt-firebase', string);
-				location.reload();
+				init(true);
+				// location.reload();
 			});
 		}
 
 		//Check to see if client has necessary API key to use Firebase
-		function check(){
+		function init(isFirstTime){
 			if(localStorage['uyt-firebase']){
-				console.log(localStorage['uyt-firebase']);
+				// console.log(localStorage['uyt-firebase']);
 				let obj = JSON.parse(localStorage['uyt-firebase']);
-				console.log(obj);
+				// console.log(obj);
 				let config = {
 					apiKey: obj.key,
 					authDomain: 'burning-torch-898.firebaseapp.com',
@@ -1621,10 +1635,24 @@ i.e. {get: get } can be {get} (I think..)
 					storageBucket: 'burning-torch-898.appspot.com'
 				};
 				firebase.initializeApp(config);
-				current = getRefObj(obj.username);
+				current = getReference(obj.username);
+				currentObj = $firebaseObject(current);
+				//If user's partition is first created..
+				if(isFirstTime){
+					currentObj.username = obj.username;
+					currentObj.password = obj.password;
+					currentObj.$save()
+					.then((ref)=>{
+						console.log('currentObj saved:', currentObj);
+						location.reload();
+						
+					});
+				}
+				console.log('currentObj save not needed:', currentObj);
+				return true;
 			} else {
 				console.log('bypass');
-				return null;
+				return false;
 			}
 			//
 		}
@@ -1649,14 +1677,21 @@ i.e. {get: get } can be {get} (I think..)
 		//We will convert our lists (savedVideos, savedSearches) into arrays
 		//We may just use 'current' since that is our saved user object that we'll only be interacting with anyways
 		function getRefArray(child) {
-			var ref = getReference(child);
-			return $firebaseArray(ref);
+			var refChild = current.child(child);
+			// console.log(current.child(child));
+			// console.log($firebaseArray(current.child(child)));
+			return $firebaseArray(refChild);
+			// return $firebaseArray(current);
 		}
 
 		//On app load, we will have a reference to the user's Firebase partition, stored in 'current'
 		//We can use 
 		function getCurrent() {
 			return current;
+		}
+
+		function hotSave() {
+			currentObj.$save();
 		}
 
 		this.services = services;

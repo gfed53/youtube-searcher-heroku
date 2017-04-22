@@ -4,11 +4,11 @@
 	angular
 	.module('myApp')
 
-	.controller('PlaylistCtrl', ['$state', '$timeout', 'ytVideoItems', 'ytSearchHistory', 'ytSearchParams', 'ytPlaylistSort', 'ytFilters', 'ytPlaylistView', 'ytDateHandler', 'ytSettings', 'ytFirebase', PlaylistCtrl]);
+	.controller('PlaylistCtrl', ['$state', '$timeout', 'ytVideoItems', 'ytVideoItemsFB', 'ytSearchHistory', 'ytSearchParams', 'ytPlaylistSort', 'ytFilters', 'ytPlaylistView', 'ytDateHandler', 'ytSettings', 'ytFirebase', PlaylistCtrl]);
 
-	function PlaylistCtrl($state, $timeout, ytVideoItems, ytSearchHistory, ytSearchParams, ytPlaylistSort, ytFilters, ytPlaylistView, ytDateHandler, ytSettings, ytFirebase){
+	function PlaylistCtrl($state, $timeout, ytVideoItems, ytVideoItemsFB, ytSearchHistory, ytSearchParams, ytPlaylistSort, ytFilters, ytPlaylistView, ytDateHandler, ytSettings, ytFirebase){
 		let vm = this;
-		vm.items = ytVideoItems.services.getItems();
+		vm.items = ytVideoItemsFB.services.getItems();
 		vm.setVideoId = setVideoId;
 		vm.pastSearches = ytSearchHistory.get();
 		vm.grab = grab;
@@ -33,13 +33,15 @@
 		vm.warnActive = ytSettings.getWarn();
 		vm.updateWarn = updateWarn;
 		//Will probably add additional options within modal
-		vm.manageStorage = ytFirebase.services.init;
+		vm.manageStorage = ytFirebase.services.save;
 
 		//Testing
 		var ref = ytFirebase.services.getCurrent();
 		// download the data into a local object
 		vm.fbData = ref;
 		//
+
+		console.log(vm.items);
 
 		//Grabs one of our saved searches, then automatically switches to the search state in its advanced search mode.
 		function grab(search){
@@ -62,7 +64,7 @@
 
 		//Removes selected video item from history/localStorage (permanently)
 		function clearItem(item){
-			ytVideoItems.services.clearItem(item, vm.warnActive);
+			ytVideoItemsFB.services.clearItem(item, vm.warnActive);
 		}
 
 		//TODO: improve logic

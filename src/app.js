@@ -10,7 +10,7 @@
 		$compileProvider.debugInfoEnabled(false);
 	}])
 
-	.run(['$timeout', '$rootScope', 'ytInitAPIs', 'ytFirebase', ($timeout, $rootScope, ytInitAPIs, ytFirebase) => {
+	.run(['$timeout', '$rootScope', 'ytInitAPIs', 'ytFirebase', 'ytVideoItemsFB', ($timeout, $rootScope, ytInitAPIs, ytFirebase, ytVideoItemsFB) => {
 		$rootScope.$on('$stateChangeSuccess', () => {
 			window.scrollTo(0,0);
 		});
@@ -19,8 +19,8 @@
 		.then(() => {
 			//Do Nothing
 		});
-		ytFirebase.services.check();
-		
+		ytFirebase.services.init();
+		ytVideoItemsFB.services.init();
 	}]);
 })();
 
