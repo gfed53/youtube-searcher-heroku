@@ -1604,21 +1604,25 @@ i.e. {get: get } can be {get} (I think..)
 			getCurrent: getCurrent,
 			getRefObj: getRefObj,
 			getRefArray: getRefArray,
-			hotSave: hotSave
+			getCredObj: getCredObj,
+			hotSave: hotSave,
+			isLoggedIn: isLoggedIn
 		};
 
 		let list = null,
 			current = null,
-			currentObj = null;
+			currentObj = null,
+			credObj = {};
 
 		function save(){
 			let initFirebaseTemp = ytModalGenerator().getTemp('initFirebaseTemp');
 			ytModalGenerator().openModal(initFirebaseTemp)
 			.then((obj) => {
-				var string = JSON.stringify(obj);
-				localStorage.setItem('uyt-firebase', string);
-				init(true);
-				// location.reload();
+				if(obj){
+					addCreds(obj);
+				} else {
+					clearCreds();
+				}
 			});
 		}
 
@@ -1649,6 +1653,7 @@ i.e. {get: get } can be {get} (I think..)
 					});
 				}
 				console.log('currentObj save not needed:', currentObj);
+				credObj = obj;
 				return true;
 			} else {
 				console.log('bypass');
@@ -1684,6 +1689,10 @@ i.e. {get: get } can be {get} (I think..)
 			// return $firebaseArray(current);
 		}
 
+		function getCredObj(){
+			return credObj;
+		}
+
 		//On app load, we will have a reference to the user's Firebase partition, stored in 'current'
 		//We can use 
 		function getCurrent() {
@@ -1692,6 +1701,21 @@ i.e. {get: get } can be {get} (I think..)
 
 		function hotSave() {
 			currentObj.$save();
+		}
+
+		function isLoggedIn(){
+			return !!current;
+		}
+
+		function addCreds(obj){
+			var string = JSON.stringify(obj);
+			localStorage.setItem('uyt-firebase', string);
+			init(true);
+		}
+
+		function clearCreds(){
+			localStorage.removeItem('uyt-firebase');
+			location.reload();
 		}
 
 		this.services = services;

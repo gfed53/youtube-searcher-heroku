@@ -3,15 +3,25 @@
 (function(){
 	angular
 	.module('myApp')
-	.controller('InitFirebaseModalController', ['$uibModalInstance', InitFirebaseModalController]);
+	.controller('InitFirebaseModalController', ['$uibModalInstance', 'ytFirebase', InitFirebaseModalController]);
 
-	function InitFirebaseModalController($uibModalInstance){
+	function InitFirebaseModalController($uibModalInstance, ytFirebase){
 		let vm = this;
 		vm.ok = ok;
+		vm.logout = logout;
 		vm.cancel = cancel;
+		vm.isLoggedIn = ytFirebase.services.isLoggedIn();
+		vm.credObj = ytFirebase.services.getCredObj();
+		console.log(vm.isLoggedIn);
+		console.log(vm.credObj);
 
+		//CB will watch for value. If truthy, we're logging in. Else, we log out.
 		function ok(obj){
 			$uibModalInstance.close(obj);
+		}
+
+		function logout(){
+			$uibModalInstance.close(false);
 		}
 
 		function cancel(){

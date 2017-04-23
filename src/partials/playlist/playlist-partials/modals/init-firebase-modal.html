@@ -1,4 +1,6 @@
-<form ng-submit="initFirebaseModal.ok(initFirebaseModal.obj)">
+<!-- User not logged in -->
+
+<form ng-submit="initFirebaseModal.ok(initFirebaseModal.obj)" ng-if="!initFirebaseModal.isLoggedIn">
     <div class="modal-body modal-body-saved-search">
         <p>Please enter a valid API key.</p>
         <input autofocus ng-model="initFirebaseModal.obj.key" type="password" class="form-control search-modal-input" placeholder="Google API key">
@@ -11,3 +13,17 @@
         <button class="btn btn-warning" type="button" ng-click="initFirebaseModal.cancel()">Cancel</button>
     </div>
 </form>
+
+<!-- User logged in -->
+<form ng-submit="initFirebaseModal.logout()" ng-if="initFirebaseModal.isLoggedIn">
+	<div class="modal-body">
+		<h2>Hello {{ initFirebaseModal.credObj.username }}</h2>
+        <p>You are currently logged in.</p>
+	</div>
+	<div class="modal-footer">
+        <button class="btn btn-primary" type="submit">Log Out</button>
+        <button class="btn btn-warning" type="button" ng-click="initFirebaseModal.cancel()">Cancel</button>
+    </div>
+</form>
+
+
