@@ -1627,7 +1627,7 @@ i.e. {get: get } can be {get} (I think..)
 		}
 
 		//Check to see if client has necessary API key to use Firebase
-		function init(isFirstTime){
+		function init(justLoggedIn, credsObj){
 			if(localStorage['uyt-firebase']){
 				// console.log(localStorage['uyt-firebase']);
 				let obj = JSON.parse(localStorage['uyt-firebase']);
@@ -1641,8 +1641,9 @@ i.e. {get: get } can be {get} (I think..)
 				firebase.initializeApp(config);
 				current = getReference(obj.username);
 				currentObj = $firebaseObject(current);
-				//If user's partition is first created..
-				if(isFirstTime){
+				//If user has just logged in..
+				if(justLoggedIn){
+					//Check if $id(partition) already exists
 					currentObj.username = obj.username;
 					currentObj.password = obj.password;
 					currentObj.$save()
@@ -1656,7 +1657,7 @@ i.e. {get: get } can be {get} (I think..)
 				credObj = obj;
 				return true;
 			} else {
-				console.log('bypass');
+				console.log('Using localStorage');
 				return false;
 			}
 			//
@@ -1710,7 +1711,7 @@ i.e. {get: get } can be {get} (I think..)
 		function addCreds(obj){
 			var string = JSON.stringify(obj);
 			localStorage.setItem('uyt-firebase', string);
-			init(true);
+			init(true, obj);
 		}
 
 		function clearCreds(){

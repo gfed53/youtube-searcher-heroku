@@ -8,7 +8,11 @@
 
 	function PlaylistCtrl($state, $timeout, ytVideoItems, ytVideoItemsFB, ytSearchHistory, ytSearchParams, ytPlaylistSort, ytFilters, ytPlaylistView, ytDateHandler, ytSettings, ytFirebase){
 		let vm = this;
-		vm.items = ytVideoItemsFB.services.getItems();
+
+		// Decide which services to use (firebase or localStorage)
+		var videoItemsService = ytFirebase.services.isLoggedIn() ? ytVideoItemsFB : ytVideoItems;
+
+		vm.items = videoItemsService.services.getItems();
 		vm.setVideoId = setVideoId;
 		vm.pastSearches = ytSearchHistory.get();
 		vm.grab = grab;
@@ -64,12 +68,12 @@
 
 		//Removes selected video item from history/localStorage (permanently)
 		function clearItem(item){
-			ytVideoItemsFB.services.clearItem(item, vm.warnActive);
+			videoItemsService.services.clearItem(item, vm.warnActive);
 		}
 
 		//TODO: improve logic
 		function clearAllVideos(){
-			ytVideoItems.services.clearAllItems()
+			videoItemsService.services.clearAllItems()
 			.then((items) => {
 				vm.items = items;
 			});
@@ -77,7 +81,7 @@
 		}
 
 		function setVideoId(videoId){
-			ytVideoItems.services.setVideoId(videoId);
+			videoItemsService.services.setVideoId(videoId);
 		}
 
 		function sortVideos(predicate){
