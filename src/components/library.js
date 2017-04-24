@@ -36,7 +36,7 @@ i.e. {get: get } can be {get} (I think..)
 	.service('ytPlaylistSort', [ytPlaylistSort])
 	.service('ytInitAPIs', ['$q', 'ytModalGenerator', ytInitAPIs])
 	.service('ytSettings', [ytSettings])
-	.service('ytFirebase', ['ytModalGenerator', '$firebaseArray', '$firebaseObject', ytFirebase]);
+	.service('ytFirebase', ['ytModalGenerator', 'ytInitAPIs', '$state', '$firebaseArray', '$firebaseObject', ytFirebase]);
 
 	//Used to follow security measures with YouTube video links in particular 
 	function ytTrustSrc($sce){
@@ -59,7 +59,7 @@ i.e. {get: get } can be {get} (I think..)
 			parsedBefore = (params.before ? ytDateHandler().getDate(params.before, 'M/D/YYYY') : undefined);
 
 			let request = {
-				key: apisObj.youTubeKey,
+				key: apisObj.googKey,
 				part: 'snippet',
 				maxResults: 50,
 				order: params.order,
@@ -153,7 +153,7 @@ i.e. {get: get } can be {get} (I think..)
 		return (channel) => {
 			let url = 'https://www.googleapis.com/youtube/v3/search';
 			let request = {
-				key: ytInitAPIs.apisObj.youTubeKey,
+				key: ytInitAPIs.apisObj.googKey,
 				part: 'snippet',
 				maxResults: 50,
 				order: 'relevance',
@@ -210,7 +210,7 @@ i.e. {get: get } can be {get} (I think..)
 		return (id) => {
 			let url = 'https://www.googleapis.com/youtube/v3/videos',
 			request = {
-				key: ytInitAPIs.apisObj.youTubeKey,
+				key: ytInitAPIs.apisObj.googKey,
 				part: 'snippet, contentDetails',
 				//contentDetails contains the duration property.
 				id: id
@@ -243,7 +243,7 @@ i.e. {get: get } can be {get} (I think..)
 		return (id) => {
 			let url = "https://www.googleapis.com/youtube/v3/channels",
 			request = {
-				key: ytInitAPIs.apisObj.youTubeKey,
+				key: ytInitAPIs.apisObj.googKey,
 				part: 'snippet',
 				id: id
 			},
@@ -452,9 +452,9 @@ i.e. {get: get } can be {get} (I think..)
 						// 	items.push(obj);
 						// }
 					}
-		}
+				}
 
-		function getItems(){
+				function getItems(){
 			// console.log(items);
 			if(!items.length){
 				init();
@@ -1509,7 +1509,7 @@ i.e. {get: get } can be {get} (I think..)
 				console.log('apis obj is:', obj);
 				this.apisObj = obj;
 				//Updating the DOM (for the Google Maps API)
-				updateDOM(this.apisObj.mapsKey);
+				updateDOM(this.apisObj.googKey);
 				deferred.resolve(this.apisObj);
 			} else {
 				ytModalGenerator().openModal(initTemp)
@@ -1519,7 +1519,7 @@ i.e. {get: get } can be {get} (I think..)
 					} else {
 						localStorage.setItem('uyts-log-info', JSON.stringify(result));
 						this.apisObj = localStorage['uyts-log-info'];
-						updateDOM(this.apisObj.mapsKey);
+						updateDOM(this.apisObj.googKey);
 
 						//Refresh page to enable g maps to work
 						//If I add a separate success modal, we will move this to that callback.
@@ -1538,7 +1538,7 @@ i.e. {get: get } can be {get} (I think..)
 				} else {
 					localStorage.setItem('uyts-log-info', JSON.stringify(result));
 					this.apisObj = localStorage['uyts-log-info'];
-					updateDOM(this.apisObj.mapsKey);
+					updateDOM(this.apisObj.googKey);
 
 					//Refresh page to enable g maps to work
 					location.reload();
@@ -1596,7 +1596,7 @@ i.e. {get: get } can be {get} (I think..)
 	}
 	
 	//The API key for the Firebase database **itself** will be stored in the user's local storage. 
-	function ytFirebase(ytModalGenerator, $firebaseArray, $firebaseObject){
+	function ytFirebase(ytModalGenerator, ytInitAPIs, $state, $firebaseArray, $firebaseObject){
 		let services = {
 			save: save,
 			init: init,
@@ -1610,9 +1610,9 @@ i.e. {get: get } can be {get} (I think..)
 		};
 
 		let list = null,
-			current = null,
-			currentObj = null,
-			credObj = {};
+		current = null,
+		currentObj = null,
+		credObj = {};
 
 		function save(){
 			let initFirebaseTemp = ytModalGenerator().getTemp('initFirebaseTemp');
@@ -1633,7 +1633,7 @@ i.e. {get: get } can be {get} (I think..)
 				let obj = JSON.parse(localStorage['uyt-firebase']);
 				// console.log(obj);
 				let config = {
-					apiKey: obj.key,
+					apiKey: ytInitAPIs.apisObj.googKey,
 					authDomain: 'burning-torch-898.firebaseapp.com',
 					databaseURL: 'https://burning-torch-898.firebaseio.com/',
 					storageBucket: 'burning-torch-898.appspot.com'
@@ -1641,21 +1641,36 @@ i.e. {get: get } can be {get} (I think..)
 				firebase.initializeApp(config);
 				current = getReference(obj.username);
 				currentObj = $firebaseObject(current);
+				currentObj.$loaded()
+				.then((data)=>{
+					if(justLoggedIn){
+						//Check if $id(partition) already exists
+						if(currentObj.password){
+							if(currentObj.password !== obj.password){
+								console.log('passwords dont match');
+							} else {
+								console.log('resuming..');
+								//$state.reload() causes error with menubar
+								location.reload();
+							}
+							
+						} else {
+							currentObj.username = obj.username;
+							currentObj.password = obj.password;
+							currentObj.$save()
+							.then((ref)=>{
+								console.log('currentObj saved:', currentObj);
+								location.reload();
+
+							});
+						}
+					}
+					console.log('currentObj save not needed:', currentObj);
+					credObj = obj;
+					return true;
+				});
 				//If user has just logged in..
-				if(justLoggedIn){
-					//Check if $id(partition) already exists
-					currentObj.username = obj.username;
-					currentObj.password = obj.password;
-					currentObj.$save()
-					.then((ref)=>{
-						console.log('currentObj saved:', currentObj);
-						location.reload();
-						
-					});
-				}
-				console.log('currentObj save not needed:', currentObj);
-				credObj = obj;
-				return true;
+				
 			} else {
 				console.log('Using localStorage');
 				return false;
