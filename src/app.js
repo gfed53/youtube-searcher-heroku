@@ -17,9 +17,10 @@
 		//Check API keys stored in localStorage
 		ytInitAPIs.check()
 		.then(() => {
-			//Do Nothing
+			//Connect to Firebase
+			ytFirebase.services.initApp(ytFirebase.services.getCredObj());
 		});
-		ytFirebase.services.init();
+		// ytFirebase.services.init();
 		ytVideoItemsFB.services.init();
 	}]);
 })();

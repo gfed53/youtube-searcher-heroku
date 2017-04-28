@@ -12,12 +12,29 @@
 		vm.cancel = cancel;
 		vm.isLoggedIn = ytFirebase.services.isLoggedIn();
 		vm.credObj = ytFirebase.services.getCredObj();
+		vm.pwError = false;
 		console.log(vm.isLoggedIn);
 		console.log(vm.credObj);
 
 		//CB will watch for value. If truthy, we're logging in. Else, we log out.
 		function ok(obj){
-			$uibModalInstance.close(obj);
+			//
+			//We need to initApp first to retrieve the app reference (so we can compare passwords)
+			
+			ytFirebase.services.grabCluster(obj)
+			.then(()=> {
+				//Then we run checkValid to compare. checkValid can take resolve/reject CBs?
+				ytFirebase.services.checkValid(obj, ()=>{
+					//We addCreds only after we know that they're correct
+					console.log('okay');
+					// $uibModalInstance.close(obj);
+				}, ()=>{
+					vm.pwError = true;
+				});
+				
+			});
+
+			// $uibModalInstance.close(obj);
 		}
 
 		function logout(){

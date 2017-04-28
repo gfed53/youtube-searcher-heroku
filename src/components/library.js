@@ -36,7 +36,7 @@ i.e. {get: get } can be {get} (I think..)
 	.service('ytPlaylistSort', [ytPlaylistSort])
 	.service('ytInitAPIs', ['$q', 'ytModalGenerator', ytInitAPIs])
 	.service('ytSettings', [ytSettings])
-	.service('ytFirebase', ['ytModalGenerator', 'ytInitAPIs', '$state', '$firebaseArray', '$firebaseObject', ytFirebase]);
+	.service('ytFirebase', ['ytModalGenerator', 'ytInitAPIs', '$q', '$state', '$firebaseArray', '$firebaseObject', ytFirebase]);
 
 	//Used to follow security measures with YouTube video links in particular 
 	function ytTrustSrc($sce){
@@ -1596,23 +1596,35 @@ i.e. {get: get } can be {get} (I think..)
 	}
 	
 	//The API key for the Firebase database **itself** will be stored in the user's local storage. 
-	function ytFirebase(ytModalGenerator, ytInitAPIs, $state, $firebaseArray, $firebaseObject){
+	function ytFirebase(ytModalGenerator, ytInitAPIs, $q, $state, $firebaseArray, $firebaseObject){
 		let services = {
 			save: save,
 			init: init,
+			initApp: initApp,
+			grabCluster: grabCluster,
+			checkValid: checkValid,
 			getReference: getReference,
 			getCurrent: getCurrent,
 			getRefObj: getRefObj,
 			getRefArray: getRefArray,
 			getCredObj: getCredObj,
 			hotSave: hotSave,
-			isLoggedIn: isLoggedIn
+			isLoggedIn: isLoggedIn,
+			addCreds: addCreds
 		};
 
 		let list = null,
 		current = null,
 		currentObj = null,
-		credObj = {};
+		loggedIn = false,
+		credObj = null;
+
+		//Immediately check if we have our stored firebase creds
+		(()=>{
+			if(localStorage['uyt-firebase']){
+				credObj = JSON.parse(localStorage['uyt-firebase']);
+			}
+		})();
 
 		function save(){
 			let initFirebaseTemp = ytModalGenerator().getTemp('initFirebaseTemp');
@@ -1626,8 +1638,9 @@ i.e. {get: get } can be {get} (I think..)
 			});
 		}
 
-		//Check to see if client has necessary API key to use Firebase
+		
 		function init(justLoggedIn, credsObj){
+			//Check to see if client has necessary API key to use Firebase
 			if(localStorage['uyt-firebase']){
 				// console.log(localStorage['uyt-firebase']);
 				let obj = JSON.parse(localStorage['uyt-firebase']);
@@ -1641,13 +1654,20 @@ i.e. {get: get } can be {get} (I think..)
 				firebase.initializeApp(config);
 				current = getReference(obj.username);
 				currentObj = $firebaseObject(current);
+				//Assume ok until issue
+				loggedIn = true;
 				currentObj.$loaded()
 				.then((data)=>{
 					if(justLoggedIn){
 						//Check if $id(partition) already exists
 						if(currentObj.password){
+							//If password doesn't match..
 							if(currentObj.password !== obj.password){
+								//Change for appropriate modal rendering
+								// loggedIn = false;
 								console.log('passwords dont match');
+								//Reroute
+								// save();
 							} else {
 								console.log('resuming..');
 								//$state.reload() causes error with menubar
@@ -1665,17 +1685,74 @@ i.e. {get: get } can be {get} (I think..)
 							});
 						}
 					}
+					//Firebase creds already set, 
 					console.log('currentObj save not needed:', currentObj);
 					credObj = obj;
 					return true;
 				});
-				//If user has just logged in..
 				
 			} else {
 				console.log('Using localStorage');
 				return false;
 			}
 			//
+		}
+
+		function initApp(credsObj){
+			let config = {
+				apiKey: ytInitAPIs.apisObj.googKey,
+				authDomain: 'burning-torch-898.firebaseapp.com',
+				databaseURL: 'https://burning-torch-898.firebaseio.com/',
+				storageBucket: 'burning-torch-898.appspot.com'
+			};
+			firebase.initializeApp(config);
+			//This would occur when we already have our firebase creds stored in our localStorage. This means the creds we have are legit - we are locked into a cluster with the correct password.
+			if(credsObj){
+				grabCluster(credsObj);
+			}
+			
+		}
+
+		//Lets the app know which cluster the user will be assigned to. This will run assuming the app is already initialized
+		function grabCluster(credsObj){
+			var deferred = $q.defer();
+			current = getReference(credsObj.username);
+			currentObj = $firebaseObject(current);
+			currentObj.$loaded()
+			.then((data)=>{
+				deferred.resolve();
+			});
+
+			return deferred.promise;
+
+		}
+
+		function checkValid(obj,res,err){
+			if(currentObj.password){
+				//If password doesn't match..
+				if(currentObj.password !== obj.password){
+					//Change for appropriate modal rendering
+					// loggedIn = false;
+					console.log('passwords dont match');
+					err();
+					//Reroute
+					// save();
+				} else {
+					console.log('ok');
+					res();
+					// location.reload();
+				}
+				
+			} else {
+				currentObj.username = obj.username;
+				currentObj.password = obj.password;
+				currentObj.$save()
+				.then((ref)=>{
+					console.log('currentObj saved:', currentObj);
+					location.reload();
+
+				});
+			}
 		}
 
 		function getReference(child){
@@ -1720,13 +1797,14 @@ i.e. {get: get } can be {get} (I think..)
 		}
 
 		function isLoggedIn(){
-			return !!current;
+			return loggedIn;
 		}
 
 		function addCreds(obj){
 			var string = JSON.stringify(obj);
 			localStorage.setItem('uyt-firebase', string);
-			init(true, obj);
+			location.reload();
+			// init(true, obj);
 		}
 
 		function clearCreds(){
