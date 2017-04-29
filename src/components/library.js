@@ -476,10 +476,10 @@ i.e. {get: get } can be {get} (I think..)
 			let warnTemp = ytModalGenerator().getTemp('warnTemp'),
 			itemRemovedTemp = ytModalGenerator().getTemp('itemRemovedTemp'),
 			deferred = $q.defer();
-			function initClear(){
+			function initClear(_item_){
 				// var index = items.indexOf(item);
 				// items.splice(index, 1);
-				items.$remove(item)
+				items.$remove(_item_)
 				.then((ref) => {
 					console.log('item removed:', ref);
 					ytFirebase.services.hotSave();
@@ -489,12 +489,12 @@ i.e. {get: get } can be {get} (I think..)
 				if(isWarnActive){
 					ytModalGenerator().openModal(warnTemp)
 					.then(()=> {
-						initClear();
+						initClear(item);
 						ytModalGenerator().openModal(itemRemovedTemp);
 						deferred.resolve();
 					});
 				} else {
-					initClear();
+					initClear(item);
 					ytModalGenerator().openModal(itemRemovedTemp);
 					deferred.resolve();
 				}
@@ -504,9 +504,7 @@ i.e. {get: get } can be {get} (I think..)
 					if(_item_.id.videoId === item.id){
 						let current = _item_;
 						//Remove both from localStorage and items array within this service.
-						localStorage.removeItem(current.codeName);
-						let currentIndex = items.indexOf(current);
-						items.splice(currentIndex, 1);
+						initClear(current);
 						deferred.resolve();
 					}
 				});
@@ -547,9 +545,12 @@ i.e. {get: get } can be {get} (I think..)
 		}
 
 		//Check if video item is saved()
+		//Bug: this will not always be retrieved in time if loading page from video state. It would depend on how quickly fbase loads up. Make async/use promise?
 		function isSaved(id){
 			let bool;
+			console.log('items', items);
 			if(items.length){
+				console.log('items are loaded');
 				items.forEach((_item_) => {
 					if(_item_.id.videoId === id){
 						bool = true;

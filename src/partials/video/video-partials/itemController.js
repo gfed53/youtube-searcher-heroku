@@ -4,10 +4,14 @@
 	angular
 	.module('myApp')
 
-	.controller('ItemCtrl', ['$state', '$stateParams', 'ytCurrentVideo', 'ytCurrentChannel', 'ytResults', 'ytVideoItems', 'ytSearchParams', 'ytTrustSrc', ItemCtrl]);
+	.controller('ItemCtrl', ['$state', '$stateParams', 'ytCurrentVideo', 'ytCurrentChannel', 'ytResults', 'ytVideoItems', 'ytVideoItemsFB', 'ytSearchParams', 'ytTrustSrc', 'ytFirebase', ItemCtrl]);
 
-	function ItemCtrl($state, $stateParams, ytCurrentVideo, ytCurrentChannel, ytResults, ytVideoItems, ytSearchParams, ytTrustSrc){
+	function ItemCtrl($state, $stateParams, ytCurrentVideo, ytCurrentChannel, ytResults, ytVideoItems, ytVideoItemsFB, ytSearchParams, ytTrustSrc, ytFirebase){
 		let vm = this;
+
+		// Decide which services to use (firebase or localStorage)
+		var videoItemsService = ytFirebase.services.isLoggedIn() ? ytVideoItemsFB : ytVideoItems;
+
 		vm.trustSrc = ytTrustSrc;
 		vm.videoId = $stateParams.videoId;
 		vm.url = 'http://www.youtube.com/embed/'+vm.videoId;
@@ -22,24 +26,26 @@
 		vm.getVideoItem(vm.videoId);
 		
 		//Init list of saved video items to compare current video against (if loading page in video view)
-		ytVideoItems.services.init();
+		videoItemsService.services.init();
 
 		
 		//In case of page refresh, we need to automatically save the videoId, or else, on state change, the video player tab will still exist with nowhere to go.
-		ytVideoItems.services.setVideoId(vm.videoId);
+		videoItemsService.services.setVideoId(vm.videoId);
 
 		//We retrieve the video from the API in order to get  
 		function getVideoItem(id){
 			ytCurrentVideo(id).getVideo()
 			.then((response) => {
 				vm.item = response.data.items[0];
-				vm.isSaved = ytVideoItems.services.isSaved(vm.item.id);
+				console.log(vm.item);
+				//Bug: this will not always be retrieved in time if loading page from video state. It would depend on how quickly fbase loads up. Make async/use promise?
+				vm.isSaved = videoItemsService.services.isSaved(vm.item.id);
 			});
 		}
 
 		//Removes selected video item from history/localStorage (permanently)
 		function clearItem(item){
-			ytVideoItems.services.clearItem(item);
+			videoItemsService.services.clearItem(item);
 			vm.cleared = true;
 		}
 

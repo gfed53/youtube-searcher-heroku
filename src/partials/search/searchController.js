@@ -8,7 +8,8 @@
 
 	function SearchCtrl($scope, $location, $timeout, $interval, $anchorScroll, $uibModal, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytSearchHistoryFB, ytVideoItems, ytVideoItemsFB, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus, ytTranslate, ytSortOrder, ytDateHandler, ytInitAPIs, ytFirebase){
 		let vm = this;
-
+		
+		// Decide which services to use (firebase or localStorage)
 		var searchHistoryService = ytFirebase.services.isLoggedIn() ? ytSearchHistoryFB : ytSearchHistory;
 
 		vm.initMap = initMap;
