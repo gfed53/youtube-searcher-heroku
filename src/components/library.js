@@ -30,6 +30,7 @@ i.e. {get: get } can be {get} (I think..)
 	.service('ytVideoItems', ['$q', '$state', '$stateParams', 'ytModalGenerator', 'ytUtilities', ytVideoItems])
 	.service('ytVideoItemsFB', ['$q', '$state', '$stateParams', 'ytModalGenerator', 'ytUtilities', 'ytFirebase', ytVideoItemsFB])
 	.service('ytSearchHistory', ['$q', 'ytModalGenerator', 'ytSearchParams', 'ytUtilities', ytSearchHistory])
+	.service('ytSearchHistoryFB', ['$q', 'ytModalGenerator', 'ytSearchParams', 'ytUtilities', 'ytFirebase', ytSearchHistoryFB])
 	.service('ytTranslate', ['$http', '$q', 'ytModalGenerator', 'ytInitAPIs', ytTranslate])
 	.service('ytSortOrder', [ytSortOrder])
 	.service('ytPlaylistView', [ytPlaylistView])
@@ -288,7 +289,6 @@ i.e. {get: get } can be {get} (I think..)
 
 		//Automatically grabs items from localStorage and saves them to variable 'items'
 		function init(){
-			//bug: for videos that were just added, getIndex... doesn't find them, and they get pushed twice?
 			if(localStorage.length){
 				for(let key in localStorage){
 					if(key.includes('uytp')){
@@ -565,26 +565,26 @@ i.e. {get: get } can be {get} (I think..)
 	//Where saved search params are stored (so while switching views/controllers, changes in search params will be kept)
 	function ytSearchParams(ytTranslate){
 		let params = {
-			keyword: undefined,
-			searchedKeyword: undefined,
+			keyword: null,
+			searchedKeyword: null,
 			searchType: 'video',
-			channel: undefined,
-			channelId: undefined,
-			image: undefined,
+			channel: null,
+			channelId: null,
+			image: null,
 			order: 'relevance',
-			after: undefined,
-			before: undefined,
-			safeSearch: undefined,
-			location: undefined,
-			locationRadius: undefined,
-			lat: undefined,
-			lng: undefined,
-			radius: undefined,
-			currentPage: undefined,
-			prevPageToken: undefined,
-			nextPageToken: undefined,
-			name: undefined,
-			date: undefined,
+			after: null,
+			before: null,
+			safeSearch: null,
+			location: null,
+			locationRadius: null,
+			lat: null,
+			lng: null,
+			radius: null,
+			currentPage: null,
+			prevPageToken: null,
+			nextPageToken: null,
+			name: null,
+			date: null,
 			lang: ytTranslate.langs[0]
 		};
 
@@ -827,33 +827,20 @@ i.e. {get: get } can be {get} (I think..)
 	//Firebase Version
 	function ytSearchHistoryFB($q, ytModalGenerator, ytSearchParams, ytUtilities, ytFirebase){
 		let pastSearches = [];
+		this.init = init;
 		this.get = get;
 		this.set = set;
 		this.clearItem = clearItem;
 		this.clearAll = clearAll;
 
-		function get(){
-			if(localStorage.length > 0){
-				for(let key in localStorage){
-					if(key.includes('uyts')){
-						let obj = localStorage.getItem(key);
-						obj = JSON.parse(obj);
-						//Fix for searches with date, correcting format to be used in search. 
-						if(obj.name){
-							if(obj.after && obj.after !== null){
-								obj.after = new Date(obj.after);
-							}
-							if(obj.before && obj.before !== null){
-								obj.before = new Date(obj.before);
-							}
-							//This is here to avoid existent objects getting reappended to the array within the session when they shouldn't be
-							if(ytUtilities().getIndexIfObjWithAttr(pastSearches, 'name', obj.name) === -1){
-								pastSearches.push(obj);
-							}
-						}
-					}
-				}
+		function init(){
+			if(ytFirebase.services.getCurrent()){
+				var ref = ytFirebase.services.getCurrent();
+				pastSearches = ytFirebase.services.getRefArray('savedSearches');
 			}
+		}
+
+		function get(){
 			return pastSearches;
 		}
 
@@ -865,11 +852,26 @@ i.e. {get: get } can be {get} (I think..)
 				if(params.name === 'cancel'){
 					//Aborted
 				} else if(params.name){
+					console.log('params', params);
+					//Have to change any undefineds(pageTokens) to null, then change them back when retrieving??
+					for(var key in params){
+						if(params[key] === undefined){
+							params[key] = null;
+						}
+					}
+
+
 					params.nameShrt = params.name;
 					params.name = params.name+'-uyts';
 					params.date = Date.now();
-					pastSearches.push(params);
-					localStorage.setItem(params.name, JSON.stringify(params));
+					console.log('params are now..', params);
+					// pastSearches.push(params);
+					// localStorage.setItem(params.name, JSON.stringify(params));
+					pastSearches.$add(params)
+					.then((ref)=>{
+						ytFirebase.services.hotSave();
+						console.log("search added: " + ref);
+					});
 				} else {
 					service.set(params, service);
 				}
@@ -880,9 +882,14 @@ i.e. {get: get } can be {get} (I think..)
 			let removedTemp = ytModalGenerator().getTemp('itemRemovedTemp');
 
 			function initClear(){
-				let searchIndex = pastSearches.indexOf(search);
-				pastSearches.splice(searchIndex, 1);
-				localStorage.removeItem(search.name);
+				// let searchIndex = pastSearches.indexOf(search);
+				// pastSearches.splice(searchIndex, 1);
+				// localStorage.removeItem(search.name);
+				pastSearches.$remove(search)
+				.then((ref) => {
+					console.log('search removed:', ref);
+					ytFirebase.services.hotSave();
+				});
 			}
 
 			if(isWarnActive){

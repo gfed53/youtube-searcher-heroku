@@ -4,17 +4,18 @@
 	angular
 	.module('myApp')
 
-	.controller('PlaylistCtrl', ['$state', '$timeout', 'ytVideoItems', 'ytVideoItemsFB', 'ytSearchHistory', 'ytSearchParams', 'ytPlaylistSort', 'ytFilters', 'ytPlaylistView', 'ytDateHandler', 'ytSettings', 'ytFirebase', PlaylistCtrl]);
+	.controller('PlaylistCtrl', ['$state', '$timeout', 'ytVideoItems', 'ytVideoItemsFB', 'ytSearchHistory', 'ytSearchHistoryFB', 'ytSearchParams', 'ytPlaylistSort', 'ytFilters', 'ytPlaylistView', 'ytDateHandler', 'ytSettings', 'ytFirebase', PlaylistCtrl]);
 
-	function PlaylistCtrl($state, $timeout, ytVideoItems, ytVideoItemsFB, ytSearchHistory, ytSearchParams, ytPlaylistSort, ytFilters, ytPlaylistView, ytDateHandler, ytSettings, ytFirebase){
+	function PlaylistCtrl($state, $timeout, ytVideoItems, ytVideoItemsFB, ytSearchHistory, ytSearchHistoryFB, ytSearchParams, ytPlaylistSort, ytFilters, ytPlaylistView, ytDateHandler, ytSettings, ytFirebase){
 		let vm = this;
 
 		// Decide which services to use (firebase or localStorage)
 		var videoItemsService = ytFirebase.services.isLoggedIn() ? ytVideoItemsFB : ytVideoItems;
+		var searchHistoryService = ytFirebase.services.isLoggedIn() ? ytSearchHistoryFB : ytSearchHistory;
 
 		vm.items = videoItemsService.services.getItems();
 		vm.setVideoId = setVideoId;
-		vm.pastSearches = ytSearchHistory.get();
+		vm.pastSearches = searchHistoryService.get();
 		vm.grab = grab;
 		vm.clearSearch = clearSearch;
 		vm.clearItem = clearItem;
@@ -55,12 +56,12 @@
 
 		//Removes selected search from history/localStorage (permanently)
 		function clearSearch(search){
-			ytSearchHistory.clearItem(search, vm.warnActive);
+			searchHistoryService.clearItem(search, vm.warnActive);
 		}
 
 		//Removes ALL searches from history/localStorage (permanently!)
 		function clearAllSearches(){
-			ytSearchHistory.clearAll()
+			searchHistoryService.clearAll()
 			.then((searches) => {
 				vm.pastSearches = searches;
 			});

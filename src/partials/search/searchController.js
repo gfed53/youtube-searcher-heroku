@@ -4,10 +4,13 @@
 	angular
 	.module('myApp')
 
-	.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$interval', '$anchorScroll', '$uibModal', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytVideoItems', 'ytVideoItemsFB', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', 'ytCheckScrollBtnStatus', 'ytTranslate', 'ytSortOrder', 'ytDateHandler', 'ytInitAPIs', SearchCtrl]);
+	.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$interval', '$anchorScroll', '$uibModal', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytSearchHistoryFB', 'ytVideoItems', 'ytVideoItemsFB', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', 'ytCheckScrollBtnStatus', 'ytTranslate', 'ytSortOrder', 'ytDateHandler', 'ytInitAPIs', 'ytFirebase', SearchCtrl]);
 
-	function SearchCtrl($scope, $location, $timeout, $interval, $anchorScroll, $uibModal, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytVideoItems, ytVideoItemsFB, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus, ytTranslate, ytSortOrder, ytDateHandler, ytInitAPIs){
+	function SearchCtrl($scope, $location, $timeout, $interval, $anchorScroll, $uibModal, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytSearchHistoryFB, ytVideoItems, ytVideoItemsFB, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus, ytTranslate, ytSortOrder, ytDateHandler, ytInitAPIs, ytFirebase){
 		let vm = this;
+
+		var searchHistoryService = ytFirebase.services.isLoggedIn() ? ytSearchHistoryFB : ytSearchHistory;
+
 		vm.initMap = initMap;
 		vm.submit = submit;
 		vm.setVideoId = setVideoId;	
@@ -173,7 +176,7 @@
 		}
 
 		function saveSearch(params){
-			ytSearchHistory.set(params, ytSearchHistory);
+			searchHistoryService.set(params, searchHistoryService);
 		}
 
 		function addToPlaylist(result){

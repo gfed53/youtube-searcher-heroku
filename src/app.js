@@ -10,7 +10,7 @@
 		$compileProvider.debugInfoEnabled(false);
 	}])
 
-	.run(['$timeout', '$rootScope', 'ytInitAPIs', 'ytFirebase', 'ytVideoItemsFB', ($timeout, $rootScope, ytInitAPIs, ytFirebase, ytVideoItemsFB) => {
+	.run(['$timeout', '$rootScope', 'ytInitAPIs', 'ytFirebase', 'ytVideoItemsFB', 'ytSearchHistoryFB', ($timeout, $rootScope, ytInitAPIs, ytFirebase, ytVideoItemsFB, ytSearchHistoryFB) => {
 		$rootScope.$on('$stateChangeSuccess', () => {
 			window.scrollTo(0,0);
 		});
@@ -21,6 +21,7 @@
 			ytFirebase.services.initApp(ytFirebase.services.getCredObj());
 			//Retrieve saved content if fb cluster is set up properly
 			ytVideoItemsFB.services.init();
+			ytSearchHistoryFB.init();
 		});
 		
 	}]);
