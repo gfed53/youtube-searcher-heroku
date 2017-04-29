@@ -436,25 +436,13 @@ i.e. {get: get } can be {get} (I think..)
 
 		//Automatically syncs to FB and saves them to variable 'items'
 		function init(){
-			
 			if(ytFirebase.services.getCurrent()){
 				var ref = ytFirebase.services.getCurrent();
 				items = ytFirebase.services.getRefArray('savedVideos');
-				// console.log(items);
-						// let obj = JSON.parse(localStorage[key]);
-						// //Legacy fallback?
-						// if(obj.$$hashKey){
-						// 	delete obj.$$hashKey;
-						// }
-						// obj.name = obj.snippet.title;
-						// obj.codeName = key;
-						// if(ytUtilities().getIndexIfObjWithAttr(items, 'name', obj.name) === -1){
-						// 	items.push(obj);
-						// }
-					}
-				}
+			}
+		}
 
-				function getItems(){
+		function getItems(){
 			// console.log(items);
 			if(!items.length){
 				init();
@@ -1623,6 +1611,8 @@ i.e. {get: get } can be {get} (I think..)
 		(()=>{
 			if(localStorage['uyt-firebase']){
 				credObj = JSON.parse(localStorage['uyt-firebase']);
+				console.log('have cred obj:', credObj);
+				loggedIn = true;
 			}
 		})();
 
@@ -1699,16 +1689,19 @@ i.e. {get: get } can be {get} (I think..)
 		}
 
 		function initApp(credsObj){
-			let config = {
-				apiKey: ytInitAPIs.apisObj.googKey,
-				authDomain: 'burning-torch-898.firebaseapp.com',
-				databaseURL: 'https://burning-torch-898.firebaseio.com/',
-				storageBucket: 'burning-torch-898.appspot.com'
-			};
-			firebase.initializeApp(config);
-			//This would occur when we already have our firebase creds stored in our localStorage. This means the creds we have are legit - we are locked into a cluster with the correct password.
-			if(credsObj){
-				grabCluster(credsObj);
+			//Make sure googKey AND DB name exists..
+			if(ytInitAPIs.apisObj.googKey){
+				let config = {
+					apiKey: ytInitAPIs.apisObj.googKey,
+					authDomain: 'burning-torch-898.firebaseapp.com',
+					databaseURL: 'https://burning-torch-898.firebaseio.com/',
+					storageBucket: 'burning-torch-898.appspot.com'
+				};
+				firebase.initializeApp(config);
+				//This would occur when we already have our firebase creds stored in our localStorage. This means the creds we have are legit - we are locked into a cluster with the correct password.
+				if(credsObj){
+					grabCluster(credsObj);
+				}
 			}
 			
 		}

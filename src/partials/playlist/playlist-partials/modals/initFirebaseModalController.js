@@ -26,8 +26,9 @@
 				//Then we run checkValid to compare. checkValid can take resolve/reject CBs?
 				ytFirebase.services.checkValid(obj, ()=>{
 					//We addCreds only after we know that they're correct
+					vm.pwError = false;
 					console.log('okay');
-					// $uibModalInstance.close(obj);
+					$uibModalInstance.close(obj);
 				}, ()=>{
 					vm.pwError = true;
 				});

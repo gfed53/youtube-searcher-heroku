@@ -3,7 +3,7 @@
 <form ng-submit="initFirebaseModal.ok(initFirebaseModal.obj)" ng-if="!initFirebaseModal.isLoggedIn">
     <div class="modal-body modal-body-saved-search">
         <h2>New User?</h2>
-        <p>Create a unique id and password to create a new database cluster.</p>
+        <p>Create a unique id and password to create a new database segment.</p>
         <h2>Returning User?</h2>
         <p>Please enter your correct id and password.</p>
         <div class="row">
@@ -23,8 +23,8 @@
 <!-- User logged in -->
 <form ng-submit="initFirebaseModal.logout()" ng-if="initFirebaseModal.isLoggedIn">
 	<div class="modal-body">
-		<h2>Hello {{ initFirebaseModal.credObj.username }}</h2>
-        <p>You are currently logged in.</p>
+		<h2>Hello!</h2>
+        <p>You are currently connected to the <span class="bold">{{ initFirebaseModal.credObj.username }}</span>  segment.</p>
 	</div>
 	<div class="modal-footer">
         <button class="btn btn-primary" type="submit">Log Out</button>
