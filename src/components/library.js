@@ -422,6 +422,7 @@ i.e. {get: get } can be {get} (I think..)
 	function ytVideoItemsFB($q, $state, $stateParams, ytModalGenerator, ytUtilities, ytFirebase){
 		let currentVideoId = $stateParams.videoId;
 		var items = [];
+		//For clearing all items, we would prob grab an obj ref of savedVideos so we can use the $remove service to clear it completely
 
 		this.services = {
 			init: init,
@@ -520,14 +521,14 @@ i.e. {get: get } can be {get} (I think..)
 			let dangerTemp = ytModalGenerator().getTemp('dangerTemp');
 			ytModalGenerator().openModal(dangerTemp)
 			.then(() => {
-				items = [];
-				for(let key in localStorage){
-					if(key.includes('uytp')){
-						localStorage.removeItem(key);
-					}
-				}
-
-				deferred.resolve(items);
+				var objRef = ytFirebase.services.getRefObj('savedVideos');
+				console.log(objRef);
+				objRef.$remove()
+				.then(()=>{
+					ytFirebase.services.hotSave();
+					console.log('all removed');
+					deferred.resolve(items);
+				});
 			}, () => {
 				deferred.reject();
 			});
@@ -912,13 +913,14 @@ i.e. {get: get } can be {get} (I think..)
 			let dangerTemp = ytModalGenerator().getTemp('dangerTemp');
 			ytModalGenerator().openModal(dangerTemp)
 			.then(() => {
-				pastSearches = [];
-				for(let key in localStorage){
-					if(key.includes('uyts')){
-						localStorage.removeItem(key);
-					}
-				}
-				deferred.resolve(pastSearches);
+				var objRef = ytFirebase.services.getRefObj('savedSearches');
+				console.log(objRef);
+				objRef.$remove()
+				.then(()=>{
+					ytFirebase.services.hotSave();
+					console.log('all removed');
+					deferred.resolve(pastSearches);
+				});
 			}, () => {
 				deferred.reject();
 			});
@@ -1500,8 +1502,8 @@ i.e. {get: get } can be {get} (I think..)
 		function check(){
 			let deferred = $q.defer();
 			//Checking localStorage to see if user has an id with saved API keys
-			if(localStorage['uyts-log-info']){
-				let obj = JSON.parse(localStorage['uyts-log-info']);
+			if(localStorage['uyt-log-info']){
+				let obj = JSON.parse(localStorage['uyt-log-info']);
 				console.log('apis obj is:', obj);
 				this.apisObj = obj;
 				//Updating the DOM (for the Google Maps API)
@@ -1513,8 +1515,8 @@ i.e. {get: get } can be {get} (I think..)
 					if(result === 'cancel'){
 						//Do nothing
 					} else {
-						localStorage.setItem('uyts-log-info', JSON.stringify(result));
-						this.apisObj = localStorage['uyts-log-info'];
+						localStorage.setItem('uyt-log-info', JSON.stringify(result));
+						this.apisObj = localStorage['uyt-log-info'];
 						updateDOM(this.apisObj.googKey);
 
 						//Refresh page to enable g maps to work
@@ -1532,8 +1534,8 @@ i.e. {get: get } can be {get} (I think..)
 				if(result === 'cancel'){
 					//Do nothing
 				} else {
-					localStorage.setItem('uyts-log-info', JSON.stringify(result));
-					this.apisObj = localStorage['uyts-log-info'];
+					localStorage.setItem('uyt-log-info', JSON.stringify(result));
+					this.apisObj = localStorage['uyt-log-info'];
 					updateDOM(this.apisObj.googKey);
 
 					//Refresh page to enable g maps to work
@@ -1769,7 +1771,7 @@ i.e. {get: get } can be {get} (I think..)
 		}
 		*/
 		function getRefObj(child) {
-			var ref = getReference(child);
+			var ref = current.child(child);
 			return $firebaseObject(ref);
 		}
 
