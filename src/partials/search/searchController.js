@@ -177,6 +177,7 @@
 		}
 
 		function saveSearch(params){
+			console.log(params);
 			searchHistoryService.set(params, searchHistoryService);
 		}
 

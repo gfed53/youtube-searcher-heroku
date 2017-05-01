@@ -618,6 +618,10 @@ i.e. {get: get } can be {get} (I think..)
 		}
 
 		function set(newParams){
+
+			newParams.after = (newParams.after ? new Date(newParams.after) : undefined);
+			newParams.before = (newParams.before ? new Date(newParams.before) : undefined);
+
 			for(let item in params){
 				//To avoid conflict with page traversal of prev search after retrieving a new search
 				if(item === 'searchedKeyword'){
@@ -630,6 +634,7 @@ i.e. {get: get } can be {get} (I think..)
 				}
 			}
 			params.keyword = newParams.searchedKeyword;
+			console.log(params);
 
 		}
 
@@ -839,6 +844,12 @@ i.e. {get: get } can be {get} (I think..)
 			if(ytFirebase.services.getCurrent()){
 				var ref = ytFirebase.services.getCurrent();
 				pastSearches = ytFirebase.services.getRefArray('savedSearches');
+				// if(params.after && params.after !== null){
+						// 	params.after = new Date(params.after);
+						// }
+						// if(params.before && params.before !== null){
+						// 	params.before = new Date(params.before);
+						// }
 			}
 		}
 
@@ -846,8 +857,9 @@ i.e. {get: get } can be {get} (I think..)
 			return pastSearches;
 		}
 
-		function set(params, service){
+		function set(_params, service){
 			let searchSavedTemp = ytModalGenerator().getTemp('searchSavedTemp');
+			let params = Object.assign({}, _params);
 			ytModalGenerator().openModal(searchSavedTemp)
 			.then((name) => {
 				params.name = name;
@@ -855,12 +867,19 @@ i.e. {get: get } can be {get} (I think..)
 					//Aborted
 				} else if(params.name){
 					console.log('params', params);
-					//Have to change any undefineds(pageTokens) to null, then change them back when retrieving??
+					//Have to change any undefined's(pageTokens) to null, then change them back when retrieving??
 					for(var key in params){
 						if(params[key] === undefined){
 							params[key] = null;
 						}
+						//Also stringify date?
+						// if(key === 'after' || key === 'before'){
+						// 	console.log(params[key]);
+						// 	params[key] = params[key].getTime();
+						// }
 					}
+					params.after = (params.after ? params.after.getTime() : null);
+					params.before = (params.before ? params.before.getTime() : null);
 
 
 					params.nameShrt = params.name;
