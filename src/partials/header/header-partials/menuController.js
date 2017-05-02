@@ -3,10 +3,14 @@
 angular
 .module('myApp')
 
-.controller('MenuCtrl', ['$scope', '$rootScope', '$timeout', 'ytVideoItems', 'ytCheckScrollY', 'ytCheckScrollDir', MenuCtrl]);
+.controller('MenuCtrl', ['$scope', '$rootScope', '$timeout', '$stateParams', 'ytVideoItems', 'ytVideoItemsFB', 'ytCheckScrollY', 'ytCheckScrollDir', 'ytFirebase', MenuCtrl]);
 
-function MenuCtrl($scope, $rootScope, $timeout, ytVideoItems, ytCheckScrollY, ytCheckScrollDir){
+function MenuCtrl($scope, $rootScope, $timeout, $stateParams, ytVideoItems, ytVideoItemsFB, ytCheckScrollY, ytCheckScrollDir, ytFirebase){
 	let vm = this;
+
+	// Decide which services to use (firebase or localStorage)
+	var videoItemsService = ytFirebase.services.isLoggedIn() ? ytVideoItemsFB : ytVideoItems;
+
 	vm.videoId = ytVideoItems.services.getVideoId();
 	vm.showNav = false;
 	vm.showFixed = false;
@@ -14,6 +18,8 @@ function MenuCtrl($scope, $rootScope, $timeout, ytVideoItems, ytCheckScrollY, yt
 	vm.updateOnClick = updateOnClick;
 	vm.noScroll = true;
 	vm.collapsed = true;
+
+	console.log('state params', $stateParams);
 
 	ytCheckScrollY().init(vm.update);
 
@@ -36,10 +42,11 @@ function MenuCtrl($scope, $rootScope, $timeout, ytVideoItems, ytCheckScrollY, yt
 		vm.collapsed = !vm.collapsed;
 	}
 
-	//Once we switch to the video state (by clicking on a video to watch), the video tab will now be visible from now on, so we have access to it for the duration of the session
+	//Once we switch to the video state (by clicking on a video to watch), the video tab will be visible from now on, so we have access to it for the duration of the session
 	$rootScope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) => {
 		if(toState.name === 'video'){
-			vm.videoId = ytVideoItems.services.getVideoId();
+			vm.videoId = videoItemsService.services.getVideoId();
+			console.log('video id?', vm.videoId);
 		}
 		vm.collapsed = true;
 	});

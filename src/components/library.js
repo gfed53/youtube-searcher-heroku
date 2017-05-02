@@ -276,6 +276,8 @@ i.e. {get: get } can be {get} (I think..)
 		let currentVideoId = $stateParams.videoId;
 		let items = [];
 
+		console.log('in service:', currentVideoId);
+
 		this.services = {
 			init: init,
 			getItems: getItems,
@@ -421,6 +423,7 @@ i.e. {get: get } can be {get} (I think..)
 	//Firebase Version
 	function ytVideoItemsFB($q, $state, $stateParams, ytModalGenerator, ytUtilities, ytFirebase){
 		let currentVideoId = $stateParams.videoId;
+		console.log('in service:', currentVideoId);
 		var items = [];
 		//For clearing all items, we would prob grab an obj ref of savedVideos so we can use the $remove service to clear it completely
 
@@ -1616,7 +1619,7 @@ i.e. {get: get } can be {get} (I think..)
 	function ytFirebase(ytModalGenerator, ytInitAPIs, $q, $state, $firebaseArray, $firebaseObject){
 		let services = {
 			save: save,
-			init: init,
+			// init: init,
 			initApp: initApp,
 			grabCluster: grabCluster,
 			checkValid: checkValid,
@@ -1631,10 +1634,10 @@ i.e. {get: get } can be {get} (I think..)
 		};
 
 		let list = null,
-		current = null,
-		currentObj = null,
-		loggedIn = false,
-		credObj = null;
+			current = null,
+			currentObj = null,
+			loggedIn = false,
+			credObj = null;
 
 		//Immediately check if we have our stored firebase creds
 		(()=>{
@@ -1642,6 +1645,8 @@ i.e. {get: get } can be {get} (I think..)
 				credObj = JSON.parse(localStorage['uyt-firebase']);
 				console.log('have cred obj:', credObj);
 				loggedIn = true;
+			} else {
+				console.log('using local storage');
 			}
 		})();
 
