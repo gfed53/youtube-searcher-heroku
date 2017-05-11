@@ -7,7 +7,7 @@
         <h2>Returning User?</h2>
         <p>Please enter your correct id and password.</p>
         <div class="row">
-        	<input ng-model="initFirebaseModal.obj.username" type="text" class="form-control search-modal-input" placeholder="John Doe" required>
+        	<input autofocus ng-model="initFirebaseModal.obj.username" type="text" class="form-control search-modal-input" placeholder="John Doe" required>
         </div>
         <div class="row">
         	<input ng-model="initFirebaseModal.obj.password" type="password" class="form-control search-modal-input" placeholder="XXXXXX" required>
@@ -27,7 +27,7 @@
         <p>You are currently connected to the <span class="bold">{{ initFirebaseModal.credObj.username }}</span>  segment.</p>
 	</div>
 	<div class="modal-footer">
-        <button class="btn btn-primary" type="submit">Log Out</button>
+        <button autofocus class="btn btn-primary" type="submit">Log Out</button>
         <button class="btn btn-warning" type="button" ng-click="initFirebaseModal.cancel()">Cancel</button>
     </div>
 </form>

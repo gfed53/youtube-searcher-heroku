@@ -28,7 +28,7 @@ i.e. {get: get } can be {get} (I think..)
 	.service('ytSearchParams', ['ytTranslate', ytSearchParams])
 	.service('ytResults', [ytResults])
 	.service('ytVideoItems', ['$q', '$state', '$stateParams', 'ytModalGenerator', 'ytUtilities', ytVideoItems])
-	.service('ytVideoItemsFB', ['$q', '$state', '$stateParams', 'ytModalGenerator', 'ytUtilities', 'ytFirebase', ytVideoItemsFB])
+	.service('ytVideoItemsFB', ['$q', '$timeout', '$state', '$stateParams', 'ytModalGenerator', 'ytUtilities', 'ytFirebase', ytVideoItemsFB])
 	.service('ytSearchHistory', ['$q', 'ytModalGenerator', 'ytSearchParams', 'ytUtilities', ytSearchHistory])
 	.service('ytSearchHistoryFB', ['$q', 'ytModalGenerator', 'ytSearchParams', 'ytUtilities', 'ytFirebase', ytSearchHistoryFB])
 	.service('ytTranslate', ['$http', '$q', 'ytModalGenerator', 'ytInitAPIs', ytTranslate])
@@ -41,6 +41,7 @@ i.e. {get: get } can be {get} (I think..)
 
 	//Used to follow security measures with YouTube video links in particular 
 	function ytTrustSrc($sce){
+		console.log('ytTrustSrc');
 		return (src) => {
 			return $sce.trustAsResourceUrl(src);
 		};
@@ -48,6 +49,7 @@ i.e. {get: get } can be {get} (I think..)
 
 	//Searches the API for videos based on search params
 	function ytSearchYouTube($q, $http, ytChanSearch, ytTranslate, ytModalGenerator, ytDateHandler, ytInitAPIs) {
+		console.log('ytSearchYouTube');
 		return (params, pageToken, direction) => {
 			
 			// Ensures that we take the previously searched keyword during page navigation.
@@ -151,6 +153,7 @@ i.e. {get: get } can be {get} (I think..)
 
 	//Searches the API for channels based on search query
 	function ytChanSearch($q, $http, ytModalGenerator, ytInitAPIs){
+		console.log('ytChanSearch');
 		return (channel) => {
 			let url = 'https://www.googleapis.com/youtube/v3/search';
 			let request = {
@@ -208,6 +211,7 @@ i.e. {get: get } can be {get} (I think..)
 
 	//Used to retrieve necessary data from a particular video (in video player section)
 	function ytCurrentVideo($q, $http, ytModalGenerator, ytInitAPIs){
+		console.log('ytCurrentVideo');
 		return (id) => {
 			let url = 'https://www.googleapis.com/youtube/v3/videos',
 			request = {
@@ -241,6 +245,7 @@ i.e. {get: get } can be {get} (I think..)
 
 	//Used to get back a video's channel data (which requires a different call from ytCurrentVideo)
 	function ytCurrentChannel($q, $http, ytModalGenerator, ytInitAPIs){
+		console.log('ytCurrentChannel');
 		return (id) => {
 			let url = "https://www.googleapis.com/youtube/v3/channels",
 			request = {
@@ -275,7 +280,7 @@ i.e. {get: get } can be {get} (I think..)
 	function ytVideoItems($q, $state, $stateParams, ytModalGenerator, ytUtilities){
 		let currentVideoId = $stateParams.videoId;
 		let items = [];
-
+		console.log('ytVideoItems');
 		console.log('in service:', currentVideoId);
 
 		this.services = {
@@ -421,9 +426,14 @@ i.e. {get: get } can be {get} (I think..)
 	}
 
 	//Firebase Version
-	function ytVideoItemsFB($q, $state, $stateParams, ytModalGenerator, ytUtilities, ytFirebase){
+	function ytVideoItemsFB($q, $timeout, $state, $stateParams, ytModalGenerator, ytUtilities, ytFirebase){
+		$timeout(()=>{
+			let currentVideoId = $stateParams.videoId;
+			console.log('in ytVideoItemsFB service:', currentVideoId);
+		}, 100);
 		let currentVideoId = $stateParams.videoId;
-		console.log('in service:', currentVideoId);
+		console.log('ytVideoItemsFB');
+		
 		var items = [];
 		//For clearing all items, we would prob grab an obj ref of savedVideos so we can use the $remove service to clear it completely
 
