@@ -2,9 +2,7 @@
 
 ## Note
 
-This is the implementation of SaYs that uses Google Firebase instead of the user's localStorage to store saved content. 
-
----
+This is the implementation of SaYs that uses Google Firebase instead of the user's localStorage to store saved content. It is still possible to use localStorage instead, as it serves as a fallback if you don't want to provide a database to use.
 
 The following is taken from the "about" section of the app:
 
