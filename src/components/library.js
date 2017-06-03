@@ -34,7 +34,7 @@ i.e. {get: get } can be {get} (I think..)
 	.service('ytTranslate', ['$http', '$q', 'ytModalGenerator', 'ytInitAPIs', ytTranslate])
 	.service('ytSortOrder', [ytSortOrder])
 	.service('ytPlaylistView', [ytPlaylistView])
-	.service('ytPlaylistSort', [ytPlaylistSort])
+	.service('ytPlaylistSort', ['ytSettings', ytPlaylistSort])
 	.service('ytInitAPIs', ['$q', 'ytModalGenerator', ytInitAPIs])
 	.service('ytSettings', [ytSettings])
 	.service('ytFirebase', ['ytModalGenerator', 'ytInitAPIs', '$q', '$state', '$firebaseArray', '$firebaseObject', ytFirebase]);
@@ -1285,17 +1285,14 @@ i.e. {get: get } can be {get} (I think..)
 	}
 
 	//Handles the saved videos and searches sorting in the saved content section 
-	function ytPlaylistSort(){
-		this.videos = {
-			reverse: false,
-			predicate: '$$hashKey'
-		};
+	function ytPlaylistSort(ytSettings){
+		//Grab object containing sort settings, either from localStorage, or default
+		let obj = ytSettings.getSortOpts();
+		this.videos = obj.videos;
 
-		this.searches = {
-			reverse: false,
-			predicate: '$$hashKey'
-		};
-		//Name
+		this.searches = obj.searches;
+
+		
 		this.order = order;
 		this.get = get;
 
@@ -1619,7 +1616,7 @@ i.e. {get: get } can be {get} (I think..)
 	//Firebase services/factories
 
 	function ytFirebaseReference(){
-		console.log('trying?');
+		// console.log('trying?');
 		// if(firebase){
 			return new firebase.database().ref();
 		// }
@@ -1653,10 +1650,10 @@ i.e. {get: get } can be {get} (I think..)
 		(()=>{
 			if(localStorage['uyt-firebase']){
 				credObj = JSON.parse(localStorage['uyt-firebase']);
-				console.log('have cred obj:', credObj);
+				// console.log('have cred obj:', credObj);
 				loggedIn = true;
 			} else {
-				console.log('using local storage');
+				// console.log('using local storage');
 			}
 		})();
 
@@ -1720,13 +1717,13 @@ i.e. {get: get } can be {get} (I think..)
 						}
 					}
 					//Firebase creds already set, 
-					console.log('currentObj save not needed:', currentObj);
+					// console.log('currentObj save not needed:', currentObj);
 					credObj = obj;
 					return true;
 				});
 				
 			} else {
-				console.log('Using localStorage');
+				// console.log('Using localStorage');
 				return false;
 			}
 			//
@@ -1770,12 +1767,12 @@ i.e. {get: get } can be {get} (I think..)
 				if(currentObj.password !== obj.password){
 					//Change for appropriate modal rendering
 					// loggedIn = false;
-					console.log('passwords dont match');
+					// console.log('passwords dont match');
 					err();
 					//Reroute
 					// save();
 				} else {
-					console.log('ok');
+					// console.log('ok');
 					res();
 					// location.reload();
 				}
@@ -1858,6 +1855,11 @@ i.e. {get: get } can be {get} (I think..)
 		this.getWarn = getWarn;
 		this.setWarn = setWarn;
 
+		this.getSortOpts = getSortOpts;
+		this.setSortOpts = setSortOpts;
+
+
+
 		function getWarn(){
 			if(localStorage['uyt-warn']){
 				return JSON.parse(localStorage['uyt-warn']);
@@ -1868,6 +1870,27 @@ i.e. {get: get } can be {get} (I think..)
 
 		function setWarn(val){
 			localStorage.setItem('uyt-warn', JSON.stringify(val));
+		}
+
+		function getSortOpts(){
+			if(localStorage['uyt-sort-opts']){
+				return JSON.parse(localStorage['uyt-sort-opts']);
+			} else {
+				return {
+					videos: {
+						predicate: 'snippet.title',
+						reverse: false
+					},
+					searches: {
+						predicate: 'name',
+						reverse: false
+					}
+				};
+			}
+		}
+
+		function setSortOpts(obj){
+			localStorage.setItem('uyt-sort-opts', JSON.stringify(obj));
 		}
 	}
 

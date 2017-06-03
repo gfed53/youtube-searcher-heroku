@@ -41,12 +41,16 @@
 		vm.manageStorage = ytFirebase.services.save;
 
 		//Testing
-		var ref = ytFirebase.services.getCurrent();
+		// var ref = ytFirebase.services.getCurrent();
 		// download the data into a local object
-		vm.fbData = ref;
+		// vm.fbData = ref;
 		//
 
-		console.log(vm.items);
+		// console.log(vm.items);
+
+		//Sort should default to name for both videos and channels.
+		//When user changes sort, it should be saved to service and localStorage
+		//If user has We want to retrieve 
 
 		//Grabs one of our saved searches, then automatically switches to the search state in its advanced search mode.
 		function grab(search){
@@ -89,12 +93,29 @@
 			let sortObj = ytPlaylistSort.order(vm.videosPredicate, predicate, ytPlaylistSort.videos);
 			vm.videosReverse = sortObj.reverse;
 			vm.videosPredicate = sortObj.predicate;
+			//Save videosReverse and videosPredicate to service, save it to local storage as well
+			saveSortOpts();
 		}
 
 		function sortSearches(predicate){
 			let sortObj = ytPlaylistSort.order(vm.searchesPredicate, predicate, ytPlaylistSort.searches);
 			vm.searchesReverse = sortObj.reverse;
 			vm.searchesPredicate = sortObj.predicate;
+
+			saveSortOpts();
+		}
+
+		function saveSortOpts(){
+			ytSettings.setSortOpts({
+				videos: {
+					predicate: vm.videosPredicate,
+					reverse: vm.videosReverse
+				},
+				searches: {
+					predicate: vm.searchesPredicate,
+					reverse: vm.searchesReverse
+				}
+			});
 		}
 
 		function closeAll(group){

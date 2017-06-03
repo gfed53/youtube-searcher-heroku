@@ -19,7 +19,7 @@ function MenuCtrl($scope, $rootScope, $timeout, $stateParams, ytVideoItems, ytVi
 	vm.noScroll = true;
 	vm.collapsed = true;
 
-	console.log('state params', $stateParams);
+	// console.log('state params', $stateParams);
 
 	ytCheckScrollY().init(vm.update);
 
