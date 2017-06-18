@@ -1626,7 +1626,6 @@ i.e. {get: get } can be {get} (I think..)
 	function ytFirebase(ytModalGenerator, ytInitAPIs, $q, $state, $firebaseArray, $firebaseObject){
 		let services = {
 			save: save,
-			// init: init,
 			initApp: initApp,
 			grabCluster: grabCluster,
 			checkValid: checkValid,

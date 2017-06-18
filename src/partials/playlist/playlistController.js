@@ -13,27 +13,38 @@
 		var videoItemsService = ytFirebase.services.isLoggedIn() ? ytVideoItemsFB : ytVideoItems;
 		var searchHistoryService = ytFirebase.services.isLoggedIn() ? ytSearchHistoryFB : ytSearchHistory;
 
+		//Fetching content
 		vm.items = videoItemsService.services.getItems();
-		vm.setVideoId = setVideoId;
 		vm.pastSearches = searchHistoryService.get();
+
+		//Methods
+		vm.setVideoId = setVideoId;
 		vm.grab = grab;
 		vm.clearSearch = clearSearch;
 		vm.clearItem = clearItem;
 		vm.clearAllVideos = clearAllVideos;
 		vm.clearAllSearches = clearAllSearches;
+
+		//Sort methods
 		vm.videosReverse = ytPlaylistSort.videos.reverse;
 		vm.videosPredicate = ytPlaylistSort.videos.predicate;
 		vm.searchesReverse = ytPlaylistSort.searches.reverse;
 		vm.searchesPredicate = ytPlaylistSort.searches.predicate;
-		vm.collapsed = ytPlaylistView.get();
 		vm.sortVideos = sortVideos;
 		vm.sortSearches = sortSearches;
+
+		//Keeps track of collapsed/expanded sections in saved/playlist section
+		vm.collapsed = ytPlaylistView.get();
+
+		
 		vm.closeAll = closeAll;
 		vm.openAll = openAll;
+
 		vm.addedAfterVideos = addedAfterVideos;
 		vm.addedBeforeVideos = addedBeforeVideos;
 		vm.addedAfterSearches = addedAfterSearches;
 		vm.addedBeforeSearches = addedBeforeSearches;
+
 		vm.isDateTypeComp = ytDateHandler().check();
 		vm.warnActive = ytSettings.getWarn();
 		vm.updateWarn = updateWarn;
@@ -85,6 +96,7 @@
 			
 		}
 
+		//Updates currentVideoId in VideoItems service. This updates stateParams, which is what we use to load the video up in the video player section.
 		function setVideoId(videoId){
 			videoItemsService.services.setVideoId(videoId);
 		}
