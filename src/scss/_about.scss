@@ -1,6 +1,5 @@
 #about {
-	margin-top: 2.5em;
-	margin-bottom: 10em;
+	margin: 1em 2em;
 	#about-intro {
 		margin: 2em 0;
 	}
@@ -10,12 +9,19 @@
 			font-size: 2em;
 		}
 	}
+
+	#about-footer {
+		border-top: 1px solid $border-grey;
+		margin-top: 2em;
+		padding: 2em;
+		text-align: center;
+	}
 }
 
 @media screen and ($tablet){
 	#about {
 		font-size: 1em;
-		margin-left: 1em;
-		margin-right: 1em;
+		margin-left: 4em;
+		margin-right: 4em;
 	}
 }
