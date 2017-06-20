@@ -322,8 +322,10 @@ body #page-header #header-wrapper #credit {
   #advanced-search .btn-clear-select, #advanced-search .btn-toggle-map {
     margin: 0 0 1em 0; }
 
-.channel-filter img {
-  width: 5em; }
+.channel-filter {
+  margin: 1em 0; }
+  .channel-filter img {
+    width: 5em; }
 
 .results {
   margin: 2em 0;
@@ -502,10 +504,6 @@ body #page-header #header-wrapper #credit {
     #advanced-search #form-channel-search {
       display: inline-block;
       margin-top: 0; }
-  .channel-filter {
-    margin: 1em 0; }
-    .channel-filter img {
-      width: 5em; }
   .results {
     margin: 2em 0;
     transition: 1s linear all; }

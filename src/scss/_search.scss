@@ -111,6 +111,7 @@
 }
 
 .channel-filter {
+	margin: 1em 0;
 	img {
 		width: 5em;
 	}
@@ -406,13 +407,7 @@
 			margin-top: 0;
 		}
 	}
-
-	.channel-filter {
-		margin: 1em 0;
-		img {
-			width: 5em;
-		}
-	}
+	
 	.results {
 		#page-selector {
 			#next-page {
