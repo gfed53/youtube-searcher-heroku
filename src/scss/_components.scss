@@ -1,6 +1,6 @@
 // Used in playlist
 .my-thumbnail {
-	width: 8em;
+	width: 100%;
 	margin: 1em 0;
 }
 
@@ -69,8 +69,18 @@
 	}
 }
 
+@media screen and ($tabletfix){
+	.my-thumbnail {
+		width: 50%;
+	}
+}
+
 @media screen and ($tablet){
 	.alert-video-saved {
 		right: 25em;
+	}
+
+	.my-thumbnail {
+		width: 12em;
 	}
 }
