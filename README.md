@@ -42,7 +42,7 @@ Map sometimes doesn't expand as it should. Simply refreshing the page should sol
 
 Sometimes issues occur when fetching saved searches/videos, and you may not see any of your saved content. Simply refreshing the page should solve this.
 
-This app works best in Google Chrome. I'm aware of the issues with Mozilla Firefox, and I'm currently working on its compatibility.
+This app works best in Google Chrome. I continue to add fixes to any cross-browser issues I may come across.
 
 
 (This ends the "about" section content)
@@ -51,14 +51,14 @@ This app works best in Google Chrome. I'm aware of the issues with Mozilla Firef
 
 This app uses CORS requests to get data from the Youtube API, and uses the iframe element to allow embedded YouTube videos within the app. Aside from working further with API hacks using AngularJS, in developing this app I was also introduced to AngularUI router, which utilizes nested states and views. This dependency is more than just a better alternative to ngView; it changes the way a website or app's structure is viewed, and promotes a more modular approach.
 
-I also began following John Papa's Style Guide for best practices in developing AngularJS projects, as I have with other projects.
+I also began following John Papa's [Style Guide](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md) for best practices in developing AngularJS projects, as I have with other projects.
 
-https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md
+This app is powered by the [Youtube Data API](https://developers.google.com/maps/documentation/javascript/), [Google Maps API](https://developers.google.com/maps/documentation/javascript/), [Yandex Translate API](https://tech.yandex.com/translate/), and [Google Firebase](https://console.firebase.google.com/).
+
 
 ## Resources
 
 The src directory contains the source code, while the build version is not currently distributed.
 
-You can visit the gh-page of this project here:
+You can visit the live demo of this project [here](http://gfed53.github.io/ultimate-youtube-searcher/src/)!
 
-http://gfed53.github.io/ultimate-youtube-searcher/src/
