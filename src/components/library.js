@@ -431,6 +431,7 @@ i.e. {get: get } can be {get} (I think..)
 			let currentVideoId = $stateParams.videoId;
 			console.log('in ytVideoItemsFB service:', currentVideoId);
 		}, 100);
+
 		let currentVideoId = $stateParams.videoId;
 		console.log('ytVideoItemsFB');
 		
@@ -465,26 +466,46 @@ i.e. {get: get } can be {get} (I think..)
 		}
 
 		function setItem(result){
-			let itemName = result.snippet.title+'-uytp',
-			dateAdded = Date.now(),
+			// let itemName = result.snippet.title+'-uytp',
+			let dateAdded = Date.now(),
 			content = result;
 			delete content.$$hashKey;
 
 			content.dateAdded = dateAdded;
 			content.name = content.snippet.title;
-			content.codeName = itemName;
+			content.codeName = result.snippet.title+'-'+content.id.videoId+'-uytp';
 
-			items.$add(content)
-			.then((ref) => {
-				// items.$save(content);
-				ytFirebase.services.hotSave();
-				console.log("item added: " + ref);
+			//testing
+			console.log('videoId: ', content.id.videoId);
+			items.forEach(item => {
+				console.log('videoId: ', item.id.videoId);
 			});
+
+			console.log('what is it?..', ytUtilities().getIndexIfObjWithAttr(items, 'codeName', content.codeName));
+
+			//Check if video already exists!
+			if(ytUtilities().getIndexIfObjWithAttr(items, 'codeName', content.codeName) === -1){
+					items.$add(content)
+					.then((ref) => {
+						// items.$save(content);
+						ytFirebase.services.hotSave();
+						console.log("item added: " + ref);
+					});
+				} else {
+					console.log('video already exists?!?');
+				}
+
+
+			
 
 
 			// content = JSON.stringify(content);
 
 		}
+
+		//Function to check if video already exists!
+		//Returns boolean, or use getIndexifObj...?
+
 
 		function clearItem(item, isWarnActive){
 			let warnTemp = ytModalGenerator().getTemp('warnTemp'),
