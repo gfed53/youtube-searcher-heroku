@@ -18,7 +18,7 @@
 		</button>
 		</div>
 	</div>
-	<div class="content-container playlist-content-container" id="video-items-container" ng-if="playlist.items.length" uib-collapse="playlist.collapsed.videosCollapsed">
+	<div class="content-container playlist-content-container" id="video-items-container" ng-if="playlist.items" uib-collapse="playlist.collapsed.videosCollapsed">
 		
 		<!-- Video Sorting  -->
 
@@ -168,11 +168,12 @@
 				</div>
 			</div>
 		</div>
-		<div class="clear-items-container">
+		<div ng-if="playlist.items.length" class="clear-items-container">
 			<button ng-click="playlist.clearAllVideos()" class="btn btn-danger btn-playlist-clear">Clear Videos</button>
 		</div>
+		<p class="emph alert-no-content" ng-if="!playlist.items.length">No saved videos present. See the "About" page for more info on how to save videos.</p>
 	</div>
-	<p ng-if="!playlist.items.length">No saved videos present. See the "About" page for more info on how to save videos.</p>
+	
 
 	<!-- Saved Searches Section -->
 
@@ -187,7 +188,7 @@
 		</button>
 		</div>
 	</div>
-	<div class="content-container playlist-content-container" id="past-search-container" ng-if="playlist.pastSearches.length" uib-collapse="playlist.collapsed.searchesCollapsed">
+	<div class="content-container playlist-content-container" id="past-search-container" ng-if="playlist.pastSearches" uib-collapse="playlist.collapsed.searchesCollapsed">
 		
 		<!-- Searches Sorting -->
 
@@ -309,11 +310,11 @@
 				</div>
 			</div>
 		</div>
-		<div class="clear-items-container">
+		<div ng-if="playlist.items.length" class="clear-items-container">
 			<button ng-click="playlist.clearAllSearches()" class="btn btn-danger btn-playlist-clear">Clear Searches</button>
 		</div>
+		<p class="emph alert-no-content" ng-if="!playlist.pastSearches.length">No saved searches present. See the "About" page for more info on how to save searches.</p>
 	</div>
-	<p ng-if="!playlist.pastSearches.length">No saved searches present. See the "About" page for more info on how to save searches.</p>
 </div>
 
 

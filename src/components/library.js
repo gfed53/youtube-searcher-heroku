@@ -427,15 +427,15 @@ i.e. {get: get } can be {get} (I think..)
 
 	//Firebase Version
 	function ytVideoItemsFB($q, $timeout, $state, $stateParams, ytModalGenerator, ytUtilities, ytFirebase){
-		$timeout(()=>{
-			let currentVideoId = $stateParams.videoId;
-			console.log('in ytVideoItemsFB service:', currentVideoId);
-		}, 100);
+		// $timeout(()=>{
+		// 	let currentVideoId = $stateParams.videoId;
+		// 	console.log('in ytVideoItemsFB service:', currentVideoId);
+		// }, 100);
 
 		let currentVideoId = $stateParams.videoId;
 		console.log('ytVideoItemsFB');
 		
-		var items = [];
+		var items = null;
 		//For clearing all items, we would prob grab an obj ref of savedVideos so we can use the $remove service to clear it completely
 
 		this.services = {
@@ -867,7 +867,7 @@ i.e. {get: get } can be {get} (I think..)
 
 	//Firebase Version
 	function ytSearchHistoryFB($q, ytModalGenerator, ytSearchParams, ytUtilities, ytFirebase){
-		let pastSearches = [];
+		let pastSearches = null;
 		this.init = init;
 		this.get = get;
 		this.set = set;

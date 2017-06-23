@@ -205,6 +205,9 @@ body #page-header #header-wrapper #credit {
     text-align: center; }
   #playlist .clear-items-container {
     text-align: right; }
+  #playlist .alert-no-content {
+    text-align: center;
+    margin: 1em; }
   #playlist .sort-filter-header {
     display: inline-block; }
   #playlist .saved-content-inner, #playlist .playlist-btn-group {
@@ -233,6 +236,10 @@ body #page-header #header-wrapper #credit {
     display: none; }
   #playlist .filter-buttons-header {
     text-align: left; } }
+
+@media screen and (min-width: 525px) {
+  #playlist .alert-no-content {
+    margin: 2em; } }
 
 @media screen and (min-width: 768px) {
   #playlist .playlist-section-options {
