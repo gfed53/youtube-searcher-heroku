@@ -182,8 +182,10 @@
 		}
 
 		function addToPlaylist(result){
-			ytVideoItemsFB.services.setItem(result);
-			vm.savedVideos.push(result);
+			ytVideoItemsFB.services.setItem(result)
+			.then(()=>{
+				vm.savedVideos.push(result);
+			});
 		}
 
 		function videoIsSaved(result){

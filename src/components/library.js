@@ -467,6 +467,7 @@ i.e. {get: get } can be {get} (I think..)
 
 		function setItem(result){
 			// let itemName = result.snippet.title+'-uytp',
+			let deferred = $q.defer();
 			let dateAdded = Date.now(),
 			content = result;
 			delete content.$$hashKey;
@@ -490,17 +491,15 @@ i.e. {get: get } can be {get} (I think..)
 						// items.$save(content);
 						ytFirebase.services.hotSave();
 						console.log("item added: " + ref);
+						deferred.resolve();
 					});
 				} else {
-					console.log('video already exists?!?');
+					console.log('video already exists!');
+					//Call modal
+					deferred.reject();
 				}
 
-
-			
-
-
-			// content = JSON.stringify(content);
-
+				return deferred.promise;
 		}
 
 		//Function to check if video already exists!
@@ -961,7 +960,9 @@ i.e. {get: get } can be {get} (I think..)
 		}
 
 		function clearAll(){
+
 			//Clears all past searches
+
 			let deferred = $q.defer();
 			let dangerTemp = ytModalGenerator().getTemp('dangerTemp');
 			ytModalGenerator().openModal(dangerTemp)
@@ -1001,7 +1002,9 @@ i.e. {get: get } can be {get} (I think..)
 		};
 	}
 
+
 	//A style tweak for the outer border of the results div. This will ensure thick borders all around, but in between each result, only thin borders (ngRepeat conflict)
+
 	function ytComputeCssClass(){
 		return (first, last) => {
 			let val;
@@ -1016,7 +1019,9 @@ i.e. {get: get } can be {get} (I think..)
 		};
 	}
 
+
 	//Used on the bottom scroll button to scroll to the top of the results div
+
 	function ytScrollTo($location, $anchorScroll){
 		return (scrollLocation) => {
 			let services = {
