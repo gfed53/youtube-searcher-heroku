@@ -467,9 +467,10 @@ i.e. {get: get } can be {get} (I think..)
 
 		function setItem(result){
 			// let itemName = result.snippet.title+'-uytp',
-			let deferred = $q.defer();
-			let dateAdded = Date.now(),
-			content = result;
+			let deferred = $q.defer(),
+			dateAdded = Date.now(),
+			content = result,
+			errorVideoExistsTemp = ytModalGenerator().getTemp('errorVideoExistsTemp');
 			delete content.$$hashKey;
 
 			content.dateAdded = dateAdded;
@@ -496,7 +497,11 @@ i.e. {get: get } can be {get} (I think..)
 				} else {
 					console.log('video already exists!');
 					//Call modal
-					deferred.reject();
+					ytModalGenerator().openModal(errorVideoExistsTemp)
+						.then(()=> {
+							deferred.reject();
+						});
+					
 				}
 
 				return deferred.promise;
@@ -1468,6 +1473,12 @@ i.e. {get: get } can be {get} (I think..)
 				controllerAs: 'updateModal'
 			};
 
+			let errorVideoExistsTemp = {
+				templateUrl: './partials/search/search-partials/modals/error-video-exists-modal.html',
+				controller: 'ErrorModalController',
+				controllerAs: 'errorModal'
+			};
+
 			let initFirebaseTemp = {
 				templateUrl: './partials/playlist/playlist-partials/modals/init-firebase-modal.html',
 				controller: 'InitFirebaseModalController',
@@ -1484,6 +1495,7 @@ i.e. {get: get } can be {get} (I think..)
 				dangerTemp: dangerTemp,
 				initTemp: initTemp,
 				updateTemp: updateTemp,
+				errorVideoExistsTemp: errorVideoExistsTemp,
 				initFirebaseTemp
 			};
 
