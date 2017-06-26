@@ -3,6 +3,11 @@
 	.view-area-header, .video-title, p {
 		text-align: center;
 	}
+
+	.video-title, .remove-video-container, .video-info-row {
+		margin: 1em;
+	}
+
 	#item {
 		margin-top: 3em;
 		margin-bottom: 15em;
@@ -14,23 +19,25 @@
 	}
 
 	.video-title {
-		margin: 1em;
+		
 		font-weight: bold;
 	}
 
 	.remove-video-container {
-		margin: 1em;
 		text-align: center;
 	}
 
 	.channel-info {
 		text-align: center;
-		margin: 0.5em;
 	}
 
-	.channel-title {
+	.video-info-label {
 		display: inline-block;
 		margin-right: 1em;
+	}
+
+	.video-desc {
+		clear: both;
 	}
 
 	iframe {
@@ -46,6 +53,13 @@
 	}	
 }
 
+@media screen and ($tablet){
+	#video {
+		.video-info-row {
+			margin: 1em 7em;
+		}
+	}
+}
 
 @media screen and ($desktop){
 	#video {

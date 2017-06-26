@@ -1,15 +1,24 @@
 <h3 class="video-title">{{ video.item.snippet.title }}</h3>
+<p><span class="emph">For Google Chrome users:</span> You can click and drag the bottom-right corner of the player to adjust the size if needed.</p>
 <my-video></my-video>
-<div class="remove-video-container" ng-if="video.isSaved">
-<p>Finished the video? Clear it from your watch list.</p>
-<button class="btn btn-default" ng-click="video.clearItem(video.item)" ng-if="!video.cleared">Clear</button>
-<button class="btn btn-default" disabled="disabled" ng-if="video.cleared">Cleared</button>
-</div>
-<p>Published: <span class="emph">{{ video.item.snippet.publishedAt | date: mm/dd/yyyy }}</span></p>
-<div class="channel-info">
-	<p class="channel-title">Channel: <span class="emph"> {{ video.item.snippet.channelTitle }}</span></p>
-	<button class="btn btn-default" ng-click="video.getChannel(video.item.snippet.channelId)">Filter</button>
-</div>
-<p class="video-desc">{{ video.item.snippet.description }}</p>
+
+<div class="video-info-container">
+	<div class="row video-info-row">
+		<div class="col-sm-6 published-info">
+			<p>Published: <span class="emph">{{ video.item.snippet.publishedAt | date: mm/dd/yyyy }}</span></p>
+		</div>
+		<div class="col-sm-6 channel-info">
+			<p class="video-info-label">Channel: <span class="emph"> {{ video.item.snippet.channelTitle }}</span></p>
+			<button class="btn btn-default" ng-click="video.getChannel(video.item.snippet.channelId)">Filter</button>
+		</div>
+	</div>
+	<div class="remove-video-container" ng-if="video.isSaved">
+		<p class="video-info-label">Finished the video? Clear it from your watch list.</p>
+		<button class="btn btn-default" ng-click="video.clearItem(video.item)" ng-if="!video.cleared">Clear</button>
+		<button class="btn btn-default" disabled="disabled" ng-if="video.cleared">Cleared</button>
+	</div>
+	<p class="video-desc">{{ video.item.snippet.description }}</p>
+</div> <!-- video-info-container -->
+
 
 

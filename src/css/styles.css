@@ -528,6 +528,9 @@ body #page-header #header-wrapper #credit {
 #video .view-area-header, #video .video-title, #video p {
   text-align: center; }
 
+#video .video-title, #video .remove-video-container, #video .video-info-row {
+  margin: 1em; }
+
 #video #item {
   margin-top: 3em;
   margin-bottom: 15em; }
@@ -536,20 +539,20 @@ body #page-header #header-wrapper #credit {
   font-family: "Courgette", serif; }
 
 #video .video-title {
-  margin: 1em;
   font-weight: bold; }
 
 #video .remove-video-container {
-  margin: 1em;
   text-align: center; }
 
 #video .channel-info {
-  text-align: center;
-  margin: 0.5em; }
+  text-align: center; }
 
-#video .channel-title {
+#video .video-info-label {
   display: inline-block;
   margin-right: 1em; }
+
+#video .video-desc {
+  clear: both; }
 
 #video iframe {
   display: block;
@@ -560,6 +563,10 @@ body #page-header #header-wrapper #credit {
 #video #choices-wrapper {
   display: block;
   text-align: center; }
+
+@media screen and (min-width: 768px) {
+  #video .video-info-row {
+    margin: 1em 7em; } }
 
 @media screen and (min-width: 1024px) {
   #video .view-area-header {
