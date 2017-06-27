@@ -1672,6 +1672,7 @@ i.e. {get: get } can be {get} (I think..)
 			getRefObj: getRefObj,
 			getRefArray: getRefArray,
 			getCredObj: getCredObj,
+			getSegName: getSegName,
 			hotSave: hotSave,
 			isLoggedIn: isLoggedIn,
 			addCreds: addCreds
@@ -1855,6 +1856,10 @@ i.e. {get: get } can be {get} (I think..)
 
 		function getCredObj(){
 			return credObj;
+		}
+
+		function getSegName(){
+			return credObj ? credObj.username : null;
 		}
 
 		//On app load, we will have a reference to the user's Firebase partition, stored in 'current'

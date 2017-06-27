@@ -17,7 +17,7 @@
 		vm.items = videoItemsService.services.getItems();
 		vm.pastSearches = searchHistoryService.get();
 
-		console.log('vm.items: ',vm.items);
+		// console.log('vm.items: ',vm.items);
 		//Methods
 		vm.setVideoId = setVideoId;
 		vm.grab = grab;
@@ -53,10 +53,8 @@
 		vm.manageStorage = ytFirebase.services.save;
 
 		//Testing
-		// var ref = ytFirebase.services.getCurrent();
-		// download the data into a local object
-		// vm.fbData = ref;
-		//
+		vm.segName = ytFirebase.services.getSegName();
+		console.log('vm.segName', vm.segName);
 
 		// console.log(vm.items);
 
