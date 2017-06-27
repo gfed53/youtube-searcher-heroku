@@ -4,8 +4,7 @@
 	<h2>Page {{ search.currentPage }}</h2>
 	<div class="search-order-arrow-container" ng-click="search.videosReverse = !search.videosReverse">
 		<span>Order: </span>
-		<span class="glyphicon glyphicon-triangle-bottom my-arrow" ng-if="search.videosReverse"></span>
-		<span class="glyphicon glyphicon-triangle-top my-arrow" ng-if="!search.videosReverse"></span>
+		<span class="glyphicon glyphicon-triangle-top my-arrow" ng-class="{flipped: search.videosReverse}"></span>
 	</div>
 	<div class="page-selector-container">
 		<form id="page-selector">

@@ -195,8 +195,12 @@
 		margin: 0 0.25em;
 	}
 	.my-arrow {
+		transition: 250ms ease-in-out all;
 		font-size: 1.5em;
 		cursor: pointer;
+	}
+	.flipped {
+		transform: rotateX(180deg);
 	}
 }
 

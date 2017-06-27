@@ -7,9 +7,12 @@
 	.controller('SearchCtrl', ['$scope', '$location', '$timeout', '$interval', '$anchorScroll', '$uibModal', 'ytSearchYouTube', 'ytChanSearch', 'ytChanFilter', 'ytSearchParams', 'ytResults', 'ytSearchHistory', 'ytSearchHistoryFB', 'ytVideoItems', 'ytVideoItemsFB', 'ytComputeCssClass', 'ytScrollTo', 'ytInitMap', 'ytCheckScrollBtnStatus', 'ytTranslate', 'ytSortOrder', 'ytDateHandler', 'ytInitAPIs', 'ytFirebase', SearchCtrl]);
 
 	function SearchCtrl($scope, $location, $timeout, $interval, $anchorScroll, $uibModal, ytSearchYouTube, ytChanSearch, ytChanFilter, ytSearchParams, ytResults, ytSearchHistory, ytSearchHistoryFB, ytVideoItems, ytVideoItemsFB, ytComputeCssClass, ytScrollTo, ytInitMap, ytCheckScrollBtnStatus, ytTranslate, ytSortOrder, ytDateHandler, ytInitAPIs, ytFirebase){
+
 		let vm = this;
 		
+
 		// Decide which services to use (firebase or localStorage)
+
 		var searchHistoryService = ytFirebase.services.isLoggedIn() ? ytSearchHistoryFB : ytSearchHistory;
 
 		vm.initMap = initMap;
@@ -31,8 +34,10 @@
 		vm.scrollBtn = false;
 		vm.isDateTypeComp = ytDateHandler().check();
 		
+
 		//Retrieving our saved variables, if any
 		//type refers to the search type, whether the user sees the basic or advanced search in the view
+
 		vm.results = ytResults.getResults();
 		vm.chanResults = ytResults.getChanResults();
 		vm.langs = ytTranslate.langs;
@@ -42,16 +47,23 @@
 		vm.currentPage = ytSearchParams.getCurrentPage();
 		vm.status = ytResults.getStatus();
 		vm.translate = translate;
+
+
 		//Keep a log of searched videos that were moved to playlist
+
 		vm.savedVideos = [];
 
+
 		//Default search settings
+
 		vm.params.searchType = (vm.params.searchType || 'video');
 
 		vm.videosReverse = ytSortOrder.videosReverse;
 		vm.sort = sort;
 
+
 		//User authentication
+
 		vm.userName = ytInitAPIs.apisObj.id;
 		vm.updateAPIInfo = ytInitAPIs.update;
 

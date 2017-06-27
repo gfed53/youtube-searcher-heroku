@@ -394,8 +394,11 @@ body #page-header #header-wrapper #credit {
   .search-order-arrow-container span {
     margin: 0 0.25em; }
   .search-order-arrow-container .my-arrow {
+    transition: 250ms ease-in-out all;
     font-size: 1.5em;
     cursor: pointer; }
+  .search-order-arrow-container .flipped {
+    transform: rotateX(180deg); }
 
 .page-selector-container {
   position: relative; }
