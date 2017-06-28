@@ -2,11 +2,16 @@
 
 	<!-- Saved Videos Section -->
 	<div class="playlist-section-options">
-		<label for="warnActive">Warn me before permanently removing items:</label>
+		<!-- <label for="warnActive">Warn me before permanently removing items:</label>
 		<input name="warnActive" ng-model="playlist.warnActive" ng-change="playlist.updateWarn()" type="checkbox">
-		<p>You will be notified before removing ALL videos or searches either way.</p>
-		<p ng-if="playlist.segName">Using  <span class="emph">{{ playlist.segName }}</span> segment.</p>
-		<button class="btn btn-default" ng-click="playlist.manageStorage()">Manage Storage Settings</button>
+		<p>You will be notified before removing ALL videos or searches either way.</p> -->
+		<p ng-if="playlist.segName">Using the <span class="emph">{{ playlist.segName }}</span> segment.</p>
+		<button class="btn btn-default" ng-click="playlist.fbaseSave()">
+			<span ng-if="!playlist.segName">Connect to Firebase</span>
+			<span ng-if="playlist.segName">Disconnect from Firebase</span>
+		</button>
+		<button class="btn btn-default" ng-click="playlist.handleStorageSettings()">Manage Storage Settings</button>
+		{{ playlist.warnActive }}
 	</div>
 	<div class="row playlist-section-header">
 		<div class="col-xs-8">

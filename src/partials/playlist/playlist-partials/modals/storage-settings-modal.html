@@ -1,0 +1,12 @@
+<form ng-submit="storageSettingsModal.ok(storageSettingsModal.warnVal)">
+    <div class="modal-body modal-body-saved-search">
+        <h2>Other Settings</h2>
+        <label for="warnActive">Warn me before permanently removing items:</label>
+        <input name="warnActive" ng-model="storageSettingsModal.warnVal" type="checkbox">
+        <p>You will be notified before removing ALL videos or searches either way.</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit">Save Changes</button>
+        <button class="btn btn-warning" type="button" ng-click="storageSettingsModal.cancel()">Cancel</button>
+    </div>
+</form>

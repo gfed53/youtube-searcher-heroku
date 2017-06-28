@@ -47,14 +47,17 @@
 		vm.addedBeforeSearches = addedBeforeSearches;
 
 		vm.isDateTypeComp = ytDateHandler().check();
-		vm.warnActive = ytSettings.getWarn();
-		vm.updateWarn = updateWarn;
-		//Will probably add additional options within modal
-		vm.manageStorage = ytFirebase.services.save;
+		vm.warnActive = ytSettings.warnActive;
+		// vm.updateWarn = updateWarn;
 
-		//Testing
+
+		//Will probably add additional options within modal
+
+		vm.fbaseSave = ytFirebase.services.save;
 		vm.segName = ytFirebase.services.getSegName();
 		console.log('vm.segName', vm.segName);
+
+		vm.handleStorageSettings = handleStorageSettings;
 
 		// console.log(vm.items);
 
@@ -157,8 +160,16 @@
 			return ytFilters().addedBeforeSearches(search, vm.searchesFilter);
 		}
 
-		function updateWarn(){
-			ytSettings.setWarn(vm.warnActive);
+		// function updateWarn(){
+		// 	ytSettings.setWarn(vm.warnActive);
+		// }
+
+		function handleStorageSettings(){
+			ytSettings.handleStorageSettings()
+			.then((res)=>{
+				console.log('val in ctrl:',res);
+				vm.warnActive = res;
+			});
 		}
 	}
 })();

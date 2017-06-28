@@ -36,7 +36,7 @@ i.e. {get: get } can be {get} (I think..)
 	.service('ytPlaylistView', [ytPlaylistView])
 	.service('ytPlaylistSort', ['ytSettings', ytPlaylistSort])
 	.service('ytInitAPIs', ['$q', 'ytModalGenerator', ytInitAPIs])
-	.service('ytSettings', [ytSettings])
+	.service('ytSettings', ['$q', 'ytModalGenerator', ytSettings])
 	.service('ytFirebase', ['ytModalGenerator', 'ytInitAPIs', '$q', '$state', '$firebaseArray', '$firebaseObject', ytFirebase]);
 
 	//Used to follow security measures with YouTube video links in particular 
@@ -1485,6 +1485,12 @@ i.e. {get: get } can be {get} (I think..)
 				controllerAs: 'initFirebaseModal'
 			};
 
+			let storageSettingsTemp = {
+				templateUrl: './partials/playlist/playlist-partials/modals/storage-settings-modal.html',
+				controller: 'StorageSettingsModalController',
+				controllerAs: 'storageSettingsModal'
+			};
+
 			let temps = {
 				searchTemp: searchTemp,
 				searchSavedTemp: searchSavedTemp,
@@ -1496,7 +1502,8 @@ i.e. {get: get } can be {get} (I think..)
 				initTemp: initTemp,
 				updateTemp: updateTemp,
 				errorVideoExistsTemp: errorVideoExistsTemp,
-				initFirebaseTemp
+				initFirebaseTemp: initFirebaseTemp,
+				storageSettingsTemp: storageSettingsTemp
 			};
 
 			function openModal(modalObj){
@@ -1892,7 +1899,15 @@ i.e. {get: get } can be {get} (I think..)
 
 	}
 
-	function ytSettings(){
+	function ytSettings($q, ytModalGenerator){
+
+		let storageSettingsTemp = ytModalGenerator().getTemp('storageSettingsTemp');
+
+
+		this.warnActive = getWarn();
+
+		this.handleStorageSettings = handleStorageSettings;
+
 
 		this.getWarn = getWarn;
 		this.setWarn = setWarn;
@@ -1900,7 +1915,21 @@ i.e. {get: get } can be {get} (I think..)
 		this.getSortOpts = getSortOpts;
 		this.setSortOpts = setSortOpts;
 
+		function handleStorageSettings(){
+			let deferred = $q.defer();
 
+			ytModalGenerator().openModal(storageSettingsTemp)
+			.then((res) => {
+				console.log('val in service:',res);
+				setWarn(res);
+				deferred.resolve(res);
+			},(err)=>{
+				console.log(err);
+				deferred.reject();
+			});
+
+			return deferred.promise;
+		}
 
 		function getWarn(){
 			if(localStorage['uyt-warn']){
@@ -1912,6 +1941,7 @@ i.e. {get: get } can be {get} (I think..)
 
 		function setWarn(val){
 			localStorage.setItem('uyt-warn', JSON.stringify(val));
+			this.warnActive = getWarn();
 		}
 
 		function getSortOpts(){
