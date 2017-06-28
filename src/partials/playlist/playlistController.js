@@ -160,10 +160,6 @@
 			return ytFilters().addedBeforeSearches(search, vm.searchesFilter);
 		}
 
-		// function updateWarn(){
-		// 	ytSettings.setWarn(vm.warnActive);
-		// }
-
 		function handleStorageSettings(){
 			ytSettings.handleStorageSettings()
 			.then((res)=>{

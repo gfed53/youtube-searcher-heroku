@@ -10,7 +10,10 @@
 		let vm = this;
 
 		//Retrieving prev warn setting
+		
 		vm.warnVal = ytSettings.getWarn();
+
+
 		vm.ok = ok;
 		vm.cancel = cancel;
 

@@ -13,7 +13,9 @@
 
 		// Decide which services to use (firebase or localStorage)
 
-		var searchHistoryService = ytFirebase.services.isLoggedIn() ? ytSearchHistoryFB : ytSearchHistory;
+		let searchHistoryService = ytFirebase.services.isLoggedIn() ? ytSearchHistoryFB : ytSearchHistory;
+
+		let videoItemsService = ytFirebase.services.isLoggedIn() ? ytVideoItemsFB : ytVideoItems;
 
 		vm.initMap = initMap;
 		vm.submit = submit;
@@ -194,7 +196,7 @@
 		}
 
 		function addToPlaylist(result){
-			ytVideoItemsFB.services.setItem(result)
+			videoItemsService.services.setItem(result)
 			.then(()=>{
 				vm.savedVideos.push(result);
 			});
