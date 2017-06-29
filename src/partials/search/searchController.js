@@ -51,7 +51,7 @@
 		vm.translate = translate;
 
 
-		//Keep a log of searched videos that were moved to playlist
+		//Keep a log of searched videos that were moved to playlist, so add button gets disabled once you add video.
 
 		vm.savedVideos = [];
 
@@ -197,8 +197,9 @@
 
 		function addToPlaylist(result){
 			videoItemsService.services.setItem(result)
-			.then(()=>{
+			.then((res)=>{
 				vm.savedVideos.push(result);
+				console.log(vm.savedVideos);
 			});
 		}
 

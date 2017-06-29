@@ -280,8 +280,8 @@ i.e. {get: get } can be {get} (I think..)
 	function ytVideoItems($q, $state, $stateParams, ytModalGenerator, ytUtilities){
 		let currentVideoId = $stateParams.videoId;
 		let items = [];
-		console.log('ytVideoItems');
-		console.log('in service:', currentVideoId);
+		// console.log('ytVideoItems');
+		// console.log('in service:', currentVideoId);
 
 		this.services = {
 			init: init,
@@ -324,6 +324,7 @@ i.e. {get: get } can be {get} (I think..)
 		function setItem(result){
 			let itemName = result.snippet.title+'-uytp',
 			dateAdded = Date.now(),
+			deferred = $q.defer();
 			content = result;
 			delete content.$$hashKey;
 
@@ -331,11 +332,16 @@ i.e. {get: get } can be {get} (I think..)
 			content.name = content.snippet.title;
 			content.codeName = itemName;
 
+			console.log('updated');
+
 			items.push(content);
 
 			content = JSON.stringify(content);
 
 			localStorage.setItem(itemName, content);
+
+			deferred.resolve(content);
+			return deferred.promise;
 
 		}
 
@@ -478,12 +484,12 @@ i.e. {get: get } can be {get} (I think..)
 			content.codeName = result.snippet.title+'-'+content.id.videoId+'-uytp';
 
 			//testing
-			console.log('videoId: ', content.id.videoId);
-			items.forEach(item => {
-				console.log('videoId: ', item.id.videoId);
-			});
+			// console.log('videoId: ', content.id.videoId);
+			// items.forEach(item => {
+			// 	console.log('videoId: ', item.id.videoId);
+			// });
 
-			console.log('what is it?..', ytUtilities().getIndexIfObjWithAttr(items, 'codeName', content.codeName));
+			// console.log('what is it?..', ytUtilities().getIndexIfObjWithAttr(items, 'codeName', content.codeName));
 
 			//Check if video already exists!
 			if(ytUtilities().getIndexIfObjWithAttr(items, 'codeName', content.codeName) === -1){
@@ -492,7 +498,7 @@ i.e. {get: get } can be {get} (I think..)
 						// items.$save(content);
 						ytFirebase.services.hotSave();
 						console.log("item added: " + ref);
-						deferred.resolve();
+						deferred.resolve(content);
 					});
 				} else {
 					console.log('video already exists!');
