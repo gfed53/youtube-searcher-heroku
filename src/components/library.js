@@ -433,10 +433,6 @@ i.e. {get: get } can be {get} (I think..)
 
 	//Firebase Version
 	function ytVideoItemsFB($q, $timeout, $state, $stateParams, ytModalGenerator, ytUtilities, ytFirebase){
-		// $timeout(()=>{
-		// 	let currentVideoId = $stateParams.videoId;
-		// 	console.log('in ytVideoItemsFB service:', currentVideoId);
-		// }, 100);
 
 		let currentVideoId = $stateParams.videoId;
 		console.log('ytVideoItemsFB');
@@ -472,7 +468,6 @@ i.e. {get: get } can be {get} (I think..)
 		}
 
 		function setItem(result){
-			// let itemName = result.snippet.title+'-uytp',
 			let deferred = $q.defer(),
 			dateAdded = Date.now(),
 			content = result,
@@ -483,19 +478,10 @@ i.e. {get: get } can be {get} (I think..)
 			content.name = content.snippet.title;
 			content.codeName = result.snippet.title+'-'+content.id.videoId+'-uytp';
 
-			//testing
-			// console.log('videoId: ', content.id.videoId);
-			// items.forEach(item => {
-			// 	console.log('videoId: ', item.id.videoId);
-			// });
-
-			// console.log('what is it?..', ytUtilities().getIndexIfObjWithAttr(items, 'codeName', content.codeName));
-
 			//Check if video already exists!
 			if(ytUtilities().getIndexIfObjWithAttr(items, 'codeName', content.codeName) === -1){
 					items.$add(content)
 					.then((ref) => {
-						// items.$save(content);
 						ytFirebase.services.hotSave();
 						console.log("item added: " + ref);
 						deferred.resolve(content);
@@ -522,8 +508,6 @@ i.e. {get: get } can be {get} (I think..)
 			itemRemovedTemp = ytModalGenerator().getTemp('itemRemovedTemp'),
 			deferred = $q.defer();
 			function initClear(_item_){
-				// var index = items.indexOf(item);
-				// items.splice(index, 1);
 				items.$remove(_item_)
 				.then((ref) => {
 					console.log('item removed:', ref);

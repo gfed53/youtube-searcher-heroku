@@ -6,7 +6,7 @@
 	.controller('StorageSettingsModalController', ['$uibModalInstance', 'ytFirebase', 'ytSettings', StorageSettingsModalController]);
 
 	function StorageSettingsModalController($uibModalInstance, ytFirebase, ytSettings){
-		console.log('storange settings ctrl');
+		// console.log('storange settings ctrl');
 		let vm = this;
 
 		//Retrieving prev warn setting
