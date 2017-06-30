@@ -538,9 +538,6 @@ body #page-header #header-wrapper #credit {
   margin-top: 3em;
   margin-bottom: 15em; }
 
-#video .view-area-header {
-  font-family: "Courgette", serif; }
-
 #video .video-title {
   font-weight: bold; }
 
@@ -555,17 +552,15 @@ body #page-header #header-wrapper #credit {
   margin-right: 1em; }
 
 #video .video-desc {
-  clear: both; }
+  clear: both;
+  padding: 1em;
+  border-top: 1px solid #E7E7E7; }
 
 #video iframe {
   display: block;
   margin: 0 auto;
   width: 100%;
   resize: both; }
-
-#video #choices-wrapper {
-  display: block;
-  text-align: center; }
 
 @media screen and (min-width: 768px) {
   #video .video-info-row {
@@ -574,6 +569,8 @@ body #page-header #header-wrapper #credit {
 @media screen and (min-width: 1024px) {
   #video .view-area-header {
     font-size: 3em; }
+  #video .video-info-container {
+    margin: 0 12em; }
   #video iframe {
     width: 50%; } }
 

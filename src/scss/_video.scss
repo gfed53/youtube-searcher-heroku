@@ -14,12 +14,8 @@
 
 		
 	}
-	.view-area-header {
-		font-family: "Courgette", serif;
-	}
 
 	.video-title {
-		
 		font-weight: bold;
 	}
 
@@ -31,6 +27,8 @@
 		text-align: center;
 	}
 
+
+
 	.video-info-label {
 		display: inline-block;
 		margin-right: 1em;
@@ -38,6 +36,8 @@
 
 	.video-desc {
 		clear: both;
+		padding: 1em;
+		border-top: 1px solid $border-grey;
 	}
 
 	iframe {
@@ -47,10 +47,10 @@
 		resize: both;
 	}
 
-	#choices-wrapper {
-		display: block;
-		text-align: center;
-	}	
+	// #choices-wrapper {
+	// 	display: block;
+	// 	text-align: center;
+	// }	
 }
 
 @media screen and ($tablet){
@@ -65,6 +65,9 @@
 	#video {
 		.view-area-header {
 			font-size: 3em;
+		}
+		.video-info-container {
+			margin: 0 12em;
 		}
 		iframe {
 			width: 50%;
