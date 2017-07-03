@@ -18,7 +18,8 @@
 		ytInitAPIs.check()
 		.then(() => {
 			//Connect to Firebase
-			ytFirebase.services.initApp(ytFirebase.services.getCredObj());
+			ytFirebase.services.init();
+			// ytFirebase.services.initApp(ytFirebase.services.getCredObj());
 			//Retrieve saved content if fb cluster is set up properly
 			ytVideoItemsFB.services.init();
 			ytSearchHistoryFB.init();

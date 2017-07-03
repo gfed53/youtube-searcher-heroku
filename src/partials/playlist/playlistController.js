@@ -13,6 +13,9 @@
 		var videoItemsService = ytFirebase.services.isLoggedIn() ? ytVideoItemsFB : ytVideoItems;
 		var searchHistoryService = ytFirebase.services.isLoggedIn() ? ytSearchHistoryFB : ytSearchHistory;
 
+		// should only show if we are using Firebase (no sh..)
+		vm.isUsingFBase = ytFirebase.services.canUseFBase();
+
 		//Fetching content
 		vm.items = videoItemsService.services.getItems();
 		vm.pastSearches = searchHistoryService.get();

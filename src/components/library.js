@@ -1661,6 +1661,7 @@ i.e. {get: get } can be {get} (I think..)
 	function ytFirebase(ytModalGenerator, ytInitAPIs, $q, $state, $firebaseArray, $firebaseObject){
 		let services = {
 			save: save,
+			init: init,
 			initApp: initApp,
 			grabCluster: grabCluster,
 			checkValid: checkValid,
@@ -1672,25 +1673,28 @@ i.e. {get: get } can be {get} (I think..)
 			getSegName: getSegName,
 			hotSave: hotSave,
 			isLoggedIn: isLoggedIn,
+			canUseFBase: canUseFBase,
 			addCreds: addCreds
 		};
 
 		let list = null,
 			current = null,
 			currentObj = null,
+			canUse = false,
 			loggedIn = false,
 			credObj = null;
 
 		//Immediately check if we have our stored firebase creds
-		(()=>{
-			if(localStorage['uyt-firebase']){
-				credObj = JSON.parse(localStorage['uyt-firebase']);
-				// console.log('have cred obj:', credObj);
-				loggedIn = true;
-			} else {
-				// console.log('using local storage');
-			}
-		})();
+		// (()=>{
+		// 	console.log('in init:',ytInitAPIs.apisObj);
+		// 	if(ytInitAPIs.apisObj.googKey &&
+		// 	ytInitAPIs.apisObj.fBaseDB &&
+		// 	localStorage['uyt-firebase']){
+		// 		credObj = JSON.parse(localStorage['uyt-firebase']);
+		// 		loggedIn = true;
+		// 	} else {
+		// 	}
+		// })();
 
 		function save(){
 			let initFirebaseTemp = ytModalGenerator().getTemp('initFirebaseTemp');
@@ -1704,88 +1708,47 @@ i.e. {get: get } can be {get} (I think..)
 			});
 		}
 
-		
-		function init(justLoggedIn, credsObj){
-			//Check to see if client has necessary API key to use Firebase
-			if(localStorage['uyt-firebase']){
-				// console.log(localStorage['uyt-firebase']);
-				let obj = JSON.parse(localStorage['uyt-firebase']);
-				// console.log(obj);
-				let config = {
-					apiKey: ytInitAPIs.apisObj.googKey,
-					authDomain: 'burning-torch-898.firebaseapp.com',
-					databaseURL: 'https://burning-torch-898.firebaseio.com/',
-					storageBucket: 'burning-torch-898.appspot.com'
-				};
-				firebase.initializeApp(config);
-				current = getReference(obj.username);
-				currentObj = $firebaseObject(current);
-				//Assume ok until issue
-				loggedIn = true;
-				currentObj.$loaded()
-				.then((data)=>{
-					if(justLoggedIn){
-						//Check if $id(partition) already exists
-						if(currentObj.password){
-							//If password doesn't match..
-							if(currentObj.password !== obj.password){
-								//Change for appropriate modal rendering
-								// loggedIn = false;
-								console.log('passwords dont match');
-								//Reroute
-								// save();
-							} else {
-								console.log('resuming..');
-								//$state.reload() causes error with menubar
-								location.reload();
-							}
-							
-						} else {
-							currentObj.username = obj.username;
-							currentObj.password = obj.password;
-							currentObj.$save()
-							.then((ref)=>{
-								console.log('currentObj saved:', currentObj);
-								location.reload();
-
-							});
-						}
-					}
-					//Firebase creds already set, 
-					// console.log('currentObj save not needed:', currentObj);
-					credObj = obj;
-					return true;
-				});
+		// localStorage['uyt-firebase']
+		function init(){
+			if(ytInitAPIs.apisObj.googKey &&
+			ytInitAPIs.apisObj.fBaseDB){
+				if(localStorage['uyt-firebase']){
+					credObj = JSON.parse(localStorage['uyt-firebase']);
+					// console.log('have cred obj:', credObj);
+					loggedIn = true;
+				}
 				
-			} else {
-				// console.log('Using localStorage');
-				return false;
-			}
-			//
+				initApp(credObj);
+			} 
+			
 		}
 
-		function initApp(credsObj){
+		function initApp(_credObj){
 			//Make sure googKey AND DB name exists..
-			if(ytInitAPIs.apisObj.googKey){
+
+			// if(ytInitAPIs.apisObj.googKey && ytInitAPIs.apisObj.fBaseDB){
 				let config = {
 					apiKey: ytInitAPIs.apisObj.googKey,
-					authDomain: 'burning-torch-898.firebaseapp.com',
-					databaseURL: 'https://burning-torch-898.firebaseio.com/',
-					storageBucket: 'burning-torch-898.appspot.com'
+					authDomain: ytInitAPIs.apisObj.fBaseDB+'.firebaseapp.com',
+					databaseURL: 'https://'+ytInitAPIs.apisObj.fBaseDB+'.firebaseio.com/',
+					storageBucket: ytInitAPIs.apisObj.fBaseDB+'burning-torch-898.appspot.com'
 				};
 				firebase.initializeApp(config);
+
+				//Whether or not we're 'logged in', this lets us know that we're at least connected to FBase
+				canUse = true;
 				//This would occur when we already have our firebase creds stored in our localStorage. This means the creds we have are legit - we are locked into a cluster with the correct password.
-				if(credsObj){
-					grabCluster(credsObj);
+				if(_credObj){
+					grabCluster(_credObj);
 				}
-			}
+			// }
 			
 		}
 
 		//Lets the app know which cluster the user will be assigned to. This will run assuming the app is already initialized
-		function grabCluster(credsObj){
+		function grabCluster(_credObj){
 			var deferred = $q.defer();
-			current = getReference(credsObj.username);
+			current = getReference(_credObj.username);
 			currentObj = $firebaseObject(current);
 			currentObj.$loaded()
 			.then((data)=>{
@@ -1871,6 +1834,10 @@ i.e. {get: get } can be {get} (I think..)
 
 		function isLoggedIn(){
 			return loggedIn;
+		}
+
+		function canUseFBase(){
+			return canUse;
 		}
 
 		function addCreds(obj){

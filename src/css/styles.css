@@ -160,6 +160,8 @@ body #page-header #header-wrapper #credit {
     max-width: 30em; }
     #playlist .playlist-section-header h2 {
       margin: 0; }
+  #playlist .playlist-section-fb {
+    display: inline-block; }
   #playlist h2 {
     display: inline-block;
     font-size: 1.5em; }
