@@ -18,7 +18,6 @@
 
 		//CB will watch for value. If truthy, we're logging in. Else, we log out.
 		function ok(obj){
-			//
 			//We need to initApp first to retrieve the app reference (so we can compare passwords)
 			
 			ytFirebase.services.grabCluster(obj)

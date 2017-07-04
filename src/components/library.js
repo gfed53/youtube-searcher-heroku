@@ -1409,6 +1409,12 @@ i.e. {get: get } can be {get} (I think..)
 				getTemp: getTemp
 			};
 
+			let newSegTemp = {
+				templateUrl: './partials/playlist/playlist-partials/modals/new-seg-modal.html',
+				controller: 'AlertModalController',
+				controllerAs: 'alertModal'
+			};
+
 			let searchTemp = {
 				templateUrl: './partials/search/search-partials/modals/error-modal.html',
 				controller: 'ErrorModalController',
@@ -1482,6 +1488,7 @@ i.e. {get: get } can be {get} (I think..)
 			};
 
 			let temps = {
+				newSegTemp: newSegTemp,
 				searchTemp: searchTemp,
 				searchSavedTemp: searchSavedTemp,
 				videoTemp: videoTemp,
@@ -1780,9 +1787,16 @@ i.e. {get: get } can be {get} (I think..)
 				currentObj.password = obj.password;
 				currentObj.$save()
 				.then((ref)=>{
-					console.log('currentObj saved:', currentObj);
-					location.reload();
+					console.log('currentObj saved:', currentObj, 'new?');
+					let newSegTemp = ytModalGenerator().getTemp('newSegTemp');
 
+					
+					//Here we can prompt user that a new cluster has been made, using modal
+					ytModalGenerator().openModal(newSegTemp)
+					.then(()=>{
+						res();
+						// location.reload();
+					});
 				});
 			}
 		}
@@ -1791,14 +1805,6 @@ i.e. {get: get } can be {get} (I think..)
 			return new firebase.database().ref(child);
 		}
 
-		/*User's main object will be named by either username or specially-coded name, and will contain:
-		{
-			'username': 'name',
-			'password': '*****',
-			'savedVideos': {...},
-			'savedSearches': {...}
-		}
-		*/
 		function getRefObj(child) {
 			var ref = current.child(child);
 			return $firebaseObject(ref);
