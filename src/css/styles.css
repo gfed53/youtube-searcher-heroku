@@ -530,7 +530,7 @@ body #page-header #header-wrapper #credit {
     .results h2 {
       font-size: 1.5em; } }
 
-#video .view-area-header, #video .video-title, #video p {
+#video .view-area-header, #video .video-title, #video .video-notify, #video p, #video .remove-video-container, #video .channel-info {
   text-align: center; }
 
 #video .video-title, #video .remove-video-container, #video .video-info-row {
@@ -542,12 +542,6 @@ body #page-header #header-wrapper #credit {
 
 #video .video-title {
   font-weight: bold; }
-
-#video .remove-video-container {
-  text-align: center; }
-
-#video .channel-info {
-  text-align: center; }
 
 #video .video-info-label {
   display: inline-block;
@@ -565,8 +559,10 @@ body #page-header #header-wrapper #credit {
   resize: both; }
 
 @media screen and (min-width: 768px) {
+  #video p, #video .remove-video-container, #video .channel-info {
+    text-align: left; }
   #video .video-info-row {
-    margin: 1em 7em; } }
+    margin: 1em 0; } }
 
 @media screen and (min-width: 1024px) {
   #video .view-area-header {

@@ -1,6 +1,6 @@
 
 #video {
-	.view-area-header, .video-title, p {
+	.view-area-header, .video-title, .video-notify, p, .remove-video-container, .channel-info {
 		text-align: center;
 	}
 
@@ -10,24 +10,12 @@
 
 	#item {
 		margin-top: 3em;
-		margin-bottom: 15em;
-
-		
+		margin-bottom: 15em;		
 	}
 
 	.video-title {
 		font-weight: bold;
 	}
-
-	.remove-video-container {
-		text-align: center;
-	}
-
-	.channel-info {
-		text-align: center;
-	}
-
-
 
 	.video-info-label {
 		display: inline-block;
@@ -46,17 +34,15 @@
 		width: 100%;
 		resize: both;
 	}
-
-	// #choices-wrapper {
-	// 	display: block;
-	// 	text-align: center;
-	// }	
 }
 
 @media screen and ($tablet){
 	#video {
+		p, .remove-video-container, .channel-info {
+			text-align: left;
+		}
 		.video-info-row {
-			margin: 1em 7em;
+			margin: 1em 0;
 		}
 	}
 }
