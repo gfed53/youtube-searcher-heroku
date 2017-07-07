@@ -1086,13 +1086,15 @@ i.e. {get: get } can be {get} (I think..)
 		return () => {
 			let services = {
 				init: init,
-				check: check
+				check: check,
+				checkB
 			};
 
 			//Match cb's that will be used in each situation. Navbar will be hidden if user scrolls down OR if page loads in middle of screen.
 			function check(scrollDownCB, scrollUpCB){
 				window.addEventListener('load', ()=>{
-					let scroll = init(scrollDownCB, scrollUpCB);
+					// let scroll = init(scrollDownCB, scrollUpCB);
+					let scroll = window.scrollY;
 
 					window.addEventListener('scroll', () => {
 						if(window.scrollY > scroll){
@@ -1104,6 +1106,11 @@ i.e. {get: get } can be {get} (I think..)
 					});
 				});
 
+			}
+
+			function checkB(){
+				return window.scrollY === 0;
+				
 			}
 
 			function init(scrolledCB, atTopCB){

@@ -12,7 +12,7 @@ function MenuCtrl($scope, $rootScope, $timeout, $stateParams, ytVideoItems, ytVi
 	var videoItemsService = ytFirebase.services.isLoggedIn() ? ytVideoItemsFB : ytVideoItems;
 
 	vm.videoId = ytVideoItems.services.getVideoId();
-	vm.showNav = false;
+	vm.showNav = ytCheckScrollDir().checkB();
 	vm.showFixed = false;
 	vm.update = update;
 	vm.updateOnClick = updateOnClick;
