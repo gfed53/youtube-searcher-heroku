@@ -10,13 +10,13 @@
 		<div class="col-sm-8 channel-info">
 			<p class="video-info-label">Channel: <span class="emph"> {{ video.item.snippet.channelTitle }}</span></p>
 			<button class="btn btn-default" ng-click="video.getChannel(video.item.snippet.channelId)">Filter</button>
+			<div class="remove-video-container" ng-if="video.isSaved">
+				<button class="btn btn-default" ng-click="video.clearItem(video.item)" ng-if="!video.cleared">Clear from watch list</button>
+				<button class="btn btn-default" disabled="disabled" ng-if="video.cleared">Cleared</button>
+			</div>
 		</div>
 	</div>
-	<div class="remove-video-container" ng-if="video.isSaved">
-		<p class="video-info-label">Finished the video? Clear it from your watch list.</p>
-		<button class="btn btn-default" ng-click="video.clearItem(video.item)" ng-if="!video.cleared">Clear</button>
-		<button class="btn btn-default" disabled="disabled" ng-if="video.cleared">Cleared</button>
-	</div>
+	
 	<p class="video-desc">{{ video.item.snippet.description }}</p>
 	
 </div> <!-- video-info-container -->

@@ -9,8 +9,13 @@
 		}
 	}
 
-	.playlist-section-fb {
+	.playlist-section-options {
+		text-align: center;
+	}
+
+	.btn-storage {
 		display: inline-block;
+		margin-bottom: 1em;
 	}
 	
 	h2 {
@@ -139,6 +144,14 @@
 			display: none;
 		}
 		.filter-buttons-header {
+			text-align: left;
+		}
+	}
+}
+
+@media screen and ($mobile6){
+	#playlist {
+		.playlist-section-options {
 			text-align: left;
 		}
 	}
