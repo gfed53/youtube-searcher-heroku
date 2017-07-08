@@ -11,7 +11,11 @@ function MenuCtrl($scope, $rootScope, $timeout, $stateParams, ytVideoItems, ytVi
 	// Decide which services to use (firebase or localStorage)
 	var videoItemsService = ytFirebase.services.isLoggedIn() ? ytVideoItemsFB : ytVideoItems;
 
-	vm.videoId = ytVideoItems.services.getVideoId();
+
+	vm.videoIdObj = videoItemsService.services.getVideoId();
+
+	console.log('in menu:',vm.videoIdObj.videoId);
+	// vm.videoId = vm.videoIdObj.videoId;
 	vm.showNav = ytCheckScrollDir().checkB();
 	vm.showFixed = false;
 	vm.update = update;

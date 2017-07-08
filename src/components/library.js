@@ -278,7 +278,7 @@ i.e. {get: get } can be {get} (I think..)
 
 	//Used for saving videos to the user's local storage (in the playlist/saved content section)
 	function ytVideoItems($q, $state, $stateParams, ytModalGenerator, ytUtilities){
-		let currentVideoId = $stateParams.videoId;
+		let videoIdObj = {videoId : $stateParams.videoId};
 		let items = [];
 		// console.log('ytVideoItems');
 		// console.log('in service:', currentVideoId);
@@ -408,11 +408,11 @@ i.e. {get: get } can be {get} (I think..)
 
 		//Check url params when loading page in video player state
 		function getVideoId(){
-			return currentVideoId;
+			return videoIdObj;
 		}
 
 		function setVideoId(videoId){
-			currentVideoId = videoId;
+			videoIdObj.videoId = videoId;
 		}
 
 		//Check if video item is saved()
@@ -434,8 +434,9 @@ i.e. {get: get } can be {get} (I think..)
 	//Firebase Version
 	function ytVideoItemsFB($q, $timeout, $state, $stateParams, ytModalGenerator, ytUtilities, ytFirebase){
 
-		let currentVideoId = $stateParams.videoId;
+		let videoIdObj = {videoId : null};
 		console.log('ytVideoItemsFB');
+		console.log('in service:');
 		
 		var items = null;
 		//For clearing all items, we would prob grab an obj ref of savedVideos so we can use the $remove service to clear it completely
@@ -566,11 +567,13 @@ i.e. {get: get } can be {get} (I think..)
 
 		//Check url params when loading page in video player state
 		function getVideoId(){
-			return currentVideoId;
+			// let deferred = $q.defer();
+			
+			return videoIdObj;
 		}
 
 		function setVideoId(videoId){
-			currentVideoId = videoId;
+			videoIdObj.videoId = videoId;
 		}
 
 		//Check if video item is saved()

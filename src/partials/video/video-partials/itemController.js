@@ -13,7 +13,10 @@
 		var videoItemsService = ytFirebase.services.isLoggedIn() ? ytVideoItemsFB : ytVideoItems;
 
 		vm.trustSrc = ytTrustSrc;
+		
 		vm.videoId = $stateParams.videoId;
+		videoItemsService.services.setVideoId(vm.videoId);
+		console.log('in video:',videoItemsService.services.getVideoId());
 		vm.url = 'http://www.youtube.com/embed/'+vm.videoId;
 		vm.trustedUrl = vm.trustSrc(vm.url);
 		vm.getVideoItem = getVideoItem;
