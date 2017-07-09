@@ -160,7 +160,7 @@
 						<a ng-click="playlist.setVideoId(item.id.videoId || item.id)" ui-sref="video({videoId: (item.id.videoId || item.id)})"><img class="my-thumbnail" ng-src="{{ item.snippet.thumbnails.default.url}}" alt="image"></a>
 					</div>
 					<div class="col-sm-6 playlist-div">
-						<p class="emph">{{ item.name || item.snippet.title || item.name }}</p>
+						<p ng-click="playlist.setVideoId(item.id.videoId || item.id)" ui-sref="video({videoId: (item.id.videoId || item.id)})" class="emph video-link-text">{{ item.name || item.snippet.title || item.name }}</p>
 						<p><span class="bold">CHANNEL:</span> {{ item.snippet.channelTitle }}</p><p><span class="bold">ADDED:</span> {{ item.dateAdded | date : short }}</p>
 						<p><span class="bold">PUBLISHED:</span> {{ item.datePublished || item.snippet.publishedAt | date : short }}</p>
 					</div>

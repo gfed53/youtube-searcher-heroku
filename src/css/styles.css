@@ -165,6 +165,10 @@ body #page-header #header-wrapper #credit {
   #playlist .btn-storage {
     display: inline-block;
     margin-bottom: 1em; }
+  #playlist .video-link-text {
+    margin: 1em 0;
+    cursor: pointer;
+    color: #2574A9; }
   #playlist h2 {
     display: inline-block;
     font-size: 1.5em; }
@@ -174,7 +178,7 @@ body #page-header #header-wrapper #credit {
     list-style-type: decimal; }
     #playlist #playlist-items .playlist-div, #playlist #past-search-items .playlist-div {
       margin-bottom: 1em; }
-      #playlist #playlist-items .playlist-div p, #playlist #past-search-items .playlist-div p {
+      #playlist #playlist-items .playlist-div p, #playlist #playlist-items .playlist-div a, #playlist #past-search-items .playlist-div p, #playlist #past-search-items .playlist-div a {
         max-width: 20em; }
   #playlist .btn-playlist-clear, #playlist .video-sort-buttons, #playlist .search-sort-buttons {
     margin: 2em 0; }
@@ -262,7 +266,9 @@ body #page-header #header-wrapper #credit {
   #playlist .saved-content-inner {
     text-align: left; }
   #playlist .playlist-btn-group {
-    text-align: right; } }
+    text-align: right; }
+  #playlist .video-link-text:hover {
+    text-decoration: underline; } }
 
 #bar, .greeting-container {
   text-align: center; }

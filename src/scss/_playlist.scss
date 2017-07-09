@@ -17,6 +17,12 @@
 		display: inline-block;
 		margin-bottom: 1em;
 	}
+
+	.video-link-text {
+		margin: 1em 0;
+		cursor: pointer;
+		color: $link;
+	}
 	
 	h2 {
 		display: inline-block;
@@ -29,9 +35,10 @@
 		list-style-type: decimal;
 		.playlist-div {
 			margin-bottom: 1em;
-			p {
+			p, a {
 				max-width: 20em;
 			}
+
 		}
 	}
 	
@@ -185,6 +192,10 @@
 
 		.playlist-btn-group {
 			text-align: right;
+		}
+
+		.video-link-text:hover {
+			text-decoration: underline;
 		}
 		
 	}
