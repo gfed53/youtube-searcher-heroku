@@ -27,7 +27,7 @@
 		<!-- Larger Viewports -->
 			<div class="row inner-result result-desktop">
 				<div class="col-md-6 tit-descrip-container">
-					<h3>{{result.snippet.title}}</h3>
+					<h3 class="video-link"><a ng-click="search.setVideoId(result.id.videoId)" ui-sref="video({videoId: result.id.videoId} )">{{result.snippet.title}}</a></h3>
 					<p>{{ result.snippet.description }}</p>
 					<p>Date: {{ result.snippet.publishedAt | date : 'short' }}</p>
 					<div class="outer-wrapper">
@@ -47,7 +47,7 @@
 			</div>
 			<!-- Smaller Viewports -->
 			<div class="row inner-result result-mobile">
-				<h3>{{result.snippet.title}}</h3>
+				<h3 class="video-link"><a ng-click="search.setVideoId(result.id.videoId)" ui-sref="video({videoId: result.id.videoId} )">{{result.snippet.title}}</a></h3>
 				<div class="col-md-6 results-img-container">
 					<a ng-click="search.setVideoId(result.id.videoId)" ui-sref="video({videoId: result.id.videoId} )"><img ng-src="{{result.snippet.thumbnails.default.url}}" alt="image"></a>
 				</div>

@@ -151,7 +151,8 @@
 		</div>
 
 		<!--  -->
-		<!-- Videos Collection -->
+		
+		<!-- Videos Collection (Small and Large Views) -->
 
 		<div class="saved-content-container playlist-content-container">
 			<div ng-repeat="item in playlist.items | orderBy:playlist.videosPredicate:playlist.videosReverse | filter:playlist.videoFilter.keyword | filter:playlist.addedAfterVideos | filter:playlist.addedBeforeVideos track by $index" class="saved-content-inner">
@@ -160,7 +161,7 @@
 						<a ng-click="playlist.setVideoId(item.id.videoId || item.id)" ui-sref="video({videoId: (item.id.videoId || item.id)})"><img class="my-thumbnail" ng-src="{{ item.snippet.thumbnails.default.url}}" alt="image"></a>
 					</div>
 					<div class="col-sm-6 playlist-div">
-						<p ng-click="playlist.setVideoId(item.id.videoId || item.id)" ui-sref="video({videoId: (item.id.videoId || item.id)})" class="emph video-link-text">{{ item.name || item.snippet.title || item.name }}</p>
+						<p ng-click="playlist.setVideoId(item.id.videoId || item.id)" class="emph video-link video-link-p"><a ui-sref="video({videoId: (item.id.videoId || item.id)})" >{{ item.name || item.snippet.title || item.name }}</a></p>
 						<p><span class="bold">CHANNEL:</span> {{ item.snippet.channelTitle }}</p><p><span class="bold">ADDED:</span> {{ item.dateAdded | date : short }}</p>
 						<p><span class="bold">PUBLISHED:</span> {{ item.datePublished || item.snippet.publishedAt | date : short }}</p>
 					</div>

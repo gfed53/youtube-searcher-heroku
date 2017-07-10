@@ -13,12 +13,21 @@ body {
 	.bold {
 		font-weight: 600;
 	}
+
+	.video-link {
+		cursor: pointer;
+		color: $link;
+	}
 }
 
 @media screen and ($desktop){
 	body{
 		#content, #page-footer, input {
 			font-size: 1em;
+		}
+
+		.video-link:hover {
+			text-decoration: underline;
 		}
 	}
 }

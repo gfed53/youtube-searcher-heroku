@@ -32,10 +32,15 @@ body {
     font-size: 1.2em; }
   body .bold {
     font-weight: 600; }
+  body .video-link {
+    cursor: pointer;
+    color: #2574A9; }
 
 @media screen and (min-width: 1024px) {
   body #content, body #page-footer, body input {
-    font-size: 1em; } }
+    font-size: 1em; }
+  body .video-link:hover {
+    text-decoration: underline; } }
 
 #about {
   margin: 1em 2em; }
@@ -165,10 +170,8 @@ body #page-header #header-wrapper #credit {
   #playlist .btn-storage {
     display: inline-block;
     margin-bottom: 1em; }
-  #playlist .video-link-text {
-    margin: 1em 0;
-    cursor: pointer;
-    color: #2574A9; }
+  #playlist .video-link-p {
+    margin: 1em 0; }
   #playlist h2 {
     display: inline-block;
     font-size: 1.5em; }
@@ -266,9 +269,7 @@ body #page-header #header-wrapper #credit {
   #playlist .saved-content-inner {
     text-align: left; }
   #playlist .playlist-btn-group {
-    text-align: right; }
-  #playlist .video-link-text:hover {
-    text-decoration: underline; } }
+    text-align: right; } }
 
 #bar, .greeting-container {
   text-align: center; }
@@ -387,8 +388,7 @@ body #page-header #header-wrapper #credit {
       .results .inner-result .tit-descrip-container .playlist-button-wrapper {
         margin: 1em; }
     .results .inner-result p {
-      overflow-x: scroll; }
-    .results .inner-result h3, .results .inner-result p {
+      overflow-x: scroll;
       color: black; }
     .results .inner-result h3 {
       font-size: 1.4em;

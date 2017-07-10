@@ -18,10 +18,8 @@
 		margin-bottom: 1em;
 	}
 
-	.video-link-text {
+	.video-link-p {
 		margin: 1em 0;
-		cursor: pointer;
-		color: $link;
 	}
 	
 	h2 {
@@ -192,10 +190,6 @@
 
 		.playlist-btn-group {
 			text-align: right;
-		}
-
-		.video-link-text:hover {
-			text-decoration: underline;
 		}
 		
 	}
