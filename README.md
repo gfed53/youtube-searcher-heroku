@@ -1,8 +1,16 @@
-# The Swiss Army YouTube Searcher (Google Firebase Version)
+# The Swiss Army YouTube Searcher (Heroku Version)
+
+## *Warning*
+
+This version is currently in development and doesn't function (at least to my knowledge!)
 
 ## Note
 
-This is the implementation of SaYs that uses Google Firebase instead of the user's localStorage to store saved content. It is still possible to use localStorage instead, as it serves as a fallback if you don't want to provide a database to use.
+This is the implementation of SaYs that I plan on deploying through Heroku. What I aim to achieve is a smoother user experience that doesn't require the user entering their own tokens for the app to function, but still have my own API keys protected.
+
+I plan to learn more about back end technologies such as Node.js and MongoDB (I may use MongoDB or stick with Firebase, not sure).
+
+
 
 The following is taken from the "about" section of the app:
 
